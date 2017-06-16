@@ -296,11 +296,13 @@ constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
     NSData *reardata = UIImageJPEGRepresentation(self.backImage, 0.1);
     rearStr = [reardata base64EncodedStringWithOptions:0];
     
-    _bindPersonalInfoManager.name = @"gogo";
-//    _bindInformationView.nameTextField.text;
-    _bindPersonalInfoManager.userId = @"10017168";
-    _bindPersonalInfoManager.certCode = @"1234567890123";
-//    _bindInformationView.identityCardTextField.text;
+//    _bindPersonalInfoManager.name = @"gogo";
+//    _bindPersonalInfoManager.userId = @"10017168";
+//    _bindPersonalInfoManager.certCode = @"1234567890123";
+
+    _bindPersonalInfoManager.name =  _bindInformationView.nameTextField.text;
+    _bindPersonalInfoManager.userId = USER_ID;
+    _bindPersonalInfoManager.certCode = _bindInformationView.identityCardTextField.text;
     _bindPersonalInfoManager.front = frontStr;
     _bindPersonalInfoManager.rear = rearStr;
     return _bindPersonalInfoManager;

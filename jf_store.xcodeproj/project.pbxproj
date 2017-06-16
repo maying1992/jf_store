@@ -80,6 +80,9 @@
 		6D52C8C01EF3C5C80062D38B /* WJLotteryGrawReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8BF1EF3C5C80062D38B /* WJLotteryGrawReformer.m */; };
 		6D52C8C31EF3C8C80062D38B /* WJLotteryDrawListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8C21EF3C8C80062D38B /* WJLotteryDrawListModel.m */; };
 		6D52C8C61EF3D7D60062D38B /* APIPrizeGoodsDetailsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8C51EF3D7D60062D38B /* APIPrizeGoodsDetailsManager.m */; };
+		6D52C8C91EF3DD400062D38B /* APIPrizeResultListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8C81EF3DD400062D38B /* APIPrizeResultListManager.m */; };
+		6D52C8CC1EF3DE350062D38B /* WJPrizeResultListReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8CB1EF3DE350062D38B /* WJPrizeResultListReformer.m */; };
+		6D52C8CF1EF3DE6D0062D38B /* WJPrizeResultListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8CE1EF3DE6D0062D38B /* WJPrizeResultListModel.m */; };
 		6D5D3FB51ECDACA900F26417 /* APISiteListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */; };
 		6D680C721EDEC28100FFFC2F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D680C741EDEC28100FFFC2F /* InfoPlist.strings */; };
 		6D680C7D1EDEC35F00FFFC2F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D680C7F1EDEC35F00FFFC2F /* Localizable.strings */; };
@@ -478,6 +481,12 @@
 		6D52C8C21EF3C8C80062D38B /* WJLotteryDrawListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJLotteryDrawListModel.m; sourceTree = "<group>"; };
 		6D52C8C41EF3D7D60062D38B /* APIPrizeGoodsDetailsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIPrizeGoodsDetailsManager.h; sourceTree = "<group>"; };
 		6D52C8C51EF3D7D60062D38B /* APIPrizeGoodsDetailsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIPrizeGoodsDetailsManager.m; sourceTree = "<group>"; };
+		6D52C8C71EF3DD400062D38B /* APIPrizeResultListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIPrizeResultListManager.h; sourceTree = "<group>"; };
+		6D52C8C81EF3DD400062D38B /* APIPrizeResultListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIPrizeResultListManager.m; sourceTree = "<group>"; };
+		6D52C8CA1EF3DE350062D38B /* WJPrizeResultListReformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJPrizeResultListReformer.h; sourceTree = "<group>"; };
+		6D52C8CB1EF3DE350062D38B /* WJPrizeResultListReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJPrizeResultListReformer.m; sourceTree = "<group>"; };
+		6D52C8CD1EF3DE6D0062D38B /* WJPrizeResultListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJPrizeResultListModel.h; sourceTree = "<group>"; };
+		6D52C8CE1EF3DE6D0062D38B /* WJPrizeResultListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJPrizeResultListModel.m; sourceTree = "<group>"; };
 		6D5D3FB31ECDACA900F26417 /* APISiteListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APISiteListManager.h; sourceTree = "<group>"; };
 		6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APISiteListManager.m; sourceTree = "<group>"; };
 		6D680C5F1EDEB83F00FFFC2F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -1185,6 +1194,8 @@
 				6DCFFE101EEAA6BD00D96C6D /* WJGoodsListReformer.m */,
 				6D52C8BE1EF3C5C80062D38B /* WJLotteryGrawReformer.h */,
 				6D52C8BF1EF3C5C80062D38B /* WJLotteryGrawReformer.m */,
+				6D52C8CA1EF3DE350062D38B /* WJPrizeResultListReformer.h */,
+				6D52C8CB1EF3DE350062D38B /* WJPrizeResultListReformer.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1202,6 +1213,8 @@
 				6D3A37091EEFE10300F5767A /* WJChannelModel.m */,
 				6D52C8C11EF3C8C80062D38B /* WJLotteryDrawListModel.h */,
 				6D52C8C21EF3C8C80062D38B /* WJLotteryDrawListModel.m */,
+				6D52C8CD1EF3DE6D0062D38B /* WJPrizeResultListModel.h */,
+				6D52C8CE1EF3DE6D0062D38B /* WJPrizeResultListModel.m */,
 			);
 			path = "Model+";
 			sourceTree = "<group>";
@@ -1892,6 +1905,8 @@
 				6D52C8BC1EF3C47C0062D38B /* APIPrizeGoodsListManager.m */,
 				6D52C8C41EF3D7D60062D38B /* APIPrizeGoodsDetailsManager.h */,
 				6D52C8C51EF3D7D60062D38B /* APIPrizeGoodsDetailsManager.m */,
+				6D52C8C71EF3DD400062D38B /* APIPrizeResultListManager.h */,
+				6D52C8C81EF3DD400062D38B /* APIPrizeResultListManager.m */,
 			);
 			path = APIHomeManager;
 			sourceTree = "<group>";
@@ -2934,6 +2949,7 @@
 				6D962FB11EE9361E002E8326 /* WJAppIsInstalled.m in Sources */,
 				B47DA0A21ECEE1010038D7E2 /* WJCanUseIntegralViewController.m in Sources */,
 				6D96DC7B1EB97FEF004EDE7F /* NSString+AES256.m in Sources */,
+				6D52C8C91EF3DD400062D38B /* APIPrizeResultListManager.m in Sources */,
 				6DCFFE141EEAA78D00D96C6D /* WJGoodsModel.m in Sources */,
 				B47826141ED59FF1002267A6 /* WJDeliveryAddressListModel.m in Sources */,
 				B40EF3BC1EC8387D00DDE49F /* WJAlreadyDeliverViewController.m in Sources */,
@@ -2948,6 +2964,7 @@
 				B40EF4431ECC464600DDE49F /* WJBindindConsumerServicesCenterViewController.m in Sources */,
 				B47826181ED59FF1002267A6 /* WJPaymentModel.m in Sources */,
 				B459DA071EBDB15400F3748B /* WJCategoryView.m in Sources */,
+				6D52C8CC1EF3DE350062D38B /* WJPrizeResultListReformer.m in Sources */,
 				B40EF4391ECC330500DDE49F /* WJConsumerActivateViewController.m in Sources */,
 				B45218871EB9F3D0009E9E40 /* WJSegmentedView.m in Sources */,
 				B4429BC91ECD81F900A87C38 /* WJIndividualOrderDetailViewController.m in Sources */,
@@ -3036,6 +3053,7 @@
 				6D96DC8C1EB980E4004EDE7F /* WJPrefectureViewController.m in Sources */,
 				B47825EC1ED44735002267A6 /* WJProductEditViewController.m in Sources */,
 				B40EF4231ECBFE8200DDE49F /* WJActivateViewController.m in Sources */,
+				6D52C8CF1EF3DE6D0062D38B /* WJPrizeResultListModel.m in Sources */,
 				6D96DC7F1EB97FEF004EDE7F /* SM3.m in Sources */,
 				6D3A37071EEFE0F300F5767A /* WJBannerModel.m in Sources */,
 				6DCFFE111EEAA6BD00D96C6D /* WJGoodsListReformer.m in Sources */,

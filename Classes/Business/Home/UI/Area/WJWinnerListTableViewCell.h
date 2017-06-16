@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WJPrizeResultListModel.h"
 
 @interface WJWinnerListTableViewCell : UITableViewCell
+
+-(void)configDataWithModel:(WJPrizeResultListModel *)model;
 
 @end

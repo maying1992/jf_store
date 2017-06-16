@@ -56,6 +56,11 @@
     return self;
 }
 
-
+-(void)configDataWithModel:(WJPrizeResultListModel *)model
+{
+    numLabel.text = model.prizeNum;
+    userLabel.text = model.userName;
+    goodsLabel.text = model.goodsName;
+}
 
 @end

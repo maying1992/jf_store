@@ -8,10 +8,14 @@
 
 #import "WJWinnerListViewController.h"
 #import "WJWinnerListTableViewCell.h"
+#import "APIPrizeResultListManager.h"
+#import "WJPrizeResultListReformer.h"
 
-@interface WJWinnerListViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface WJWinnerListViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
 
-@property(nonatomic ,strong) UITableView     *mainTableView;
+@property(nonatomic ,strong) UITableView                      * mainTableView;
+@property(nonatomic ,strong) APIPrizeResultListManager        * prizeResultListManager;
+@property(nonatomic ,strong) NSMutableArray                   * dataArray;
 
 @end
 
@@ -23,6 +27,19 @@
     self.title = @"中奖名单";
     self.isHiddenTabBar = YES;
     [self.view addSubview:self.mainTableView];
+    [self.prizeResultListManager loadData];
+}
+
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    self.dataArray = [manager fetchDataWithReformer:[WJPrizeResultListReformer new]];
+    [self.mainTableView reloadData];
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    NSLog(@"%@",manager.errorMessage);
 }
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource
@@ -33,7 +50,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return self.dataArray.count + 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -48,6 +65,9 @@
     if (cell == nil) {
         cell = [[WJWinnerListTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WJWinnerListTableViewCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone; 
+    }
+    if (indexPath.row > 0) {
+        [cell configDataWithModel:self.dataArray[indexPath.row - 1]];
     }
     return cell;
 }
@@ -64,6 +84,15 @@
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _mainTableView;
+}
+
+- (APIPrizeResultListManager *)prizeResultListManager
+{
+    if (_prizeResultListManager == nil) {
+        _prizeResultListManager = [[APIPrizeResultListManager alloc]init];
+        _prizeResultListManager.delegate = self;
+    }
+    return _prizeResultListManager;
 }
 
 @end

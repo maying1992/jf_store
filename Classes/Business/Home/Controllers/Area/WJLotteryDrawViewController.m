@@ -54,7 +54,7 @@
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
     self.dataArray = [manager fetchDataWithReformer:[WJLotteryGrawReformer new]];
-    
+    [self.mainTableView reloadData];
 }
 
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager
@@ -70,7 +70,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -84,8 +84,8 @@
     if (cell == nil) {
         cell = [[WJLotteryDrawTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WJLotteryDrawTableViewCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
     }
+    [cell configDataWithModel:self.dataArray[indexPath.row]];
     return cell;
 }
 

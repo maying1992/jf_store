@@ -14,7 +14,10 @@
 - (id)manager:(APIBaseManager *)manager reformData:(id)data
 {
     NSMutableArray  * array = [NSMutableArray array];
-    
+    for (NSDictionary * dic in data[@"goods_list"]) {
+        WJLotteryDrawListModel * categoryModel = [[WJLotteryDrawListModel alloc] initWithDic:dic];
+        [array addObject:categoryModel];
+    }
     return array;
 }
 

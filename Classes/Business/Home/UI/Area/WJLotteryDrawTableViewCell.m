@@ -7,6 +7,7 @@
 //
 
 #import "WJLotteryDrawTableViewCell.h"
+#import "UIImageView+WebCache.h"
 
 @interface WJLotteryDrawTableViewCell()
 {
@@ -73,5 +74,15 @@
     }
     return self;
 }
+
+-(void)configDataWithModel:(WJLotteryDrawListModel *)model
+{
+    titleLabel.text = model.goodsName;
+    integralLabel.text = model.integral;
+    yetDrawLabel.text = model.prizeCount;
+    totalLabel.text = model.prizeTimes;
+    [imageView sd_setImageWithURL:[NSURL URLWithString:model.picUrl]];
+}
+
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WJLotteryDrawListModel.h"
 
 @interface WJLotteryDrawTableViewCell : UITableViewCell
+
+-(void)configDataWithModel:(WJLotteryDrawListModel *)model;
 
 @end

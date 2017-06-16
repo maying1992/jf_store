@@ -78,9 +78,9 @@
 -(void)configDataWithModel:(WJLotteryDrawListModel *)model
 {
     titleLabel.text = model.goodsName;
-    integralLabel.text = model.integral;
-    yetDrawLabel.text = model.prizeCount;
-    totalLabel.text = model.prizeTimes;
+    integralLabel.text = [NSString stringWithFormat:@"积分：%@",model.integral];
+    yetDrawLabel.text = [NSString stringWithFormat:@"已抽奖：%@",model.prizeCount];
+    totalLabel.text = [NSString stringWithFormat:@"总抽奖人数：%@人",model.prizeTimes];
     [imageView sd_setImageWithURL:[NSURL URLWithString:model.picUrl]];
 }
 

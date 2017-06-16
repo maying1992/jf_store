@@ -79,8 +79,8 @@
     }else {
         position = _pageNo + 1;
     }
-    return @{@"current_page":NumberToString(self.pageCount),
-             @"page_size":NumberToString(position)};
+    return @{@"page_size":NumberToString(self.pageCount),
+             @"current_page":NumberToString(position)};
 }
 
 #pragma mark - APIManager Methods

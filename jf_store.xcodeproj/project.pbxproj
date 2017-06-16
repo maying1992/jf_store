@@ -79,6 +79,7 @@
 		6D52C8BD1EF3C47C0062D38B /* APIPrizeGoodsListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8BC1EF3C47C0062D38B /* APIPrizeGoodsListManager.m */; };
 		6D52C8C01EF3C5C80062D38B /* WJLotteryGrawReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8BF1EF3C5C80062D38B /* WJLotteryGrawReformer.m */; };
 		6D52C8C31EF3C8C80062D38B /* WJLotteryDrawListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8C21EF3C8C80062D38B /* WJLotteryDrawListModel.m */; };
+		6D52C8C61EF3D7D60062D38B /* APIPrizeGoodsDetailsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8C51EF3D7D60062D38B /* APIPrizeGoodsDetailsManager.m */; };
 		6D5D3FB51ECDACA900F26417 /* APISiteListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */; };
 		6D680C721EDEC28100FFFC2F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D680C741EDEC28100FFFC2F /* InfoPlist.strings */; };
 		6D680C7D1EDEC35F00FFFC2F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D680C7F1EDEC35F00FFFC2F /* Localizable.strings */; };
@@ -475,6 +476,8 @@
 		6D52C8BF1EF3C5C80062D38B /* WJLotteryGrawReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJLotteryGrawReformer.m; sourceTree = "<group>"; };
 		6D52C8C11EF3C8C80062D38B /* WJLotteryDrawListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJLotteryDrawListModel.h; sourceTree = "<group>"; };
 		6D52C8C21EF3C8C80062D38B /* WJLotteryDrawListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJLotteryDrawListModel.m; sourceTree = "<group>"; };
+		6D52C8C41EF3D7D60062D38B /* APIPrizeGoodsDetailsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIPrizeGoodsDetailsManager.h; sourceTree = "<group>"; };
+		6D52C8C51EF3D7D60062D38B /* APIPrizeGoodsDetailsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIPrizeGoodsDetailsManager.m; sourceTree = "<group>"; };
 		6D5D3FB31ECDACA900F26417 /* APISiteListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APISiteListManager.h; sourceTree = "<group>"; };
 		6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APISiteListManager.m; sourceTree = "<group>"; };
 		6D680C5F1EDEB83F00FFFC2F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -1887,6 +1890,8 @@
 				6DCFFE0D1EEA854500D96C6D /* APIGoodsListManager.m */,
 				6D52C8BB1EF3C47C0062D38B /* APIPrizeGoodsListManager.h */,
 				6D52C8BC1EF3C47C0062D38B /* APIPrizeGoodsListManager.m */,
+				6D52C8C41EF3D7D60062D38B /* APIPrizeGoodsDetailsManager.h */,
+				6D52C8C51EF3D7D60062D38B /* APIPrizeGoodsDetailsManager.m */,
 			);
 			path = APIHomeManager;
 			sourceTree = "<group>";
@@ -3063,6 +3068,7 @@
 				B4E5B6F61EC44B8500F9A7CA /* WJPurchaseOrderDetailCell.m in Sources */,
 				6D27CC181ECC53C800BC6C97 /* WJTagView.m in Sources */,
 				B47825F01ED53499002267A6 /* WJProductEditView.m in Sources */,
+				6D52C8C61EF3D7D60062D38B /* APIPrizeGoodsDetailsManager.m in Sources */,
 				B4E5B6ED1EC4110B00F9A7CA /* WJIndividualAllOrderController.m in Sources */,
 				B45218841EB9F3D0009E9E40 /* WJIndivdualCollectionViewCell.m in Sources */,
 				6D27CC161ECC53C800BC6C97 /* WJTag.m in Sources */,

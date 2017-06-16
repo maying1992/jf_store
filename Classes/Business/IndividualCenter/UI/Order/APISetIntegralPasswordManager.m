@@ -46,7 +46,7 @@
 - (NSDictionary *)paramsForApi:(APIBaseManager *)manager
 {
     return @{@"integralPassword" :self.password
-             @"integralPassword" :self.password
+//             @"integralPassword" :self.password
              };
 }
 

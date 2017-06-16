@@ -20,8 +20,8 @@
     #define ShareSDK_WeChat_AppID       @"wx14758e350711494b"
     #define ShareSDK_WeChat_Secret      @"977eda7bf4ea912e45db111131151803"
 
-    #define ShareSDK_Weibo_AppID        @"3602348914"
-    #define ShareSDK_Weibo_AppSecret    @"fa987193b9b003f805d25bdfa204b7f"
+    #define ShareSDK_Weibo_AppID        @"2765034104"
+    #define ShareSDK_Weibo_AppSecret    @"05785b82906772bbbcc4ec51a4f21a16"
 #else
 
 #endif

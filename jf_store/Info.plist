@@ -29,7 +29,7 @@
 			<array>
 				<string>wx14758e350711494b</string>
 				<string>QQ41EF3C28</string>
-				<string>wb3602348914</string>
+				<string>wb2765034104</string>
 			</array>
 		</dict>
 	</array>
@@ -43,6 +43,9 @@
 		<string>sinaweibohd</string>
 		<string>mqqopensdkapiV2</string>
 		<string>mqqapi</string>
+		<string>weibosdk2.5</string>
+		<string>weibosdk</string>
+		<string></string>
 	</array>
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>

@@ -10,8 +10,8 @@
 
 @interface WJGoodsPlateModel : NSObject
 
-@property (nonatomic, strong) NSString   * channelId;
-@property (nonatomic, strong) NSString   * channelName;
+@property (nonatomic, strong) NSString   * categroyId;
+@property (nonatomic, strong) NSString   * categroyName;
 @property (nonatomic, strong) NSString   * picUrl;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;

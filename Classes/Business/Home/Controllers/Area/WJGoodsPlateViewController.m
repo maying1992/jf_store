@@ -10,6 +10,10 @@
 #import "WJGoodsPlateViewController.h"
 #import "APIIndexCategoryManager.h"
 #import "WJGoodsPlateReformer.h"
+#import "WJGoodsPlateModel.h"
+#import "UIImageView+WebCache.h"
+
+#import "WJGoodsListViewController.h"
 
 #define kDefaultIdentifier              @"kDefaultIdentifier"
 
@@ -55,19 +59,21 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 10;
+    return self.dataArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kDefaultIdentifier forIndexPath:indexPath];
     cell.backgroundColor = WJColorWhite;
+    WJGoodsPlateModel * model = self.dataArray[indexPath.row];
     UIImageView *imagView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.width, cell.width)];
-    imagView.image = [WJUtilityMethod createImageWithColor:WJRandomColor];
+    [imagView sd_setImageWithURL:[NSURL URLWithString:model.picUrl]];
+//    imagView.image = [WJUtilityMethod createImageWithColor:WJRandomColor];
     [cell.contentView addSubview:imagView];
     UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, cell.width, cell.width, 28)];
     titleLabel.font = WJFont14;
-    titleLabel.text = @"大家电";
+    titleLabel.text = model.categroyName;
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.textColor = WJColorMainTitle;
     [cell.contentView addSubview:titleLabel];
@@ -85,7 +91,10 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    WJGoodsListViewController * goodsListVC = [[WJGoodsListViewController alloc]init];
+    WJGoodsPlateModel * model = self.dataArray[indexPath.row];
+    goodsListVC.categoryID = model.categroyId;
+    [self.navigationController pushViewController:goodsListVC animated:YES];
 }
 
 #pragma mark - getter && setter

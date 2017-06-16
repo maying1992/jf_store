@@ -13,8 +13,8 @@
 - (instancetype)initWithDic:(NSDictionary *)dic
 {
     if (self = [super init]) {
-        self.channelId = ToString(dic[@"channel_id"]);
-        self.channelName = ToString(dic[@"channel_name"]);
+        self.categroyId = ToString(dic[@"category_id"]);
+        self.categroyName = ToString(dic[@"category_name"]);
         self.picUrl = ToString(dic[@"pic_url"]);
     }
     return self;

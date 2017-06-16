@@ -190,6 +190,7 @@
         _goodsListManager = [[APIGoodsListManager alloc]init];
         _goodsListManager.delegate = self;
     }
+    _goodsListManager.categoryID = self.categoryID?:@"";
     return _goodsListManager;
 }
 

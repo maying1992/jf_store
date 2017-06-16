@@ -10,4 +10,6 @@
 
 @interface WJGoodsListViewController : WJViewController
 
+@property (nonatomic, strong) NSString * categoryID;
+
 @end

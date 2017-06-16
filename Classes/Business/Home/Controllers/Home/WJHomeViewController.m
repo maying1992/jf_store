@@ -18,6 +18,7 @@
 #import "APIHomeManager.h"
 #import "WJHomeReformer.h"
 #import "WJBannerModel.h"
+#import "WJChannelModel.h"
 
 #import "WJScanCodeViewController.h"
 #import "WJAddressViewController.h"
@@ -237,6 +238,7 @@
         WJChannelModel * channelModel = self.channelListArray[indexPath.row];
         if ([channelModel.relationType intValue] == 1) {
             WJGoodsPlateViewController * goodsPlateVC = [[WJGoodsPlateViewController alloc]init];
+            goodsPlateVC.channelId = channelModel.channelId;
             [self.navigationController pushViewController:goodsPlateVC animated:YES];
         }else if ([channelModel.relationType intValue] == 2){
             WJGoodsListViewController * goodsListVC = [[WJGoodsListViewController alloc]init];

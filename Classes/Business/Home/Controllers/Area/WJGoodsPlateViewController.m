@@ -8,15 +8,17 @@
 //
 
 #import "WJGoodsPlateViewController.h"
-
+#import "APIIndexCategoryManager.h"
+#import "WJGoodsPlateReformer.h"
 
 #define kDefaultIdentifier              @"kDefaultIdentifier"
 
-@interface WJGoodsPlateViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface WJGoodsPlateViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,APIManagerCallBackDelegate>
 
 
-@property(nonatomic,strong) UICollectionView        *collectionView;
-
+@property(nonatomic,strong) UICollectionView                * collectionView;
+@property(nonatomic,strong) APIIndexCategoryManager         * indexCategoryManager;
+@property(nonatomic,strong)NSMutableArray                   * dataArray;
 
 @end
 
@@ -29,6 +31,20 @@
     
     self.title = @"快消品板块";
     [self.view addSubview:self.collectionView];
+    [self.indexCategoryManager loadData];
+}
+
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    self.dataArray = [manager fetchDataWithReformer:[WJGoodsPlateReformer new]];
+    [self.collectionView reloadData];
+    
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    NSLog(@"%@",manager.errorMessage);
 }
 
 #pragma mark - CollectionViewDelegate/CollectionViewDataSource
@@ -94,5 +110,16 @@
     }
     return _collectionView;
 }
+
+- (APIIndexCategoryManager *)indexCategoryManager
+{
+    if (_indexCategoryManager == nil) {
+        _indexCategoryManager = [[APIIndexCategoryManager alloc]init];
+        _indexCategoryManager.delegate = self;
+    }
+    _indexCategoryManager.channelId = self.channelId;
+    return _indexCategoryManager;
+}
+
 
 @end

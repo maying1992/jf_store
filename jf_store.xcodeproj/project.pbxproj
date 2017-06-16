@@ -85,6 +85,9 @@
 		6D52C8CF1EF3DE6D0062D38B /* WJPrizeResultListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8CE1EF3DE6D0062D38B /* WJPrizeResultListModel.m */; };
 		6D52C8D21EF3E4D20062D38B /* WJLotteryDrawDetailReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8D11EF3E4D20062D38B /* WJLotteryDrawDetailReformer.m */; };
 		6D52C8D51EF3E8390062D38B /* WJLotteryDrawDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8D41EF3E8390062D38B /* WJLotteryDrawDetailModel.m */; };
+		6D52C8D81EF3EDA50062D38B /* APIIndexCategoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8D71EF3EDA50062D38B /* APIIndexCategoryManager.m */; };
+		6D52C8DB1EF3EFD80062D38B /* WJGoodsPlateReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8DA1EF3EFD80062D38B /* WJGoodsPlateReformer.m */; };
+		6D52C8DE1EF3F1650062D38B /* WJGoodsPlateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8DD1EF3F1650062D38B /* WJGoodsPlateModel.m */; };
 		6D5D3FB51ECDACA900F26417 /* APISiteListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */; };
 		6D680C721EDEC28100FFFC2F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D680C741EDEC28100FFFC2F /* InfoPlist.strings */; };
 		6D680C7D1EDEC35F00FFFC2F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D680C7F1EDEC35F00FFFC2F /* Localizable.strings */; };
@@ -493,6 +496,12 @@
 		6D52C8D11EF3E4D20062D38B /* WJLotteryDrawDetailReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJLotteryDrawDetailReformer.m; sourceTree = "<group>"; };
 		6D52C8D31EF3E8390062D38B /* WJLotteryDrawDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJLotteryDrawDetailModel.h; sourceTree = "<group>"; };
 		6D52C8D41EF3E8390062D38B /* WJLotteryDrawDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJLotteryDrawDetailModel.m; sourceTree = "<group>"; };
+		6D52C8D61EF3EDA50062D38B /* APIIndexCategoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIIndexCategoryManager.h; sourceTree = "<group>"; };
+		6D52C8D71EF3EDA50062D38B /* APIIndexCategoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIIndexCategoryManager.m; sourceTree = "<group>"; };
+		6D52C8D91EF3EFD80062D38B /* WJGoodsPlateReformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJGoodsPlateReformer.h; sourceTree = "<group>"; };
+		6D52C8DA1EF3EFD80062D38B /* WJGoodsPlateReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJGoodsPlateReformer.m; sourceTree = "<group>"; };
+		6D52C8DC1EF3F1650062D38B /* WJGoodsPlateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJGoodsPlateModel.h; sourceTree = "<group>"; };
+		6D52C8DD1EF3F1650062D38B /* WJGoodsPlateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJGoodsPlateModel.m; sourceTree = "<group>"; };
 		6D5D3FB31ECDACA900F26417 /* APISiteListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APISiteListManager.h; sourceTree = "<group>"; };
 		6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APISiteListManager.m; sourceTree = "<group>"; };
 		6D680C5F1EDEB83F00FFFC2F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -1198,6 +1207,8 @@
 				6D3A37031EEF93A100F5767A /* WJHomeReformer.m */,
 				6DCFFE0F1EEAA6BD00D96C6D /* WJGoodsListReformer.h */,
 				6DCFFE101EEAA6BD00D96C6D /* WJGoodsListReformer.m */,
+				6D52C8D91EF3EFD80062D38B /* WJGoodsPlateReformer.h */,
+				6D52C8DA1EF3EFD80062D38B /* WJGoodsPlateReformer.m */,
 				6D52C8BE1EF3C5C80062D38B /* WJLotteryGrawReformer.h */,
 				6D52C8BF1EF3C5C80062D38B /* WJLotteryGrawReformer.m */,
 				6D52C8CA1EF3DE350062D38B /* WJPrizeResultListReformer.h */,
@@ -1219,6 +1230,8 @@
 				6D3A37061EEFE0F300F5767A /* WJBannerModel.m */,
 				6D3A37081EEFE10300F5767A /* WJChannelModel.h */,
 				6D3A37091EEFE10300F5767A /* WJChannelModel.m */,
+				6D52C8DC1EF3F1650062D38B /* WJGoodsPlateModel.h */,
+				6D52C8DD1EF3F1650062D38B /* WJGoodsPlateModel.m */,
 				6D52C8C11EF3C8C80062D38B /* WJLotteryDrawListModel.h */,
 				6D52C8C21EF3C8C80062D38B /* WJLotteryDrawListModel.m */,
 				6D52C8CD1EF3DE6D0062D38B /* WJPrizeResultListModel.h */,
@@ -1911,6 +1924,8 @@
 				6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */,
 				6DCFFE0C1EEA854500D96C6D /* APIGoodsListManager.h */,
 				6DCFFE0D1EEA854500D96C6D /* APIGoodsListManager.m */,
+				6D52C8D61EF3EDA50062D38B /* APIIndexCategoryManager.h */,
+				6D52C8D71EF3EDA50062D38B /* APIIndexCategoryManager.m */,
 				6D52C8BB1EF3C47C0062D38B /* APIPrizeGoodsListManager.h */,
 				6D52C8BC1EF3C47C0062D38B /* APIPrizeGoodsListManager.m */,
 				6D52C8C41EF3D7D60062D38B /* APIPrizeGoodsDetailsManager.h */,
@@ -2923,6 +2938,7 @@
 				B45218A81EB9F471009E9E40 /* WJOrderModel.m in Sources */,
 				6D96DC711EB97FEF004EDE7F /* APICommonParamsGenerator.m in Sources */,
 				B40EF3B31EC80A6500DDE49F /* WJStoreModel.m in Sources */,
+				6D52C8D81EF3EDA50062D38B /* APIIndexCategoryManager.m in Sources */,
 				6D0EABE21EB326070026B20B /* UILabel+CountHeightAndWidth.m in Sources */,
 				B40EF3DC1EC9597100DDE49F /* WJRechargeCenterViewController.m in Sources */,
 				B45218BE1EBB29DE009E9E40 /* WJForgetPasswordView.m in Sources */,
@@ -2984,6 +3000,7 @@
 				B4E5B6F91EC4632400F9A7CA /* WJRechargeOrderDetailViewController.m in Sources */,
 				6D27CC121ECC53C800BC6C97 /* WJAddressTableViewCell.m in Sources */,
 				B40EF43F1ECC3ADB00DDE49F /* WJRechargeRedIntegralViewController.m in Sources */,
+				6D52C8DB1EF3EFD80062D38B /* WJGoodsPlateReformer.m in Sources */,
 				6D52C8BD1EF3C47C0062D38B /* APIPrizeGoodsListManager.m in Sources */,
 				B478262D1ED91C81002267A6 /* WJGivingListTCell.m in Sources */,
 				6D96DC891EB980D3004EDE7F /* WJIndividualCenterViewController.m in Sources */,
@@ -3078,6 +3095,7 @@
 				B4E5B6CF1EC2F16A00F9A7CA /* WJGivingOrderViewController.m in Sources */,
 				B4E5B6B71EC19EE600F9A7CA /* APIIndividualCenterManager.m in Sources */,
 				B45218FC1EBB3F90009E9E40 /* WJLogisticsCompanyModel.m in Sources */,
+				6D52C8DE1EF3F1650062D38B /* WJGoodsPlateModel.m in Sources */,
 				B47DA0A91ECEECD80038D7E2 /* WJPurchaseIntegralViewController.m in Sources */,
 				B4429BBA1ECD718700A87C38 /* WJIndividualWaitingPayViewController.m in Sources */,
 				B45218CD1EBB2AB0009E9E40 /* WJBindInformationViewController.m in Sources */,

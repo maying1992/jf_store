@@ -10,4 +10,6 @@
 
 @interface WJGoodsPlateViewController : WJViewController
 
+@property(nonatomic ,strong) NSString           * channelId;
+
 @end

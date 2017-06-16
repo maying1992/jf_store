@@ -144,9 +144,6 @@
     WJScanCodeViewController *sacanVC = [[WJScanCodeViewController alloc]init];
     [self.navigationController pushViewController:sacanVC animated:YES];
     
-    // 显示控制器
-    [self presentViewController:vc animated:YES completion:nil];
-    
 //    [WJShare sendShareController:self
 //                         LinkURL:@"www.baidu.com"
 //                         TagName:@"TAG_ProductDetail"

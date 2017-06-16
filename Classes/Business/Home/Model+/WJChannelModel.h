@@ -13,7 +13,7 @@
 @property (nonatomic, strong) NSString   * channelId;
 @property (nonatomic, strong) NSString   * channelName;
 @property (nonatomic, strong) NSString   * channelPic;
-@property (nonatomic, strong) NSString   * channelType;
+//@property (nonatomic, strong) NSString   * channelType;
 @property (nonatomic, strong) NSString   * relationType;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;

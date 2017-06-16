@@ -234,13 +234,14 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
-        if (indexPath.row <=1) {
-            WJGoodsListViewController * goodsListVC = [[WJGoodsListViewController alloc]init];
-            [self.navigationController pushViewController:goodsListVC animated:YES];
-        }else if (indexPath.row <= 3){
+        WJChannelModel * channelModel = self.channelListArray[indexPath.row];
+        if ([channelModel.relationType intValue] == 1) {
             WJGoodsPlateViewController * goodsPlateVC = [[WJGoodsPlateViewController alloc]init];
             [self.navigationController pushViewController:goodsPlateVC animated:YES];
-        }else if (indexPath.row <= 5){
+        }else if ([channelModel.relationType intValue] == 2){
+            WJGoodsListViewController * goodsListVC = [[WJGoodsListViewController alloc]init];
+            [self.navigationController pushViewController:goodsListVC animated:YES];
+        }else if ([channelModel.relationType intValue] == 3){
             WJLotteryDrawViewController * lotteryDrawVC = [[WJLotteryDrawViewController alloc]init];
             [self.navigationController pushViewController:lotteryDrawVC animated:YES];
         }

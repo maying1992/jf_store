@@ -16,7 +16,7 @@
         self.channelId = ToString(dic[@"channel_id"]);
         self.channelName = ToString(dic[@"channel_name"]);
         self.channelPic = ToString(dic[@"channel_pic"]);
-        self.channelType = ToString(dic[@"channel_type"]);
+//        self.channelType = ToString(dic[@"channel_type"]);
         self.relationType = ToString(dic[@"relation_type"]);
         
     }

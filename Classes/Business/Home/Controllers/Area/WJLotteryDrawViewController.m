@@ -37,7 +37,6 @@
     [rightButton setTitle:@"中奖查询" forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(rightButtonAction) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    
 }
 
 - (void)rightButtonAction

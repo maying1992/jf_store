@@ -10,4 +10,6 @@
 
 @interface WJLotteryDrawDetailViewController : WJViewController
 
+@property(nonatomic ,strong) NSString       * prizeId;
+
 @end

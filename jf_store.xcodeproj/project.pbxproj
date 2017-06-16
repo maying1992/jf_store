@@ -83,6 +83,8 @@
 		6D52C8C91EF3DD400062D38B /* APIPrizeResultListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8C81EF3DD400062D38B /* APIPrizeResultListManager.m */; };
 		6D52C8CC1EF3DE350062D38B /* WJPrizeResultListReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8CB1EF3DE350062D38B /* WJPrizeResultListReformer.m */; };
 		6D52C8CF1EF3DE6D0062D38B /* WJPrizeResultListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8CE1EF3DE6D0062D38B /* WJPrizeResultListModel.m */; };
+		6D52C8D21EF3E4D20062D38B /* WJLotteryDrawDetailReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8D11EF3E4D20062D38B /* WJLotteryDrawDetailReformer.m */; };
+		6D52C8D51EF3E8390062D38B /* WJLotteryDrawDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8D41EF3E8390062D38B /* WJLotteryDrawDetailModel.m */; };
 		6D5D3FB51ECDACA900F26417 /* APISiteListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */; };
 		6D680C721EDEC28100FFFC2F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D680C741EDEC28100FFFC2F /* InfoPlist.strings */; };
 		6D680C7D1EDEC35F00FFFC2F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D680C7F1EDEC35F00FFFC2F /* Localizable.strings */; };
@@ -487,6 +489,10 @@
 		6D52C8CB1EF3DE350062D38B /* WJPrizeResultListReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJPrizeResultListReformer.m; sourceTree = "<group>"; };
 		6D52C8CD1EF3DE6D0062D38B /* WJPrizeResultListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJPrizeResultListModel.h; sourceTree = "<group>"; };
 		6D52C8CE1EF3DE6D0062D38B /* WJPrizeResultListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJPrizeResultListModel.m; sourceTree = "<group>"; };
+		6D52C8D01EF3E4D20062D38B /* WJLotteryDrawDetailReformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJLotteryDrawDetailReformer.h; sourceTree = "<group>"; };
+		6D52C8D11EF3E4D20062D38B /* WJLotteryDrawDetailReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJLotteryDrawDetailReformer.m; sourceTree = "<group>"; };
+		6D52C8D31EF3E8390062D38B /* WJLotteryDrawDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJLotteryDrawDetailModel.h; sourceTree = "<group>"; };
+		6D52C8D41EF3E8390062D38B /* WJLotteryDrawDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJLotteryDrawDetailModel.m; sourceTree = "<group>"; };
 		6D5D3FB31ECDACA900F26417 /* APISiteListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APISiteListManager.h; sourceTree = "<group>"; };
 		6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APISiteListManager.m; sourceTree = "<group>"; };
 		6D680C5F1EDEB83F00FFFC2F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -1196,6 +1202,8 @@
 				6D52C8BF1EF3C5C80062D38B /* WJLotteryGrawReformer.m */,
 				6D52C8CA1EF3DE350062D38B /* WJPrizeResultListReformer.h */,
 				6D52C8CB1EF3DE350062D38B /* WJPrizeResultListReformer.m */,
+				6D52C8D01EF3E4D20062D38B /* WJLotteryDrawDetailReformer.h */,
+				6D52C8D11EF3E4D20062D38B /* WJLotteryDrawDetailReformer.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1215,6 +1223,8 @@
 				6D52C8C21EF3C8C80062D38B /* WJLotteryDrawListModel.m */,
 				6D52C8CD1EF3DE6D0062D38B /* WJPrizeResultListModel.h */,
 				6D52C8CE1EF3DE6D0062D38B /* WJPrizeResultListModel.m */,
+				6D52C8D31EF3E8390062D38B /* WJLotteryDrawDetailModel.h */,
+				6D52C8D41EF3E8390062D38B /* WJLotteryDrawDetailModel.m */,
 			);
 			path = "Model+";
 			sourceTree = "<group>";
@@ -2889,6 +2899,7 @@
 				6D34D08C1ED2D0730065202B /* WJTradingHallRechargeViewController.m in Sources */,
 				6D27CC221ECC543100BC6C97 /* WJAddressViewController.m in Sources */,
 				6D2754DB1ED7DB9500A4B0D7 /* WJBottonBarView.m in Sources */,
+				6D52C8D51EF3E8390062D38B /* WJLotteryDrawDetailModel.m in Sources */,
 				B4E5B6B41EC0760100F9A7CA /* WJCategoryModel.m in Sources */,
 				6D27CC171ECC53C800BC6C97 /* WJTagButton.m in Sources */,
 				B459DA041EBD7BDB00F3748B /* WJEditAddressViewController.m in Sources */,
@@ -3109,6 +3120,7 @@
 				6D96DC3A1EB97F25004EDE7F /* UIView+LayoutMethods.m in Sources */,
 				B45218ED1EBB3195009E9E40 /* WJDBAreaManager.m in Sources */,
 				B40EF3F41ECAB02800DDE49F /* WJSystemMessageCell.m in Sources */,
+				6D52C8D21EF3E4D20062D38B /* WJLotteryDrawDetailReformer.m in Sources */,
 				6D27CBDB1ECC35CD00BC6C97 /* WJGoodsListViewController.m in Sources */,
 				6D96DC7E1EB97FEF004EDE7F /* NSString+SHA.m in Sources */,
 				B4429BC01ECD73D000A87C38 /* WJIndividualWaitingReceiveViewController.m in Sources */,

@@ -8,11 +8,17 @@
 
 #import "WJLotteryDrawDetailViewController.h"
 #import "SDCycleScrollView.h"
+#import "APIPrizeGoodsDetailsManager.h"
+#import "WJLotteryDrawDetailReformer.h"
+#import "WJLotteryDrawDetailModel.h"
 
-@interface WJLotteryDrawDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
+@interface WJLotteryDrawDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,APIManagerCallBackDelegate>
 
 @property(nonatomic ,strong) UITableView                     * mainTableView;
 @property(nonatomic, strong) SDCycleScrollView               * cycleScrollView;
+@property(nonatomic, strong) APIPrizeGoodsDetailsManager     * prizeGoodsDetailsManager;
+@property(nonatomic ,strong) WJLotteryDrawDetailModel        * dataModel;
+
 
 @end
 
@@ -35,6 +41,19 @@
     self.isHiddenTabBar = YES;
     [self.view addSubview:self.mainTableView];
     [self UISetUp];
+    [self.prizeGoodsDetailsManager loadData];
+}
+
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    self.dataModel = [manager fetchDataWithReformer:[WJLotteryDrawDetailReformer new]];
+    [self.mainTableView reloadData];
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    NSLog(@"%@",manager.errorMessage);
 }
 
 - (void)backBarButton:(UIButton *)btn{
@@ -50,7 +69,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -73,7 +92,7 @@
         }
         return cell;
 //    }
-//    else{
+//    else if (indexPath.row == 1){
 //        WJGoodsDetailTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"WJGoodsDetailTableViewCell"];
 //        if (cell == nil) {
 //            cell = [[WJGoodsDetailTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WJGoodsDetailTableViewCell"];
@@ -134,5 +153,14 @@
     return _mainTableView;
 }
 
+- (APIPrizeGoodsDetailsManager *)prizeGoodsDetailsManager
+{
+    if (_prizeGoodsDetailsManager == nil) {
+        _prizeGoodsDetailsManager = [[APIPrizeGoodsDetailsManager alloc]init];
+        _prizeGoodsDetailsManager.delegate = self;
+    }
+    _prizeGoodsDetailsManager.prizeId = self.prizeId;
+    return _prizeGoodsDetailsManager;
+}
 
 @end

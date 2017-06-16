@@ -11,6 +11,7 @@
 #import "WJLotteryDrawTableViewCell.h"
 #import "APIPrizeGoodsListManager.h"
 #import "WJLotteryGrawReformer.h"
+#import "WJLotteryDrawListModel.h"
 
 #import "WJWinnerListViewController.h"
 #import "WJLotteryDrawDetailViewController.h"
@@ -92,6 +93,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WJLotteryDrawDetailViewController * lotteryDrawDetailVC = [[WJLotteryDrawDetailViewController alloc]init];
+    WJLotteryDrawListModel * model = self.dataArray[indexPath.row];
+    lotteryDrawDetailVC.prizeId = model.prizeId;
     [self.navigationController pushViewController:lotteryDrawDetailVC animated:YES];
 }
 

@@ -88,6 +88,8 @@
 		6D52C8D81EF3EDA50062D38B /* APIIndexCategoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8D71EF3EDA50062D38B /* APIIndexCategoryManager.m */; };
 		6D52C8DB1EF3EFD80062D38B /* WJGoodsPlateReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8DA1EF3EFD80062D38B /* WJGoodsPlateReformer.m */; };
 		6D52C8DE1EF3F1650062D38B /* WJGoodsPlateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8DD1EF3F1650062D38B /* WJGoodsPlateModel.m */; };
+		6D52C8E11EF3FCF30062D38B /* WJWebTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8E01EF3FCF30062D38B /* WJWebTableViewCell.m */; };
+		6D52C8E41EF3FE730062D38B /* WJLotteryDrawDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8E31EF3FE730062D38B /* WJLotteryDrawDetailCell.m */; };
 		6D5D3FB51ECDACA900F26417 /* APISiteListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */; };
 		6D680C721EDEC28100FFFC2F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D680C741EDEC28100FFFC2F /* InfoPlist.strings */; };
 		6D680C7D1EDEC35F00FFFC2F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D680C7F1EDEC35F00FFFC2F /* Localizable.strings */; };
@@ -502,6 +504,10 @@
 		6D52C8DA1EF3EFD80062D38B /* WJGoodsPlateReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJGoodsPlateReformer.m; sourceTree = "<group>"; };
 		6D52C8DC1EF3F1650062D38B /* WJGoodsPlateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJGoodsPlateModel.h; sourceTree = "<group>"; };
 		6D52C8DD1EF3F1650062D38B /* WJGoodsPlateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJGoodsPlateModel.m; sourceTree = "<group>"; };
+		6D52C8DF1EF3FCF30062D38B /* WJWebTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWebTableViewCell.h; sourceTree = "<group>"; };
+		6D52C8E01EF3FCF30062D38B /* WJWebTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWebTableViewCell.m; sourceTree = "<group>"; };
+		6D52C8E21EF3FE730062D38B /* WJLotteryDrawDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJLotteryDrawDetailCell.h; sourceTree = "<group>"; };
+		6D52C8E31EF3FE730062D38B /* WJLotteryDrawDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJLotteryDrawDetailCell.m; sourceTree = "<group>"; };
 		6D5D3FB31ECDACA900F26417 /* APISiteListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APISiteListManager.h; sourceTree = "<group>"; };
 		6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APISiteListManager.m; sourceTree = "<group>"; };
 		6D680C5F1EDEB83F00FFFC2F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -1680,6 +1686,8 @@
 			children = (
 				6D27CBF11ECC53BC00BC6C97 /* WJTitleButton.h */,
 				6D27CBF21ECC53BC00BC6C97 /* WJTitleButton.m */,
+				6D52C8DF1EF3FCF30062D38B /* WJWebTableViewCell.h */,
+				6D52C8E01EF3FCF30062D38B /* WJWebTableViewCell.m */,
 				6D27CBEF1ECC53BC00BC6C97 /* WJLotteryDrawTableViewCell.h */,
 				6D27CBF01ECC53BC00BC6C97 /* WJLotteryDrawTableViewCell.m */,
 				6D3B7F3B1EE6604E00A57388 /* WJLotteryDrawDetailTableViewCell.h */,
@@ -1690,6 +1698,8 @@
 				6D2754DA1ED7DB9500A4B0D7 /* WJBottonBarView.m */,
 				6D2754DC1ED7E47400A4B0D7 /* WJGoodsDetailTableViewCell.h */,
 				6D2754DD1ED7E47400A4B0D7 /* WJGoodsDetailTableViewCell.m */,
+				6D52C8E21EF3FE730062D38B /* WJLotteryDrawDetailCell.h */,
+				6D52C8E31EF3FE730062D38B /* WJLotteryDrawDetailCell.m */,
 			);
 			path = Area;
 			sourceTree = "<group>";
@@ -3032,6 +3042,7 @@
 				B40EF3C41EC846FC00DDE49F /* WJOrderFooterView.m in Sources */,
 				B4E5B6FC1EC47B0800F9A7CA /* APIGetGrCodeManager.m in Sources */,
 				6D0EABE41EB326070026B20B /* DZNSegmentedControl.m in Sources */,
+				6D52C8E41EF3FE730062D38B /* WJLotteryDrawDetailCell.m in Sources */,
 				B45218C31EBB2A07009E9E40 /* WJBindInformationView.m in Sources */,
 				B4429BDB1ECDADC700A87C38 /* WJLotteryQueryViewController.m in Sources */,
 				B45218D31EBB2AE6009E9E40 /* WJPasswordSettingViewController.m in Sources */,
@@ -3087,6 +3098,7 @@
 				6DCFFE111EEAA6BD00D96C6D /* WJGoodsListReformer.m in Sources */,
 				B47DA0BB1ED2B4040038D7E2 /* WJOrderConfirmModel.m in Sources */,
 				6D96DC7D1EB97FEF004EDE7F /* SecurityService.m in Sources */,
+				6D52C8E11EF3FCF30062D38B /* WJWebTableViewCell.m in Sources */,
 				B4E5B6C31EC1D2A000F9A7CA /* APIMyDeliveryAddressManager.m in Sources */,
 				B40EF3A41EC5C5FD00DDE49F /* WJStoreCategorySelectView.m in Sources */,
 				B4E5B6BD1EC1AF4B00F9A7CA /* WJIndividualCenterReformer.m in Sources */,

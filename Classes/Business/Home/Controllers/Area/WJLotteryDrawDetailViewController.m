@@ -11,8 +11,15 @@
 #import "APIPrizeGoodsDetailsManager.h"
 #import "WJLotteryDrawDetailReformer.h"
 #import "WJLotteryDrawDetailModel.h"
+#import "WJWebTableViewCell.h"
+#import "WJLotteryDrawDetailCell.h"
+#import "WJLotteryDrawDetailModel.h"
 
-@interface WJLotteryDrawDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,APIManagerCallBackDelegate>
+@interface WJLotteryDrawDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,APIManagerCallBackDelegate,ReloadWebViewDelegate>
+{
+    CGFloat       productDetailCellHight;
+}
+
 
 @property(nonatomic ,strong) UITableView                     * mainTableView;
 @property(nonatomic, strong) SDCycleScrollView               * cycleScrollView;
@@ -60,14 +67,22 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - ReloadWebViewDelegate
+- (void)reloadByHeight:(CGFloat)height
+{
+    productDetailCellHight = height;
+    [self.mainTableView reloadData];
+}
+
 #pragma mark UITableViewDelegate && UITableViewDataSource
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 3;
 }
@@ -77,28 +92,42 @@
     if (indexPath.row == 0) {
         //轮播
         return kScreenWidth * 0.6;
-    }else{
+    }else if (indexPath.row == 1) {
         return 120;
+    }else{
+        return productDetailCellHight;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (indexPath.row == 0) {
+    if (indexPath.row == 0) {
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
         if (cell == nil) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
             [cell.contentView addSubview:self.cycleScrollView];
         }
         return cell;
-//    }
-//    else if (indexPath.row == 1){
-//        WJGoodsDetailTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"WJGoodsDetailTableViewCell"];
-//        if (cell == nil) {
-//            cell = [[WJGoodsDetailTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WJGoodsDetailTableViewCell"];
-//        }
-//        return cell;
-//    }
+    }else if(indexPath.row == 1){
+        WJLotteryDrawDetailCell * cell = [tableView dequeueReusableCellWithIdentifier:@"WJLotteryDrawDetailCell"];
+        if (cell == nil) {
+            cell = [[WJLotteryDrawDetailCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WJLotteryDrawDetailCell"];
+        }
+        [cell configDataWithModel:self.dataModel];
+        return cell;
+    }else{
+        //商品详情
+        WJWebTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"WebCell"];
+        if (!cell) {
+            cell = [[WJWebTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WebCell"];
+            cell.heightDelegate = self;
+        }
+        if (self.dataModel != nil && productDetailCellHight == 0) {
+            [cell configWithURL:self.dataModel.linkUrl];
+        }
+        cell.contentView.backgroundColor = WJRandomColor;
+        return cell;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -145,7 +174,7 @@
 
 - (UITableView *)mainTableView{
     if (_mainTableView == nil) {
-        _mainTableView = [[UITableView alloc]initWithFrame:CGRectMake( 0, - kStatusBarHeight, kScreenWidth, kScreenHeight - kNavBarAndStatBarHeight - kTabbarHeight) style:UITableViewStylePlain];
+        _mainTableView = [[UITableView alloc]initWithFrame:CGRectMake( 0, - kStatusBarHeight, kScreenWidth, kScreenHeight - kTabbarHeight +kStatusBarHeight) style:UITableViewStylePlain];
         _mainTableView.delegate = self;
         _mainTableView.dataSource = self;
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;

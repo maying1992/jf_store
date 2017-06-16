@@ -58,7 +58,7 @@
 
 -(void)configDataWithModel:(WJPrizeResultListModel *)model
 {
-    numLabel.text = model.prizeNum;
+    numLabel.text = [NSString stringWithFormat:@"%@期",model.prizeNum];
     userLabel.text = model.userName;
     goodsLabel.text = model.goodsName;
 }

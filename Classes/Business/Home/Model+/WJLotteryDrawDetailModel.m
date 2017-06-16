@@ -23,8 +23,10 @@
         self.linkUrl = ToString(dic[@"link_url"]);
         
         self.picInfoList = [NSMutableArray array];
-        for (NSString * url in dic[@"picInfoList"]) {
-            [self.picInfoList addObject:url];
+        if (![dic[@"picInfoList"]isEqualToArray:@[]]) {
+            for (NSString * url in dic[@"picInfoList"]) {
+                [self.picInfoList addObject:url];
+            }
         }
     }
     return self;

@@ -47,7 +47,6 @@
 - (NSDictionary *)paramsForApi:(APIBaseManager *)manager
 {
     return @{@"name" :self.name,
-             @"user_id":self.userId,
              @"certCode" :self.certCode,
              @"front" :self.front,
              @"rear" :self.rear};

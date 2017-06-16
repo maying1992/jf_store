@@ -20,12 +20,14 @@
     [formatter setDateFormat:@"YYYYMMddHHmmss"];
     NSString *currentTimeString = [formatter stringFromDate:[NSDate date]];
     
+    parameters[@"user_id"] = USER_ID?:@"";
     parameters[@"sign_type"] = @"MD5";
     parameters[@"channel"] = KChannel;
     parameters[@"timestamp"] = currentTimeString;
     parameters[@"system_id"] = @"12";
     parameters[@"version"] = kSystemVersion;
     parameters[@"terminal"] = @"11";
+    
     return parameters;
 }
 

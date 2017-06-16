@@ -80,7 +80,6 @@
     
     return @{@"pageSize":NumberToString(self.pageCount),
              @"pageNum":NumberToString(position),
-             @"user_id":self.userId
              };
 }
 

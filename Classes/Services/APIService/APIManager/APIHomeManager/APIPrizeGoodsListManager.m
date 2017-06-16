@@ -1,20 +1,35 @@
 //
-//  APIModifyInformationManager.m
+//  APIPrizeGoodsListManager.m
 //  jf_store
 //
-//  Created by reborn on 2017/6/8.
+//  Created by XT Xiong on 2017/6/16.
 //  Copyright © 2017年 JF. All rights reserved.
 //
 
-#import "APIModifyInformationManager.h"
+#import "APIPrizeGoodsListManager.h"
 
-@implementation APIModifyInformationManager
+
+@interface APIPrizeGoodsListManager()
+{
+    NSInteger _pageNo;  //  分页:第几页 从1开始 默认1
+}
+
+@property (nonatomic, assign, readwrite) NSInteger callBackCount;    //  请求返回的个数
+
+
+@end
+
+@implementation APIPrizeGoodsListManager
+
+
 - (instancetype)init
 {
     self = [super init];
     if (self) {
         self.paramSource = self;
         self.validator = self;
+        self.pageCount = 10;        // 默认10
+        self.firstPageNo = 1;       //默认第一页
     }
     return self;
 }
@@ -27,7 +42,20 @@
  */
 - (BOOL)manager:(APIBaseManager *)manager isCorrectWithCallBackData:(NSDictionary *)data
 {
-    return [data[@"rspCode"] integerValue] == 0;
+    
+    if ([data isKindOfClass:[NSDictionary class]]) {
+        self.callBackCount = [data[@"total_page"] integerValue];
+        
+    }
+    BOOL isCorrect = [data[@"rspCode"] integerValue] == 0 && self.callBackCount > 0;
+    if (isCorrect) {
+        if (self.shouldCleanData) {
+            _pageNo = _firstPageNo;
+        }else {
+            _pageNo++;
+        }
+    }
+    return isCorrect;
 }
 
 /*
@@ -45,16 +73,20 @@
 //让manager能够获取调用API所需要的数据
 - (NSDictionary *)paramsForApi:(APIBaseManager *)manager
 {
-    return @{@"head" :self.headPic?:@"",
-             @"nick_name" :self.nickName?:@"",
-             @"age" :self.age?:@""
-             };
+    NSInteger position = _pageNo;
+    if (self.shouldCleanData) {
+        position = _firstPageNo;
+    }else {
+        position = _pageNo + 1;
+    }
+    return @{@"current_page":NumberToString(self.pageCount),
+             @"page_size":NumberToString(position)};
 }
 
 #pragma mark - APIManager Methods
 - (NSString *)methodName
 {
-    return @"setUserCenter";
+    return @"prizeGoodsList";
 }
 
 - (NSString *)serviceType
@@ -66,4 +98,5 @@
 {
     return APIManagerRequestTypePost;
 }
+
 @end

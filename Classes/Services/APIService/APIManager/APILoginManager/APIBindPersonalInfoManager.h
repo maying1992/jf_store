@@ -11,7 +11,6 @@
 @interface APIBindPersonalInfoManager : APIBaseManager<APIManagerParamSourceDelegate,APIManagerVaildator,APIManager>
 
 @property (nonatomic, strong) NSString * name;
-@property (nonatomic, strong) NSString * userId;
 @property (nonatomic, strong) NSString * certCode;
 @property (nonatomic, strong) NSString * front;
 @property (nonatomic, strong) NSString * rear;

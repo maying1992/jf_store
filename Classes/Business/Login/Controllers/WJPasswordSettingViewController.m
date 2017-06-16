@@ -266,7 +266,6 @@
     } else if (self.passwordType == PasswordTypeConfirm) {
         
         self.setIntegralPasswordManager.password = enterPassword;
-        self.setIntegralPasswordManager.useId = USER_ID;
         [self.setIntegralPasswordManager loadData];
         [self cleanPsdView];
         

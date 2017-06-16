@@ -669,7 +669,6 @@
         _modifyInformationManager = [[APIModifyInformationManager alloc] init];
         _modifyInformationManager.delegate = self;
     }
-    _modifyInformationManager.userId = ToString(USER_ID);
     _modifyInformationManager.headPic = self.headPortraitStr;
     _modifyInformationManager.nickName = nickNameTF.text;
     _modifyInformationManager.age = ageTF.text;

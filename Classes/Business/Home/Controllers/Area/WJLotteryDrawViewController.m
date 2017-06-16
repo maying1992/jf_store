@@ -9,13 +9,17 @@
 
 #import "WJLotteryDrawViewController.h"
 #import "WJLotteryDrawTableViewCell.h"
+#import "APIPrizeGoodsListManager.h"
+#import "WJLotteryGrawReformer.h"
 
 #import "WJWinnerListViewController.h"
 #import "WJLotteryDrawDetailViewController.h"
 
-@interface WJLotteryDrawViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface WJLotteryDrawViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
 
-@property(nonatomic ,strong) UITableView     *mainTableView;
+@property(nonatomic ,strong) UITableView                    * mainTableView;
+@property(nonatomic ,strong) APIPrizeGoodsListManager       * prizeGoodsListManager;
+@property(nonatomic ,strong) NSMutableArray                   * dataArray;
 
 @end
 
@@ -27,6 +31,7 @@
     self.isHiddenTabBar = YES;
     [self.view addSubview:self.mainTableView];
     [self navigationSetup];
+    [self.prizeGoodsListManager loadData];
 }
 
 - (void)navigationSetup
@@ -43,6 +48,18 @@
 {
     WJWinnerListViewController * winnerLisrVC = [[WJWinnerListViewController alloc]init];
     [self.navigationController pushViewController:winnerLisrVC animated:YES];
+}
+
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    self.dataArray = [manager fetchDataWithReformer:[WJLotteryGrawReformer new]];
+    
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    NSLog(@"%@",manager.errorMessage);
 }
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource
@@ -89,6 +106,15 @@
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _mainTableView;
+}
+
+- (APIPrizeGoodsListManager *)prizeGoodsListManager
+{
+    if (_prizeGoodsListManager == nil) {
+        _prizeGoodsListManager = [[APIPrizeGoodsListManager alloc]init];
+        _prizeGoodsListManager.delegate = self;
+    }
+    return _prizeGoodsListManager;
 }
 
 

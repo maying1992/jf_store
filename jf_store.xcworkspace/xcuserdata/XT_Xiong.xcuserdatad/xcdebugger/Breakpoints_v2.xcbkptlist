@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Classes/Business/Home/Controllers/Home/WJHomeViewController.m"
-            timestampString = "519291652.667902"
+            filePath = "Classes/Business/Home/Core/WJLotteryGrawReformer.m"
+            timestampString = "519294117.739437"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
-            landmarkName = "-collectionView:didSelectItemAtIndexPath:"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "-manager:reformData:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

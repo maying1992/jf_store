@@ -336,7 +336,6 @@
         _myDeliveryAddressManager = [[APIMyDeliveryAddressManager alloc] init];
     }
     _myDeliveryAddressManager.delegate = self;
-    _myDeliveryAddressManager.userId = ToString(USER_ID);
     return _myDeliveryAddressManager;
 }
 

@@ -24,7 +24,9 @@
         
     }
     
-    return @"http://139.129.110.82:9090/interface/dateService.do";
+    return @"http://192.168.1.150:8080/interface/dateService.do";
+
+//    return @"http://139.129.110.82:9090/interface/dateService.do";
 }
 
 - (NSString *)onlineApiVersion

@@ -9,7 +9,6 @@
 #import "APIBaseManager.h"
 
 @interface APIModifyInformationManager : APIBaseManager<APIManagerParamSourceDelegate,APIManagerVaildator,APIManager>
-@property(nonatomic, strong)NSString *userId;
 @property(nonatomic, strong)NSString *headPic;
 @property(nonatomic, strong)NSString *age;
 @property(nonatomic, strong)NSString *nickName;

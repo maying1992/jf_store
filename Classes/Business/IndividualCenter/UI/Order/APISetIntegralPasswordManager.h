@@ -12,7 +12,6 @@
 
 
 @property (nonatomic, strong) NSString *password;
-@property (nonatomic, strong) NSString *useId;
 
 
 @end

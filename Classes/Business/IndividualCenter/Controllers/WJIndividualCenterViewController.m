@@ -654,6 +654,7 @@
         
         WJLoginController *loginVC = [[WJLoginController alloc]init];
         WJNavigationController *nav = [[WJNavigationController alloc] initWithRootViewController:loginVC];
+        
         [self.navigationController presentViewController:nav animated:YES completion:nil];
     }
 }

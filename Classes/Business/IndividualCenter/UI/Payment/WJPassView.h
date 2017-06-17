@@ -27,8 +27,10 @@
 
 @interface WJPassView : UIView
 
-@property (nonatomic, weak) id<WJPassViewDelegate> delegate;
-@property(nonatomic,assign) NSInteger alertTag;
+@property (nonatomic, weak)   id<WJPassViewDelegate>      delegate;
+@property (nonatomic, assign) NSInteger                   alertTag;
+@property (nonatomic, strong) NSString                  * enterPassword;
+
 
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title;
 - (void)showIn;

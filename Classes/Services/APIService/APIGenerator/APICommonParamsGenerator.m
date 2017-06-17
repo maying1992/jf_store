@@ -21,6 +21,7 @@
     NSString *currentTimeString = [formatter stringFromDate:[NSDate date]];
     
     parameters[@"user_id"] = USER_ID?:@"";
+    parameters[@"site_id"] = SITE_ID?:@"";
     parameters[@"sign_type"] = @"MD5";
     parameters[@"channel"] = KChannel;
     parameters[@"timestamp"] = currentTimeString;

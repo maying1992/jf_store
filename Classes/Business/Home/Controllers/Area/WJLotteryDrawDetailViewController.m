@@ -14,8 +14,12 @@
 #import "WJWebTableViewCell.h"
 #import "WJLotteryDrawDetailCell.h"
 #import "WJLotteryDrawDetailModel.h"
+#import "APIPrizeNowManager.h"
+#import "WJPassView.h"
+#import "WJSystemAlertView.h"
 
-@interface WJLotteryDrawDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,APIManagerCallBackDelegate,ReloadWebViewDelegate>
+
+@interface WJLotteryDrawDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,APIManagerCallBackDelegate,ReloadWebViewDelegate,WJPassViewDelegate,WJSystemAlertViewDelegate>
 {
     CGFloat       productDetailCellHight;
 }
@@ -24,6 +28,7 @@
 @property(nonatomic ,strong) UITableView                     * mainTableView;
 @property(nonatomic, strong) SDCycleScrollView               * cycleScrollView;
 @property(nonatomic, strong) APIPrizeGoodsDetailsManager     * prizeGoodsDetailsManager;
+@property(nonatomic, strong) APIPrizeNowManager              * prizeNowManager;
 @property(nonatomic ,strong) WJLotteryDrawDetailModel        * dataModel;
 
 
@@ -51,9 +56,24 @@
     [self.prizeGoodsDetailsManager loadData];
 }
 
+- (void)outputButtonAction
+{
+    
+    WJPassView *passView  = [[WJPassView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - ALD(50)) title:@"请输入支付密码"];
+    passView.delegate = self;
+    [passView showIn];
+//    self.payType = order.payType;
+    
+//    self.orderModel = order;
+
+}
+
 #pragma mark - APIManagerCallBackDelegate
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
+    if ([manager isMemberOfClass:[APIPrizeNowManager class]]) {
+        ALERT(@"抽奖成功");
+    }
     self.dataModel = [manager fetchDataWithReformer:[WJLotteryDrawDetailReformer new]];
     [self.mainTableView reloadData];
 }
@@ -61,11 +81,74 @@
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager
 {
     NSLog(@"%@",manager.errorMessage);
+    ALERT(manager.errorMessage);
 }
 
 - (void)backBarButton:(UIButton *)btn{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
+#pragma mark - WJPassViewDelegate
+- (void)successWithVerifyPsdAlert:(WJPassView *)alertView
+{
+    NSLog(@"111");
+    self.prizeNowManager.password = alertView.enterPassword;
+    [self.prizeNowManager loadData];
+}
+
+- (void)failedWithVerifyPsdAlert:(WJPassView *)alertView errerMessage:(NSString * )errerMessage
+{
+    NSLog(@"222");
+    [alertView dismiss];
+    [self showAlertWithMessage:errerMessage];
+    
+}
+
+-(void)setTradePasswordActionWith:(WJPassView *)alertView
+{
+    NSLog(@"333");
+
+    [alertView dismiss];
+    
+//    WJIntegralTradePasswordViewController *integralTradePasswordViewController = [[WJIntegralTradePasswordViewController alloc] init];
+//    [self.navigationController pushViewController:integralTradePasswordViewController animated:YES];
+}
+
+- (void)forgetPasswordActionWith:(WJPassView *)alertView
+{
+    NSLog(@"444");
+
+    [alertView dismiss];
+    
+//    WJIntegralTradePasswordViewController *integralTradePasswordViewController = [[WJIntegralTradePasswordViewController alloc] init];
+//    [self.navigationController pushViewController:integralTradePasswordViewController animated:YES];
+}
+
+#pragma mark - WJSystemAlertViewDelegate
+- (void)wjAlertView:(WJSystemAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //取消
+    if (buttonIndex == 0) {
+        [alertView dismiss];
+        
+    } else {
+        
+        WJPassView *passView = [[WJPassView alloc] initWithFrame:self.view.bounds title:@"请输入支付密码"];
+        passView.delegate = self;
+        [passView showIn];
+    }
+}
+
+
+
+- (void)showAlertWithMessage:(NSString *)msg
+{
+    WJSystemAlertView *sysAlert = [[WJSystemAlertView alloc] initWithTitle:@"验证失败" message:msg delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"再试一次" textAlignment:NSTextAlignmentCenter];
+    
+    [sysAlert showIn];
+}
+
 
 #pragma mark - ReloadWebViewDelegate
 - (void)reloadByHeight:(CGFloat)height
@@ -93,7 +176,7 @@
         //轮播
         return kScreenWidth * 0.6;
     }else if (indexPath.row == 1) {
-        return 120;
+        return 105;
     }else{
         return productDetailCellHight;
     }
@@ -190,6 +273,17 @@
     }
     _prizeGoodsDetailsManager.prizeId = self.prizeId;
     return _prizeGoodsDetailsManager;
+}
+
+- (APIPrizeNowManager *)prizeNowManager
+{
+    if (_prizeNowManager == nil) {
+        _prizeNowManager = [[APIPrizeNowManager alloc]init];
+        _prizeNowManager.delegate = self;
+    }
+    _prizeNowManager.prizeId = self.prizeId;
+    _prizeNowManager.count = @"1";
+    return _prizeNowManager;
 }
 
 @end

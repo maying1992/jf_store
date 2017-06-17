@@ -8,6 +8,7 @@
 
 #import "WJPassView.h"
 #import "WJSystemAlertView.h"
+#import "APIVerifyPayPasswordManager.h"
 
 #define IVTag  200
 
@@ -29,12 +30,15 @@
     UIView * enterBg;
     NSMutableArray *enterPsdViews;
     NSInteger selectedIvTag;
-    NSString *enterPassword;
+//    NSString *enterPassword;
     NSMutableArray *psdArray;
     
 }
 
 @property (nonatomic, assign) BOOL canInputPassword;
+@property (nonatomic, strong) APIVerifyPayPasswordManager * verifyPayPasswordManager;
+
+
 @end
 
 @implementation WJPassView
@@ -282,7 +286,7 @@
 
 - (void)sureBtnAction{
     
-    enterPassword = [psdArray componentsJoinedByString:@""];
+    _enterPassword = [psdArray componentsJoinedByString:@""];
     if (psdArray.count == 0){
         [[TKAlertCenter defaultCenter] postAlertWithMessage:@"密码位数不能为空"];
         self.canInputPassword = YES;
@@ -298,6 +302,9 @@
     
     
     //请求接口
+    self.verifyPayPasswordManager.password = _enterPassword;
+    [self.verifyPayPasswordManager loadData];
+    
 }
 
 #pragma mark - APIManagerCallBackDelegate
@@ -391,6 +398,15 @@
         _alertTag = alertTag;
         self.tag = alertTag;
     }
+}
+
+- (APIVerifyPayPasswordManager *)verifyPayPasswordManager
+{
+    if (_verifyPayPasswordManager == nil) {
+        _verifyPayPasswordManager = [[APIVerifyPayPasswordManager alloc]init];
+        _verifyPayPasswordManager.delegate = self;
+    }
+    return _verifyPayPasswordManager;
 }
 
 

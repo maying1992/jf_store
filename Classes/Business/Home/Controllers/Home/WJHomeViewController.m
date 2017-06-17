@@ -19,6 +19,7 @@
 #import "WJHomeReformer.h"
 #import "WJBannerModel.h"
 #import "WJChannelModel.h"
+#import "WJGoodsModel.h"
 
 #import "WJScanCodeViewController.h"
 #import "WJAddressViewController.h"
@@ -248,7 +249,9 @@
             [self.navigationController pushViewController:lotteryDrawVC animated:YES];
         }
     }else if (indexPath.section == 3){
+        WJGoodsModel * model = self.goodsListArray[indexPath.row];
         WJGoodsDetailViewController * goodsDetailVC = [[WJGoodsDetailViewController alloc]init];
+        goodsDetailVC.goodsId = model.goodsId;
         [self.navigationController pushViewController:goodsDetailVC animated:YES];
     }
     

@@ -26,6 +26,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+                
         titleLabel = [[UILabel alloc]initForAutoLayout];
         titleLabel.font = WJFont15;
         titleLabel.textColor = WJColorMainTitle;
@@ -51,7 +52,7 @@
         [self.contentView addConstraints:[line constraintsTop:10 FromView:integralLabel]];
         
         totalNumLabel = [[UILabel alloc]initForAutoLayout];
-        totalNumLabel.font = WJFont14;
+        totalNumLabel.font = WJFont13;
         totalNumLabel.textColor = WJColorDardGray6;
         totalNumLabel.text = @"总抽奖人数1000人";
         [self.contentView addSubview:totalNumLabel];
@@ -59,7 +60,7 @@
         [self.contentView addConstraints:[totalNumLabel constraintsLeftInContainer:10]];
         
         nowNumLabel = [[UILabel alloc]initForAutoLayout];
-        nowNumLabel.font = WJFont14;
+        nowNumLabel.font = WJFont13;
         nowNumLabel.textColor = WJColorDardGray6;
         nowNumLabel.text = @"已抽奖人数51人";
         [self.contentView addSubview:nowNumLabel];
@@ -67,7 +68,7 @@
         [self.contentView addConstraints:[nowNumLabel constraintsRightInContainer:10]];
         
         goodsNumLabel = [[UILabel alloc]initForAutoLayout];
-        goodsNumLabel.font = WJFont14;
+        goodsNumLabel.font = WJFont13;
         goodsNumLabel.textColor = WJColorDardGray6;
         goodsNumLabel.text = @"货品货号：0002050";
         [self.contentView addSubview:goodsNumLabel];

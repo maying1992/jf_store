@@ -10,4 +10,6 @@
 
 @interface WJGoodsDetailViewController : WJViewController
 
+@property (nonatomic ,strong ) NSString         *goodsId;
+
 @end

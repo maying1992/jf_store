@@ -10,13 +10,17 @@
 #import "WJBottonBarView.h"
 #import "SDCycleScrollView.h"
 #import "WJGoodsDetailTableViewCell.h"
+#import "APIGoodsDetailsManager.h"
+#import "WJGoodsDetailModel.h"
+#import "WJGoodsDetailReformer.h"
 
-
-@interface WJGoodsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
+@interface WJGoodsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,APIManagerCallBackDelegate>
 
 @property(nonatomic ,strong) WJBottonBarView                 * bottonBarView;
 @property(nonatomic ,strong) UITableView                     * mainTableView;
 @property(nonatomic, strong) SDCycleScrollView               * cycleScrollView;
+@property(nonatomic, strong) APIGoodsDetailsManager          * goodsDetailsManager;
+@property(nonatomic ,strong) NSMutableArray                   * dataArray;
 
 @end
 
@@ -39,9 +43,21 @@
     self.isHiddenTabBar = YES;
     [self.view addSubview:self.mainTableView];
     [self UISetUp];
-
+    [self.goodsDetailsManager loadData];
 }
 
+
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    self.dataArray = [manager fetchDataWithReformer:[WJGoodsDetailReformer new]];
+    [self.mainTableView reloadData];
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    NSLog(@"%@",manager.errorMessage);
+}
 
 - (void)backBarButton:(UIButton *)btn{
     [self.navigationController popViewControllerAnimated:YES];
@@ -179,6 +195,16 @@
         
     }
     return _bottonBarView;
+}
+
+- (APIGoodsDetailsManager *)goodsDetailsManager
+{
+    if (_goodsDetailsManager == nil) {
+        _goodsDetailsManager = [[APIGoodsDetailsManager alloc]init];
+        _goodsDetailsManager.delegate = self;
+    }
+    _goodsDetailsManager.goodsId = self.goodsId;
+    return _goodsDetailsManager;
 }
 
 @end

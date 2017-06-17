@@ -12,10 +12,10 @@
 - (id)initWithDic:(NSDictionary *)dic{
     if (self = [super init]) {
         
-        self.totalPage = [dic[@"totalPage"] integerValue];
+        self.totalPage = [dic[@"total_page"] integerValue];
         
         NSMutableArray *arr = [NSMutableArray array];
-        for (NSDictionary *orderDic in dic[@"list"]) {
+        for (NSDictionary *orderDic in dic[@"order_list"]) {
             WJOrderModel *orderModel = [[WJOrderModel alloc] initWithDic:orderDic];
             [arr addObject:orderModel];
         }

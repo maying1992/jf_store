@@ -36,13 +36,13 @@
  而且本来判断返回数据是否正确的逻辑就应该交给manager去做，不要放到回调到controller的delegate方法里面去做。
  */
 - (BOOL)manager:(APIBaseManager *)manager isCorrectWithCallBackData:(NSDictionary *)data
-{
-    if(data == nil || data[@"val"] == nil) {
+{  
+    if(data == nil) {
         return NO;
     }
     
-    if ([data[@"val"] isKindOfClass:[NSDictionary class]]) {
-        self.callBackCount = [data[@"val"][@"totalPage"] integerValue];
+    if ([data isKindOfClass:[NSDictionary class]]) {
+        self.callBackCount = [data[@"total_page"] integerValue];
         
     }
     BOOL isCorrect = [data[@"rspCode"] integerValue] == 0 && self.callBackCount > 0;
@@ -87,7 +87,7 @@
 #pragma mark - APIManager Methods
 - (NSString *)methodName
 {
-    return @"/orderinfo/orderlist";
+    return @"orderList";
 }
 
 - (NSString *)serviceType

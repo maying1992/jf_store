@@ -83,7 +83,7 @@ typedef NS_ENUM(NSInteger, HomeType){
  */
 typedef NS_ENUM(NSInteger, OrderStatus){
     
-    OrderStatusAll = 0,            // 全部
+    OrderStatusAll = 10,            // 全部
     OrderStatusUnfinished = 1,     // 待支付订单
     OrderStatusWaitDeliver  = 2,   // 待发货
     OrderStatusWaitReceive = 3,    // 待收货

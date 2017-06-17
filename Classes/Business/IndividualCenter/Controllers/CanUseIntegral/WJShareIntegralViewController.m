@@ -9,9 +9,12 @@
 #import "WJShareIntegralViewController.h"
 #import "WJCanUseIntegralCell.h"
 #import "WJRefreshTableView.h"
+#import "APIQueryIntergralListManager.h"
 @interface WJShareIntegralViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)WJRefreshTableView       *tableView;
-@property(nonatomic,strong)NSMutableArray           *listArray;
+@property(nonatomic,strong)APIQueryIntergralListManager *queryIntergralListManager;
+@property(nonatomic,strong)WJRefreshTableView           *tableView;
+@property(nonatomic,strong)NSMutableArray               *listArray;
+
 @end
 
 @implementation WJShareIntegralViewController
@@ -102,5 +105,16 @@
     }
     return _tableView;
 }
+
+-(APIQueryIntergralListManager *)queryIntergralListManager
+{
+    if (!_queryIntergralListManager) {
+        _queryIntergralListManager = [[APIQueryIntergralListManager alloc] init];
+        _queryIntergralListManager.delegate = self;
+    }
+    _queryIntergralListManager.integralType = 2;
+    return _queryIntergralListManager;
+}
+
 
 @end

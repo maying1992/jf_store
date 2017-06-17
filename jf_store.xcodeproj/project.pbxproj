@@ -257,6 +257,7 @@
 		B459DA161EBDCE5600F3748B /* APIForgetPasswordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B459DA151EBDCE5600F3748B /* APIForgetPasswordManager.m */; };
 		B4683FAF1EF4E10500339415 /* APIQueryIntergralListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FAE1EF4E10500339415 /* APIQueryIntergralListManager.m */; };
 		B4683FB51EF4F89F00339415 /* APIIndividualCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FB41EF4F89F00339415 /* APIIndividualCenterManager.m */; };
+		B4683FB81EF52F5D00339415 /* APIIndividualOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FB71EF52F5D00339415 /* APIIndividualOrderManager.m */; };
 		B47825E31ED3D5A5002267A6 /* WJPassView.m in Sources */ = {isa = PBXBuildFile; fileRef = B47825E21ED3D5A5002267A6 /* WJPassView.m */; };
 		B47825E91ED4292F002267A6 /* WJSysContactsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B47825E81ED4292F002267A6 /* WJSysContactsManager.m */; };
 		B47825EC1ED44735002267A6 /* WJProductEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47825EB1ED44735002267A6 /* WJProductEditViewController.m */; };
@@ -277,7 +278,6 @@
 		B478262D1ED91C81002267A6 /* WJGivingListTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B478262C1ED91C81002267A6 /* WJGivingListTCell.m */; };
 		B47826301ED9222A002267A6 /* WJIntegralGivingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B478262F1ED9222A002267A6 /* WJIntegralGivingViewController.m */; };
 		B47DA08C1ECE9E950038D7E2 /* WJGoodFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47DA08B1ECE9E950038D7E2 /* WJGoodFriendsViewController.m */; };
-		B47DA08F1ECEBCEB0038D7E2 /* APIIndividualOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B47DA08E1ECEBCEB0038D7E2 /* APIIndividualOrderManager.m */; };
 		B47DA0931ECEC58F0038D7E2 /* WJIntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47DA0921ECEC58F0038D7E2 /* WJIntegralViewController.m */; };
 		B47DA0961ECED68D0038D7E2 /* WJIndividualOrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B47DA0951ECED68D0038D7E2 /* WJIndividualOrderListModel.m */; };
 		B47DA0991ECED7900038D7E2 /* WJOrderListReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = B47DA0981ECED7900038D7E2 /* WJOrderListReformer.m */; };
@@ -869,6 +869,8 @@
 		B4683FAE1EF4E10500339415 /* APIQueryIntergralListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIQueryIntergralListManager.m; sourceTree = "<group>"; };
 		B4683FB31EF4F89F00339415 /* APIIndividualCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIIndividualCenterManager.h; sourceTree = "<group>"; };
 		B4683FB41EF4F89F00339415 /* APIIndividualCenterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIIndividualCenterManager.m; sourceTree = "<group>"; };
+		B4683FB61EF52F5D00339415 /* APIIndividualOrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIIndividualOrderManager.h; sourceTree = "<group>"; };
+		B4683FB71EF52F5D00339415 /* APIIndividualOrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIIndividualOrderManager.m; sourceTree = "<group>"; };
 		B47825E11ED3D5A5002267A6 /* WJPassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJPassView.h; sourceTree = "<group>"; };
 		B47825E21ED3D5A5002267A6 /* WJPassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJPassView.m; sourceTree = "<group>"; };
 		B47825E71ED4292F002267A6 /* WJSysContactsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WJSysContactsManager.h; path = ../../Business/IndividualCenter/Controllers/Goodfriends/WJSysContactsManager.h; sourceTree = "<group>"; };
@@ -909,8 +911,6 @@
 		B478262F1ED9222A002267A6 /* WJIntegralGivingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJIntegralGivingViewController.m; sourceTree = "<group>"; };
 		B47DA08A1ECE9E950038D7E2 /* WJGoodFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJGoodFriendsViewController.h; sourceTree = "<group>"; };
 		B47DA08B1ECE9E950038D7E2 /* WJGoodFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJGoodFriendsViewController.m; sourceTree = "<group>"; };
-		B47DA08D1ECEBCEB0038D7E2 /* APIIndividualOrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APIIndividualOrderManager.h; path = Classes/Business/IndividualCenter/Controllers/Goodfriends/APIIndividualOrderManager.h; sourceTree = SOURCE_ROOT; };
-		B47DA08E1ECEBCEB0038D7E2 /* APIIndividualOrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APIIndividualOrderManager.m; path = Classes/Business/IndividualCenter/Controllers/Goodfriends/APIIndividualOrderManager.m; sourceTree = SOURCE_ROOT; };
 		B47DA0911ECEC58F0038D7E2 /* WJIntegralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJIntegralViewController.h; sourceTree = "<group>"; };
 		B47DA0921ECEC58F0038D7E2 /* WJIntegralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJIntegralViewController.m; sourceTree = "<group>"; };
 		B47DA0941ECED68D0038D7E2 /* WJIndividualOrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJIndividualOrderListModel.h; sourceTree = "<group>"; };
@@ -1981,8 +1981,6 @@
 				B4E5B6FB1EC47B0800F9A7CA /* APIGetGrCodeManager.m */,
 				B40EF3EB1EC9BC1000DDE49F /* APISetIntegralPasswordManager.h */,
 				B40EF3EC1EC9BC1000DDE49F /* APISetIntegralPasswordManager.m */,
-				B47DA08D1ECEBCEB0038D7E2 /* APIIndividualOrderManager.h */,
-				B47DA08E1ECEBCEB0038D7E2 /* APIIndividualOrderManager.m */,
 				B478261F1ED6DDC4002267A6 /* APIApplyRefundManager.h */,
 				B47826201ED6DDC4002267A6 /* APIApplyRefundManager.m */,
 				B49BCC8B1EE9347E000CF631 /* APIModifyInformationManager.h */,
@@ -2613,6 +2611,8 @@
 		B4683FA91EF4DDF900339415 /* APIIndividualManager */ = {
 			isa = PBXGroup;
 			children = (
+				B4683FB61EF52F5D00339415 /* APIIndividualOrderManager.h */,
+				B4683FB71EF52F5D00339415 /* APIIndividualOrderManager.m */,
 				B4683FB31EF4F89F00339415 /* APIIndividualCenterManager.h */,
 				B4683FB41EF4F89F00339415 /* APIIndividualCenterManager.m */,
 				B4683FAD1EF4E10500339415 /* APIQueryIntergralListManager.h */,
@@ -3076,6 +3076,7 @@
 				B4E5B6AE1EC070B700F9A7CA /* APICategoryListManager.m in Sources */,
 				6D96DC761EB97FEF004EDE7F /* APIURLResponse.m in Sources */,
 				B40EF3C41EC846FC00DDE49F /* WJOrderFooterView.m in Sources */,
+				B4683FB81EF52F5D00339415 /* APIIndividualOrderManager.m in Sources */,
 				B4E5B6FC1EC47B0800F9A7CA /* APIGetGrCodeManager.m in Sources */,
 				6D0EABE41EB326070026B20B /* DZNSegmentedControl.m in Sources */,
 				6D52C8E41EF3FE730062D38B /* WJLotteryDrawDetailCell.m in Sources */,
@@ -3179,7 +3180,6 @@
 				B478261A1ED59FF1002267A6 /* WJProductEditModel.m in Sources */,
 				6D27CC141ECC53C800BC6C97 /* WJScanView.m in Sources */,
 				6D96DC3B1EB97F25004EDE7F /* TKAlertCenter.m in Sources */,
-				B47DA08F1ECEBCEB0038D7E2 /* APIIndividualOrderManager.m in Sources */,
 				B45219181EBC86D9009E9E40 /* APIVerifyCodeManager.m in Sources */,
 				B4E5B7001EC47F0800F9A7CA /* CreatQRCodeAndBarCodeFromLeon.m in Sources */,
 				6D27CC101ECC53C800BC6C97 /* WJGoodsCollectionViewCell.m in Sources */,

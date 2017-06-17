@@ -11,7 +11,7 @@
 @implementation WJOrderListReformer
 - (id)manager:(APIBaseManager *)manager reformData:(id)data
 {
-    WJIndividualOrderListModel *orderListModel = [[WJIndividualOrderListModel alloc] initWithDic:data[@"val"]];
+    WJIndividualOrderListModel *orderListModel = [[WJIndividualOrderListModel alloc] initWithDic:data];
     
     return orderListModel;
 }

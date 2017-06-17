@@ -12,9 +12,10 @@
 - (id)initWithDic:(NSDictionary *)dic{
     if (self = [super init]) {
         
-        self.name      = ToString(dic[@"goodsName"]);
-        self.imageUrl  = ToString(dic[@"goodsPic"]);
-        self.count     = [dic[@"goodsNum"] integerValue];
+        self.name      = ToString(dic[@"goods_name"]);
+        self.imageUrl  = ToString(dic[@"head_pic"]);
+        self.count     = [dic[@"count"] integerValue];
+        
         self.standardDes = ToString(dic[@"attribute"]);
 
         
@@ -29,6 +30,9 @@
         self.refundPrice = ToString(dic[@"refund_total"]);
         self.stock     = [dic[@"goods_number"] integerValue];
         self.logisticsCost = ToString(dic[@"logistics_cost"]);
+        
+        self.integral = ToString(dic[@"integral"]);
+
         
         
         NSMutableArray *arr = [NSMutableArray array];

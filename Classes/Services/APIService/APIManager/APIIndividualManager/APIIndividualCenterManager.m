@@ -45,7 +45,7 @@
 //让manager能够获取调用API所需要的数据
 - (NSDictionary *)paramsForApi:(APIBaseManager *)manager
 {
-    return @{@"user_id" :self.userID ? : @""};
+    return @{};
 }
 
 #pragma mark - APIManager Methods

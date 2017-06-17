@@ -10,6 +10,4 @@
 
 @interface APIIndividualCenterManager : APIBaseManager<APIManagerParamSourceDelegate,APIManagerVaildator,APIManager>
 
-@property (nonatomic, strong) NSString *userID;
-
 @end

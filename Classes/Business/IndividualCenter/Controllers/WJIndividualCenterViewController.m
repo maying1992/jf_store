@@ -45,6 +45,8 @@
 #import "WJApplyStoreViewController.h"
 #import "WJGoodFriendsViewController.h"
 #import "WJIntegralViewController.h"
+#import "WJApplyStoreViewController.h"
+#import "WJConsumerServicesIntegralViewController.h"
 
 #define kHeaderViewIdentifier               @"kHeaderViewIdentifier"
 #define kHeaderViewDefaultIdentifier        @"kHeaderViewDefaultIdentifier"
@@ -483,15 +485,22 @@
                 switch (index) {
                     case 0:
                     {
+                        
                         if (USER_ID) {
                             
-                            WJMyStoreViewController *myStoreVC = [[WJMyStoreViewController alloc] init];
-                            [self.navigationController pushViewController:myStoreVC animated:YES];
                             
-//                            WJApplyStoreViewController *applyStoreVC = [[WJApplyStoreViewController alloc] init];
-//                            [self.navigationController pushViewController:applyStoreVC animated:YES];
-
-                            
+                            if (self.individualCenterModel.storeId) {
+                                
+                                WJMyStoreViewController *myStoreVC = [[WJMyStoreViewController alloc] init];
+                                [self.navigationController pushViewController:myStoreVC animated:YES];
+                                
+                                
+                            } else {
+                                
+                                WJApplyStoreViewController *applyStoreVC = [[WJApplyStoreViewController alloc] init];
+                                [self.navigationController pushViewController:applyStoreVC animated:YES];
+                                
+                            }
                             
                         } else {
                             
@@ -566,8 +575,17 @@
                     {
                         if (USER_ID) {
                             
-                            WJConsumerServicesProtocolViewController *consumerServicesProtocolVC = [[WJConsumerServicesProtocolViewController alloc] init];
-                            [self.navigationController pushViewController:consumerServicesProtocolVC animated:YES];
+                            
+                            if ([self.individualCenterModel.userType isEqualToString:@"3"]) {
+                                
+                                WJConsumerServicesIntegralViewController *consumerServicesIntegralVC = [[WJConsumerServicesIntegralViewController alloc] init];
+                                [self.navigationController pushViewController:consumerServicesIntegralVC animated:YES];
+                                
+                            } else {
+                                
+                                WJConsumerServicesProtocolViewController *consumerServicesProtocolVC = [[WJConsumerServicesProtocolViewController alloc] init];
+                                [self.navigationController pushViewController:consumerServicesProtocolVC animated:YES];
+                            }
                             
                         } else {
                             
@@ -779,7 +797,6 @@
         _individualCenterManager = [[APIIndividualCenterManager alloc] init];
         _individualCenterManager.delegate = self;
     }
-    _individualCenterManager.userID = USER_ID;
     return _individualCenterManager;
 }
 

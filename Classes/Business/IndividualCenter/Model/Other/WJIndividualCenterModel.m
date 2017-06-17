@@ -12,8 +12,8 @@
 - (id)initWithDic:(NSDictionary *)dic{
     if (self = [super init]) {
         
-        self.creditsCount = [dic[@"usePoint"] integerValue];
-        self.friendsCount = [dic[@"friendNum"] integerValue];
+        self.creditsCount = [dic[@"integral"] integerValue];
+        self.friendsCount = [dic[@"friends_num"] integerValue];
 
         self.waitPayOrderCount = [dic[@"pending_payment"] integerValue];
         self.waitDeliverOrderCount = [dic[@"deliver_goods"] integerValue];
@@ -22,6 +22,8 @@
         self.refundOrderCount = [dic[@"refund_num"] integerValue];
 
 
+        self.storeId = dic[@"store_id"];
+        self.userType = dic[@"user_type"];
         self.messageCount = [dic[@"news_num"] integerValue];
     }
     

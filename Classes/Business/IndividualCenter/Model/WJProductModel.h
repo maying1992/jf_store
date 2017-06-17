@@ -16,6 +16,9 @@
 @property(nonatomic,strong)NSString        *standardDes;  //规格
 
 @property(nonatomic,strong)NSString        *salePrice;      //售价
+
+@property(nonatomic,strong)NSString        *integral;
+
 @property(nonatomic,assign)NSInteger       stock;
 
 @property(nonatomic,assign)ProductStatus   productStatus;   //商品退款状态

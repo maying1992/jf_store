@@ -15,11 +15,9 @@
     BOOL      isHeaderRefresh;
     BOOL      isFooterRefresh;
 }
-
+@property(nonatomic,strong)APIQueryIntergralListManager *queryIntergralListManager;
 @property(nonatomic,strong)WJRefreshTableView           *tableView;
 @property(nonatomic,strong)NSMutableArray               *listArray;
-@property(nonatomic,strong)APIQueryIntergralListManager *queryIntergralListManager;
-
 @end
 
 @implementation WJCanUseIntegralViewController
@@ -30,11 +28,9 @@
     self.isHiddenTabBar = YES;
     
     [self SetUI];
-
-//    [self requestData];
-    [self.queryIntergralListManager loadData];
-
     [self.view addSubview:self.tableView];
+    
+    [self requestData];
 }
 
 #pragma mark - Request
@@ -47,7 +43,6 @@
     self.queryIntergralListManager.shouldCleanData = YES;
     self.queryIntergralListManager.firstPageNo = 1;
     [self.queryIntergralListManager loadData];
-    
 }
 
 #pragma mark - WJRefreshTableView Delegate
@@ -135,7 +130,7 @@
 
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager
 {
-    if ([manager isKindOfClass:[self.queryIntergralListManager class]]) {
+    if ([manager isKindOfClass:[APIQueryIntergralListManager class]]) {
         
         if (manager.errorType == APIManagerErrorTypeNoData) {
             [self refreshFooterStatus:YES];
@@ -241,9 +236,7 @@
         _queryIntergralListManager.delegate = self;
     }
     
-    _queryIntergralListManager.userId = USER_ID;
     _queryIntergralListManager.integralType =  1;
-//    _queryIntergralListManager.setId = @"2134";
     return _queryIntergralListManager;
 }
 

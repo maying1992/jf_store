@@ -34,9 +34,7 @@
  而且本来判断返回数据是否正确的逻辑就应该交给manager去做，不要放到回调到controller的delegate方法里面去做。
  */
 - (BOOL)manager:(APIBaseManager *)manager isCorrectWithCallBackData:(NSDictionary *)data
-{
-    //    return [data[@"rspCode"] integerValue] == 0;
-    
+{    
     if(data == nil) {
         return NO;
     }
@@ -78,9 +76,7 @@
         position = _pageNo + 1;
     }
     
-    return @{@"user_id" :self.userId ? : @"",
-//             @"site_id" :self.setId ? : @"",
-             @"integral_type" :NumberToString(self.integralType),
+    return @{@"integral_type" :NumberToString(self.integralType),
              @"page_size":NumberToString(self.pageCount),
              @"current_page":NumberToString(position)
              };
@@ -100,5 +96,12 @@
 - (APIManagerRequestType)requestType
 {
     return APIManagerRequestTypePost;
+}
+
+#pragma mark - setter
+- (void)setFirstPageNo:(NSInteger)firstPageNo
+{
+    _firstPageNo = firstPageNo;
+    _pageNo = _firstPageNo;
 }
 @end

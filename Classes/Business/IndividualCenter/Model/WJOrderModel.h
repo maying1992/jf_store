@@ -10,14 +10,18 @@
 
 @interface WJOrderModel : NSObject
 @property(nonatomic,strong) NSString        *orderNo;
+@property(nonatomic,strong) NSString        *orderId;
 @property(nonatomic,assign) OrderStatus     orderStatus;
 @property(nonatomic,strong) NSString        *shopName;
 @property(nonatomic,strong) NSString        *shopId;
 @property(nonatomic,strong)NSMutableArray   *productList;
 
 @property(nonatomic,assign) NSInteger       totalCount;        //合计数量
-@property(nonatomic,strong) NSString        *PayAmount;        //列表合计
+@property(nonatomic,strong) NSString        *PayAmount;        //小计总计
+@property(nonatomic,strong) NSString        *payIntegral;      //小计积分
 @property(nonatomic,strong) NSString        *freight;          //运费
+@property(nonatomic,strong) NSString        *freightIntegral;  //运费积分
+
 @property(nonatomic,strong) NSString        *totalMoney;       //详情总金额
 @property(nonatomic,strong) NSString        *totalIntegral;    //详情总积分
 @property(nonatomic,strong) NSString        *payTime;

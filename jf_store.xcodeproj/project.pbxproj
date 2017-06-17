@@ -263,6 +263,8 @@
 		B4683FAF1EF4E10500339415 /* APIQueryIntergralListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FAE1EF4E10500339415 /* APIQueryIntergralListManager.m */; };
 		B4683FB51EF4F89F00339415 /* APIIndividualCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FB41EF4F89F00339415 /* APIIndividualCenterManager.m */; };
 		B4683FB81EF52F5D00339415 /* APIIndividualOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FB71EF52F5D00339415 /* APIIndividualOrderManager.m */; };
+		B4683FBB1EF5401700339415 /* APIBindingServiceCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FBA1EF5401700339415 /* APIBindingServiceCenterManager.m */; };
+		B4683FBE1EF5415B00339415 /* APIUserBindingInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FBD1EF5415B00339415 /* APIUserBindingInfoManager.m */; };
 		B47825E31ED3D5A5002267A6 /* WJPassView.m in Sources */ = {isa = PBXBuildFile; fileRef = B47825E21ED3D5A5002267A6 /* WJPassView.m */; };
 		B47825E91ED4292F002267A6 /* WJSysContactsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B47825E81ED4292F002267A6 /* WJSysContactsManager.m */; };
 		B47825EC1ED44735002267A6 /* WJProductEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47825EB1ED44735002267A6 /* WJProductEditViewController.m */; };
@@ -886,6 +888,10 @@
 		B4683FB41EF4F89F00339415 /* APIIndividualCenterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIIndividualCenterManager.m; sourceTree = "<group>"; };
 		B4683FB61EF52F5D00339415 /* APIIndividualOrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIIndividualOrderManager.h; sourceTree = "<group>"; };
 		B4683FB71EF52F5D00339415 /* APIIndividualOrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIIndividualOrderManager.m; sourceTree = "<group>"; };
+		B4683FB91EF5401700339415 /* APIBindingServiceCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIBindingServiceCenterManager.h; sourceTree = "<group>"; };
+		B4683FBA1EF5401700339415 /* APIBindingServiceCenterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIBindingServiceCenterManager.m; sourceTree = "<group>"; };
+		B4683FBC1EF5415B00339415 /* APIUserBindingInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIUserBindingInfoManager.h; sourceTree = "<group>"; };
+		B4683FBD1EF5415B00339415 /* APIUserBindingInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIUserBindingInfoManager.m; sourceTree = "<group>"; };
 		B47825E11ED3D5A5002267A6 /* WJPassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJPassView.h; sourceTree = "<group>"; };
 		B47825E21ED3D5A5002267A6 /* WJPassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJPassView.m; sourceTree = "<group>"; };
 		B47825E71ED4292F002267A6 /* WJSysContactsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WJSysContactsManager.h; path = ../../Business/IndividualCenter/Controllers/Goodfriends/WJSysContactsManager.h; sourceTree = "<group>"; };
@@ -2642,6 +2648,10 @@
 				B4683FB41EF4F89F00339415 /* APIIndividualCenterManager.m */,
 				B4683FAD1EF4E10500339415 /* APIQueryIntergralListManager.h */,
 				B4683FAE1EF4E10500339415 /* APIQueryIntergralListManager.m */,
+				B4683FB91EF5401700339415 /* APIBindingServiceCenterManager.h */,
+				B4683FBA1EF5401700339415 /* APIBindingServiceCenterManager.m */,
+				B4683FBC1EF5415B00339415 /* APIUserBindingInfoManager.h */,
+				B4683FBD1EF5415B00339415 /* APIUserBindingInfoManager.m */,
 			);
 			path = APIIndividualManager;
 			sourceTree = "<group>";
@@ -2999,6 +3009,8 @@
 				B40EF42C1ECC1F6D00DDE49F /* WJConsumerServicesPayViewController.m in Sources */,
 				6D34D08F1ED2EFC00065202B /* WJTradingHallRechargeTableViewCell.m in Sources */,
 				B478262A1ED91AC2002267A6 /* WJGivingListViewController.m in Sources */,
+				B4683FBE1EF5415B00339415 /* APIUserBindingInfoManager.m in Sources */,
+				B4683FBB1EF5401700339415 /* APIBindingServiceCenterManager.m in Sources */,
 				B40EF43C1ECC338D00DDE49F /* WJConsumerActivateCell.m in Sources */,
 				6D0EABEC1EB326070026B20B /* WJLoadingView.m in Sources */,
 				B45218F31EBB3267009E9E40 /* SqliteManager.m in Sources */,

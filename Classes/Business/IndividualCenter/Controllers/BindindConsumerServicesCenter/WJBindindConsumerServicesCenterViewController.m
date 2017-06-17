@@ -7,7 +7,9 @@
 //
 
 #import "WJBindindConsumerServicesCenterViewController.h"
-
+#import "APIUserBindingInfoManager.h"
+#import "APIBindingServiceCenterManager.h"
+#import "APIRecommenderInfoManager.h"
 #define spaceMargin                         (iPhone6OrThan?(ALD(0)):(ALD(15)))
 
 @interface WJBindindConsumerServicesCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,APIManagerCallBackDelegate>
@@ -16,11 +18,16 @@
     UITextField *bindingServiceCodeTF;
     UITextField *nameTF;
     UITextField *phoneTF;
-
     UIButton    *bindingOrRemoveBindingButton;
 }
-@property(nonatomic,strong)UITableView                  *mTb;
-@property(nonatomic,strong)NSArray                      *listArray;
+@property(nonatomic,strong)UITableView                     *mTb;
+@property(nonatomic,strong)NSArray                         *listArray;
+@property(nonatomic,strong)APIUserBindingInfoManager       *userBindingInfoManager;
+@property(nonatomic,strong)APIBindingServiceCenterManager  *bindingServiceCenterManager;
+@property(nonatomic,strong)APIRecommenderInfoManager       *recommenderInfoManager;
+@property(nonatomic,strong)NSString                     *name;
+@property(nonatomic,strong)NSString                     *contact;
+@property(nonatomic,strong)NSString                     *serviecStatus;
 
 @end
 
@@ -37,6 +44,8 @@
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handletapPressGesture)];
     [self.view  addGestureRecognizer:tapGesture];
+    
+    [self.userBindingInfoManager loadData];
     
 }
 
@@ -66,7 +75,36 @@
 #pragma mark - APIManagerCallBackDelegate
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
-
+    if ([manager isKindOfClass:[APIUserBindingInfoManager class]]) {
+        
+        NSDictionary *dic = [manager fetchDataWithReformer:nil];
+        
+        self.name = dic[@"service_name"];
+        self.contact = dic[@"contact"];
+        self.serviceCode = dic[@"service_code"];
+        self.serviecStatus = dic[@"service_status"];
+        
+        [self.mTb reloadData];
+        
+    } else if ([manager isKindOfClass:[APIBindingServiceCenterManager class]]) {
+        
+        if ([self.bindingServiceCenterManager.operation isEqualToString:@"1"]) {
+            
+            ALERT(@"绑定成功");
+        } else {
+            ALERT(@"解除绑定");
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    } else {
+        
+        
+        NSDictionary *dic = [manager fetchDataWithReformer:nil];
+        
+        nameTF.text = dic[@"name"];
+        phoneTF.text = dic[@"phone"];
+    }
 }
 
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager
@@ -82,10 +120,14 @@
 //    return YES;
 //}
 //
-//-(void)textFieldDidEndEditing:(UITextField *)textField
-//{
-//
-//}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == bindingServiceCodeTF) {
+        [self.recommenderInfoManager loadData];
+
+    }
+
+}
 
 #pragma mark - UITableViewDelegate/UITableViewDataSource
 
@@ -108,7 +150,7 @@
         cell.textLabel.font = WJFont14;
         cell.backgroundColor = WJColorWhite;
         
-        UILabel *nameL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(10), 0, ALD(170), ALD(45))];
+        UILabel *nameL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(10), 0, ALD(180), ALD(45))];
         nameL.textColor = WJColorDardGray6;
         nameL.tag = 2001;
         [cell.contentView addSubview:nameL];
@@ -142,7 +184,7 @@
         if (self.serviceCode) {
             
             contentTF.userInteractionEnabled = NO;
-            contentTF.text = @"124";
+            contentTF.text = self.serviceCode;
             
         } else {
             
@@ -157,10 +199,10 @@
         contentTF.clearButtonMode = UITextFieldViewModeWhileEditing;
         nameTF = contentTF;
         
-        if (self.serviceCode) {
+        if ([self.serviecStatus isEqualToString:@"1"]) {
             
             contentTF.userInteractionEnabled = NO;
-            contentTF.text = @"李明";
+            contentTF.text = self.name;
             
         } else {
             
@@ -175,15 +217,14 @@
         contentTF.keyboardType = UIKeyboardTypeDefault;
         contentTF.clearButtonMode = UITextFieldViewModeWhileEditing;
         
-        if (self.serviceCode) {
+        if ([self.serviecStatus isEqualToString:@"1"]) {
             
             contentTF.userInteractionEnabled = NO;
-            contentTF.text = @"13354283549";
+            contentTF.text = self.contact;
         } else {
             contentTF.text = @"";
             contentTF.userInteractionEnabled = NO;
         }
-        
         
     }
     
@@ -203,13 +244,19 @@
         
     } else {
         
-        if (self.serviceCode) {
+        if ([self.serviecStatus isEqualToString:@"1"]) {
             
-            
+            //绑定
+            self.bindingServiceCenterManager.operation = @"1";
         } else {
             
+            //解绑
+            self.bindingServiceCenterManager.operation = @"2";
         }
+        
+        [self.bindingServiceCenterManager loadData];
     }
+    
 }
 
 #pragma mark -event
@@ -251,6 +298,37 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(APIRecommenderInfoManager *)recommenderInfoManager
+{
+    if (!_recommenderInfoManager) {
+        _recommenderInfoManager = [[APIRecommenderInfoManager alloc] init];
+        _recommenderInfoManager.delegate = self;
+    }
+    _recommenderInfoManager.recommenderCode = bindingServiceCodeTF.text;
+
+    return _recommenderInfoManager;
+}
+
+-(APIUserBindingInfoManager *)userBindingInfoManager
+{
+    if (!_userBindingInfoManager) {
+        _userBindingInfoManager = [[APIUserBindingInfoManager alloc] init];
+        _userBindingInfoManager.delegate = self;
+    }
+    return _userBindingInfoManager;
+}
+
+
+-(APIBindingServiceCenterManager *)bindingServiceCenterManager
+{
+    if (!_bindingServiceCenterManager) {
+        _bindingServiceCenterManager = [[APIBindingServiceCenterManager alloc] init];
+        _bindingServiceCenterManager.delegate = self;
+    }
+    return _bindingServiceCenterManager;
+}
+
 
 
 

@@ -194,12 +194,36 @@
 
 -(void)configDataWithOrder:(WJOrderModel *)order
 {
+    NSString * totalMoneyStr = @"商品小计：";
+    if (![order.PayAmount isEqualToString:@"0"]) {
+        totalMoneyStr = [totalMoneyStr stringByAppendingFormat:@"%@元",order.PayAmount];
+    }
+    if (![order.payIntegral isEqualToString:@"0"]) {
+        if ([totalMoneyStr isEqualToString:@"商品小计："]) {
+            totalMoneyStr = [totalMoneyStr stringByAppendingFormat:@"%@积分",order.payIntegral];
+        }else{
+            totalMoneyStr = [totalMoneyStr stringByAppendingFormat:@"+%@积分",order.payIntegral];
+        }
+    }
+    totalMoneyL.text = totalMoneyStr;
+//    NSString *totalMoneyStr = [NSString stringWithFormat:@"商品小计: %@",order.PayAmount];
+//    totalMoneyL.attributedText= [self attributedText:totalMoneyStr firstLength:5];
     
-    NSString *totalMoneyStr = [NSString stringWithFormat:@"商品小计: %@",order.PayAmount];
-    totalMoneyL.attributedText= [self attributedText:totalMoneyStr firstLength:5];
     
-    NSString *freightStr = [NSString stringWithFormat:@"运费: %@",order.freight];
-    freightL.attributedText= [self attributedText:freightStr firstLength:3];
+    NSString * freightStr = @"运费：";
+    if (![order.freight isEqualToString:@"0"]) {
+        freightStr = [freightStr stringByAppendingFormat:@"%@元",order.freight];
+    }
+    if (![order.freightIntegral isEqualToString:@"0"]) {
+        if ([freightStr isEqualToString:@"运费："]) {
+            freightStr = [freightStr stringByAppendingFormat:@"%@积分",order.freightIntegral];
+        }else{
+            freightStr = [freightStr stringByAppendingFormat:@"+%@积分",order.freightIntegral];
+        }
+    }
+    freightL.text = freightStr;
+//    NSString *freightStr = [NSString stringWithFormat:@"运费: %@",order.freight];
+//    freightL.attributedText= [self attributedText:freightStr firstLength:3];
     
     switch (order.orderStatus) {
         case OrderStatusSuccess:

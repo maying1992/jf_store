@@ -565,7 +565,6 @@
                     case 4:
                     {
                         WJBindindConsumerServicesCenterViewController *bindindConsumerServicesCenterVC = [[WJBindindConsumerServicesCenterViewController alloc] init];
-//                        bindindConsumerServicesCenterVC.serviceCode = @"1111";
                         [self.navigationController pushViewController:bindindConsumerServicesCenterVC animated:YES];
 
                     }

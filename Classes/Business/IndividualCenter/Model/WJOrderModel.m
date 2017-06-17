@@ -13,13 +13,20 @@
 - (id)initWithDic:(NSDictionary *)dic{
     if (self = [super init]) {
         
-        self.orderNo = ToString(dic[@"orderCode"]);
+        self.orderNo = ToString(dic[@"order_code"]);
+        self.orderNo = ToString(dic[@"order_id"]);
         self.shopName = ToString(dic[@"store_name"]);
         self.orderStatus = (OrderStatus)[dic[@"status"] intValue];
+        
         self.PayAmount = ToString(dic[@"order_total"]);
-        self.freight = ToString(dic[@"logistics"]);
+        self.payIntegral = ToString(dic[@"order_integral"]);
+
         self.totalMoney = ToString(dic[@"totalMoney"]);
         self.totalIntegral = ToString(dic[@"totalIntegral"]);
+        
+        self.freight = ToString(dic[@"logistics_cost"]);
+        self.freightIntegral = ToString(dic[@"logistics_integral"]);
+        
         self.totalCount = [dic[@"goods_num"] integerValue];
         self.payTime = ToString(dic[@"payTime"]);
         self.createTime = ToString(dic[@"createDate"]);

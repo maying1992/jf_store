@@ -178,8 +178,8 @@
         _recommenderInfoManager.delegate = self;
     }
     _recommenderInfoManager.recommenderCode = self.registerView.recommendedTextField.text;
-    _recommenderInfoManager.loginName = self.registerView.phoneTextField.text;
-    _recommenderInfoManager.verifiationCode = self.registerView.verifyTextField.text;
+//    _recommenderInfoManager.loginName = self.registerView.phoneTextField.text;
+//    _recommenderInfoManager.verifiationCode = self.registerView.verifyTextField.text;
 
     return _recommenderInfoManager;
 }

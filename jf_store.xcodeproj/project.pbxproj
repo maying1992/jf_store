@@ -96,6 +96,9 @@
 		6D52D6BB1EF50BD200396BBF /* WJGoodsDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52D6BA1EF50BD200396BBF /* WJGoodsDetailModel.m */; };
 		6D52D6BE1EF510D800396BBF /* WJAddressReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52D6BD1EF510D800396BBF /* WJAddressReformer.m */; };
 		6D52D6C11EF510FE00396BBF /* WJAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52D6C01EF510FE00396BBF /* WJAddressModel.m */; };
+		6D52D6C41EF5489B00396BBF /* WJChooseGoodsPropertyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52D6C31EF5489B00396BBF /* WJChooseGoodsPropertyController.m */; };
+		6D52D6C71EF5510D00396BBF /* WJChooseGoodsSizeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52D6C61EF5510D00396BBF /* WJChooseGoodsSizeCell.m */; };
+		6D52D6CD1EF55CF200396BBF /* WJDigitalSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52D6CC1EF55CF200396BBF /* WJDigitalSelectorView.m */; };
 		6D5D3FB51ECDACA900F26417 /* APISiteListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */; };
 		6D680C721EDEC28100FFFC2F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D680C741EDEC28100FFFC2F /* InfoPlist.strings */; };
 		6D680C7D1EDEC35F00FFFC2F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D680C7F1EDEC35F00FFFC2F /* Localizable.strings */; };
@@ -527,6 +530,12 @@
 		6D52D6BD1EF510D800396BBF /* WJAddressReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJAddressReformer.m; sourceTree = "<group>"; };
 		6D52D6BF1EF510FE00396BBF /* WJAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJAddressModel.h; sourceTree = "<group>"; };
 		6D52D6C01EF510FE00396BBF /* WJAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJAddressModel.m; sourceTree = "<group>"; };
+		6D52D6C21EF5489B00396BBF /* WJChooseGoodsPropertyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJChooseGoodsPropertyController.h; sourceTree = "<group>"; };
+		6D52D6C31EF5489B00396BBF /* WJChooseGoodsPropertyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJChooseGoodsPropertyController.m; sourceTree = "<group>"; };
+		6D52D6C51EF5510D00396BBF /* WJChooseGoodsSizeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJChooseGoodsSizeCell.h; sourceTree = "<group>"; };
+		6D52D6C61EF5510D00396BBF /* WJChooseGoodsSizeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJChooseGoodsSizeCell.m; sourceTree = "<group>"; };
+		6D52D6CB1EF55CF200396BBF /* WJDigitalSelectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJDigitalSelectorView.h; sourceTree = "<group>"; };
+		6D52D6CC1EF55CF200396BBF /* WJDigitalSelectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJDigitalSelectorView.m; sourceTree = "<group>"; };
 		6D5D3FB31ECDACA900F26417 /* APISiteListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APISiteListManager.h; sourceTree = "<group>"; };
 		6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APISiteListManager.m; sourceTree = "<group>"; };
 		6D680C5F1EDEB83F00FFFC2F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -1706,6 +1715,8 @@
 				6D27CBEC1ECC508F00BC6C97 /* WJWinnerListViewController.m */,
 				6D2754D61ED7DAC200A4B0D7 /* WJGoodsDetailViewController.h */,
 				6D2754D71ED7DAC200A4B0D7 /* WJGoodsDetailViewController.m */,
+				6D52D6C21EF5489B00396BBF /* WJChooseGoodsPropertyController.h */,
+				6D52D6C31EF5489B00396BBF /* WJChooseGoodsPropertyController.m */,
 			);
 			path = Area;
 			sourceTree = "<group>";
@@ -1725,6 +1736,10 @@
 				6D2754DA1ED7DB9500A4B0D7 /* WJBottonBarView.m */,
 				6D2754DC1ED7E47400A4B0D7 /* WJGoodsDetailTableViewCell.h */,
 				6D2754DD1ED7E47400A4B0D7 /* WJGoodsDetailTableViewCell.m */,
+				6D52D6C51EF5510D00396BBF /* WJChooseGoodsSizeCell.h */,
+				6D52D6C61EF5510D00396BBF /* WJChooseGoodsSizeCell.m */,
+				6D52D6CB1EF55CF200396BBF /* WJDigitalSelectorView.h */,
+				6D52D6CC1EF55CF200396BBF /* WJDigitalSelectorView.m */,
 				6D52C8E21EF3FE730062D38B /* WJLotteryDrawDetailCell.h */,
 				6D52C8E31EF3FE730062D38B /* WJLotteryDrawDetailCell.m */,
 			);
@@ -2959,6 +2974,7 @@
 				B45218861EB9F3D0009E9E40 /* WJOrderTypeCollectionViewCell.m in Sources */,
 				6D96DC7C1EB97FEF004EDE7F /* NSString+MD5.m in Sources */,
 				B45218831EB9F3D0009E9E40 /* WJAvatarView.m in Sources */,
+				6D52D6CD1EF55CF200396BBF /* WJDigitalSelectorView.m in Sources */,
 				B47DA08C1ECE9E950038D7E2 /* WJGoodFriendsViewController.m in Sources */,
 				6D962FB71EE9361F002E8326 /* WJShareManager.m in Sources */,
 				B4E5B6EA1EC30BE500F9A7CA /* WJMyDeliveryAddressReformer.m in Sources */,
@@ -2969,6 +2985,7 @@
 				6D2754DB1ED7DB9500A4B0D7 /* WJBottonBarView.m in Sources */,
 				6D52C8D51EF3E8390062D38B /* WJLotteryDrawDetailModel.m in Sources */,
 				B4E5B6B41EC0760100F9A7CA /* WJCategoryModel.m in Sources */,
+				6D52D6C41EF5489B00396BBF /* WJChooseGoodsPropertyController.m in Sources */,
 				6D27CC171ECC53C800BC6C97 /* WJTagButton.m in Sources */,
 				B459DA041EBD7BDB00F3748B /* WJEditAddressViewController.m in Sources */,
 				6D27CC2E1ECC674A00BC6C97 /* WJFloatWindowView.m in Sources */,
@@ -3007,6 +3024,7 @@
 				B452190C1EBC33AB009E9E40 /* WJPurchaseOrderCell.m in Sources */,
 				B45218E61EBB308D009E9E40 /* BaseDBModel.m in Sources */,
 				B40EF4151ECAFDA300DDE49F /* WJShareMemberViewController.m in Sources */,
+				6D52D6C71EF5510D00396BBF /* WJChooseGoodsSizeCell.m in Sources */,
 				B459DA011EBD782400F3748B /* WJMyDeliveryAddressCell.m in Sources */,
 				B40EF3A71EC5CA0E00DDE49F /* WJStoreCategorySelectCell.m in Sources */,
 				B40EF4041ECAF08800DDE49F /* WJGivingApplyViewController.m in Sources */,

@@ -15,6 +15,7 @@
 #import "WJGoodsDetailReformer.h"
 #import "WJWebTableViewCell.h"
 
+#import "WJChooseGoodsPropertyController.h"
 
 @interface WJGoodsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,APIManagerCallBackDelegate,ReloadWebViewDelegate>
 {
@@ -82,12 +83,25 @@
 
 - (void)addShopCarButtonAction
 {
-    
+    WJChooseGoodsPropertyController * chooseGoodsVC = [[WJChooseGoodsPropertyController alloc]init];
+//    chooseGoodsVC.productDetailModel = self.productDetailModel;
+    chooseGoodsVC.toNextController = ToAddShoppingCart;
+    chooseGoodsVC.isFromProductDetail = YES;
+    chooseGoodsVC.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    [self addChildViewController:chooseGoodsVC];
+    [self.view addSubview:chooseGoodsVC.view];
 }
 
 - (void)buyNowButtonAction
 {
-    
+    WJChooseGoodsPropertyController * chooseGoodsVC = [[WJChooseGoodsPropertyController alloc]init];
+//    chooseGoodsVC.productDetailModel = self.productDetailModel;
+    chooseGoodsVC.toNextController = ToConfirmOrderController;
+    chooseGoodsVC.isFromProductDetail = YES;
+    chooseGoodsVC.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    [self addChildViewController:chooseGoodsVC];
+    [self.view addSubview:chooseGoodsVC.view];
+
 }
 
 #pragma mark - ReloadWebViewDelegate

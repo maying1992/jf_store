@@ -12,5 +12,7 @@
 
 @property (nonatomic, strong) NSString * prizeId;
 @property (nonatomic, strong) NSString * count;
+@property (nonatomic, strong) NSString * password;
+
 
 @end

@@ -48,7 +48,8 @@
 - (NSDictionary *)paramsForApi:(APIBaseManager *)manager
 {
     return @{@"prize_id":self.prizeId,
-             @"count":self.count};
+             @"count":self.count,
+             @"password":self.password};
 }
 
 #pragma mark - APIManager Methods

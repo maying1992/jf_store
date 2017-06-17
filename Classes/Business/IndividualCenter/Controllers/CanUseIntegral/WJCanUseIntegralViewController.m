@@ -9,9 +9,17 @@
 #import "WJCanUseIntegralViewController.h"
 #import "WJCanUseIntegralCell.h"
 #import "WJRefreshTableView.h"
-@interface WJCanUseIntegralViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)WJRefreshTableView       *tableView;
-@property(nonatomic,strong)NSMutableArray           *listArray;
+#import "APIQueryIntergralListManager.h"
+@interface WJCanUseIntegralViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
+{
+    BOOL      isHeaderRefresh;
+    BOOL      isFooterRefresh;
+}
+
+@property(nonatomic,strong)WJRefreshTableView           *tableView;
+@property(nonatomic,strong)NSMutableArray               *listArray;
+@property(nonatomic,strong)APIQueryIntergralListManager *queryIntergralListManager;
+
 @end
 
 @implementation WJCanUseIntegralViewController
@@ -22,12 +30,134 @@
     self.isHiddenTabBar = YES;
     
     [self SetUI];
+
+//    [self requestData];
+    [self.queryIntergralListManager loadData];
+
     [self.view addSubview:self.tableView];
+}
+
+#pragma mark - Request
+
+- (void)requestData{
+    
+    if (self.listArray.count > 0) {
+        [self.listArray removeAllObjects];
+    }
+    self.queryIntergralListManager.shouldCleanData = YES;
+    self.queryIntergralListManager.firstPageNo = 1;
+    [self.queryIntergralListManager loadData];
+    
+}
+
+#pragma mark - WJRefreshTableView Delegate
+
+- (void)startHeadRefreshToDo:(WJRefreshTableView *)tableView
+{
+    if (!isHeaderRefresh && !isFooterRefresh) {
+        isHeaderRefresh = YES;
+        self.queryIntergralListManager.shouldCleanData = YES;
+        [self requestData];
+    }
+    
+}
+
+- (void)startFootRefreshToDo:(WJRefreshTableView *)tableView
+{
+    if (!isFooterRefresh && !isHeaderRefresh) {
+        isFooterRefresh = YES;
+        self.queryIntergralListManager.shouldCleanData = NO;
+        [self.queryIntergralListManager loadData];
+    }
+}
+
+- (void)endGetData:(BOOL)needReloadData{
+    
+    if (isHeaderRefresh) {
+        isHeaderRefresh = NO;
+        [self.tableView endHeadRefresh];
+    }
+    
+    if (isFooterRefresh){
+        isFooterRefresh = NO;
+        [self.tableView endFootFefresh];
+    }
+    
+    if (needReloadData) {
+        [self.tableView reloadData];
+    }
+}
+
+- (void)refreshFooterStatus:(BOOL)status{
+    
+    if (status) {
+        [self.tableView hiddenFooter];
+    } else {
+        [self.tableView showFooter];
+    }
+    
+    if (self.listArray.count > 0) {
+        self.tableView.tableFooterView = [UIView new];
+        
+    } else {
+        
+//        self.tableView.tableFooterView = nil;
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    if ([manager isKindOfClass:[APIQueryIntergralListManager class]]) {
+//        self.orderListModel = [manager fetchDataWithReformer:[[WJOrderListReformer alloc] init]];
+//        
+//        if (self.listArray.count == 0) {
+//            
+//            self.listArray =  self.orderListModel.orderList;
+//            
+//        } else {
+//            
+//            if (self.queryIntergralListManager.currentPage < self.orderListModel.totalPage) {
+//                
+//                [self.listArray addObjectsFromArray: self.orderListModel.orderList];
+//            }
+//        }
+        
+        [self endGetData:YES];
+        [self refreshFooterStatus:manager.hadGotAllData];
+    }
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    if ([manager isKindOfClass:[self.queryIntergralListManager class]]) {
+        
+        if (manager.errorType == APIManagerErrorTypeNoData) {
+            [self refreshFooterStatus:YES];
+            
+            if (isHeaderRefresh) {
+                if (self.listArray.count > 0) {
+                    [self.listArray removeAllObjects];
+                    
+                }
+                [self endGetData:YES];
+                return;
+            }
+            [self endGetData:NO];
+            
+        } else {
+            
+            [self refreshFooterStatus:self.queryIntergralListManager.hadGotAllData];
+            [self endGetData:NO];
+            
+        }
+        
+    }
 }
 
 -(void)SetUI
@@ -103,5 +233,18 @@
     return _tableView;
 }
 
+
+-(APIQueryIntergralListManager *)queryIntergralListManager
+{
+    if (!_queryIntergralListManager) {
+        _queryIntergralListManager = [[APIQueryIntergralListManager alloc] init];
+        _queryIntergralListManager.delegate = self;
+    }
+    
+    _queryIntergralListManager.userId = USER_ID;
+    _queryIntergralListManager.integralType =  1;
+//    _queryIntergralListManager.setId = @"2134";
+    return _queryIntergralListManager;
+}
 
 @end

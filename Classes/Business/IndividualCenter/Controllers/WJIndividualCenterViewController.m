@@ -46,7 +46,6 @@
 #import "WJGoodFriendsViewController.h"
 #import "WJIntegralViewController.h"
 
-
 #define kHeaderViewIdentifier               @"kHeaderViewIdentifier"
 #define kHeaderViewDefaultIdentifier        @"kHeaderViewDefaultIdentifier"
 
@@ -186,19 +185,19 @@
         
         if (indexPath.row == 0) {
             
-            [cell configDataWithIcon:orderDic[@"icon"] orderType:orderDic[@"text"] count:[NSString stringWithFormat:@"%ld",self.individualCenterModel.shopOrderCount]];
+            [cell configDataWithIcon:orderDic[@"icon"] orderType:orderDic[@"text"] count:[NSString stringWithFormat:@"%ld",self.individualCenterModel.waitPayOrderCount]];
             
         } else if (indexPath.row == 1) {
-            [cell configDataWithIcon:orderDic[@"icon"] orderType:orderDic[@"text"] count:[NSString stringWithFormat:@"%ld",self.individualCenterModel.rechargeOrderCount]];
+            [cell configDataWithIcon:orderDic[@"icon"] orderType:orderDic[@"text"] count:[NSString stringWithFormat:@"%ld",self.individualCenterModel.waitDeliverOrderCount]];
             
         } else if (indexPath.row == 2) {
-            [cell configDataWithIcon:orderDic[@"icon"] orderType:orderDic[@"text"] count:[NSString stringWithFormat:@"%ld",self.individualCenterModel.givingOrderCount]];
+            [cell configDataWithIcon:orderDic[@"icon"] orderType:orderDic[@"text"] count:[NSString stringWithFormat:@"%ld",self.individualCenterModel.waitReceiveOrderCount]];
 
         } else if (indexPath.row == 3) {
-            [cell configDataWithIcon:orderDic[@"icon"] orderType:orderDic[@"text"] count:[NSString stringWithFormat:@"%ld",self.individualCenterModel.creditsSwitchCount]];
+            [cell configDataWithIcon:orderDic[@"icon"] orderType:orderDic[@"text"] count:[NSString stringWithFormat:@"%ld",self.individualCenterModel.finishOrderCount]];
 
         } else {
-            [cell configDataWithIcon:orderDic[@"icon"] orderType:orderDic[@"text"] count:[NSString stringWithFormat:@"%ld",self.individualCenterModel.dealOrderCount]];
+            [cell configDataWithIcon:orderDic[@"icon"] orderType:orderDic[@"text"] count:[NSString stringWithFormat:@"%ld",self.individualCenterModel.refundOrderCount]];
         }
         
         return cell;
@@ -780,8 +779,7 @@
         _individualCenterManager = [[APIIndividualCenterManager alloc] init];
         _individualCenterManager.delegate = self;
     }
-    _individualCenterManager.loginName = USER_TEL;
-
+    _individualCenterManager.userID = USER_ID;
     return _individualCenterManager;
 }
 

@@ -15,12 +15,14 @@
         self.creditsCount = [dic[@"usePoint"] integerValue];
         self.friendsCount = [dic[@"friendNum"] integerValue];
 
-        self.shopOrderCount = [dic[@"shopOrderNum"] integerValue];
-        self.rechargeOrderCount = [dic[@"rechargeOrderNum"] integerValue];
-        self.givingOrderCount = [dic[@"givingOrderNum"] integerValue];
-        self.creditsSwitchCount = [dic[@"pointSwitchNum"] integerValue];
-        self.dealOrderCount = [dic[@"dealOrderNum"] integerValue];
-        self.messageCount = [dic[@"messageNum"] integerValue];
+        self.waitPayOrderCount = [dic[@"pending_payment"] integerValue];
+        self.waitDeliverOrderCount = [dic[@"deliver_goods"] integerValue];
+        self.waitReceiveOrderCount = [dic[@"take_delivery"] integerValue];
+        self.finishOrderCount = [dic[@"deliver_goods"] integerValue];
+        self.refundOrderCount = [dic[@"refund_num"] integerValue];
+
+
+        self.messageCount = [dic[@"news_num"] integerValue];
     }
     
     return self;

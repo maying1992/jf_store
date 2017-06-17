@@ -58,7 +58,6 @@
 
 - (void)outputButtonAction
 {
-//    [self.prizeNowManager loadData];
     
     WJPassView *passView  = [[WJPassView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - ALD(50)) title:@"请输入支付密码"];
     passView.delegate = self;
@@ -94,14 +93,13 @@
 - (void)successWithVerifyPsdAlert:(WJPassView *)alertView
 {
     NSLog(@"111");
+    [self.prizeNowManager loadData];
 }
 
 - (void)failedWithVerifyPsdAlert:(WJPassView *)alertView errerMessage:(NSString * )errerMessage
 {
     NSLog(@"222");
-
     [alertView dismiss];
-    
     [self showAlertWithMessage:errerMessage];
     
 }

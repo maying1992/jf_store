@@ -8,6 +8,7 @@
 
 #import "WJPassView.h"
 #import "WJSystemAlertView.h"
+#import "APIVerifyPayPasswordManager.h"
 
 #define IVTag  200
 
@@ -35,6 +36,9 @@
 }
 
 @property (nonatomic, assign) BOOL canInputPassword;
+@property (nonatomic, strong) APIVerifyPayPasswordManager * verifyPayPasswordManager;
+
+
 @end
 
 @implementation WJPassView
@@ -298,6 +302,8 @@
     
     
     //请求接口
+    self.verifyPayPasswordManager.password = enterPassword;
+    [self.verifyPayPasswordManager loadData];
     
 }
 
@@ -392,6 +398,15 @@
         _alertTag = alertTag;
         self.tag = alertTag;
     }
+}
+
+- (APIVerifyPayPasswordManager *)verifyPayPasswordManager
+{
+    if (_verifyPayPasswordManager == nil) {
+        _verifyPayPasswordManager = [[APIVerifyPayPasswordManager alloc]init];
+        _verifyPayPasswordManager.delegate = self;
+    }
+    return _verifyPayPasswordManager;
 }
 
 

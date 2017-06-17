@@ -47,6 +47,7 @@
 {
     return @{@"center_id":self.centerId ? : @"",
              @"operation":self.operation ? : @"",
+//             @"user_id" :self.userID ? :@""
              };
 }
 

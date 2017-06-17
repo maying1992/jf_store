@@ -10,6 +10,8 @@
 #import "WJCanUseIntegralCell.h"
 #import "WJRefreshTableView.h"
 #import "APIQueryIntergralListManager.h"
+#import "WJIntegralListModel.h"
+#import "WJIntegralListReformer.h"
 @interface WJCanUseIntegralViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
 {
     BOOL      isHeaderRefresh;
@@ -18,6 +20,7 @@
 @property(nonatomic,strong)APIQueryIntergralListManager *queryIntergralListManager;
 @property(nonatomic,strong)WJRefreshTableView           *tableView;
 @property(nonatomic,strong)NSMutableArray               *listArray;
+@property(nonatomic,strong)WJIntegralListModel          *listModel;
 @end
 
 @implementation WJCanUseIntegralViewController
@@ -109,19 +112,19 @@
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
     if ([manager isKindOfClass:[APIQueryIntergralListManager class]]) {
-//        self.orderListModel = [manager fetchDataWithReformer:[[WJOrderListReformer alloc] init]];
-//        
-//        if (self.listArray.count == 0) {
-//            
-//            self.listArray =  self.orderListModel.orderList;
-//            
-//        } else {
-//            
-//            if (self.queryIntergralListManager.currentPage < self.orderListModel.totalPage) {
-//                
-//                [self.listArray addObjectsFromArray: self.orderListModel.orderList];
-//            }
-//        }
+        self.listArray = [manager fetchDataWithReformer:[[WJIntegralListReformer alloc] init]];
+        
+        if (self.listArray.count == 0) {
+            
+            self.listArray =  self.listModel.integralList;
+            
+        } else {
+            
+            if (self.queryIntergralListManager.firstPageNo < self.listModel.totalPage) {
+                
+                [self.listArray addObjectsFromArray: self.listModel.integralList];
+            }
+        }
         
         [self endGetData:YES];
         [self refreshFooterStatus:manager.hadGotAllData];
@@ -237,6 +240,7 @@
     }
     
     _queryIntergralListManager.integralType =  1;
+//    _queryIntergralListManager.userID = USER_ID;
     return _queryIntergralListManager;
 }
 

@@ -21,7 +21,9 @@
     NSString *currentTimeString = [formatter stringFromDate:[NSDate date]];
     
     NSDictionary  *userInformation = [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation];
-    parameters[@"user_id"] = userInformation[@"user_id"] ?:@"";
+    NSString *userId  = [NSString stringWithFormat:@"%@",userInformation[@"user_id"]];
+    
+    parameters[@"user_id"] = userId ?:@"";
     parameters[@"site_id"] = SITE_ID?:@"";
     parameters[@"sign_type"] = @"MD5";
     parameters[@"channel"] = KChannel;

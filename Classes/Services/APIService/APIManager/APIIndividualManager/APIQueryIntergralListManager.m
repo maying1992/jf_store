@@ -75,6 +75,7 @@
         position = _pageNo + 1;
     }
     return @{@"integral_type" :NumberToString(self.integralType),
+//             @"user_id" :self.userID ? : @"",
              @"page_size":NumberToString(self.pageCount),
              @"current_page":NumberToString(position)};
 }

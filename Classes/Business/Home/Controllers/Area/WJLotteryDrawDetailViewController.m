@@ -93,7 +93,7 @@
         //轮播
         return kScreenWidth * 0.6;
     }else if (indexPath.row == 1) {
-        return 120;
+        return 105;
     }else{
         return productDetailCellHight;
     }

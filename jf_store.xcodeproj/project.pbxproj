@@ -72,7 +72,6 @@
 		6D3A37041EEF93A100F5767A /* WJHomeReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3A37031EEF93A100F5767A /* WJHomeReformer.m */; };
 		6D3A37071EEFE0F300F5767A /* WJBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3A37061EEFE0F300F5767A /* WJBannerModel.m */; };
 		6D3A370A1EEFE10300F5767A /* WJChannelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3A37091EEFE10300F5767A /* WJChannelModel.m */; };
-		6D3B7F3D1EE6604E00A57388 /* WJLotteryDrawDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3B7F3C1EE6604E00A57388 /* WJLotteryDrawDetailTableViewCell.m */; };
 		6D417D2F1ECE9C9800CB6E35 /* WJTradingHallTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D417D2E1ECE9C9800CB6E35 /* WJTradingHallTableViewCell.m */; };
 		6D417D391ECEF0C700CB6E35 /* WJKLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D417D381ECEF0C700CB6E35 /* WJKLineView.m */; };
 		6D4FC7031EBC2C32007BC78A /* APILoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4FC7021EBC2C32007BC78A /* APILoginManager.m */; };
@@ -90,6 +89,7 @@
 		6D52C8DE1EF3F1650062D38B /* WJGoodsPlateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8DD1EF3F1650062D38B /* WJGoodsPlateModel.m */; };
 		6D52C8E11EF3FCF30062D38B /* WJWebTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8E01EF3FCF30062D38B /* WJWebTableViewCell.m */; };
 		6D52C8E41EF3FE730062D38B /* WJLotteryDrawDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8E31EF3FE730062D38B /* WJLotteryDrawDetailCell.m */; };
+		6D52D6AF1EF4D7D700396BBF /* APIPrizeNowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52D6AE1EF4D7D700396BBF /* APIPrizeNowManager.m */; };
 		6D5D3FB51ECDACA900F26417 /* APISiteListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */; };
 		6D680C721EDEC28100FFFC2F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D680C741EDEC28100FFFC2F /* InfoPlist.strings */; };
 		6D680C7D1EDEC35F00FFFC2F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D680C7F1EDEC35F00FFFC2F /* Localizable.strings */; };
@@ -471,8 +471,6 @@
 		6D3A37061EEFE0F300F5767A /* WJBannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJBannerModel.m; sourceTree = "<group>"; };
 		6D3A37081EEFE10300F5767A /* WJChannelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJChannelModel.h; sourceTree = "<group>"; };
 		6D3A37091EEFE10300F5767A /* WJChannelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJChannelModel.m; sourceTree = "<group>"; };
-		6D3B7F3B1EE6604E00A57388 /* WJLotteryDrawDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJLotteryDrawDetailTableViewCell.h; sourceTree = "<group>"; };
-		6D3B7F3C1EE6604E00A57388 /* WJLotteryDrawDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJLotteryDrawDetailTableViewCell.m; sourceTree = "<group>"; };
 		6D417D2D1ECE9C9800CB6E35 /* WJTradingHallTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJTradingHallTableViewCell.h; sourceTree = "<group>"; };
 		6D417D2E1ECE9C9800CB6E35 /* WJTradingHallTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJTradingHallTableViewCell.m; sourceTree = "<group>"; };
 		6D417D371ECEF0C700CB6E35 /* WJKLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJKLineView.h; sourceTree = "<group>"; };
@@ -508,6 +506,8 @@
 		6D52C8E01EF3FCF30062D38B /* WJWebTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWebTableViewCell.m; sourceTree = "<group>"; };
 		6D52C8E21EF3FE730062D38B /* WJLotteryDrawDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJLotteryDrawDetailCell.h; sourceTree = "<group>"; };
 		6D52C8E31EF3FE730062D38B /* WJLotteryDrawDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJLotteryDrawDetailCell.m; sourceTree = "<group>"; };
+		6D52D6AD1EF4D7D700396BBF /* APIPrizeNowManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIPrizeNowManager.h; sourceTree = "<group>"; };
+		6D52D6AE1EF4D7D700396BBF /* APIPrizeNowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIPrizeNowManager.m; sourceTree = "<group>"; };
 		6D5D3FB31ECDACA900F26417 /* APISiteListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APISiteListManager.h; sourceTree = "<group>"; };
 		6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APISiteListManager.m; sourceTree = "<group>"; };
 		6D680C5F1EDEB83F00FFFC2F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -1690,8 +1690,6 @@
 				6D52C8E01EF3FCF30062D38B /* WJWebTableViewCell.m */,
 				6D27CBEF1ECC53BC00BC6C97 /* WJLotteryDrawTableViewCell.h */,
 				6D27CBF01ECC53BC00BC6C97 /* WJLotteryDrawTableViewCell.m */,
-				6D3B7F3B1EE6604E00A57388 /* WJLotteryDrawDetailTableViewCell.h */,
-				6D3B7F3C1EE6604E00A57388 /* WJLotteryDrawDetailTableViewCell.m */,
 				6D27CC261ECC545500BC6C97 /* WJWinnerListTableViewCell.h */,
 				6D27CC271ECC545500BC6C97 /* WJWinnerListTableViewCell.m */,
 				6D2754D91ED7DB9500A4B0D7 /* WJBottonBarView.h */,
@@ -1942,6 +1940,8 @@
 				6D52C8C51EF3D7D60062D38B /* APIPrizeGoodsDetailsManager.m */,
 				6D52C8C71EF3DD400062D38B /* APIPrizeResultListManager.h */,
 				6D52C8C81EF3DD400062D38B /* APIPrizeResultListManager.m */,
+				6D52D6AD1EF4D7D700396BBF /* APIPrizeNowManager.h */,
+				6D52D6AE1EF4D7D700396BBF /* APIPrizeNowManager.m */,
 			);
 			path = APIHomeManager;
 			sourceTree = "<group>";
@@ -2958,7 +2958,6 @@
 				B40EF3CA1EC9479900DDE49F /* WJRefundOrderFooterView.m in Sources */,
 				B452190F1EBC6AAA009E9E40 /* APIGetUserCodeManager.m in Sources */,
 				B459DA0A1EBDB1B900F3748B /* WJCategoryListModel.m in Sources */,
-				6D3B7F3D1EE6604E00A57388 /* WJLotteryDrawDetailTableViewCell.m in Sources */,
 				B40EF42F1ECC23E700DDE49F /* WJConsumerServicesIntegralViewController.m in Sources */,
 				B40EF3D21EC94FE200DDE49F /* WJLogisticsDetailModel.m in Sources */,
 				B47826271ED91915002267A6 /* WJIntegralActivateViewController.m in Sources */,
@@ -3060,6 +3059,7 @@
 				B47826151ED59FF1002267A6 /* WJDeliveryAddressModel.m in Sources */,
 				6D0EABF21EB326070026B20B /* WJWKWebViewController.m in Sources */,
 				6D96DC721EB97FEF004EDE7F /* APIRequestGenerator.m in Sources */,
+				6D52D6AF1EF4D7D700396BBF /* APIPrizeNowManager.m in Sources */,
 				6D962FB51EE9361F002E8326 /* QQApiManager.m in Sources */,
 				6D0EABE11EB326070026B20B /* NSString+CoculationSize.m in Sources */,
 				B49BCC8D1EE9347E000CF631 /* APIModifyInformationManager.m in Sources */,

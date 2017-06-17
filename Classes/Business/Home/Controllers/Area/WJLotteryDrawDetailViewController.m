@@ -93,6 +93,7 @@
 - (void)successWithVerifyPsdAlert:(WJPassView *)alertView
 {
     NSLog(@"111");
+    self.prizeNowManager.password = alertView.enterPassword;
     [self.prizeNowManager loadData];
 }
 

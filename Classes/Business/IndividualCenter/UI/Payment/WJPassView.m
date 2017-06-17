@@ -30,7 +30,7 @@
     UIView * enterBg;
     NSMutableArray *enterPsdViews;
     NSInteger selectedIvTag;
-    NSString *enterPassword;
+//    NSString *enterPassword;
     NSMutableArray *psdArray;
     
 }
@@ -286,7 +286,7 @@
 
 - (void)sureBtnAction{
     
-    enterPassword = [psdArray componentsJoinedByString:@""];
+    _enterPassword = [psdArray componentsJoinedByString:@""];
     if (psdArray.count == 0){
         [[TKAlertCenter defaultCenter] postAlertWithMessage:@"密码位数不能为空"];
         self.canInputPassword = YES;
@@ -302,7 +302,7 @@
     
     
     //请求接口
-    self.verifyPayPasswordManager.password = enterPassword;
+    self.verifyPayPasswordManager.password = _enterPassword;
     [self.verifyPayPasswordManager loadData];
     
 }

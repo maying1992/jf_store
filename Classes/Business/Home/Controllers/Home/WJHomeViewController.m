@@ -91,8 +91,14 @@
 
 - (void)navigationSetup
 {
+    NSString * string = nil;
+    if (SITE_NAME == nil) {
+        string = @"大陆";
+    }else{
+        string = SITE_NAME;
+    }
     WJAddressButton * addressButton = [[WJAddressButton alloc]init];
-    [addressButton setTitle:@"北京" forState:UIControlStateNormal];
+    [addressButton setTitle:string forState:UIControlStateNormal];
     [addressButton addTarget:self action:@selector(addressButton) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addressButton];
     

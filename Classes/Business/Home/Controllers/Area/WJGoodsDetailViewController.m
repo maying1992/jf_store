@@ -13,14 +13,19 @@
 #import "APIGoodsDetailsManager.h"
 #import "WJGoodsDetailModel.h"
 #import "WJGoodsDetailReformer.h"
+#import "WJWebTableViewCell.h"
 
-@interface WJGoodsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,APIManagerCallBackDelegate>
+
+@interface WJGoodsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,APIManagerCallBackDelegate,ReloadWebViewDelegate>
+{
+    CGFloat       productDetailCellHight;
+}
 
 @property(nonatomic ,strong) WJBottonBarView                 * bottonBarView;
 @property(nonatomic ,strong) UITableView                     * mainTableView;
 @property(nonatomic, strong) SDCycleScrollView               * cycleScrollView;
 @property(nonatomic, strong) APIGoodsDetailsManager          * goodsDetailsManager;
-@property(nonatomic ,strong) NSMutableArray                   * dataArray;
+@property(nonatomic ,strong) WJGoodsDetailModel              * goodsDetailModel;
 
 @end
 
@@ -50,7 +55,9 @@
 #pragma mark - APIManagerCallBackDelegate
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
-    self.dataArray = [manager fetchDataWithReformer:[WJGoodsDetailReformer new]];
+    self.goodsDetailModel = [manager fetchDataWithReformer:[WJGoodsDetailReformer new]];
+    _cycleScrollView.imageURLStringsGroup = _goodsDetailModel.picList;;
+
     [self.mainTableView reloadData];
 }
 
@@ -83,12 +90,21 @@
     
 }
 
+#pragma mark - ReloadWebViewDelegate
+- (void)reloadByHeight:(CGFloat)height
+{
+    productDetailCellHight = height;
+    [self.mainTableView reloadData];
+}
 
 #pragma mark UITableViewDelegate && UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    if (self.goodsDetailModel == nil) {
+        return 0;
+    }
+    return 3;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -101,8 +117,10 @@
     if (indexPath.row == 0) {
         //轮播
         return kScreenWidth * 0.6;
-    }else{
+    }else if (indexPath.row == 1){
         return 120;
+    }else{
+        return productDetailCellHight;
     }
 }
 
@@ -115,12 +133,25 @@
             [cell.contentView addSubview:self.cycleScrollView];
         }
         return cell;
-    }else{
+    }else if (indexPath.row == 1) {
         WJGoodsDetailTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"WJGoodsDetailTableViewCell"];
         if (cell == nil) {
             cell = [[WJGoodsDetailTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WJGoodsDetailTableViewCell"];
         }
+        [cell configDataWithModel:self.goodsDetailModel];
         return cell;
+    }else{
+        //商品详情
+        WJWebTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"WebCell"];
+        if (!cell) {
+            cell = [[WJWebTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WebCell"];
+            cell.heightDelegate = self;
+        }
+        if (self.goodsDetailModel != nil && productDetailCellHight == 0) {
+            [cell configWithURL:self.goodsDetailModel.linkUrl];
+        }
+        return cell;
+
     }
 }
 
@@ -142,12 +173,11 @@
 - (SDCycleScrollView *)cycleScrollView
 {
     if (_cycleScrollView == nil) {
-        NSArray *imageNames = @[[UIImage imageNamed:@"new_x1_19201200_01"],[UIImage imageNamed:@"new_x1_19201200_02"],[UIImage imageNamed:@"new_x1_19201200_03"],[UIImage imageNamed:@"new_x1_19201200_04"]];
-        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth * 0.6) shouldInfiniteLoop:YES imageNamesGroup:imageNames];
-        _cycleScrollView.delegate = self;
+//        NSArray *imageNames = @[[UIImage imageNamed:@"new_x1_19201200_01"],[UIImage imageNamed:@"new_x1_19201200_02"],[UIImage imageNamed:@"new_x1_19201200_03"],[UIImage imageNamed:@"new_x1_19201200_04"]];
+        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth * 0.6) delegate:self placeholderImage:nil];
         _cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
         _cycleScrollView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        //        _cycleScrollView.autoScrollTimeInterval = 2;
+//        _cycleScrollView.autoScrollTimeInterval = 2;
     }
     return _cycleScrollView;
 }

@@ -45,10 +45,12 @@
         [self.contentView addConstraints:[subLabel constraintsLeftInContainer:10]];
         
         integralLabel = [[UILabel alloc]initForAutoLayout];
-        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:@"3599积分"];
-        [attrStr addAttributes:@{NSFontAttributeName:WJFont16,NSForegroundColorAttributeName:WJColorSubColor} range:NSMakeRange(0,attrStr.length - 2)];
-        [attrStr addAttributes:@{NSFontAttributeName:WJFont11,NSForegroundColorAttributeName:WJColorMainTitle,NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle|NSUnderlinePatternSolid),NSStrikethroughColorAttributeName:WJColorDardGray9} range:NSMakeRange(attrStr.length - 2, 2)];
-        integralLabel.attributedText = attrStr;
+        integralLabel.font = WJFont14;
+        integralLabel.text = @"3599积分";
+//        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:@"3599积分"];
+//        [attrStr addAttributes:@{NSFontAttributeName:WJFont16,NSForegroundColorAttributeName:WJColorSubColor} range:NSMakeRange(0,attrStr.length - 2)];
+//        [attrStr addAttributes:@{NSFontAttributeName:WJFont11,NSForegroundColorAttributeName:WJColorMainTitle,NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle|NSUnderlinePatternSolid),NSStrikethroughColorAttributeName:WJColorDardGray9} range:NSMakeRange(attrStr.length - 2, 2)];
+//        integralLabel.attributedText = attrStr;
         [self.contentView addSubview:integralLabel];
         [self.contentView addConstraints:[integralLabel constraintsTop:8 FromView:subLabel]];
         [self.contentView addConstraints:[integralLabel constraintsLeftInContainer:10]];
@@ -79,5 +81,39 @@
     }
     return self;
 }
+
+-(void)configDataWithModel:(WJGoodsDetailModel *)model
+{
+    titleLabel.text = model.goodsName;
+    subLabel.text = model.goodsBrief;
+    salesLabel.text = [NSString stringWithFormat:@"销量：%@",model.salesCount];
+    cityLabel.text = model.address;
+    NSString * sellingStr = @"";
+    if (![model.sellingPrice isEqualToString:@"0"]) {
+        sellingStr = [sellingStr stringByAppendingFormat:@"%@元",model.sellingPrice];
+    }
+    if (![model.sellingIntegral isEqualToString:@"0"]) {
+        if ([sellingStr isEqualToString:@""]) {
+            sellingStr = [sellingStr stringByAppendingFormat:@"%@积分",model.sellingIntegral];
+        }else{
+            sellingStr = [sellingStr stringByAppendingFormat:@"+%@积分",model.sellingIntegral];
+        }
+    }
+    integralLabel.text = sellingStr;
+    
+    NSString * postageStr = @"邮费：";
+    if (![model.sellingPrice isEqualToString:@"0"]) {
+        postageStr = [postageStr stringByAppendingFormat:@"%@元",model.sellingPrice];
+    }
+    if (![model.sellingIntegral isEqualToString:@"0"]) {
+        if ([postageStr isEqualToString:@"邮费："]) {
+            postageStr = [postageStr stringByAppendingFormat:@"%@积分",model.sellingIntegral];
+        }else{
+            postageStr = [postageStr stringByAppendingFormat:@"+%@积分",model.sellingIntegral];
+        }
+    }
+    postageLabel.text = postageStr;
+}
+
 
 @end

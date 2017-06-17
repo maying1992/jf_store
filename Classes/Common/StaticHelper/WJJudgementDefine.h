@@ -36,7 +36,12 @@
 
 #define USER_Token [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation][@"token"]
 #define USER_ID   [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation][@"user_id"]
-#define SITE_ID   [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation][@"site_id"]
+#define SITE_ID   [[NSUserDefaults standardUserDefaults] objectForKey:KSitID]
+#define SITE_NUM   [[NSUserDefaults standardUserDefaults] objectForKey:KSitNum]
+#define SITE_NAME   [[NSUserDefaults standardUserDefaults] objectForKey:KSitName]
+#define LANGUAGE_NAME   [[NSUserDefaults standardUserDefaults] objectForKey:KLanguageName]
+#define LANGUAGE_NUM   [[NSUserDefaults standardUserDefaults] objectForKey:KLanguageNum]
+
 
 #define USER_TEL  [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation][@"contact"]
 #define USER_headPortrait  [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation][@"head_portrait"]

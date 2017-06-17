@@ -37,6 +37,12 @@
 #define KPasswordSwitch      @"PasswordSwitch"                  //无密开关状态的key值
 
 #define KUserInformation     @"UserInformation"                 //登录返回用户字典的key值
+#define KSitID               @"KSitID"                          //位置ID的key值
+#define KSitName             @"KSitName"                        //位置名称的key值
+#define KSitNum              @"KSitNum"                         //位置数的key值
+#define KLanguageName        @"KLanguageName"                   //语言名称的key值
+#define KLanguageNum        @"KLanguageNum"                     //语言数的key值
+
 
 #define KCashTransferUrl     @"CashTransferUrl"                 //斗金URL
 

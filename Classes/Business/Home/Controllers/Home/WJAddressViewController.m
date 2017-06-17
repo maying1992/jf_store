@@ -9,6 +9,8 @@
 #import "WJAddressViewController.h"
 #import "WJAddressTableViewCell.h"
 #import "APISiteListManager.h"
+#import "WJAddressReformer.h"
+#import "WJAddressModel.h"
 
 
 @interface WJAddressViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
@@ -19,6 +21,9 @@
 
 @property(nonatomic ,strong) UITableView            * addressTableView;
 @property(nonatomic ,strong) APISiteListManager     * siteListManager;
+@property(nonatomic,strong) NSMutableArray          * addressArray;
+@property(nonatomic,strong) NSMutableArray          * languageArray;
+
 
 @end
 
@@ -27,8 +32,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"语言地区";
-    selectAddress = 0;
-    selectLanguage = 0;
+    if (SITE_NAME == nil) {
+        selectAddress = 0;
+    }else{
+        selectAddress = [SITE_NUM integerValue];
+    }
+    if (LANGUAGE_NAME == nil) {
+        selectLanguage = 0;
+    }else{
+        selectLanguage = [LANGUAGE_NUM integerValue];
+    }
     
     [self.view addSubview:self.addressTableView];
     [self UISetUp];
@@ -69,14 +82,16 @@
 
 
 #pragma mark - APIManagerCallBackDelegate
-
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
+    self.addressArray = [manager fetchDataWithReformer:[WJAddressReformer new]];
+    [self.addressTableView reloadData];
     
 }
+
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager
 {
-    
+    NSLog(@"%@",manager.errorMessage);
 }
 
 
@@ -87,7 +102,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    if (section == 0) {
+        return self.addressArray.count;
+    }else{
+        return self.languageArray.count;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -106,9 +125,18 @@
     headerLabel.font = WJFont13;
     headerLabel.textColor = WJColorMainTitle;
     if (section == 0) {
-        headerLabel.text = @"当前地区：中国大陆";
+        if (SITE_NAME == nil) {
+            WJAddressModel * model = self.addressArray[0];
+            headerLabel.text = [NSString stringWithFormat:@"当前地区：%@",model.siteName];
+        }else{
+            headerLabel.text = [NSString stringWithFormat:@"当前地区：%@",SITE_NAME];
+        }
     }else{
-        headerLabel.text = @"当前语言：简体中文";
+        if (LANGUAGE_NAME == nil){
+            headerLabel.text = [NSString stringWithFormat:@"当前语言：%@",self.languageArray[0]];
+        }else{
+            headerLabel.text = [NSString stringWithFormat:@"当前语言：%@",LANGUAGE_NAME];
+        }
     }
     [headerView addSubview:headerLabel];
     return headerView;
@@ -122,12 +150,15 @@
     }
     
     if (indexPath.section == 0) {
+        WJAddressModel * model = self.addressArray[indexPath.row];
+        cell.textLabel.text = model.siteName;
         if (indexPath.row == selectAddress) {
             [cell conFigData:YES];
         }else{
             [cell conFigData:NO];
         }
     }else{
+        cell.textLabel.text = self.languageArray[indexPath.row];
         if (indexPath.row == selectLanguage) {
             [cell conFigData:YES];
         }else{
@@ -141,8 +172,15 @@
 {
     if (indexPath.section == 0) {
         selectAddress = indexPath.row;
+        WJAddressModel * model = self.addressArray[indexPath.row];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:model.siteName forKey:KSitName];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%ld",(long)indexPath.row] forKey:KSitNum];
+        [[NSUserDefaults standardUserDefaults] setObject:model.siteId forKey:KSitID];
     }else{
         selectLanguage = indexPath.row;
+        [[NSUserDefaults standardUserDefaults] setObject:self.languageArray[indexPath.row] forKey:KLanguageName];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%ld",(long)indexPath.row] forKey:KLanguageNum];
     }
     [self.addressTableView reloadData];
 }
@@ -168,11 +206,12 @@
     return _siteListManager;
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSMutableArray *)languageArray
+{
+    if (_languageArray == nil) {
+        _languageArray = [[NSMutableArray alloc]initWithArray:@[@"中文",@"英文",@"韩文",@"日文",@"俄文",@"希腊文"]];
+    }
+    return _languageArray;
 }
-
 
 @end

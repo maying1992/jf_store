@@ -52,7 +52,7 @@
 #pragma mark - APIManager Methods
 - (NSString *)methodName
 {
-    return @"/site/list";
+    return @"selectSiteInfo";
 }
 
 - (NSString *)serviceType

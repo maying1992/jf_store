@@ -94,6 +94,8 @@
 		6D52D6B51EF50AA000396BBF /* APIGoodsDetailsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52D6B41EF50AA000396BBF /* APIGoodsDetailsManager.m */; };
 		6D52D6B81EF50B7700396BBF /* WJGoodsDetailReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52D6B71EF50B7700396BBF /* WJGoodsDetailReformer.m */; };
 		6D52D6BB1EF50BD200396BBF /* WJGoodsDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52D6BA1EF50BD200396BBF /* WJGoodsDetailModel.m */; };
+		6D52D6BE1EF510D800396BBF /* WJAddressReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52D6BD1EF510D800396BBF /* WJAddressReformer.m */; };
+		6D52D6C11EF510FE00396BBF /* WJAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52D6C01EF510FE00396BBF /* WJAddressModel.m */; };
 		6D5D3FB51ECDACA900F26417 /* APISiteListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */; };
 		6D680C721EDEC28100FFFC2F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D680C741EDEC28100FFFC2F /* InfoPlist.strings */; };
 		6D680C7D1EDEC35F00FFFC2F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D680C7F1EDEC35F00FFFC2F /* Localizable.strings */; };
@@ -521,6 +523,10 @@
 		6D52D6B71EF50B7700396BBF /* WJGoodsDetailReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJGoodsDetailReformer.m; sourceTree = "<group>"; };
 		6D52D6B91EF50BD200396BBF /* WJGoodsDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJGoodsDetailModel.h; sourceTree = "<group>"; };
 		6D52D6BA1EF50BD200396BBF /* WJGoodsDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJGoodsDetailModel.m; sourceTree = "<group>"; };
+		6D52D6BC1EF510D800396BBF /* WJAddressReformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJAddressReformer.h; sourceTree = "<group>"; };
+		6D52D6BD1EF510D800396BBF /* WJAddressReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJAddressReformer.m; sourceTree = "<group>"; };
+		6D52D6BF1EF510FE00396BBF /* WJAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJAddressModel.h; sourceTree = "<group>"; };
+		6D52D6C01EF510FE00396BBF /* WJAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJAddressModel.m; sourceTree = "<group>"; };
 		6D5D3FB31ECDACA900F26417 /* APISiteListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APISiteListManager.h; sourceTree = "<group>"; };
 		6D5D3FB41ECDACA900F26417 /* APISiteListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APISiteListManager.m; sourceTree = "<group>"; };
 		6D680C5F1EDEB83F00FFFC2F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -1226,6 +1232,8 @@
 			children = (
 				6D3A37021EEF93A100F5767A /* WJHomeReformer.h */,
 				6D3A37031EEF93A100F5767A /* WJHomeReformer.m */,
+				6D52D6BC1EF510D800396BBF /* WJAddressReformer.h */,
+				6D52D6BD1EF510D800396BBF /* WJAddressReformer.m */,
 				6DCFFE0F1EEAA6BD00D96C6D /* WJGoodsListReformer.h */,
 				6DCFFE101EEAA6BD00D96C6D /* WJGoodsListReformer.m */,
 				6D52C8D91EF3EFD80062D38B /* WJGoodsPlateReformer.h */,
@@ -1247,6 +1255,8 @@
 			children = (
 				6DCE02DB1EC0602500217E7A /* WJHotKeysModel.h */,
 				6DCE02DC1EC0602500217E7A /* WJHotKeysModel.m */,
+				6D52D6BF1EF510FE00396BBF /* WJAddressModel.h */,
+				6D52D6C01EF510FE00396BBF /* WJAddressModel.m */,
 				6DCFFE121EEAA78D00D96C6D /* WJGoodsModel.h */,
 				6DCFFE131EEAA78D00D96C6D /* WJGoodsModel.m */,
 				6D3A37051EEFE0F300F5767A /* WJBannerModel.h */,
@@ -3038,6 +3048,7 @@
 				B47826181ED59FF1002267A6 /* WJPaymentModel.m in Sources */,
 				B459DA071EBDB15400F3748B /* WJCategoryView.m in Sources */,
 				6D52C8CC1EF3DE350062D38B /* WJPrizeResultListReformer.m in Sources */,
+				6D52D6C11EF510FE00396BBF /* WJAddressModel.m in Sources */,
 				B40EF4391ECC330500DDE49F /* WJConsumerActivateViewController.m in Sources */,
 				B45218871EB9F3D0009E9E40 /* WJSegmentedView.m in Sources */,
 				B4429BC91ECD81F900A87C38 /* WJIndividualOrderDetailViewController.m in Sources */,
@@ -3085,6 +3096,7 @@
 				B45218D31EBB2AE6009E9E40 /* WJPasswordSettingViewController.m in Sources */,
 				6D5D3FB51ECDACA900F26417 /* APISiteListManager.m in Sources */,
 				B478261E1ED68C4E002267A6 /* WJOnLinePayViewController.m in Sources */,
+				6D52D6BE1EF510D800396BBF /* WJAddressReformer.m in Sources */,
 				B45218FF1EBC16DA009E9E40 /* WJMyQrCodeViewController.m in Sources */,
 				B47DA0B21ECEEE5B0038D7E2 /* WJShareIntegralViewController.m in Sources */,
 				6D0EABE71EB326070026B20B /* WJRefreshTableView.m in Sources */,

@@ -36,6 +36,8 @@
 
 #define USER_Token [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation][@"token"]
 #define USER_ID   [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation][@"user_id"]
+#define SITE_ID   [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation][@"site_id"]
+
 #define USER_TEL  [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation][@"contact"]
 #define USER_headPortrait  [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation][@"head_portrait"]
 

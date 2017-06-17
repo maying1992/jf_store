@@ -12,11 +12,12 @@
 @property(nonatomic,assign)NSInteger creditsCount;
 @property(nonatomic,assign)NSInteger friendsCount;
 
-@property(nonatomic,assign)NSInteger shopOrderCount;      //购物订单数量
-@property(nonatomic,assign)NSInteger rechargeOrderCount;  //充值订单数量
-@property(nonatomic,assign)NSInteger givingOrderCount;    //赠送订单数量
-@property(nonatomic,assign)NSInteger creditsSwitchCount;  //积分互转数量
-@property(nonatomic,assign)NSInteger dealOrderCount;      //交易大厅数量
+
+@property(nonatomic,assign)NSInteger waitPayOrderCount;
+@property(nonatomic,assign)NSInteger waitDeliverOrderCount;
+@property(nonatomic,assign)NSInteger waitReceiveOrderCount;
+@property(nonatomic,assign)NSInteger finishOrderCount;
+@property(nonatomic,assign)NSInteger refundOrderCount;
 
 @property(nonatomic,assign)NSInteger messageCount;        //消息
 

@@ -14,6 +14,7 @@
 #import "WJWebTableViewCell.h"
 #import "WJLotteryDrawDetailCell.h"
 #import "WJLotteryDrawDetailModel.h"
+#import "APIPrizeNowManager.h"
 
 @interface WJLotteryDrawDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,APIManagerCallBackDelegate,ReloadWebViewDelegate>
 {
@@ -24,6 +25,7 @@
 @property(nonatomic ,strong) UITableView                     * mainTableView;
 @property(nonatomic, strong) SDCycleScrollView               * cycleScrollView;
 @property(nonatomic, strong) APIPrizeGoodsDetailsManager     * prizeGoodsDetailsManager;
+@property(nonatomic, strong) APIPrizeNowManager              * prizeNowManager;
 @property(nonatomic ,strong) WJLotteryDrawDetailModel        * dataModel;
 
 
@@ -51,9 +53,17 @@
     [self.prizeGoodsDetailsManager loadData];
 }
 
+- (void)outputButtonAction
+{
+    [self.prizeNowManager loadData];
+}
+
 #pragma mark - APIManagerCallBackDelegate
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
+    if ([manager isMemberOfClass:[APIPrizeNowManager class]]) {
+        ALERT(@"抽奖成功");
+    }
     self.dataModel = [manager fetchDataWithReformer:[WJLotteryDrawDetailReformer new]];
     [self.mainTableView reloadData];
 }
@@ -190,6 +200,17 @@
     }
     _prizeGoodsDetailsManager.prizeId = self.prizeId;
     return _prizeGoodsDetailsManager;
+}
+
+- (APIPrizeNowManager *)prizeNowManager
+{
+    if (_prizeNowManager == nil) {
+        _prizeNowManager = [[APIPrizeNowManager alloc]init];
+        _prizeNowManager.delegate = self;
+    }
+    _prizeNowManager.prizeId = self.prizeId;
+    _prizeNowManager.count = @"1";
+    return _prizeNowManager;
 }
 
 @end

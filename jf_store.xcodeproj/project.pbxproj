@@ -81,6 +81,9 @@
 		6D3499181EF6632300509BF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3499171EF6632300509BF6 /* Foundation.framework */; };
 		6D34991A1EF6632F00509BF6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3499191EF6632F00509BF6 /* CFNetwork.framework */; };
 		6D34991C1EF6633800509BF6 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D34991B1EF6633800509BF6 /* CoreMotion.framework */; };
+		6D34991F1EF66F1E00509BF6 /* APITradeHallFeeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34991E1EF66F1E00509BF6 /* APITradeHallFeeManager.m */; };
+		6D3499221EF6847500509BF6 /* WJTradeHallfeeReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3499211EF6847500509BF6 /* WJTradeHallfeeReformer.m */; };
+		6D3499251EF684CD00509BF6 /* WJAdmissionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3499241EF684CD00509BF6 /* WJAdmissionModel.m */; };
 		6D34D08C1ED2D0730065202B /* WJTradingHallRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34D08B1ED2D0730065202B /* WJTradingHallRechargeViewController.m */; };
 		6D34D08F1ED2EFC00065202B /* WJTradingHallRechargeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34D08E1ED2EFC00065202B /* WJTradingHallRechargeTableViewCell.m */; };
 		6D34D0921ED2F59D0065202B /* WJTradingHallOutputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34D0911ED2F59D0065202B /* WJTradingHallOutputViewController.m */; };
@@ -522,6 +525,12 @@
 		6D3499171EF6632300509BF6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6D3499191EF6632F00509BF6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		6D34991B1EF6633800509BF6 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		6D34991D1EF66F1E00509BF6 /* APITradeHallFeeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APITradeHallFeeManager.h; path = Classes/Services/APIService/APIManager/APIHomeManager/APITradeHallFeeManager.h; sourceTree = SOURCE_ROOT; };
+		6D34991E1EF66F1E00509BF6 /* APITradeHallFeeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APITradeHallFeeManager.m; path = Classes/Services/APIService/APIManager/APIHomeManager/APITradeHallFeeManager.m; sourceTree = SOURCE_ROOT; };
+		6D3499201EF6847500509BF6 /* WJTradeHallfeeReformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WJTradeHallfeeReformer.h; path = Classes/Services/APIService/APIManager/APIHomeManager/WJTradeHallfeeReformer.h; sourceTree = SOURCE_ROOT; };
+		6D3499211EF6847500509BF6 /* WJTradeHallfeeReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WJTradeHallfeeReformer.m; path = Classes/Services/APIService/APIManager/APIHomeManager/WJTradeHallfeeReformer.m; sourceTree = SOURCE_ROOT; };
+		6D3499231EF684CD00509BF6 /* WJAdmissionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WJAdmissionModel.h; path = Classes/Services/APIService/APIManager/APIHomeManager/WJAdmissionModel.h; sourceTree = SOURCE_ROOT; };
+		6D3499241EF684CD00509BF6 /* WJAdmissionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WJAdmissionModel.m; path = Classes/Services/APIService/APIManager/APIHomeManager/WJAdmissionModel.m; sourceTree = SOURCE_ROOT; };
 		6D34D08A1ED2D0730065202B /* WJTradingHallRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJTradingHallRechargeViewController.h; sourceTree = "<group>"; };
 		6D34D08B1ED2D0730065202B /* WJTradingHallRechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJTradingHallRechargeViewController.m; sourceTree = "<group>"; };
 		6D34D08D1ED2EFC00065202B /* WJTradingHallRechargeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJTradingHallRechargeTableViewCell.h; sourceTree = "<group>"; };
@@ -1572,6 +1581,8 @@
 		6D0EAB711EB324610026B20B /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				6D3499201EF6847500509BF6 /* WJTradeHallfeeReformer.h */,
+				6D3499211EF6847500509BF6 /* WJTradeHallfeeReformer.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1579,6 +1590,8 @@
 		6D0EAB721EB324610026B20B /* Model+ */ = {
 			isa = PBXGroup;
 			children = (
+				6D3499231EF684CD00509BF6 /* WJAdmissionModel.h */,
+				6D3499241EF684CD00509BF6 /* WJAdmissionModel.m */,
 			);
 			path = "Model+";
 			sourceTree = "<group>";
@@ -2207,6 +2220,8 @@
 		6D96DC4A1EB97FEF004EDE7F /* APITradingHallManager */ = {
 			isa = PBXGroup;
 			children = (
+				6D34991D1EF66F1E00509BF6 /* APITradeHallFeeManager.h */,
+				6D34991E1EF66F1E00509BF6 /* APITradeHallFeeManager.m */,
 			);
 			path = APITradingHallManager;
 			sourceTree = "<group>";
@@ -3219,6 +3234,7 @@
 				6D0EABE21EB326070026B20B /* UILabel+CountHeightAndWidth.m in Sources */,
 				B40EF3DC1EC9597100DDE49F /* WJRechargeCenterViewController.m in Sources */,
 				B45218BE1EBB29DE009E9E40 /* WJForgetPasswordView.m in Sources */,
+				6D3499251EF684CD00509BF6 /* WJAdmissionModel.m in Sources */,
 				B47DA0991ECED7900038D7E2 /* WJOrderListReformer.m in Sources */,
 				6D0EABE81EB326070026B20B /* WJAlertView.m in Sources */,
 				6D0EABE31EB326070026B20B /* AttributedLabel.m in Sources */,
@@ -3266,6 +3282,7 @@
 				B40EF3BC1EC8387D00DDE49F /* WJAlreadyDeliverViewController.m in Sources */,
 				B45218851EB9F3D0009E9E40 /* WJIndivdualMoreCollectionViewCell.m in Sources */,
 				B45218C01EBB29DE009E9E40 /* WJRegisterView.m in Sources */,
+				6D3499221EF6847500509BF6 /* WJTradeHallfeeReformer.m in Sources */,
 				B40EF3D51EC950C800DDE49F /* WJLogisticsModel.m in Sources */,
 				B40EF3B61EC8374100DDE49F /* WJOrderManagerController.m in Sources */,
 				B45218CE1EBB2AB0009E9E40 /* WJForgetPasswordViewController.m in Sources */,
@@ -3365,6 +3382,7 @@
 				B45218F41EBB3267009E9E40 /* WJSqliteBaseManager.m in Sources */,
 				6D3A37041EEF93A100F5767A /* WJHomeReformer.m in Sources */,
 				6D96DC751EB97FEF004EDE7F /* APIProxy.m in Sources */,
+				6D34991F1EF66F1E00509BF6 /* APITradeHallFeeManager.m in Sources */,
 				B4E5B6F31EC4451500F9A7CA /* WJPurchaseOrderDetailModel.m in Sources */,
 				B40EF40A1ECAF35D00DDE49F /* WJRemoveBindingViewController.m in Sources */,
 				B40EF3ED1EC9BC1000DDE49F /* APISetIntegralPasswordManager.m in Sources */,

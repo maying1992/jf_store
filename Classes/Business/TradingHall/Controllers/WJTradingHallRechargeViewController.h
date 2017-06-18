@@ -10,4 +10,6 @@
 
 @interface WJTradingHallRechargeViewController : WJViewController
 
+@property (nonatomic , strong) NSMutableArray       * dataArray;
+
 @end

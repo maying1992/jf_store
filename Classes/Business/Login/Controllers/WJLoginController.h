@@ -10,6 +10,7 @@
 
 typedef enum
 {
+    LoginFromTradingHallView,      //交易大厅进入判断
     LoginFromTabIndividualCenter, //tab个人中心
     LoginFromWebToUserId,        //给H5 userid
 } LoginFrom;

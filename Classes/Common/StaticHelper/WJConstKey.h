@@ -82,8 +82,9 @@
 //通知关键字
 
 #define kNoLogin                    @"noLogin"                  //token失效
-#define kTabCustomVCResponse        @"tabCustomVCResponse"      //tab定制页面刷新
-#define kTabCustomVCGoOutVC         @"TabCustomVCGoOutVC"       //tab定制页面退出
+#define kTraingHallVCResponse       @"TraingHallVCResponse"     //tab交易大厅刷新
+#define KCheckingIsPay              @"CheckingIsPay"            //交易大厅判断
+#define kTraingHallVCGoOutVC        @"kTraingHallVCGoOutVC"     //tab交易大厅退出
 
 #define kTabThirdShopRefresh        @"RefreshThirdShop"         //tab店铺刷新
 #define kTabCategoryRefresh         @"RefreshCategory"          //tab分类刷新

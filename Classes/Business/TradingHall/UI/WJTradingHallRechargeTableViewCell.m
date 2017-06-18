@@ -26,12 +26,13 @@
         self.textLabel.textColor = WJColorMainTitle;
         
         imageIV = [[UIImageView alloc]initForAutoLayout];
-        UIView *bottomLine = [[UIView alloc]initWithFrame:CGRectMake(0, 39, kScreenWidth, 0.5)];
-        bottomLine.backgroundColor = WJColorSeparatorLine1;
         imageIV.image = [UIImage imageNamed:@"language_area_btn_radio button_n"];
         [self.contentView addSubview:imageIV];
-        [self.contentView addConstraints:[imageIV constraintsRightInContainer:12]];
+        [self.contentView addConstraints:[imageIV constraintsRightInContainer:15]];
         [self.contentView addConstraint:[imageIV constraintCenterYInContainer]];
+        
+        UIView *bottomLine = [[UIView alloc]initWithFrame:CGRectMake(0, 44, kScreenWidth, 0.5)];
+        bottomLine.backgroundColor = WJColorSeparatorLine1;
         [self.contentView addSubview:bottomLine];
     }
     return self;

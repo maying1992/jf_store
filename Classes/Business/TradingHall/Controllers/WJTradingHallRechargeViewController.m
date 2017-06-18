@@ -8,13 +8,19 @@
 
 #import "WJTradingHallRechargeViewController.h"
 #import "WJTradingHallRechargeTableViewCell.h"
+#import "WJAdmissionModel.h"
+#import "APITradeHallPaymentManager.h"
 
-@interface WJTradingHallRechargeViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "WeixinPayManager.h"
+#import "AlipayManager.h"
+
+@interface WJTradingHallRechargeViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerParamSourceDelegate>
 {
     NSInteger selectCell;
-
 }
-@property(nonatomic ,strong) UITableView        * mainTableView;
+@property(nonatomic ,strong) UITableView                        * mainTableView;
+@property(nonatomic ,strong) WJAdmissionModel                   * admissionModel;
+@property(nonatomic ,strong) APITradeHallPaymentManager         * tradeHallPaymentManager;
 
 @end
 
@@ -24,10 +30,11 @@
     [super viewDidLoad];
     
     self.title = @"交易大厅";
-    selectCell = 0;
+    selectCell = 3;
     [self navigationSetUp];
     [self UISetUp];
     [self.view addSubview:self.mainTableView];
+    self.admissionModel = self.dataArray[0];
 }
 
 - (void)navigationSetUp
@@ -46,18 +53,49 @@
 -(void)cancelAction
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    if (self.rechargeFrom == TradingHallRechargeFromTradingHallView) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kTraingHallVCGoOutVC object:nil];
+    }
 }
 
 - (void)paymentButtonAction
 {
+    if ([self.admissionModel.admissionType isEqualToString:@"个人"]) {
+        self.tradeHallPaymentManager.feeType = @"1";
+    }else{
+        self.tradeHallPaymentManager.feeType = @"2";
+    }
+    self.tradeHallPaymentManager.payType = NumberToString(selectCell - 2);
+    [self.tradeHallPaymentManager loadData];
     
+}
+
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    NSDictionary * dic = [manager fetchDataWithReformer:nil];
+    if (selectCell - 2 == 1) {
+        [AlipayManager alipayManager].selectPaymentVC = self;
+        [AlipayManager alipayManager].totleCash = dic[@"order_total"];
+        [[AlipayManager alipayManager]callAlipayWithOrderString:dic[@"prepayid"]];
+    }else{
+        [WeixinPayManager WXPayManager].selectPaymentVC = self;
+        [WeixinPayManager WXPayManager].totleCash = dic[@"order_total"];
+        [[WeixinPayManager WXPayManager]callWexinPayWithPrePayid:dic[@"prepayid"]];
+    }
+    
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    NSLog(@"%@",manager.errorMessage);
 }
 
 #pragma mark UITableViewDelegate && UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 5;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -67,23 +105,73 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == 2) {
+        return 10;
+    }
     return 44;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WJTradingHallRechargeTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
-    if (cell == nil) {
-        cell = [[WJTradingHallRechargeTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
-    }
-    if (indexPath.row == 0) {
-        cell.textLabel.text = @"微信支付";
-        [self cellSelect:indexPath.row Cell:cell];
+    if (indexPath.row <= 2) {
+        UITableViewCell     * cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.textLabel.font = WJFont14;
+        cell.textLabel.textColor = WJColorMainTitle;
+        
+        if (indexPath.row == 0) {
+            cell.textLabel.text = @"开通方式";
+            UIView *bottomLine = [[UIView alloc]initWithFrame:CGRectMake(0, 44, kScreenWidth, 0.5)];
+            bottomLine.backgroundColor = WJColorSeparatorLine1;
+            [cell.contentView addSubview:bottomLine];
+            
+            UIImageView * imageIV = [[UIImageView alloc]initForAutoLayout];
+            imageIV.image = [UIImage imageNamed:@"icon_arrow_right"];
+            [cell.contentView addSubview:imageIV];
+            [cell.contentView addConstraints:[imageIV constraintsRightInContainer:12]];
+            [cell.contentView addConstraint:[imageIV constraintCenterYInContainer]];
+            
+            UILabel     * rightLabel = [[UILabel alloc]initForAutoLayout];
+            rightLabel.font = WJFont14;
+            rightLabel.textColor = WJColorMainTitle;
+            rightLabel.text = self.admissionModel.admissionType;
+            [cell.contentView addSubview:rightLabel];
+            [cell.contentView addConstraints:[rightLabel constraintsRight:10 FromView:imageIV]];
+            [cell.contentView addConstraint:[rightLabel constraintCenterYInContainer]];
+            
+        }else if (indexPath.row == 1){
+            cell.textLabel.text = @"金额";
+            UIView *bottomLine = [[UIView alloc]initWithFrame:CGRectMake(0, 44, kScreenWidth, 0.5)];
+            bottomLine.backgroundColor = WJColorSeparatorLine1;
+            [cell.contentView addSubview:bottomLine];
+            
+            UILabel     * rightLabel = [[UILabel alloc]initForAutoLayout];
+            rightLabel.font = WJFont14;
+            rightLabel.textColor = WJColorMainTitle;
+            rightLabel.text = [NSString stringWithFormat:@"%@元/季",self.admissionModel.admissionMoney];
+            [cell.contentView addSubview:rightLabel];
+            [cell.contentView addConstraints:[rightLabel constraintsRightInContainer:15]];
+            [cell.contentView addConstraint:[rightLabel constraintCenterYInContainer]];
+            
+        }else{
+            cell.backgroundColor = WJColorViewBg;
+        }
+        return cell;
+        
     }else{
-        cell.textLabel.text = @"支付宝支付";
-        [self cellSelect:indexPath.row Cell:cell];
+        WJTradingHallRechargeTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"WJTradingHallRechargeTableViewCell"];
+        if (cell == nil) {
+            cell = [[WJTradingHallRechargeTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WJTradingHallRechargeTableViewCell"];
+        }
+        if (indexPath.row == 3) {
+            cell.textLabel.text = @"支付宝支付";
+            [self cellSelect:indexPath.row Cell:cell];
+        }else{
+            cell.textLabel.text = @"微信支付";
+            [self cellSelect:indexPath.row Cell:cell];
+        }
+        return cell;
     }
-    return cell;
 }
 
 - (void)cellSelect:(NSInteger )indexPathRow Cell:(WJTradingHallRechargeTableViewCell *)cell
@@ -97,15 +185,41 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    selectCell = indexPath.row;
-    [self.mainTableView reloadData];
+    if (indexPath.row == 0) {
+        [self alertChoose];
+    }
+    if (indexPath.row > 2) {
+        selectCell = indexPath.row;
+        [self.mainTableView reloadData];
+    }
+}
+
+
+- (void)alertChoose
+{
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:  UIAlertControllerStyleActionSheet];
+    for (WJAdmissionModel *model in self.dataArray) {
+        [alert addAction:[UIAlertAction actionWithTitle:model.admissionType style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            for(WJAdmissionModel *model in self.dataArray) {
+                if ([action.title isEqualToString:model.admissionType]) {
+                    self.admissionModel = model;
+                    [self.mainTableView reloadData];
+                }
+            }
+        }]];
+    }
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:nil]];
+    [self presentViewController:alert animated:true completion:nil];
 }
 
 - (UITableView *)mainTableView{
     if (_mainTableView == nil) {
-        _mainTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44 + 10, kScreenWidth, kScreenHeight -kNavBarAndStatBarHeight - 88 - 10) style:UITableViewStylePlain];
+        _mainTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 44*4 + 10) style:UITableViewStylePlain];
         _mainTableView.delegate = self;
         _mainTableView.dataSource = self;
+        _mainTableView.bounces = NO;
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _mainTableView;
@@ -114,21 +228,21 @@
 
 - (void)UISetUp
 {
-    UILabel * topLabel= [[UILabel alloc]initForAutoLayout];
-    topLabel.backgroundColor = WJColorWhite;
-    NSString * textString = @"100元/季";
-    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:textString];
-    NSUInteger length = [textString length];
-    
-    NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-    style.firstLineHeadIndent = 15;//距离左边
-    [attrString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, length)];
-    [attrString addAttribute:NSFontAttributeName value:WJFont14 range:NSMakeRange(0, length)];
-    [attrString addAttribute:NSForegroundColorAttributeName value:WJColorDardGray3 range:NSMakeRange(0, length)];
-    topLabel.attributedText = attrString;
-    [self.view addSubview:topLabel];
-    [self.view addConstraints:[topLabel constraintsSize:CGSizeMake(kScreenWidth, 44)]];
-    [self.view addConstraints:[topLabel constraintsAssignTop]];
+//    UILabel * topLabel= [[UILabel alloc]initForAutoLayout];
+//    topLabel.backgroundColor = WJColorWhite;
+//    NSString * textString = @"100元/季";
+//    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:textString];
+//    NSUInteger length = [textString length];
+//    
+//    NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+//    style.firstLineHeadIndent = 15;//距离左边
+//    [attrString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, length)];
+//    [attrString addAttribute:NSFontAttributeName value:WJFont14 range:NSMakeRange(0, length)];
+//    [attrString addAttribute:NSForegroundColorAttributeName value:WJColorDardGray3 range:NSMakeRange(0, length)];
+//    topLabel.attributedText = attrString;
+//    [self.view addSubview:topLabel];
+//    [self.view addConstraints:[topLabel constraintsSize:CGSizeMake(kScreenWidth, 44)]];
+//    [self.view addConstraints:[topLabel constraintsAssignTop]];
     
     UIButton * paymentButton = [UIButton buttonWithType:UIButtonTypeCustom];
     paymentButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -143,9 +257,13 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    
+- (APITradeHallPaymentManager *)tradeHallPaymentManager
+{
+    if (_tradeHallPaymentManager == nil) {
+        _tradeHallPaymentManager = [[APITradeHallPaymentManager alloc]init];
+        _tradeHallPaymentManager.delegate = self;
+    }
+    return _tradeHallPaymentManager;
 }
 
 

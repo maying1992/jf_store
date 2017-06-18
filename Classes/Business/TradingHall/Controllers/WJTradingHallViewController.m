@@ -39,6 +39,7 @@
     [self.view addSubview:self.mainTableView];
     [self navigationSetup];
     [self hiddenBackBarButtonItem];
+    [self tradingHallResponse];
     [kDefaultCenter addObserver:self selector:@selector(tradingHallResponse) name:kTraingHallVCResponse object:nil];
     [kDefaultCenter addObserver:self selector:@selector(checkingIsPay) name:KCheckingIsPay object:nil];
     [kDefaultCenter addObserver:self selector:@selector(goOutVC) name:kTraingHallVCGoOutVC object:nil];
@@ -62,6 +63,7 @@
     if ([dic[@"is_pay"] isEqualToString:@"2"]) {
         WJTradingHallRechargeViewController * rechargeVC = [[WJTradingHallRechargeViewController alloc]init];
         rechargeVC.dataArray = dic[@"admission_list"];
+        rechargeVC.rechargeFrom = TradingHallRechargeFromTradingHallView;
         WJNavigationController *nav = [[WJNavigationController alloc] initWithRootViewController:rechargeVC];
         [self.navigationController presentViewController:nav animated:YES completion:nil];
     }

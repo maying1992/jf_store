@@ -7,7 +7,7 @@
 //
 
 #import "WJTradeHallfeeReformer.h"
-#import "WJAddressModel.h"
+#import "WJAdmissionModel.h"
 
 @implementation WJTradeHallfeeReformer
 - (id)manager:(APIBaseManager *)manager reformData:(id)data
@@ -16,7 +16,7 @@
 
     NSMutableArray  * array = [NSMutableArray array];
     for (NSDictionary * dic in data[@"admission_list"]) {
-        WJAddressModel * categoryModel = [[WJAddressModel alloc] initWithDic:dic];
+        WJAdmissionModel * categoryModel = [[WJAdmissionModel alloc] initWithDic:dic];
         [array addObject:categoryModel];
     }
     NSString * isPay = ToString(data[@"is_pay"]);

@@ -84,6 +84,7 @@
 		6D34991F1EF66F1E00509BF6 /* APITradeHallFeeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34991E1EF66F1E00509BF6 /* APITradeHallFeeManager.m */; };
 		6D3499221EF6847500509BF6 /* WJTradeHallfeeReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3499211EF6847500509BF6 /* WJTradeHallfeeReformer.m */; };
 		6D3499251EF684CD00509BF6 /* WJAdmissionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3499241EF684CD00509BF6 /* WJAdmissionModel.m */; };
+		6D3499281EF6A11500509BF6 /* APITradeHallPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3499271EF6A11500509BF6 /* APITradeHallPaymentManager.m */; };
 		6D34D08C1ED2D0730065202B /* WJTradingHallRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34D08B1ED2D0730065202B /* WJTradingHallRechargeViewController.m */; };
 		6D34D08F1ED2EFC00065202B /* WJTradingHallRechargeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34D08E1ED2EFC00065202B /* WJTradingHallRechargeTableViewCell.m */; };
 		6D34D0921ED2F59D0065202B /* WJTradingHallOutputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34D0911ED2F59D0065202B /* WJTradingHallOutputViewController.m */; };
@@ -532,6 +533,8 @@
 		6D3499211EF6847500509BF6 /* WJTradeHallfeeReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WJTradeHallfeeReformer.m; path = Classes/Services/APIService/APIManager/APIHomeManager/WJTradeHallfeeReformer.m; sourceTree = SOURCE_ROOT; };
 		6D3499231EF684CD00509BF6 /* WJAdmissionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WJAdmissionModel.h; path = Classes/Services/APIService/APIManager/APIHomeManager/WJAdmissionModel.h; sourceTree = SOURCE_ROOT; };
 		6D3499241EF684CD00509BF6 /* WJAdmissionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WJAdmissionModel.m; path = Classes/Services/APIService/APIManager/APIHomeManager/WJAdmissionModel.m; sourceTree = SOURCE_ROOT; };
+		6D3499261EF6A11500509BF6 /* APITradeHallPaymentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APITradeHallPaymentManager.h; path = Classes/Services/APIService/APIManager/APIHomeManager/APITradeHallPaymentManager.h; sourceTree = SOURCE_ROOT; };
+		6D3499271EF6A11500509BF6 /* APITradeHallPaymentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APITradeHallPaymentManager.m; path = Classes/Services/APIService/APIManager/APIHomeManager/APITradeHallPaymentManager.m; sourceTree = SOURCE_ROOT; };
 		6D34D08A1ED2D0730065202B /* WJTradingHallRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJTradingHallRechargeViewController.h; sourceTree = "<group>"; };
 		6D34D08B1ED2D0730065202B /* WJTradingHallRechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJTradingHallRechargeViewController.m; sourceTree = "<group>"; };
 		6D34D08D1ED2EFC00065202B /* WJTradingHallRechargeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJTradingHallRechargeTableViewCell.h; sourceTree = "<group>"; };
@@ -2225,6 +2228,8 @@
 			children = (
 				6D34991D1EF66F1E00509BF6 /* APITradeHallFeeManager.h */,
 				6D34991E1EF66F1E00509BF6 /* APITradeHallFeeManager.m */,
+				6D3499261EF6A11500509BF6 /* APITradeHallPaymentManager.h */,
+				6D3499271EF6A11500509BF6 /* APITradeHallPaymentManager.m */,
 			);
 			path = APITradingHallManager;
 			sourceTree = "<group>";
@@ -3179,6 +3184,7 @@
 				B45218BF1EBB29DE009E9E40 /* WJLoginView.m in Sources */,
 				B40EF3CD1EC94F1200DDE49F /* WJLogisticsDetailViewController.m in Sources */,
 				B47826241ED80A25002267A6 /* WJPayResultViewController.m in Sources */,
+				6D3499281EF6A11500509BF6 /* APITradeHallPaymentManager.m in Sources */,
 				B47826171ED59FF1002267A6 /* WJMemberModel.m in Sources */,
 				6D96DC981EB98656004EDE7F /* WJSignCreateManager.m in Sources */,
 				B4E5B6CC1EC2C41900F9A7CA /* APIDealAddressManager.m in Sources */,

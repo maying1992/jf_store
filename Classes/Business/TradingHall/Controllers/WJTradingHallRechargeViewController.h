@@ -8,8 +8,15 @@
 
 #import "WJViewController.h"
 
+typedef enum
+{
+    TradingHallRechargeFromTradingHallView,      //交易大厅进入判断
+
+} TradingHallRechargeFrom;
+
 @interface WJTradingHallRechargeViewController : WJViewController
 
-@property (nonatomic , strong) NSMutableArray       * dataArray;
+@property (nonatomic , strong) NSMutableArray               * dataArray;
+@property (nonatomic , assign) TradingHallRechargeFrom        rechargeFrom;
 
 @end

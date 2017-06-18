@@ -25,6 +25,7 @@
 @property(nonatomic,strong)APIUserBindingInfoManager       *userBindingInfoManager;
 @property(nonatomic,strong)APIBindingServiceCenterManager  *bindingServiceCenterManager;
 @property(nonatomic,strong)APIRecommenderInfoManager       *recommenderInfoManager;
+
 @property(nonatomic,strong)NSString                     *name;
 @property(nonatomic,strong)NSString                     *contact;
 @property(nonatomic,strong)NSString                     *serviecStatus;
@@ -46,7 +47,6 @@
     [self.view  addGestureRecognizer:tapGesture];
     
     [self.userBindingInfoManager loadData];
-    
 }
 
 
@@ -99,11 +99,17 @@
         
     } else {
         
-        
         NSDictionary *dic = [manager fetchDataWithReformer:nil];
         
-        nameTF.text = dic[@"name"];
-        phoneTF.text = dic[@"phone"];
+        self.name = dic[@"userName"];
+        self.contact = dic[@"contact"];
+        
+        
+        NSIndexPath *indexPath1=[NSIndexPath indexPathForRow:1 inSection:0];
+        [self.mTb reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath1,nil] withRowAnimation:UITableViewRowAnimationNone];
+        
+        NSIndexPath *indexPath2=[NSIndexPath indexPathForRow:2 inSection:0];
+        [self.mTb reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath2,nil] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
 
@@ -114,12 +120,6 @@
 
 #pragma mark - UITextFieldDelegate
 
-//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-//    
-//
-//    return YES;
-//}
-//
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == bindingServiceCodeTF) {
@@ -127,6 +127,15 @@
 
     }
 
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == bindingServiceCodeTF) {
+        [self.recommenderInfoManager loadData];
+        
+    }
+    return YES;
 }
 
 #pragma mark - UITableViewDelegate/UITableViewDataSource
@@ -181,15 +190,16 @@
         contentTF.clearButtonMode = UITextFieldViewModeWhileEditing;
         bindingServiceCodeTF = contentTF;
         
-        if (self.serviceCode) {
-            
-            contentTF.userInteractionEnabled = NO;
-            contentTF.text = self.serviceCode;
-            
-        } else {
+        if ([self.serviecStatus isEqualToString:@"1"]) {
             
             contentTF.text = @"";
             contentTF.userInteractionEnabled = YES;
+            contentTF.placeholder = @"请输入中心编码";
+            
+        } else {
+            
+            contentTF.userInteractionEnabled = NO;
+            contentTF.text = self.serviceCode;
 
         }
         
@@ -201,14 +211,21 @@
         
         if ([self.serviecStatus isEqualToString:@"1"]) {
             
-            contentTF.userInteractionEnabled = NO;
-            contentTF.text = self.name;
+            if ([self.name isEqualToString:@""]) {
+                contentTF.text = @"";
+                contentTF.userInteractionEnabled = NO;
+                
+            } else {
+                
+                contentTF.text = self.name;
+                contentTF.userInteractionEnabled = NO;
+            }
+
             
         } else {
-            
-            contentTF.text = @"";
-            contentTF.userInteractionEnabled = NO;
 
+            contentTF.userInteractionEnabled = NO;
+            contentTF.text = self.name;
         }
         
     } else  {
@@ -219,11 +236,23 @@
         
         if ([self.serviecStatus isEqualToString:@"1"]) {
             
+            if ([self.contact isEqualToString:@""]) {
+                
+                contentTF.text = @"";
+                contentTF.userInteractionEnabled = NO;
+                
+            } else {
+                
+                contentTF.text = self.contact;
+                contentTF.userInteractionEnabled = NO;
+            }
+
+            
+        } else {
+            
             contentTF.userInteractionEnabled = NO;
             contentTF.text = self.contact;
-        } else {
-            contentTF.text = @"";
-            contentTF.userInteractionEnabled = NO;
+
         }
         
     }

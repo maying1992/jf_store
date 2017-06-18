@@ -113,7 +113,6 @@
     [settingButton setImage:[UIImage imageNamed:@"setting_icon"] forState:UIControlStateNormal];
     [settingButton addTarget:self action:@selector(settingButtonAction) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:settingButton];
-    
 }
 
 -(void)refreshIndividualCenter
@@ -130,7 +129,6 @@
 -(void)loginRefresh
 {
     [self.collectionView reloadData];
-
 }
 
 #pragma mark - APIManagerCallBackDelegate
@@ -546,23 +544,23 @@
                         
                         break;
                         
+//                    case 3:
+//                    {
+//                        if (USER_ID) {
+//                            
+//                            WJShareMemberViewController *shareMemberVC = [[WJShareMemberViewController alloc] init];
+//                            [self.navigationController pushViewController:shareMemberVC animated:YES];
+//                            
+//                        } else {
+//                            
+//                            WJLoginController *loginVC = [[WJLoginController alloc]init];
+//                            WJNavigationController *nav = [[WJNavigationController alloc] initWithRootViewController:loginVC];
+//                            [self.navigationController presentViewController:nav animated:YES completion:nil];
+//                            
+//                        }
+//                    }
+//                        break;
                     case 3:
-                    {
-                        if (USER_ID) {
-                            
-                            WJShareMemberViewController *shareMemberVC = [[WJShareMemberViewController alloc] init];
-                            [self.navigationController pushViewController:shareMemberVC animated:YES];
-                            
-                        } else {
-                            
-                            WJLoginController *loginVC = [[WJLoginController alloc]init];
-                            WJNavigationController *nav = [[WJNavigationController alloc] initWithRootViewController:loginVC];
-                            [self.navigationController presentViewController:nav animated:YES completion:nil];
-                            
-                        }
-                    }
-                        break;
-                    case 4:
                     {
                         WJBindindConsumerServicesCenterViewController *bindindConsumerServicesCenterVC = [[WJBindindConsumerServicesCenterViewController alloc] init];
                         [self.navigationController pushViewController:bindindConsumerServicesCenterVC animated:YES];
@@ -570,7 +568,7 @@
                     }
                         break;
                         
-                    case 5:
+                    case 4:
                     {
                         if (USER_ID) {
                             
@@ -595,7 +593,7 @@
                     }
                         break;
                         
-                        case 6:
+                        case 5:
                     {
                         WJSwitchIntegralViewController *switchIntegralVC = [[WJSwitchIntegralViewController alloc] init];
                         [self.navigationController pushViewController:switchIntegralVC animated:YES];
@@ -603,7 +601,7 @@
                     }
                         break;
                         
-                        case 7:
+                        case 6:
                     {
                         if (USER_ID) {
                             
@@ -619,7 +617,7 @@
                     }
                         break;
                         
-                    case 8:
+                    case 7:
                     {
                         if (USER_ID) {
                             
@@ -635,7 +633,7 @@
                     }
                         break;
                         
-                    case 9:
+                    case 8:
                     {
                         WJLotteryQueryViewController *lotteryQueryVC = [[WJLotteryQueryViewController alloc] init];
                         [self.navigationController pushViewController:lotteryQueryVC animated:YES];
@@ -764,7 +762,7 @@
         _dataArray = @[@{@"icon":@"myCollection",@"text":@"个人店铺"},
                        @{@"icon":@"myCoupons",@"text":@"充值中心"},
                        @{@"icon":@"addressManage",@"text":@"我的消息"},
-                       @{@"icon":@"aboutMe",@"text":@"分享会员"},
+//                       @{@"icon":@"aboutMe",@"text":@"分享会员"},
                        @{@"icon":@"aboutMe",@"text":@"绑定消费服务中心"},
                        @{@"icon":@"aboutMe",@"text":@"消费服务中心"},
                        @{@"icon":@"aboutMe",@"text":@"转积分"},

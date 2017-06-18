@@ -13,6 +13,7 @@
 #import "APIServiceCenterConditionManager.h"
 #import "WJServiceCenterConditionModel.h"
 #import "APIOpenServiceCenterManager.h"
+#import "WJAddressViewController.h"
 
 @interface WJConsumerServicesPayViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
 {
@@ -263,6 +264,9 @@
         
         if (indexPath.row == 0) {
             
+            WJAddressViewController *addressVC = [[WJAddressViewController alloc]init];
+            WJNavigationController *nav = [[WJNavigationController alloc] initWithRootViewController:addressVC];
+            [self.navigationController presentViewController:nav animated:YES completion:nil];
         }
         
     } else {

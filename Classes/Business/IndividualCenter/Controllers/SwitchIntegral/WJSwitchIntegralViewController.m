@@ -8,8 +8,9 @@
 
 #import "WJSwitchIntegralViewController.h"
 #import "WJRechargeCenterCell.h"
-
-@interface WJSwitchIntegralViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "APISwitchIntegralManager.h"
+#import "APIRecommenderInfoManager.h"
+@interface WJSwitchIntegralViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     UITextField *userCodeTF;
     UITextField *switchIntegralTF;
@@ -17,6 +18,11 @@
 @property(nonatomic,strong)UITableView              *tableView;
 @property(nonatomic,strong)NSArray                  *listArray;
 @property(nonatomic,assign)NSInteger                selectPayAwayIndex;
+@property(nonatomic,strong)APISwitchIntegralManager *switchIntegralManager;
+@property(nonatomic,strong)APIRecommenderInfoManager *recommendInfoManager;
+@property(nonatomic,strong)NSString                  *recommendName;
+@property(nonatomic,strong)NSString                  *contact;
+
 @end
 
 @implementation WJSwitchIntegralViewController
@@ -49,6 +55,51 @@
     [confirmButton addTarget:self action:@selector(confirmButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:confirmButton];
+}
+
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    if ([manager isKindOfClass:[APIRecommenderInfoManager class]]) {
+        
+        NSDictionary *dic = [manager fetchDataWithReformer:nil];
+        
+        self.recommendName = dic[@"userName"];
+        self.contact = dic[@"contact"];
+        
+        NSIndexPath *indexPath1=[NSIndexPath indexPathForRow:1 inSection:1];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath1,nil] withRowAnimation:UITableViewRowAnimationNone];
+        
+        NSIndexPath *indexPath2=[NSIndexPath indexPathForRow:2 inSection:1];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath2,nil] withRowAnimation:UITableViewRowAnimationNone];
+        
+        
+    } else if([manager isKindOfClass:[APISwitchIntegralManager class]]) {
+        
+        ALERT(@"转积分成功");
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    [[TKAlertCenter defaultCenter]  postAlertWithMessage:manager.errorMessage];
+}
+
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == userCodeTF) {
+        [self.recommendInfoManager loadData];
+    }
+    
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.recommendInfoManager loadData];
+    [self handletapPressGesture];
+    return YES;
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -116,7 +167,7 @@
             
         case 1:
         {
-            UILabel  *nameL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(12), ALD(11), ALD(80), ALD(22))];
+            UILabel  *nameL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(12), ALD(11), ALD(100), ALD(22))];
             nameL.textColor = WJColorDarkGray;
             nameL.font = WJFont14;
             
@@ -124,8 +175,8 @@
             UITextField *contentTF = [[UITextField alloc] initWithFrame:CGRectMake(kScreenWidth - ALD(12) - ALD(200), 0, ALD(200), ALD(44))];
             contentTF.font = WJFont14;
             contentTF.textColor = WJColorDarkGray;
+            contentTF.delegate = self;
             contentTF.textAlignment = NSTextAlignmentRight;
-            [cell.contentView addSubview:contentTF];
             
             [cell.contentView addSubview:nameL];
             [cell.contentView addSubview:contentTF];
@@ -143,14 +194,24 @@
             } else if (indexPath.row == 1) {
                 
                 contentTF.userInteractionEnabled = NO;
-                contentTF.text = @"李明";
+                
+                if (self.recommendName) {
+                    contentTF.text = self.recommendName;
+                } else {
+                    contentTF.text = @"";
+
+                }
                 
             } else if (indexPath.row == 2) {
                 
                 contentTF.userInteractionEnabled = NO;
-                contentTF.text = @"13354284950";
+                if (self.contact) {
+                    contentTF.text = self.contact;
+                } else {
+                    
+                    contentTF.text = @"";
+                }
 
-                
             }  else {
                 
                 contentTF.placeholder = @"请输入转积分";
@@ -190,7 +251,7 @@
         ALERT(@"请输入转积分");
         return;
     }
-    //请求接口
+    [self.switchIntegralManager loadData];
 }
 
 #pragma mark - event
@@ -231,5 +292,26 @@
              ];
 }
 
+-(APISwitchIntegralManager *)switchIntegralManager
+{
+    if (!_switchIntegralManager) {
+        _switchIntegralManager = [[APISwitchIntegralManager alloc] init];
+        _switchIntegralManager.delegate = self;
+    }
+    _switchIntegralManager.inUserId = userCodeTF.text;
+    _switchIntegralManager.integral = switchIntegralTF.text;
 
+    return _switchIntegralManager;
+}
+
+
+-(APIRecommenderInfoManager *)recommendInfoManager
+{
+    if (!_recommendInfoManager) {
+        _recommendInfoManager = [[APIRecommenderInfoManager alloc] init];
+        _recommendInfoManager.delegate = self;
+    }
+    _recommendInfoManager.recommenderCode = userCodeTF.text;
+    return _recommendInfoManager;
+}
 @end

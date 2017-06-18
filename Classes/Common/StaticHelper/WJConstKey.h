@@ -83,7 +83,7 @@
 
 #define kNoLogin                    @"noLogin"                  //token失效
 #define kTraingHallVCResponse       @"TraingHallVCResponse"     //tab交易大厅刷新
-#define KCheckingPayVCResponse      @"CheckingPayVCResponse"    //交易大厅判断
+#define KCheckingIsPay              @"CheckingIsPay"            //交易大厅判断
 #define kTraingHallVCGoOutVC        @"kTraingHallVCGoOutVC"     //tab交易大厅退出
 
 #define kTabThirdShopRefresh        @"RefreshThirdShop"         //tab店铺刷新

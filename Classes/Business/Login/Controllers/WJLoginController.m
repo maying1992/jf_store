@@ -65,7 +65,7 @@
 {
     switch (self.loginFrom) {
         case LoginFromTradingHallView:
-            [[NSNotificationCenter defaultCenter] postNotificationName:kTraingHallVCResponse object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:KCheckingIsPay object:nil];
             break;
             
         default:

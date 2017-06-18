@@ -11,6 +11,7 @@
 #import "WJTradingHallTableViewCell.h"
 #import "WJTabBarController.h"
 #import "APITradeHallFeeManager.h"
+#import "WJTradeHallfeeReformer.h"
 
 #import "WJLoginController.h"
 #import "WJTradingHallRechargeViewController.h"
@@ -38,8 +39,8 @@
     [self.view addSubview:self.mainTableView];
     [self navigationSetup];
     [self hiddenBackBarButtonItem];
-    [kDefaultCenter addObserver:self selector:@selector(tradingHallCResponse) name:KCheckingPayVCResponse object:nil];
-    [kDefaultCenter addObserver:self selector:@selector(checkingIsPay) name:kTraingHallVCResponse object:nil];
+    [kDefaultCenter addObserver:self selector:@selector(tradingHallResponse) name:kTraingHallVCResponse object:nil];
+    [kDefaultCenter addObserver:self selector:@selector(checkingIsPay) name:KCheckingIsPay object:nil];
     [kDefaultCenter addObserver:self selector:@selector(goOutVC) name:kTraingHallVCGoOutVC object:nil];
 
 }
@@ -57,8 +58,13 @@
 #pragma mark - APIManagerCallBackDelegate
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
-    NSDictionary * dic = [manager fetchDataWithReformer:nil];
-    
+    NSDictionary * dic = [manager fetchDataWithReformer:[WJTradeHallfeeReformer new]];
+    if ([dic[@"is_pay"] isEqualToString:@"2"]) {
+        WJTradingHallRechargeViewController * rechargeVC = [[WJTradingHallRechargeViewController alloc]init];
+        rechargeVC.dataArray = dic[@"admission_list"];
+        WJNavigationController *nav = [[WJNavigationController alloc] initWithRootViewController:rechargeVC];
+        [self.navigationController presentViewController:nav animated:YES completion:nil];
+    }
 }
 
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager
@@ -68,8 +74,9 @@
 
 #pragma mark - BUtton Action
 
-- (void)tradingHallCResponse
+- (void)tradingHallResponse
 {
+    NSLog(@"1111");
     if (!USER_ID) {
         WJLoginController *loginVC = [[WJLoginController alloc]init];
         loginVC.loginFrom = LoginFromTradingHallView;

@@ -273,6 +273,13 @@
 		B4683FCD1EF6255000339415 /* APIServiceCenterConditionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FCC1EF6255000339415 /* APIServiceCenterConditionManager.m */; };
 		B4683FD01EF6273100339415 /* WJServiceCenterConditionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FCF1EF6273100339415 /* WJServiceCenterConditionModel.m */; };
 		B4683FD31EF62E6000339415 /* APIOpenServiceCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FD21EF62E6000339415 /* APIOpenServiceCenterManager.m */; };
+		B4683FD61EF64FA000339415 /* APIOrderDetailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FD51EF64FA000339415 /* APIOrderDetailManager.m */; };
+		B4683FD91EF6550A00339415 /* WJOrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FD81EF6550A00339415 /* WJOrderDetailModel.m */; };
+		B4683FDC1EF6576E00339415 /* WJShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FDB1EF6576E00339415 /* WJShopModel.m */; };
+		B4683FDF1EF65C8C00339415 /* WJOrderDetailReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FDE1EF65C8C00339415 /* WJOrderDetailReformer.m */; };
+		B4683FE21EF665C800339415 /* WJRefundOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FE11EF665C800339415 /* WJRefundOrderDetailViewController.m */; };
+		B4683FE51EF66F0000339415 /* APIQueryBondManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FE41EF66F0000339415 /* APIQueryBondManager.m */; };
+		B4683FE81EF675A900339415 /* APIExchangeBondManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FE71EF675A900339415 /* APIExchangeBondManager.m */; };
 		B47825E31ED3D5A5002267A6 /* WJPassView.m in Sources */ = {isa = PBXBuildFile; fileRef = B47825E21ED3D5A5002267A6 /* WJPassView.m */; };
 		B47825E91ED4292F002267A6 /* WJSysContactsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B47825E81ED4292F002267A6 /* WJSysContactsManager.m */; };
 		B47825EC1ED44735002267A6 /* WJProductEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47825EB1ED44735002267A6 /* WJProductEditViewController.m */; };
@@ -916,6 +923,20 @@
 		B4683FCF1EF6273100339415 /* WJServiceCenterConditionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJServiceCenterConditionModel.m; sourceTree = "<group>"; };
 		B4683FD11EF62E6000339415 /* APIOpenServiceCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIOpenServiceCenterManager.h; sourceTree = "<group>"; };
 		B4683FD21EF62E6000339415 /* APIOpenServiceCenterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIOpenServiceCenterManager.m; sourceTree = "<group>"; };
+		B4683FD41EF64FA000339415 /* APIOrderDetailManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIOrderDetailManager.h; sourceTree = "<group>"; };
+		B4683FD51EF64FA000339415 /* APIOrderDetailManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIOrderDetailManager.m; sourceTree = "<group>"; };
+		B4683FD71EF6550A00339415 /* WJOrderDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJOrderDetailModel.h; sourceTree = "<group>"; };
+		B4683FD81EF6550A00339415 /* WJOrderDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJOrderDetailModel.m; sourceTree = "<group>"; };
+		B4683FDA1EF6576E00339415 /* WJShopModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJShopModel.h; sourceTree = "<group>"; };
+		B4683FDB1EF6576E00339415 /* WJShopModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJShopModel.m; sourceTree = "<group>"; };
+		B4683FDD1EF65C8C00339415 /* WJOrderDetailReformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJOrderDetailReformer.h; sourceTree = "<group>"; };
+		B4683FDE1EF65C8C00339415 /* WJOrderDetailReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJOrderDetailReformer.m; sourceTree = "<group>"; };
+		B4683FE01EF665C800339415 /* WJRefundOrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJRefundOrderDetailViewController.h; sourceTree = "<group>"; };
+		B4683FE11EF665C800339415 /* WJRefundOrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJRefundOrderDetailViewController.m; sourceTree = "<group>"; };
+		B4683FE31EF66F0000339415 /* APIQueryBondManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIQueryBondManager.h; sourceTree = "<group>"; };
+		B4683FE41EF66F0000339415 /* APIQueryBondManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIQueryBondManager.m; sourceTree = "<group>"; };
+		B4683FE61EF675A900339415 /* APIExchangeBondManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIExchangeBondManager.h; sourceTree = "<group>"; };
+		B4683FE71EF675A900339415 /* APIExchangeBondManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIExchangeBondManager.m; sourceTree = "<group>"; };
 		B47825E11ED3D5A5002267A6 /* WJPassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJPassView.h; sourceTree = "<group>"; };
 		B47825E21ED3D5A5002267A6 /* WJPassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJPassView.m; sourceTree = "<group>"; };
 		B47825E71ED4292F002267A6 /* WJSysContactsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WJSysContactsManager.h; path = ../../Business/IndividualCenter/Controllers/Goodfriends/WJSysContactsManager.h; sourceTree = "<group>"; };
@@ -1373,6 +1394,8 @@
 				B4E5B6E91EC30BE500F9A7CA /* WJMyDeliveryAddressReformer.m */,
 				B47DA0971ECED7900038D7E2 /* WJOrderListReformer.h */,
 				B47DA0981ECED7900038D7E2 /* WJOrderListReformer.m */,
+				B4683FDD1EF65C8C00339415 /* WJOrderDetailReformer.h */,
+				B4683FDE1EF65C8C00339415 /* WJOrderDetailReformer.m */,
 				B4683FC51EF55F0700339415 /* WJIntegralListReformer.h */,
 				B4683FC61EF55F0700339415 /* WJIntegralListReformer.m */,
 			);
@@ -2227,6 +2250,10 @@
 				B47DA0951ECED68D0038D7E2 /* WJIndividualOrderListModel.m */,
 				B47DA0B91ED2B4040038D7E2 /* WJOrderConfirmModel.h */,
 				B47DA0BA1ED2B4040038D7E2 /* WJOrderConfirmModel.m */,
+				B4683FD71EF6550A00339415 /* WJOrderDetailModel.h */,
+				B4683FD81EF6550A00339415 /* WJOrderDetailModel.m */,
+				B4683FDA1EF6576E00339415 /* WJShopModel.h */,
+				B4683FDB1EF6576E00339415 /* WJShopModel.m */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -2479,6 +2506,8 @@
 				B4429BCB1ECD83F900A87C38 /* WJIndividualAllOrderViewController.m */,
 				B4429BC71ECD81F900A87C38 /* WJIndividualOrderDetailViewController.h */,
 				B4429BC81ECD81F900A87C38 /* WJIndividualOrderDetailViewController.m */,
+				B4683FE01EF665C800339415 /* WJRefundOrderDetailViewController.h */,
+				B4683FE11EF665C800339415 /* WJRefundOrderDetailViewController.m */,
 				B47DA0B61ED2B2C20038D7E2 /* WJOrderConfirmController.h */,
 				B47DA0B71ED2B2C20038D7E2 /* WJOrderConfirmController.m */,
 				B478261C1ED68C4E002267A6 /* WJOnLinePayViewController.h */,
@@ -2686,6 +2715,12 @@
 				B4683FCC1EF6255000339415 /* APIServiceCenterConditionManager.m */,
 				B4683FD11EF62E6000339415 /* APIOpenServiceCenterManager.h */,
 				B4683FD21EF62E6000339415 /* APIOpenServiceCenterManager.m */,
+				B4683FD41EF64FA000339415 /* APIOrderDetailManager.h */,
+				B4683FD51EF64FA000339415 /* APIOrderDetailManager.m */,
+				B4683FE31EF66F0000339415 /* APIQueryBondManager.h */,
+				B4683FE41EF66F0000339415 /* APIQueryBondManager.m */,
+				B4683FE61EF675A900339415 /* APIExchangeBondManager.h */,
+				B4683FE71EF675A900339415 /* APIExchangeBondManager.m */,
 			);
 			path = APIIndividualManager;
 			sourceTree = "<group>";
@@ -3077,6 +3112,7 @@
 				B47826271ED91915002267A6 /* WJIntegralActivateViewController.m in Sources */,
 				B452190C1EBC33AB009E9E40 /* WJPurchaseOrderCell.m in Sources */,
 				B45218E61EBB308D009E9E40 /* BaseDBModel.m in Sources */,
+				B4683FDF1EF65C8C00339415 /* WJOrderDetailReformer.m in Sources */,
 				B40EF4151ECAFDA300DDE49F /* WJShareMemberViewController.m in Sources */,
 				6D52D6C71EF5510D00396BBF /* WJChooseGoodsSizeCell.m in Sources */,
 				B459DA011EBD782400F3748B /* WJMyDeliveryAddressCell.m in Sources */,
@@ -3117,6 +3153,7 @@
 				B459D9FB1EBD767C00F3748B /* WJMyDeliveryAddressViewController.m in Sources */,
 				B40EF3B91EC8380F00DDE49F /* WJRefundOrderViewController.m in Sources */,
 				B45219121EBC6E4B009E9E40 /* APIRecommenderInfoManager.m in Sources */,
+				B4683FDC1EF6576E00339415 /* WJShopModel.m in Sources */,
 				B40EF4431ECC464600DDE49F /* WJBindindConsumerServicesCenterViewController.m in Sources */,
 				B47826181ED59FF1002267A6 /* WJPaymentModel.m in Sources */,
 				B459DA071EBDB15400F3748B /* WJCategoryView.m in Sources */,
@@ -3142,6 +3179,8 @@
 				6D27CC0F1ECC53C800BC6C97 /* WJCategoryCollectionViewCell.m in Sources */,
 				B47DA09C1ECEDA300038D7E2 /* WJForgetIntegralPasswordViewController.m in Sources */,
 				6DCB8B841EF257DD009760F8 /* APIBindPersonalInfoManager.m in Sources */,
+				B4683FD61EF64FA000339415 /* APIOrderDetailManager.m in Sources */,
+				B4683FD91EF6550A00339415 /* WJOrderDetailModel.m in Sources */,
 				B47DA0961ECED68D0038D7E2 /* WJIndividualOrderListModel.m in Sources */,
 				6DCFFE0E1EEA854500D96C6D /* APIGoodsListManager.m in Sources */,
 				6D27CC131ECC53C800BC6C97 /* WJClearHistoryTableCell.m in Sources */,
@@ -3164,6 +3203,7 @@
 				B4683FB81EF52F5D00339415 /* APIIndividualOrderManager.m in Sources */,
 				B4E5B6FC1EC47B0800F9A7CA /* APIGetGrCodeManager.m in Sources */,
 				6D0EABE41EB326070026B20B /* DZNSegmentedControl.m in Sources */,
+				B4683FE81EF675A900339415 /* APIExchangeBondManager.m in Sources */,
 				6D52C8E41EF3FE730062D38B /* WJLotteryDrawDetailCell.m in Sources */,
 				B45218C31EBB2A07009E9E40 /* WJBindInformationView.m in Sources */,
 				B4429BDB1ECDADC700A87C38 /* WJLotteryQueryViewController.m in Sources */,
@@ -3184,6 +3224,7 @@
 				B47826151ED59FF1002267A6 /* WJDeliveryAddressModel.m in Sources */,
 				6D0EABF21EB326070026B20B /* WJWKWebViewController.m in Sources */,
 				6D96DC721EB97FEF004EDE7F /* APIRequestGenerator.m in Sources */,
+				B4683FE21EF665C800339415 /* WJRefundOrderDetailViewController.m in Sources */,
 				6D52D6AF1EF4D7D700396BBF /* APIPrizeNowManager.m in Sources */,
 				6D962FB51EE9361F002E8326 /* QQApiManager.m in Sources */,
 				6D0EABE11EB326070026B20B /* NSString+CoculationSize.m in Sources */,
@@ -3194,6 +3235,7 @@
 				6D52D6BB1EF50BD200396BBF /* WJGoodsDetailModel.m in Sources */,
 				B4429BC31ECD7B5500A87C38 /* WJIndividualFinishOrderViewController.m in Sources */,
 				B45218D71EBB2C2B009E9E40 /* WJIndividualInformationController.m in Sources */,
+				B4683FE51EF66F0000339415 /* APIQueryBondManager.m in Sources */,
 				6D96DC791EB97FEF004EDE7F /* APIServiceWanJiKa.m in Sources */,
 				B40EF4191ECB0CFD00DDE49F /* WJMemberView.m in Sources */,
 				6D52C8C31EF3C8C80062D38B /* WJLotteryDrawListModel.m in Sources */,

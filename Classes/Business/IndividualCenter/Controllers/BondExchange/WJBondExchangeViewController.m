@@ -11,7 +11,9 @@
 #import "WJRechargeRedIntegralViewController.h"
 #import "WJSystemAlertView.h"
 #import "WJBondRecycleViewController.h"
-@interface WJBondExchangeViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,WJSystemAlertViewDelegate>
+#import "APIQueryBondManager.h"
+#import "APIExchangeBondManager.h"
+@interface WJBondExchangeViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,WJSystemAlertViewDelegate,APIManagerCallBackDelegate>
 {
     UITextField *userCodeTF;
     UITextField *multifunctionalIntegralTF;
@@ -19,6 +21,15 @@
 }
 @property(nonatomic,strong)UITableView              *tableView;
 @property(nonatomic,strong)NSMutableArray           *listArray;
+@property(nonatomic,strong)APIQueryBondManager      *queryBondManager;
+@property(nonatomic,strong)APIExchangeBondManager   *exchangeBondManager;
+
+@property(nonatomic,strong)NSString                 *currentBond;
+@property(nonatomic,strong)NSString                 *mulIntegral;  //多功能积分
+@property(nonatomic,strong)NSString                 *ratio;        //兑换比例
+@property(nonatomic,strong)NSString                 *exchangeBond; //最多可兑换债券
+
+
 @end
 
 @implementation WJBondExchangeViewController
@@ -31,6 +42,7 @@
     [self UISetup];
     
     [self.view addSubview:self.tableView];
+    [self.queryBondManager loadData];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handletapPressGesture)];
     [self.view  addGestureRecognizer:tapGesture];
@@ -69,6 +81,37 @@
 }
 
 
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    if([manager isKindOfClass:[APIQueryBondManager class]])
+    {
+        NSDictionary *dic = [manager fetchDataWithReformer:nil];
+
+        self.currentBond = dic[@"bond"];
+        self.mulIntegral = dic[@"mulIntegral"];
+        self.ratio = dic[@"ratio"];
+        self.exchangeBond = dic[@"exchange_bond"];
+        
+        [self.tableView reloadData];
+    } else {
+        
+        ALERT(@"兑换成功");
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    [[TKAlertCenter defaultCenter]  postAlertWithMessage:manager.errorMessage];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -101,7 +144,7 @@
     bondL.font = WJFont12;
     
     UILabel *countL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(12), bondL.bottom + ALD(23), kScreenWidth - ALD(24), ALD(20))];
-    countL.text = @"3000张";
+    countL.text = [NSString stringWithFormat:@"%@张",self.currentBond];
     countL.textColor = WJColorWhite;
     countL.textAlignment = NSTextAlignmentLeft;
     countL.font = WJFont45;
@@ -145,6 +188,8 @@
     UILabel *nameL = (UILabel *)[cell.contentView viewWithTag:1001];
     UITextField *contentTF = (UITextField *)[cell.contentView viewWithTag:1002];
 
+    NSDictionary *infoDic = [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation];
+
     
     NSDictionary *dic = self.listArray[indexPath.row];
     nameL.text = dic[@"text"];
@@ -152,20 +197,22 @@
     if (indexPath.row == 0) {
         
         contentTF.userInteractionEnabled = NO;
-        contentTF.text = @"A888888";
+        contentTF.text = infoDic[@"userCode"];
         userCodeTF = contentTF;
         
     } else if (indexPath.row == 1) {
         
-        contentTF.userInteractionEnabled = YES;
-        contentTF.placeholder = @"请输入多功能积分";
+        contentTF.userInteractionEnabled = NO;
+        contentTF.text = [NSString stringWithFormat:@"%ld",[self.mulIntegral integerValue]];
         multifunctionalIntegralTF = contentTF;
+        
 
     } else {
         
-        contentTF.userInteractionEnabled = NO;
+        contentTF.userInteractionEnabled = YES;
+        contentTF.placeholder = @"请输入兑换债券";
         bondTF = contentTF;
-        contentTF.text = [NSString stringWithFormat:@"%ld",[multifunctionalIntegralTF.text integerValue] / 5];
+
     }
     return cell;
 }
@@ -185,8 +232,13 @@
 
 -(void)bondExchangeButtonAction
 {
-    if (!(multifunctionalIntegralTF.text.length > 0)) {
-        ALERT(@"请输入多功能积分");
+    if (!(bondTF.text.length > 0)) {
+        ALERT(@"请输入债券");
+        return;
+    }
+    
+    if ([bondTF.text integerValue] > [self.exchangeBond integerValue]) {
+        ALERT(@"输入债券超过最多可兑换债券");
         return;
     }
     
@@ -199,7 +251,7 @@
 {
     if (buttonIndex == 0) {
         
-        
+        [self.exchangeBondManager loadData];
     }
 }
 
@@ -234,6 +286,25 @@
              @{@"text":@"多功能积分"},
              @{@"text":@"债券"}
              ];
+}
+
+-(APIQueryBondManager *)queryBondManager
+{
+    if (!_queryBondManager) {
+        _queryBondManager = [[APIQueryBondManager alloc] init];
+        _queryBondManager.delegate = self;
+    }
+    return _queryBondManager;
+}
+
+-(APIExchangeBondManager *)exchangeBondManager
+{
+    if (!_exchangeBondManager) {
+        _exchangeBondManager = [[APIExchangeBondManager alloc] init];
+        _exchangeBondManager.delegate = self;
+    }
+    _exchangeBondManager.bond = bondTF.text;
+    return _exchangeBondManager;
 }
 
 

@@ -201,48 +201,48 @@
 
 - (NSMutableArray *)orderArray{
     if (!_orderArray) {
-        //        _orderArray = [NSMutableArray array];
+        _orderArray = [NSMutableArray array];
         
-        WJProductModel *product1 = [[WJProductModel alloc] init];
-        product1.name = @"茶水壶";
-        product1.standardDes = @"43mmx56mm";
-        product1.count = 1;
-        
-        WJProductModel *product2 = [[WJProductModel alloc] init];
-        product2.name = @"电暖壶";
-        product2.standardDes = @"30mmx40mm";
-        product2.count = 1;
-        
-        WJOrderModel *order1 = [[WJOrderModel alloc] init];
-        order1.orderNo = @"7348723249872547";
-        order1.orderStatus = OrderStatusRefunding;
-        order1.freight = @"34积分";
-        order1.PayAmount = @"4323积分";
-        order1.address = @"圣帕特里克节创立于5世纪，是念护神的节特是多少来看发电量时看风景打赏块但是大家阿老KFJDSAFSDFFDSFd电风扇开发";
-        order1.refundReason = @"自愿";
-        order1.remainingRefundTime = @"36小时25分45秒后自动退款";
-        
-        
-        WJOrderModel *order2 = [[WJOrderModel alloc] init];
-        order2.orderNo = @"2348723249872547";
-        order2.orderStatus = OrderStatusRefunding;
-        order2.freight = @"34积分";
-        order2.PayAmount = @"4323积分";
-        order2.address = @"圣帕特里克节创立于5世纪，是念护神的节特是多少来看发电量时看风景打赏块但是大家阿老KFJDSAFSDFFDSFd电风扇开发";
-        order2.refundReason = @"自愿";
-        order2.remainingRefundTime = @"36小时30分10秒后自动退款";
-
-        
-        
-        WJProductModel *product3 = [[WJProductModel alloc] init];
-        product3.name = @"保温杯";
-        product3.standardDes = @"30mmx40mm";
-        product3.count = 1;
-        
-        order1.productList = [NSMutableArray arrayWithObjects:product1,product2 ,nil];
-        order2.productList = [NSMutableArray arrayWithObjects:product3 ,product1,nil];
-        
-        _orderArray = [NSMutableArray arrayWithObjects:order1, order2,nil];
+//        WJProductModel *product1 = [[WJProductModel alloc] init];
+//        product1.name = @"茶水壶";
+//        product1.standardDes = @"43mmx56mm";
+//        product1.count = 1;
+//        
+//        WJProductModel *product2 = [[WJProductModel alloc] init];
+//        product2.name = @"电暖壶";
+//        product2.standardDes = @"30mmx40mm";
+//        product2.count = 1;
+//        
+//        WJOrderModel *order1 = [[WJOrderModel alloc] init];
+//        order1.orderNo = @"7348723249872547";
+//        order1.orderStatus = OrderStatusRefunding;
+//        order1.freight = @"34积分";
+//        order1.PayAmount = @"4323积分";
+//        order1.address = @"圣帕特里克节创立于5世纪，是念护神的节特是多少来看发电量时看风景打赏块但是大家阿老KFJDSAFSDFFDSFd电风扇开发";
+//        order1.refundReason = @"自愿";
+//        order1.remainingRefundTime = @"36小时25分45秒后自动退款";
+//        
+//        
+//        WJOrderModel *order2 = [[WJOrderModel alloc] init];
+//        order2.orderNo = @"2348723249872547";
+//        order2.orderStatus = OrderStatusRefunding;
+//        order2.freight = @"34积分";
+//        order2.PayAmount = @"4323积分";
+//        order2.address = @"圣帕特里克节创立于5世纪，是念护神的节特是多少来看发电量时看风景打赏块但是大家阿老KFJDSAFSDFFDSFd电风扇开发";
+//        order2.refundReason = @"自愿";
+//        order2.remainingRefundTime = @"36小时30分10秒后自动退款";
+//
+//        
+//        
+//        WJProductModel *product3 = [[WJProductModel alloc] init];
+//        product3.name = @"保温杯";
+//        product3.standardDes = @"30mmx40mm";
+//        product3.count = 1;
+//        
+//        order1.productList = [NSMutableArray arrayWithObjects:product1,product2 ,nil];
+//        order2.productList = [NSMutableArray arrayWithObjects:product3 ,product1,nil];
+//        
+//        _orderArray = [NSMutableArray arrayWithObjects:order1, order2,nil];
     }
     return _orderArray;
 }

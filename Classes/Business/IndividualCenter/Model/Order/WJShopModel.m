@@ -1,40 +1,27 @@
 //
-//  WJOrderModel.m
+//  WJShopModel.m
 //  jf_store
 //
-//  Created by reborn on 17/5/3.
+//  Created by maying on 2017/6/18.
 //  Copyright © 2017年 JF. All rights reserved.
 //
 
-#import "WJOrderModel.h"
+#import "WJShopModel.h"
 #import "WJProductModel.h"
-
-@implementation WJOrderModel
+@implementation WJShopModel
 - (id)initWithDic:(NSDictionary *)dic{
     if (self = [super init]) {
         
-        self.orderNo = ToString(dic[@"order_code"]);
-        self.orderNo = ToString(dic[@"order_id"]);
         self.shopName = ToString(dic[@"store_name"]);
+        self.shopId = ToString(dic[@"store_id"]);
+
         self.orderStatus = (OrderStatus)[dic[@"status"] intValue];
         
-        self.PayAmount = ToString(dic[@"order_total"]);
+        self.payPrice = ToString(dic[@"order_price"]);
         self.payIntegral = ToString(dic[@"order_integral"]);
-
-        self.freight = ToString(dic[@"logistics_cost"]);
+    
+        self.freight = ToString(dic[@"logistics_price"]);
         self.freightIntegral = ToString(dic[@"logistics_integral"]);
-        
-        self.totalCount = [dic[@"goods_num"] integerValue];
-
-        self.payType = [dic[@"payType"] integerValue];
-        self.refundReason = ToString(dic[@"cancelReason"]);
-
-
-        self.shopId = ToString(dic[@"store_id"]);
-        self.refundTime = ToString(dic[@"refund_time"]);
-        self.refundId = ToString(dic[@"refund_id"]);
-        self.individualOrderType = (IndividualOrderType)[dic[@"individualOrderType"] intValue];
-        self.remainingRefundTime = ToString(dic[@"remainingRefundTime"]);
 
         
         NSMutableArray * resultsArray  = [NSMutableArray array];

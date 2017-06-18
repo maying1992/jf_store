@@ -9,6 +9,11 @@
 #import "WJChooseGoodsPropertyController.h"
 #import "WJChooseGoodsSizeCell.h"
 #import "WJDigitalSelectorView.h"
+#import "APIPayNowManager.h"
+#import "WJAtrrValueModel.h"
+
+#import "WeixinPayManager.h"
+#import "AlipayManager.h"
 
 @interface WJChooseGoodsPropertyController ()<UITableViewDataSource, UITableViewDelegate,APIManagerCallBackDelegate>
 {
@@ -26,6 +31,7 @@
 @property(nonatomic,strong)UIButton                    *backButton;
 @property(nonatomic,strong)WJChooseGoodsSizeCell       *sizeCell;
 @property(nonatomic,strong)WJChooseGoodsSizeCell       *colorCell;
+@property(nonatomic,strong)APIPayNowManager            *payNowManager;
 
 @end
 
@@ -60,7 +66,23 @@
         ALERT(@"请选择数量");
         return;
     }
+    WJAtrrValueModel *sizeModel = self.sizeArray[sizeTag - 1001];
+    WJAtrrValueModel *colorModel = self.colorArray[colorTag - 1001];
+
     
+    self.payNowManager.attrRelationids = [NSString stringWithFormat:@"%@,%@",colorModel.valueId,sizeModel.valueId];
+    self.payNowManager.storeId = self.storeId;
+//    self.payNowManager.goodsNum = NumberToString(currentCount);
+//    self.payNowManager.goodsID = self.goodsID;
+//    [self.payNowManager loadData];
+    
+//    [AlipayManager alipayManager].selectPaymentVC = self;
+//    [AlipayManager alipayManager].totleCash = @"100";
+//    [[AlipayManager alipayManager]callAlipayWithOrderString:@"timestamp=2016-07-29+16%3A55%3A53&biz_content=%7B%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22total_amount%22%3A%220.1%22%2C%22subject%22%3A%22%E4%BA%A4%E6%98%93%E5%A4%A7%E5%8E%85%E7%BC%B4%E8%B4%B9%22%2C%22notify_url%22%3A%22http%3A%2F%2F139.129.110.82%3A9090%2Fpaymanager%2FtradeHallAsynchronousOrder.do%22%2C%22out_trade_no%22%3A%221073839907961085952%22%7D&sign_type=RSA2&charset=utf-8&method=alipay.trade.app.pay&app_id=2017052507344513&version=1.0&sign=YAkWtjW9ufqaJxUkVy18sT5ctU%2BIq%2BjUHllZEdQA4K9UUv18ezNkjav6HWkpKLNxk5AvFDqoHgalj9lgz95CuFv%2B2E09xvMet3%2FJHkqCY8N6HynN7jxqPHkZDyck5KBDuTPlDom5JnjFii%2BGyvSEaQ1UxXYFnVowecPlIsZyXd%2F8rVjGzqizwo5vVM%2BFHsPHD0%2FaTEc4ZwAscTFCCsCT5I8LWc6VsxE4XoqvuNQIhOhlDjzfqNcQX%2F92wqAa86S%2B563EL6v8HeHXtrbqd3sNDpH%2FU5YLOubWbEyh0n33E6pdZO7GRhBgbdsBvaNVXjHzlDufPElD7x0HVVY7bY2mGw%3D%3D"];
+    
+    [WeixinPayManager WXPayManager].selectPaymentVC = self;
+    [WeixinPayManager WXPayManager].totleCash = @"0.01";
+    [[WeixinPayManager WXPayManager]callWexinPayWithPrePayid:@"wx20170618153412bc00b14c980240237263"];
 }
 
 -(void)backButtonAction
@@ -70,6 +92,17 @@
 }
 
 
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    NSDictionary * dic = [manager fetchDataWithReformer:nil];
+
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    NSLog(@"%@",manager.errorMessage);
+}
 
 #pragma mark - UITableViewDelegate
 
@@ -271,6 +304,14 @@
         button.backgroundColor = WJColorWhite;
         colorTag = 0;
     }
+}
+
+- (APIPayNowManager *)payNowManager{
+    if (_payNowManager == nil) {
+        _payNowManager = [[APIPayNowManager alloc]init];
+        _payNowManager.delegate = self;
+    }
+    return _payNowManager;
 }
 
 

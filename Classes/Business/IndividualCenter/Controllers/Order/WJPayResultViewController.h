@@ -11,4 +11,7 @@
 @interface WJPayResultViewController : WJViewController
 
 @property(nonatomic,assign)BOOL isPaySuccess;
+@property (nonatomic ,strong) NSString          * totleCash;
+
+
 @end

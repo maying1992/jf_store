@@ -8,6 +8,8 @@
 
 #import "WJViewController.h"
 
+//typedef void(^SureButtonBlock)(WJProductModel *model);
+
 typedef NS_ENUM(NSInteger, ChooseGoodsPropertyToController){
     
     ToAddShoppingCart = 0,        //添加到购物车
@@ -21,7 +23,12 @@ typedef NS_ENUM(NSInteger, ChooseGoodsPropertyToController){
 @property(nonatomic,assign)ChooseGoodsPropertyToController toNextController;
 
 @property(nonatomic,assign)BOOL         isFromProductDetail;
+
+@property(nonatomic,strong)NSString            * storeId;
+@property(nonatomic,strong)NSString            * goodsID;
 @property(nonatomic,strong)NSMutableArray      *sizeArray;
 @property(nonatomic,strong)NSMutableArray      *colorArray;
+
+//@property(nonatomic,strong)SureButtonBlock sureButtonBlock;
 
 @end

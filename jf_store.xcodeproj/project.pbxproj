@@ -65,6 +65,7 @@
 		6D27CC251ECC543100BC6C97 /* WJSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D27CC211ECC543100BC6C97 /* WJSearchViewController.m */; };
 		6D27CC281ECC545500BC6C97 /* WJWinnerListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D27CC271ECC545500BC6C97 /* WJWinnerListTableViewCell.m */; };
 		6D27CC2E1ECC674A00BC6C97 /* WJFloatWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D27CC2D1ECC674A00BC6C97 /* WJFloatWindowView.m */; };
+		6D3498E71EF62C7300509BF6 /* WJAtrrValueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3498E61EF62C7300509BF6 /* WJAtrrValueModel.m */; };
 		6D34D08C1ED2D0730065202B /* WJTradingHallRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34D08B1ED2D0730065202B /* WJTradingHallRechargeViewController.m */; };
 		6D34D08F1ED2EFC00065202B /* WJTradingHallRechargeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34D08E1ED2EFC00065202B /* WJTradingHallRechargeTableViewCell.m */; };
 		6D34D0921ED2F59D0065202B /* WJTradingHallOutputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34D0911ED2F59D0065202B /* WJTradingHallOutputViewController.m */; };
@@ -472,6 +473,8 @@
 		6D27CC271ECC545500BC6C97 /* WJWinnerListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWinnerListTableViewCell.m; sourceTree = "<group>"; };
 		6D27CC2C1ECC674A00BC6C97 /* WJFloatWindowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJFloatWindowView.h; sourceTree = "<group>"; };
 		6D27CC2D1ECC674A00BC6C97 /* WJFloatWindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJFloatWindowView.m; sourceTree = "<group>"; };
+		6D3498E51EF62C7300509BF6 /* WJAtrrValueModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJAtrrValueModel.h; sourceTree = "<group>"; };
+		6D3498E61EF62C7300509BF6 /* WJAtrrValueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJAtrrValueModel.m; sourceTree = "<group>"; };
 		6D34D08A1ED2D0730065202B /* WJTradingHallRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJTradingHallRechargeViewController.h; sourceTree = "<group>"; };
 		6D34D08B1ED2D0730065202B /* WJTradingHallRechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJTradingHallRechargeViewController.m; sourceTree = "<group>"; };
 		6D34D08D1ED2EFC00065202B /* WJTradingHallRechargeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJTradingHallRechargeTableViewCell.h; sourceTree = "<group>"; };
@@ -1297,6 +1300,8 @@
 				6D52C8D41EF3E8390062D38B /* WJLotteryDrawDetailModel.m */,
 				6D52D6B91EF50BD200396BBF /* WJGoodsDetailModel.h */,
 				6D52D6BA1EF50BD200396BBF /* WJGoodsDetailModel.m */,
+				6D3498E51EF62C7300509BF6 /* WJAtrrValueModel.h */,
+				6D3498E61EF62C7300509BF6 /* WJAtrrValueModel.m */,
 			);
 			path = "Model+";
 			sourceTree = "<group>";
@@ -3109,6 +3114,7 @@
 				6D96DC891EB980D3004EDE7F /* WJIndividualCenterViewController.m in Sources */,
 				B47825E91ED4292F002267A6 /* WJSysContactsManager.m in Sources */,
 				B40EF3D81EC951F700DDE49F /* WJLogisticsCell.m in Sources */,
+				6D3498E71EF62C7300509BF6 /* WJAtrrValueModel.m in Sources */,
 				6D27CBF41ECC53BC00BC6C97 /* WJTitleButton.m in Sources */,
 				B4429BC61ECD7C2300A87C38 /* WJIndividualRefundOrderViewController.m in Sources */,
 				6D27CC0F1ECC53C800BC6C97 /* WJCategoryCollectionViewCell.m in Sources */,

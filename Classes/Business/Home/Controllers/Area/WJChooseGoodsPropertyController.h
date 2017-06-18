@@ -21,5 +21,7 @@ typedef NS_ENUM(NSInteger, ChooseGoodsPropertyToController){
 @property(nonatomic,assign)ChooseGoodsPropertyToController toNextController;
 
 @property(nonatomic,assign)BOOL         isFromProductDetail;
+@property(nonatomic,strong)NSMutableArray      *sizeArray;
+@property(nonatomic,strong)NSMutableArray      *colorArray;
 
 @end

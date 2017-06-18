@@ -14,6 +14,8 @@
 {
     WJDigitalSelectorView *digitalSelectorView;
     NSInteger currentCount;
+    NSInteger sizeTag;
+    NSInteger colorTag;
 
     BOOL      isFirstChoose;    //是否第一次选择
     BOOL      isFirstChooseSize;//第一次选择类型
@@ -23,6 +25,7 @@
 @property(nonatomic,strong)UIButton                    *sureButton;
 @property(nonatomic,strong)UIButton                    *backButton;
 @property(nonatomic,strong)WJChooseGoodsSizeCell       *sizeCell;
+@property(nonatomic,strong)WJChooseGoodsSizeCell       *colorCell;
 
 @end
 
@@ -45,6 +48,18 @@
 
 - (void)sureButtonAction
 {
+    if (colorTag == 0) {
+        ALERT(@"请选择颜色");
+        return;
+    }
+    if (sizeTag == 0) {
+        ALERT(@"请选择尺码");
+        return;
+    }
+    if (currentCount == 0) {
+        ALERT(@"请选择数量");
+        return;
+    }
     
 }
 
@@ -54,27 +69,31 @@
     [super removeFromParentViewController];
 }
 
+
+
 #pragma mark - UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 7;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-        return 40;
+        return 45;
     }else if (indexPath.row == 1){
         return 25;
     }else if(indexPath.row == 2){
-        return self.sizeCell.height;
+        return self.colorCell.height;
     }else if(indexPath.row == 3){
         return 25;
     }else if (indexPath.row == 4){
         return self.sizeCell.height;
+    }else if(indexPath.row == 5){
+        return 25;
     }else{
-        return 60;
+        return 70;
     }
 }
 
@@ -82,27 +101,26 @@
 {
     if (indexPath.row == 0) {
         return [self creativeTopCellWithTitleString:@"产品规格"];
-        
     }else if (indexPath.row == 1){
         return [self creativeDefaultCellWithTitleString:@"颜色"];
     }else if(indexPath.row == 2){
-        return self.sizeCell;
+        return self.colorCell;
     }else if (indexPath.row == 3){
         return [self creativeDefaultCellWithTitleString:@"尺码"];
     }else if (indexPath.row == 4){
         return self.sizeCell;
+    }else if (indexPath.row == 5){
+        return [self creativeDefaultCellWithTitleString:@"数量"];
     }else{
         UITableViewCell * cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+//        cell.backgroundColor = WJColorCardRed;
         digitalSelectorView = [[WJDigitalSelectorView alloc] initWithFrame:CGRectMake(15, 10, [WJDigitalSelectorView width], [WJDigitalSelectorView height])];
         [digitalSelectorView refeshDigitalSelectorViewWithCount:currentCount];
         
         __weak typeof(self) weakSelf = self;
         [digitalSelectorView setCountChangeBlock:^(BOOL isIncrease) {
-            
             [weakSelf selectViewCountChanged:isIncrease];
-            
         }];
         
         [cell.contentView addSubview:digitalSelectorView];
@@ -146,7 +164,7 @@
     [cell.contentView addSubview:line];
     [cell.contentView addConstraints:[line constraintsSize:CGSizeMake(kScreenWidth - 30, 0.5)]];
     [cell.contentView addConstraints:[line constraintsLeftInContainer:15]];
-    [cell.contentView addConstraints:[line constraintsBottomInContainer:0]];
+    [cell.contentView addConstraints:[line constraintsBottomInContainer:5]];
 
     return cell;
 }
@@ -191,18 +209,68 @@
     return _sureButton;
 }
 
+- (WJChooseGoodsSizeCell *)colorCell
+{
+    if (_colorCell == nil) {
+        _colorCell = [[WJChooseGoodsSizeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ColorCell"];
+        _colorCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [_colorCell addButtonNameList:self.colorArray];
+        
+        for (UIButton *button in _colorCell.buttonList) {
+            [button addTarget:self action:@selector(colorBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
+    }
+    return _colorCell;
+}
+
 - (WJChooseGoodsSizeCell *)sizeCell
 {
     if (_sizeCell == nil) {
         _sizeCell = [[WJChooseGoodsSizeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SizeCell"];
         _sizeCell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        [_sizeCell addButtonNameList:self.sizeListArray];
+        [_sizeCell addButtonNameList:self.sizeArray];
         
         for (UIButton *button in _sizeCell.buttonList) {
             [button addTarget:self action:@selector(sizeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
     return _sizeCell;
+}
+
+- (void)sizeBtnAction:(UIButton *)button
+{
+    for (UIButton *btn in _sizeCell.buttonList) {
+        if (btn != button) {
+            btn.selected = NO;
+        }
+        btn.backgroundColor = WJColorWhite;
+    }
+    button.selected = !button.selected;
+    if (button.selected) {
+        button.backgroundColor = WJColorMainColor;
+        sizeTag = button.tag;
+    }else{
+        button.backgroundColor = WJColorWhite;
+        sizeTag = 0;
+    }
+}
+
+- (void)colorBtnAction:(UIButton *)button
+{
+    for (UIButton *btn in _colorCell.buttonList) {
+        if (btn != button) {
+            btn.selected = NO;
+        }
+        btn.backgroundColor = WJColorWhite;
+    }
+    button.selected = !button.selected;
+    if (button.selected) {
+        button.backgroundColor = WJColorMainColor;
+        colorTag = button.tag;
+    }else{
+        button.backgroundColor = WJColorWhite;
+        colorTag = 0;
+    }
 }
 
 

@@ -8,6 +8,7 @@
 
 #import "WJBondRecycleViewController.h"
 #import "WJSystemAlertView.h"
+#import "APIBondRecyleManager.h"
 
 @interface WJBondRecycleViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,WJSystemAlertViewDelegate>
 {
@@ -16,6 +17,7 @@
 }
 @property(nonatomic,strong)UITableView              *tableView;
 @property(nonatomic,strong)NSMutableArray           *listArray;
+@property(nonatomic,strong)APIBondRecyleManager     *bondRecyleManager;
 @end
 
 @implementation WJBondRecycleViewController
@@ -49,6 +51,21 @@
     [confirmButton addTarget:self action:@selector(confirmButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:confirmButton];
+}
+
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    if([manager isKindOfClass:[APIBondRecyleManager class]])
+    {
+        ALERT(@"回收成功");
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    [[TKAlertCenter defaultCenter]  postAlertWithMessage:manager.errorMessage];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -96,11 +113,12 @@
         [cell.contentView addSubview:nameL];
         [cell.contentView addSubview:contentTF];
         
-        
     }
     UILabel *nameL = (UILabel *)[cell.contentView viewWithTag:1001];
     UITextField *contentTF = (UITextField *)[cell.contentView viewWithTag:1002];
     
+    NSDictionary *infoDic = [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation];
+
     
     NSDictionary *dic = self.listArray[indexPath.row];
     nameL.text = dic[@"text"];
@@ -108,7 +126,7 @@
     if (indexPath.row == 0) {
         
         contentTF.userInteractionEnabled = NO;
-        contentTF.text = @"A888888";
+        contentTF.text = infoDic[@"userCode"];
         userCodeTF = contentTF;
         
     } else {
@@ -131,7 +149,7 @@
 {
     if (buttonIndex == 0) {
         
-        
+        [self.bondRecyleManager loadData];
     }
 }
 
@@ -177,6 +195,16 @@
              @{@"text":@"用户编号"},
              @{@"text":@"债券"}
              ];
+}
+
+-(APIBondRecyleManager *)bondRecyleManager
+{
+    if (!_bondRecyleManager) {
+        _bondRecyleManager = [[APIBondRecyleManager alloc] init];
+        _bondRecyleManager.delegate = self;
+    }
+    _bondRecyleManager.bond = bondTF.text;
+    return _bondRecyleManager;
 }
 
 

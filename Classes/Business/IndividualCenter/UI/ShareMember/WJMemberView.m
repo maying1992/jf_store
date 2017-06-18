@@ -7,7 +7,7 @@
 //
 
 #import "WJMemberView.h"
-
+#import <UIImageView+WebCache.h>
 @interface WJMemberView ()
 {
     UIImageView *avatarImageView;
@@ -80,6 +80,15 @@
         
     }
     return self;
+}
+
+-(void)conFigDataWithModel:(WJMemberModel*)model
+{
+    [avatarImageView sd_setImageWithURL:[NSURL URLWithString:model.headPic] placeholderImage:nil];
+    nameL.text = model.name;
+    countL.text = [NSString stringWithFormat:@"%ld",model.remuneration];
+    friendsCountL.text = [NSString stringWithFormat:@"%ld",model.friendsCount];
+
 }
 
 

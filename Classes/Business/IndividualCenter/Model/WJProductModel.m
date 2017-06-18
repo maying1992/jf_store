@@ -19,7 +19,8 @@
         self.standardDes = ToString(dic[@"attribute"]);
 
         self.productId = ToString(dic[@"goods_id"]);
-        self.salePrice = ToString(dic[@"price"]);
+        
+        
         self.productStatus = [dic[@"goods_status"] integerValue];
         self.brandId   = ToString(dic[@"brand_id"]);
         self.brandName = ToString(dic[@"brand_name"]);
@@ -30,7 +31,6 @@
         self.stock     = [dic[@"goods_number"] integerValue];
         self.logisticsCost = ToString(dic[@"logistics_cost"]);
         
-        self.integral = ToString(dic[@"integral"]);
 
         
 //        NSMutableArray *arr = [NSMutableArray array];

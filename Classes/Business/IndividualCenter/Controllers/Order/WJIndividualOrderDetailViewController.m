@@ -60,11 +60,24 @@
     totalAmountL.font = WJFont13;
     totalAmountL.textAlignment = NSTextAlignmentLeft;
     
+    NSString *totalAmountStr = @"合计：";
+    if (![self.detailModel.orderPrice isEqualToString:@"0"]) {
+        totalAmountStr = [totalAmountStr stringByAppendingFormat:@"%@元",self.detailModel.orderPrice];
+    }
+    if (![self.detailModel.orderIntegral isEqualToString:@"0"]) {
+        if ([totalAmountStr isEqualToString:@"合计："]) {
+            totalAmountStr = [totalAmountStr stringByAppendingFormat:@"%@积分",self.detailModel.orderIntegral];
+        }else{
+            totalAmountStr = [totalAmountStr stringByAppendingFormat:@"+%@积分",self.detailModel.orderIntegral];
+        }
+    }
+    totalAmountL.text = totalAmountStr;
+    
 //    NSString *totalAmountStr = [NSString stringWithFormat:@"合计: %@元%@积分",self.detailModel.totalMoney,self.detailModel.totalIntegral];
 //    totalAmountL.attributedText= [self attributedText:totalAmountStr firstLength:3];
-    [bottomView addSubview:totalAmountL];
+//    [bottomView addSubview:totalAmountL];
     
-    if (self.orderModel.orderStatus == OrderStatusUnfinished) {
+    if (self.detailModel.orderStatus == OrderStatusUnfinished) {
         
         UIButton *payRigthNowButton = [UIButton buttonWithType:UIButtonTypeCustom];
         payRigthNowButton.frame = CGRectMake(bottomView.width - ALD(10) - ALD(80), ALD(10), ALD(80), ALD(30));
@@ -78,7 +91,7 @@
         [bottomView addSubview:payRigthNowButton];
         
         
-    } else if (self.orderModel.orderStatus == OrderStatusClose) {
+    } else if (self.detailModel.orderStatus == OrderStatusClose) {
         
         UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
         deleteButton.frame = CGRectMake(bottomView.width - ALD(10) - ALD(80), ALD(10), ALD(80), ALD(30));
@@ -91,7 +104,7 @@
         [deleteButton addTarget:self action:@selector(deleteButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [bottomView addSubview:deleteButton];
         
-    } else if (self.orderModel.orderStatus == OrderStatusSuccess) {
+    } else if (self.detailModel.orderStatus == OrderStatusSuccess) {
         
         UIButton *logisticsButton = [UIButton buttonWithType:UIButtonTypeCustom];
         logisticsButton.frame = CGRectMake(bottomView.width - ALD(20) - ALD(160), ALD(10), ALD(80), ALD(30));
@@ -117,7 +130,7 @@
         [bottomView addSubview:buyAgainButton];
         
         
-    } else if (self.orderModel.orderStatus == OrderStatusWaitReceive) {
+    } else if (self.detailModel.orderStatus == OrderStatusWaitReceive) {
         
         UIButton *logisticsButton = [UIButton buttonWithType:UIButtonTypeCustom];
         logisticsButton.frame = CGRectMake(bottomView.width - ALD(20) - ALD(160), ALD(10), ALD(80), ALD(30));
@@ -143,7 +156,7 @@
         [finishButton addTarget:self action:@selector(finishButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [bottomView addSubview:finishButton];
         
-    } else if (self.orderModel.orderStatus == OrderStatusWaitDeliver) {
+    } else if (self.detailModel.orderStatus == OrderStatusWaitDeliver) {
         
         UIButton *refundOnlyButton = [UIButton buttonWithType:UIButtonTypeCustom];
         refundOnlyButton.frame = CGRectMake(bottomView.width - ALD(10) - ALD(80), ALD(10), ALD(80), ALD(30));
@@ -156,7 +169,7 @@
         [refundOnlyButton addTarget:self action:@selector(refundOnlyButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [bottomView addSubview:refundOnlyButton];
         
-    }  else if (self.orderModel.orderStatus == OrderStatusApplyRefund) {
+    }  else if (self.detailModel.orderStatus == OrderStatusApplyRefund) {
         
         UIButton *cancelRefundButton = [UIButton buttonWithType:UIButtonTypeCustom];
         cancelRefundButton.frame = CGRectMake(bottomView.width - ALD(10) - ALD(80), ALD(10), ALD(80), ALD(30));
@@ -169,11 +182,11 @@
         [cancelRefundButton addTarget:self action:@selector(cancelRefundButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [bottomView addSubview:cancelRefundButton];
         
-    } else if (self.orderModel.orderStatus == OrderStatusRefunding) {
+    } else if (self.detailModel.orderStatus == OrderStatusRefunding) {
         
         bottomView.hidden = YES;
         
-    } else if (self.orderModel.orderStatus == OrderStatusAlreadyRefund) {
+    } else if (self.detailModel.orderStatus == OrderStatusAlreadyRefund) {
         
         NSString *totalAmountStr = [NSString stringWithFormat:@"退款: %@",@"4324"];
         totalAmountL.attributedText= [self attributedText:totalAmountStr firstLength:3];
@@ -290,7 +303,7 @@
         
         shopNameL.text = self.orderModel.shopName;
         
-        switch (self.orderModel.orderStatus) {
+        switch (self.detailModel.orderStatus) {
             case OrderStatusSuccess:
             {
                 statusL.text = @"完成";
@@ -352,20 +365,51 @@
         
         UILabel *totalMoneyL = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth - ALD(12) - ALD(150), 0, ALD(150), ALD(30))];
         totalMoneyL.textAlignment = NSTextAlignmentRight;
+        totalMoneyL.font = WJFont12;
         [footerView addSubview:totalMoneyL];
         
         
-        NSString *totalMoneyStr = [NSString stringWithFormat:@"商品小计: %@",self.orderModel.PayAmount];
-        totalMoneyL.attributedText= [self attributedText:totalMoneyStr firstLength:5];
+        WJShopModel *shop = self.detailModel.shopList[section - 1];
+        
+        NSString * totalMoneyStr = @"商品小计：";
+        if (![shop.payPrice isEqualToString:@"0"]) {
+            totalMoneyStr = [totalMoneyStr stringByAppendingFormat:@"%@元",shop.payPrice];
+        }
+        if (![shop.payIntegral isEqualToString:@"0"]) {
+            if ([totalMoneyStr isEqualToString:@"商品小计："]) {
+                totalMoneyStr = [totalMoneyStr stringByAppendingFormat:@"%@积分",shop.payIntegral];
+            }else{
+                totalMoneyStr = [totalMoneyStr stringByAppendingFormat:@"+%@积分",shop.payIntegral];
+            }
+        }
+        totalMoneyL.text = totalMoneyStr;
+//        
+//        NSString *totalMoneyStr = [NSString stringWithFormat:@"商品小计: %@",self.orderModel.PayAmount];
+//        totalMoneyL.attributedText= [self attributedText:totalMoneyStr firstLength:5];
         
         
         UILabel *freightL = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth - ALD(12) - ALD(150), totalMoneyL.bottom, ALD(150), ALD(30))];
         freightL.textAlignment = NSTextAlignmentRight;
+        freightL.font = WJFont12;
         [footerView addSubview:freightL];
         
         
-        NSString *freightStr = [NSString stringWithFormat:@"运费: %@",self.orderModel.freight];
-        freightL.attributedText= [self attributedText:freightStr firstLength:3];
+        NSString * freightStr = @"运费：";
+        if (![shop.freight isEqualToString:@"0"]) {
+            freightStr = [freightStr stringByAppendingFormat:@"%@元",shop.freight];
+        }
+        if (![shop.payIntegral isEqualToString:@"0"]) {
+            if ([freightStr isEqualToString:@"运费："]) {
+                freightStr = [freightStr stringByAppendingFormat:@"%@积分",shop.freightIntegral];
+            }else{
+                freightStr = [freightStr stringByAppendingFormat:@"+%@积分",shop.freightIntegral];
+            }
+        }
+        freightL.text = freightStr;
+        
+        
+//        NSString *freightStr = [NSString stringWithFormat:@"运费: %@",self.orderModel.freight];
+//        freightL.attributedText= [self attributedText:freightStr firstLength:3];
         
         return footerView;
     }

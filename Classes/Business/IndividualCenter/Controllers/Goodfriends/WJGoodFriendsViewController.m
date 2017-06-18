@@ -13,12 +13,17 @@
 #import "WJMemberView.h"
 #import "WJSysContactsManager.h"
 #import "APIQueryFriendsListManager.h"
-
+#import "WJFriendsListReformer.h"
+#import "WJFriendListModel.h"
 @interface WJGoodFriendsViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
 {
-    NSMutableArray *dataArray;
+//    NSMutableArray *dataArray;
+
+    BOOL      isHeaderRefresh;
+    BOOL      isFooterRefresh;
 }
 @property(nonatomic,strong)WJRefreshTableView   *tableView;
+@property(nonatomic,strong)NSMutableArray       *dataArray;
 @property(nonatomic,strong)NSMutableArray       *indexArray;        //排序后的出现过的首字母数组
 @property(nonatomic,strong)NSMutableArray       *letterResultArray; //排序好的结果数组
 @property(nonatomic,strong)WJMemberView         *memberView;
@@ -27,6 +32,7 @@
 
 @property(nonatomic,strong)APIQueryFriendsListManager *friendsListManager;
 @property(nonatomic,strong)WJSysContactsManager *contactsManager;
+@property(nonatomic,strong)WJFriendListModel    *friendListModel;
 
 @end
 
@@ -38,52 +44,161 @@
     self.title = @"好友";
     self.isHiddenTabBar = YES;
     
-    [self loadData];
-    
-    self.indexArray = [BMChineseSort IndexWithArray:dataArray Key:@"name"];
-    self.letterResultArray = [BMChineseSort sortObjectArray:dataArray Key:@"name"];
+//    [self loadData];
+//    
+//    self.indexArray = [BMChineseSort IndexWithArray:dataArray Key:@"name"];
+//    self.letterResultArray = [BMChineseSort sortObjectArray:dataArray Key:@"name"];
     
     [self.view addSubview:self.tableView];
     
+    [self requestData];
+
+}
+
+
+#pragma mark - Request
+
+- (void)requestData{
+    
+    if (self.dataArray.count > 0) {
+        [self.dataArray removeAllObjects];
+    }
+    self.friendsListManager.shouldCleanData = YES;
+    self.friendsListManager.firstPageNo = 1;
     [self.friendsListManager loadData];
+}
+
+#pragma mark - WJRefreshTableView Delegate
+
+- (void)startHeadRefreshToDo:(WJRefreshTableView *)tableView
+{
+    if (!isHeaderRefresh && !isFooterRefresh) {
+        isHeaderRefresh = YES;
+        self.friendsListManager.shouldCleanData = YES;
+        [self requestData];
+    }
     
 }
 
-#pragma mark - APIManagerCallBackDelegate
+- (void)startFootRefreshToDo:(WJRefreshTableView *)tableView
+{
+    if (!isFooterRefresh && !isHeaderRefresh) {
+        isFooterRefresh = YES;
+        self.friendsListManager.shouldCleanData = NO;
+        [self.friendsListManager loadData];
+    }
+}
+
+- (void)endGetData:(BOOL)needReloadData{
+    
+    if (isHeaderRefresh) {
+        isHeaderRefresh = NO;
+        [self.tableView endHeadRefresh];
+    }
+    
+    if (isFooterRefresh){
+        isFooterRefresh = NO;
+        [self.tableView endFootFefresh];
+    }
+    
+    if (needReloadData) {
+        [self.tableView reloadData];
+    }
+}
+
+- (void)refreshFooterStatus:(BOOL)status{
+    
+    if (status) {
+        [self.tableView hiddenFooter];
+    } else {
+        [self.tableView showFooter];
+    }
+    
+    if (self.dataArray.count > 0) {
+        self.tableView.tableFooterView = [UIView new];
+        
+    } else {
+        
+        //        self.tableView.tableFooterView = nil;
+    }
+    
+}
+
+
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
-    if([manager isKindOfClass:[APIQueryFriendsListManager class]])
-    {
-
+    if ([manager isKindOfClass:[APIQueryFriendsListManager class]]) {
+        
+        self.friendListModel = [manager fetchDataWithReformer:[[WJFriendsListReformer alloc] init]];
+        
+        if (self.dataArray.count == 0) {
+            
+            self.dataArray =  self.friendListModel.friendsList;
+            
+        } else {
+            
+            if (self.friendsListManager.firstPageNo < self.friendListModel.totalPage) {
+                
+                [self.dataArray addObjectsFromArray: self.friendListModel.friendsList];
+            }
+        }
+        
+        self.indexArray = [BMChineseSort IndexWithArray:self.dataArray Key:@"name"];
+        self.letterResultArray = [BMChineseSort sortObjectArray:self.dataArray Key:@"name"];
+        
+        [self endGetData:YES];
+        [self refreshFooterStatus:manager.hadGotAllData];
     }
 }
 
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager
 {
-    
-}
-
--(void)loadData{
-    NSArray *stringsToSort=[NSArray arrayWithObjects:
-                            @"安迪",@"阿兰",
-                            @"包贝尔",@"白凡",
-                            @"蔡国庆",@"蔡明",
-                            @"弟弟",@"弟子",
-                            @"李白",@"张三",
-                            @"重庆",@"重量",
-                            @"调节",@"调用",
-                            @"小白",@"小明",@"千珏",
-                            @"黄家驹", @"鼠标",@"hello",@"多美丽",@"肯德基",
-                            nil];
-    
-    dataArray = [[NSMutableArray alloc] initWithCapacity:0];
-    for (int i = 0; i<[stringsToSort count]; i++) {
-        WJMemberModel *model = [[WJMemberModel alloc] init];
-        model.name = [stringsToSort objectAtIndex:i];
-        model.number = i;
-        [dataArray addObject:model];
+    if ([manager isKindOfClass:[APIQueryFriendsListManager class]]) {
+        
+        if (manager.errorType == APIManagerErrorTypeNoData) {
+            [self refreshFooterStatus:YES];
+            
+            if (isHeaderRefresh) {
+                if (self.dataArray.count > 0) {
+                    [self.dataArray removeAllObjects];
+                    
+                }
+                [self endGetData:YES];
+                return;
+            }
+            [self endGetData:NO];
+            
+        } else {
+            
+            [self refreshFooterStatus:self.friendsListManager.hadGotAllData];
+            [self endGetData:NO];
+            
+        }
+        
     }
 }
+
+//-(void)loadData{
+//    NSArray *stringsToSort=[NSArray arrayWithObjects:
+//                            @"安迪",@"阿兰",
+//                            @"包贝尔",@"白凡",
+//                            @"蔡国庆",@"蔡明",
+//                            @"弟弟",@"弟子",
+//                            @"李白",@"张三",
+//                            @"重庆",@"重量",
+//                            @"调节",@"调用",
+//                            @"小白",@"小明",@"千珏",
+//                            @"黄家驹", @"鼠标",@"hello",@"多美丽",@"肯德基",
+//                            nil];
+//    
+//    dataArray = [[NSMutableArray alloc] initWithCapacity:0];
+//    for (int i = 0; i<[stringsToSort count]; i++) {
+//        WJMemberModel *model = [[WJMemberModel alloc] init];
+//        model.name = [stringsToSort objectAtIndex:i];
+//        model.number = i;
+//        [dataArray addObject:model];
+//    }
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -214,7 +329,10 @@
         }
     } else {
         
+        WJMemberModel *model = [[self.letterResultArray objectAtIndex:indexPath.section - 1] objectAtIndex:indexPath.row];
+        
         [self.view addSubview:self.maskView];
+        [self.memberView conFigDataWithModel:model];
         [self.maskView addSubview:self.memberView];
     }
 }

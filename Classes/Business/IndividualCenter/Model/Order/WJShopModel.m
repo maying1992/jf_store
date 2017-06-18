@@ -17,10 +17,10 @@
 
         self.orderStatus = (OrderStatus)[dic[@"status"] intValue];
         
-        self.payPrice = ToString(dic[@"order_price"]);
-        self.payIntegral = ToString(dic[@"order_integral"]);
+        self.payPrice = ToString(dic[@"total_price"]);
+        self.payIntegral = ToString(dic[@"total_integral"]);
     
-        self.freight = ToString(dic[@"logistics_price"]);
+        self.freight = ToString(dic[@"logistics_cost"]);
         self.freightIntegral = ToString(dic[@"logistics_integral"]);
 
         

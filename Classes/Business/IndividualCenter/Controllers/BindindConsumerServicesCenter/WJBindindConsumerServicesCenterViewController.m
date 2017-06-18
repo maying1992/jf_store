@@ -306,7 +306,7 @@
         _recommenderInfoManager.delegate = self;
     }
     _recommenderInfoManager.recommenderCode = bindingServiceCodeTF.text;
-
+//    _recommenderInfoManager.userID = USER_ID;
     return _recommenderInfoManager;
 }
 
@@ -316,6 +316,7 @@
         _userBindingInfoManager = [[APIUserBindingInfoManager alloc] init];
         _userBindingInfoManager.delegate = self;
     }
+//    _userBindingInfoManager.userID = USER_ID;
     return _userBindingInfoManager;
 }
 
@@ -326,6 +327,7 @@
         _bindingServiceCenterManager = [[APIBindingServiceCenterManager alloc] init];
         _bindingServiceCenterManager.delegate = self;
     }
+//    _bindingServiceCenterManager.userID = USER_ID;
     return _bindingServiceCenterManager;
 }
 

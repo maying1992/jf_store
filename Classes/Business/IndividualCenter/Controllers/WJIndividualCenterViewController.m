@@ -796,6 +796,7 @@
         _individualCenterManager = [[APIIndividualCenterManager alloc] init];
         _individualCenterManager.delegate = self;
     }
+//    _individualCenterManager.userID = USER_ID;
     return _individualCenterManager;
 }
 

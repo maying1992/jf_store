@@ -555,6 +555,7 @@
         _orderManager.delegate =  self;
     }
     _orderManager.orderStatus = OrderStatusUnfinished;
+//    _orderManager.userID = USER_ID;
     return _orderManager;
 }
 @end

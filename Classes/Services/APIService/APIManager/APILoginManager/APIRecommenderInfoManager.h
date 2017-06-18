@@ -11,5 +11,6 @@
 @interface APIRecommenderInfoManager : APIBaseManager<APIManagerParamSourceDelegate,APIManagerVaildator,APIManager>
 
 @property (nonatomic, strong) NSString *recommenderCode;
+//@property (nonatomic, strong) NSString          *userID;
 
 @end

@@ -11,5 +11,5 @@
 @interface APIBindingServiceCenterManager : APIBaseManager<APIManagerParamSourceDelegate,APIManagerVaildator,APIManager>
 @property(nonatomic,strong)NSString *centerId;
 @property(nonatomic,strong)NSString *operation; //1.绑定 2.解绑
-
+//@property(nonatomic,strong)NSString *userID;
 @end

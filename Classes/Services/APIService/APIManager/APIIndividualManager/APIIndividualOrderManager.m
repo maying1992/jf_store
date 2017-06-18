@@ -80,7 +80,8 @@
     
     return @{@"pageSize":NumberToString(self.pageCount),
              @"pageNum":NumberToString(position),
-             @"status":NumberToString(self.orderStatus)
+             @"status":NumberToString(self.orderStatus),
+//             @"user_id" :self.userID ? :@""
              };
 }
 

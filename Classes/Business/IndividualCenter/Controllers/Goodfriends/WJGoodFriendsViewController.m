@@ -11,10 +11,10 @@
 #import "BMChineseSort.h"
 #import "WJRefreshTableView.h"
 #import "WJMemberView.h"
-
 #import "WJSysContactsManager.h"
+#import "APIQueryFriendsListManager.h"
 
-@interface WJGoodFriendsViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface WJGoodFriendsViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
 {
     NSMutableArray *dataArray;
 }
@@ -25,6 +25,7 @@
 @property(nonatomic,strong)UIView               *maskView;
 @property(nonatomic,strong)NSString             *selectPhoneNumber;
 
+@property(nonatomic,strong)APIQueryFriendsListManager *friendsListManager;
 @property(nonatomic,strong)WJSysContactsManager *contactsManager;
 
 @end
@@ -43,6 +44,22 @@
     self.letterResultArray = [BMChineseSort sortObjectArray:dataArray Key:@"name"];
     
     [self.view addSubview:self.tableView];
+    
+    [self.friendsListManager loadData];
+    
+}
+
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    if([manager isKindOfClass:[APIQueryFriendsListManager class]])
+    {
+
+    }
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
     
 }
 
@@ -257,6 +274,15 @@
         
     }
     return _maskView;
+}
+
+-(APIQueryFriendsListManager *)friendsListManager
+{
+    if (!_friendsListManager) {
+        _friendsListManager = [[APIQueryFriendsListManager alloc] init];
+        _friendsListManager.delegate = self;
+    }
+    return _friendsListManager;
 }
 
 @end

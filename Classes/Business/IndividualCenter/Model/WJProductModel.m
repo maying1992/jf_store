@@ -18,7 +18,6 @@
         
         self.standardDes = ToString(dic[@"attribute"]);
 
-        
         self.productId = ToString(dic[@"goods_id"]);
         self.salePrice = ToString(dic[@"price"]);
         self.productStatus = [dic[@"goods_status"] integerValue];
@@ -34,14 +33,13 @@
         self.integral = ToString(dic[@"integral"]);
 
         
-        
-        NSMutableArray *arr = [NSMutableArray array];
-        for (NSDictionary *attributeDic in dic[@"attribute_list"]) {
-            WJAttributeDetailModel *attributeDetailModel = [[WJAttributeDetailModel alloc] initWithDictionary:attributeDic];
-            [arr addObject:attributeDetailModel];
-        }
-        self.attributeArray = [NSMutableArray arrayWithArray:arr];
-        [arr removeAllObjects];
+//        NSMutableArray *arr = [NSMutableArray array];
+//        for (NSDictionary *attributeDic in dic[@"attribute_list"]) {
+//            WJAttributeDetailModel *attributeDetailModel = [[WJAttributeDetailModel alloc] initWithDictionary:attributeDic];
+//            [arr addObject:attributeDetailModel];
+//        }
+//        self.attributeArray = [NSMutableArray arrayWithArray:arr];
+//        [arr removeAllObjects];
     }
     return self;
 }

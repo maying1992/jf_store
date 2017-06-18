@@ -1,12 +1,12 @@
 //
-//  WJIndividualOrderDetailViewController.m
+//  WJRefundOrderDetailViewController.m
 //  jf_store
 //
-//  Created by reborn on 17/5/18.
+//  Created by maying on 2017/6/18.
 //  Copyright © 2017年 JF. All rights reserved.
 //
 
-#import "WJIndividualOrderDetailViewController.h"
+#import "WJRefundOrderDetailViewController.h"
 #import "WJPurchaseOrderDetailCell.h"
 #import "WJProductModel.h"
 #import "WJApplyRefundViewController.h"
@@ -19,7 +19,7 @@
 #import "WJOrderDetailModel.h"
 #import "WJOrderDetailReformer.h"
 #import "WJShopModel.h"
-@interface WJIndividualOrderDetailViewController ()<UITableViewDelegate, UITableViewDataSource,WJPassViewDelegate,WJSystemAlertViewDelegate>
+@interface WJRefundOrderDetailViewController ()<UITableViewDelegate, UITableViewDataSource,WJPassViewDelegate,WJSystemAlertViewDelegate>
 {
     UIView      *bottomView;
     UILabel     *totalAmountL;
@@ -29,8 +29,7 @@
 @property(nonatomic,strong)WJOrderDetailModel           *detailModel;
 @end
 
-@implementation WJIndividualOrderDetailViewController
-
+@implementation WJRefundOrderDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,7 +37,7 @@
     self.isHiddenTabBar = YES;
     
     [self initBottomView];
-    [self showLoadingView];
+    [self.view addSubview:self.tableView];
     [self.orderDetailManager loadData];
     
 }
@@ -60,8 +59,8 @@
     totalAmountL.font = WJFont13;
     totalAmountL.textAlignment = NSTextAlignmentLeft;
     
-//    NSString *totalAmountStr = [NSString stringWithFormat:@"合计: %@元%@积分",self.detailModel.totalMoney,self.detailModel.totalIntegral];
-//    totalAmountL.attributedText= [self attributedText:totalAmountStr firstLength:3];
+    //    NSString *totalAmountStr = [NSString stringWithFormat:@"合计: %@元%@积分",self.detailModel.totalMoney,self.detailModel.totalIntegral];
+    //    totalAmountL.attributedText= [self attributedText:totalAmountStr firstLength:3];
     [bottomView addSubview:totalAmountL];
     
     if (self.orderModel.orderStatus == OrderStatusUnfinished) {
@@ -161,7 +160,7 @@
         UIButton *cancelRefundButton = [UIButton buttonWithType:UIButtonTypeCustom];
         cancelRefundButton.frame = CGRectMake(bottomView.width - ALD(10) - ALD(80), ALD(10), ALD(80), ALD(30));
         [cancelRefundButton setTitle:@"取消退款"
-                          forState:UIControlStateNormal];
+                            forState:UIControlStateNormal];
         [cancelRefundButton setTitleColor:WJColorWhite forState:UIControlStateNormal];
         cancelRefundButton.backgroundColor = WJColorMainColor;
         cancelRefundButton.titleLabel.font = WJFont14;
@@ -192,18 +191,16 @@
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
     if ([manager isKindOfClass:[APIOrderDetailManager class]]) {
-
-        [self hiddenLoadingView];
+        
         self.detailModel = [manager fetchDataWithReformer:[[WJOrderDetailReformer alloc] init]];
-
-        [self.view addSubview:self.tableView];
+        
         [self.tableView reloadData];
     }
 }
 
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager
 {
-
+    
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -215,14 +212,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    if (section == 0) {
-        
-        return 1;
-        
+    if (section == self.detailModel.shopList.count) {
+        return 2;
     } else if (section == self.detailModel.shopList.count + 1) {
-        
         return 1;
-        
     } else {
         
         WJShopModel *shopModel = self.detailModel.shopList[section - 1];
@@ -233,41 +226,37 @@
             return shopModel.productList.count;
         }
     }
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 0) {
+    if (section == self.detailModel.shopList.count) {
         return 0;
-    } else if (section == self.detailModel.shopList.count + 1) {
         
-        return ALD(10);
+    } else if (section == self.detailModel.shopList.count + 1) {
+        return 0;
     } else {
         return ALD(40);
     }
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section == 0) {
+    if (section == self.detailModel.shopList.count) {
         return ALD(10);
         
     } else if (section == self.detailModel.shopList.count + 1) {
         return ALD(10);
-        
-    } else  {
+    } else {
         return ALD(55);
     }
-    
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [UIView new];
     
-    if (section > 0  &&  section <=  self.detailModel.shopList.count) {
+    if (section < self.detailModel.shopList.count) {
         
         headerView.backgroundColor = WJColorWhite;
         
@@ -346,7 +335,7 @@
 {
     UIView *footerView = [UIView new];
     
-    if (section > 0 && section <= self.detailModel.shopList.count) {
+    if (section < self.detailModel.shopList.count) {
         
         footerView.backgroundColor = WJColorWhite;
         
@@ -378,8 +367,8 @@
     
     NSInteger section = indexPath.section;
     
-    if (section == 0) {
-        return ALD(80);
+    if (section == self.detailModel.shopList.count) {
+        return ALD(44);
         
     } else if (section == self.detailModel.shopList.count + 1) {
         return ALD(150);
@@ -404,28 +393,32 @@
     
     NSInteger section = indexPath.section;
     
-    if (section == 0) {
+    if (section == self.detailModel.shopList.count) {
+   
+        UILabel *nameL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(12), 0, ALD(60), ALD(44))];
+        nameL.font = WJFont12;
+        nameL.textColor = WJColorDardGray3;
+        nameL.textAlignment = NSTextAlignmentLeft;
+        [cell.contentView addSubview:nameL];
         
-        UILabel *receiverL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(12), ALD(15), ALD(130), ALD(20))];
-        receiverL.text = [NSString stringWithFormat:@"收货人：%@",self.detailModel.receiveName];
-        receiverL.font = WJFont13;
-        receiverL.textColor = WJColorDardGray3;
-        [cell.contentView addSubview:receiverL];
+        UILabel *contentL = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth - ALD(12) - ALD(150), 0, ALD(150), ALD(44))];
+        contentL.font = WJFont12;
+        contentL.textColor = WJColorDardGray3;
+        contentL.textAlignment = NSTextAlignmentRight;
+        [cell.contentView addSubview:contentL];
         
-        UILabel *phoneL = [[UILabel alloc] initWithFrame:CGRectMake(receiverL.right + ALD(40), ALD(15), ALD(100), ALD(20))];
-        phoneL.textColor = WJColorDardGray3;
-        phoneL.text = [NSString stringWithFormat:@"%@",self.detailModel.phone];
-        phoneL.font = WJFont13;
-        [cell.contentView addSubview:phoneL];
+        if (indexPath.row == 0) {
+            nameL.text = @"退款原因";
+            contentL.text = @"买重复了";
+            
+        } else {
+            
+            nameL.text = @"退款说明";
+            contentL.text = @"商品购买重复申请，谢谢";
+        }
         
+    } else if (section == self.detailModel.shopList.count + 1) {
         
-        UILabel *addressL = [[UILabel alloc] initWithFrame:CGRectMake(receiverL.frame.origin.x, receiverL.bottom + ALD(10), kScreenWidth - ALD(45), ALD(20))];
-        addressL.text = [NSString stringWithFormat:@"收货地址：%@",self.detailModel.address];
-        addressL.textColor = WJColorLightGray;
-        addressL.font = WJFont13;
-        [cell.contentView addSubview:addressL];
-        
-    }  else if (section == self.detailModel.shopList.count + 1) {
         
         UILabel *orderNoL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(12), ALD(15), ALD(200), ALD(20))];
         orderNoL.textColor = WJColorDardGray3;
@@ -448,6 +441,8 @@
         payTimeL.font = WJFont12;
         payTimeL.textAlignment = NSTextAlignmentLeft;
         [cell.contentView addSubview:payTimeL];
+
+        
         
     } else {
         
@@ -458,6 +453,7 @@
         WJShopModel *shop = self.detailModel.shopList[indexPath.section - 1];
         [purchaseCell configDataWithProduct:shop.productList[indexPath.row]];
     }
+    
     return cell;
 }
 
@@ -475,6 +471,7 @@
         {
             //积分支付
             NSLog(@"支付成功");
+            
         }
             break;
             
@@ -541,6 +538,8 @@
     }
 }
 
+
+
 - (void)showAlertWithMessage:(NSString *)msg
 {
     WJSystemAlertView *sysAlert = [[WJSystemAlertView alloc] initWithTitle:@"验证失败" message:msg delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"再试一次" textAlignment:NSTextAlignmentCenter];
@@ -561,6 +560,7 @@
             WJOnLinePayViewController *onLinePayVC = [[WJOnLinePayViewController alloc] init];
             onLinePayVC.orderModel = self.orderModel;
             [self.navigationController pushViewController:onLinePayVC animated:YES];
+            
         }
             break;
             
@@ -591,7 +591,7 @@
             WJPassView *passView  = [[WJPassView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - ALD(50)) title:@"请输入支付密码"];
             passView.delegate = self;
             [passView showIn];
-
+            
             
         }
             break;
@@ -602,7 +602,7 @@
             WJPassView *passView  = [[WJPassView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - ALD(50)) title:@"请输入支付密码"];
             passView.delegate = self;
             [passView showIn];
-
+            
         }
             break;
             

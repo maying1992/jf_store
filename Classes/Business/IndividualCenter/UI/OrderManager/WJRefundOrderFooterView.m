@@ -101,7 +101,7 @@
     NSString *freightStr = [NSString stringWithFormat:@"运费: %@",order.freight];
     freightL.attributedText= [self attributedText:freightStr firstLength:3];
     
-    addressL.text = [NSString stringWithFormat:@"地址:%@",order.address];
+//    addressL.text = [NSString stringWithFormat:@"地址:%@",order.address];
     
     
     NSString *refundTimeStr = [NSString stringWithFormat:@"(%@)",order.remainingRefundTime];

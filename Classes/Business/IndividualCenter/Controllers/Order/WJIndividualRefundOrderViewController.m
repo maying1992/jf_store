@@ -16,6 +16,7 @@
 #import "APIIndividualOrderManager.h"
 #import "WJOrderListReformer.h"
 #import "WJIndividualOrderListModel.h"
+#import "WJRefundOrderDetailViewController.h"
 @interface WJIndividualRefundOrderViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
 {
     BOOL      isHeaderRefresh;
@@ -346,10 +347,9 @@
 -(void)refundDetailWithOrder:(WJOrderModel *)order
 {
     NSLog(@"退款详情");
-    WJIndividualOrderDetailViewController *orderDetailVC = [[WJIndividualOrderDetailViewController alloc] init];
-    orderDetailVC.orderModel = order;
-    [self.navigationController pushViewController:orderDetailVC animated:YES];
-    
+    WJRefundOrderDetailViewController *refundOrderDetailVC = [[WJRefundOrderDetailViewController alloc] init];
+    refundOrderDetailVC.orderModel = order;
+    [self.navigationController pushViewController:refundOrderDetailVC animated:YES];
 }
 
 -(void)cancelRefundWithOrder:(WJOrderModel *)order
@@ -384,7 +384,7 @@
         _orderManager = [[APIIndividualOrderManager alloc] init];
         _orderManager.delegate =  self;
     }
-    _orderManager.orderStatus = OrderStatusAllRefund;
+    _orderManager.orderStatus = OrderStatusApplyRefund;
     return _orderManager;
 }
 

@@ -29,7 +29,7 @@
 @property(nonatomic,strong)NSString        *cartId;
 @property(nonatomic,strong)NSString        *brandId;
 @property(nonatomic,strong)NSString        *brandName;
-@property(nonatomic,strong)NSMutableArray  *attributeArray;
+//@property(nonatomic,strong)NSMutableArray  *attributeArray;
 @property(nonatomic,assign)BOOL            isSelect;
 
 

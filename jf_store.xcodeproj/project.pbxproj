@@ -68,6 +68,19 @@
 		6D3498E71EF62C7300509BF6 /* WJAtrrValueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3498E61EF62C7300509BF6 /* WJAtrrValueModel.m */; };
 		6D3498EA1EF6382F00509BF6 /* APIPayNowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3498E91EF6382F00509BF6 /* APIPayNowManager.m */; };
 		6D3498FD1EF65A5000509BF6 /* WeixinPayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3498FC1EF65A5000509BF6 /* WeixinPayManager.m */; };
+		6D3499061EF661B900509BF6 /* AlipayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3499011EF661B900509BF6 /* AlipayManager.m */; };
+		6D3499071EF661B900509BF6 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6D3499031EF661B900509BF6 /* AlipaySDK.bundle */; };
+		6D3499081EF661B900509BF6 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3499041EF661B900509BF6 /* AlipaySDK.framework */; };
+		6D34990A1EF662B200509BF6 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3499091EF662B200509BF6 /* libc++.tbd */; };
+		6D34990C1EF662C800509BF6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D34990B1EF662C800509BF6 /* SystemConfiguration.framework */; };
+		6D34990E1EF662DA00509BF6 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D34990D1EF662DA00509BF6 /* CoreTelephony.framework */; };
+		6D3499101EF662E700509BF6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D34990F1EF662E700509BF6 /* QuartzCore.framework */; };
+		6D3499121EF662FA00509BF6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3499111EF662FA00509BF6 /* CoreText.framework */; };
+		6D3499141EF6630B00509BF6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3499131EF6630B00509BF6 /* CoreGraphics.framework */; };
+		6D3499161EF6631600509BF6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3499151EF6631600509BF6 /* UIKit.framework */; };
+		6D3499181EF6632300509BF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3499171EF6632300509BF6 /* Foundation.framework */; };
+		6D34991A1EF6632F00509BF6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3499191EF6632F00509BF6 /* CFNetwork.framework */; };
+		6D34991C1EF6633800509BF6 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D34991B1EF6633800509BF6 /* CoreMotion.framework */; };
 		6D34D08C1ED2D0730065202B /* WJTradingHallRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34D08B1ED2D0730065202B /* WJTradingHallRechargeViewController.m */; };
 		6D34D08F1ED2EFC00065202B /* WJTradingHallRechargeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34D08E1ED2EFC00065202B /* WJTradingHallRechargeTableViewCell.m */; };
 		6D34D0921ED2F59D0065202B /* WJTradingHallOutputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34D0911ED2F59D0065202B /* WJTradingHallOutputViewController.m */; };
@@ -485,6 +498,20 @@
 		6D3498E91EF6382F00509BF6 /* APIPayNowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIPayNowManager.m; sourceTree = "<group>"; };
 		6D3498FB1EF65A5000509BF6 /* WeixinPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeixinPayManager.h; sourceTree = "<group>"; };
 		6D3498FC1EF65A5000509BF6 /* WeixinPayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeixinPayManager.m; sourceTree = "<group>"; };
+		6D3499001EF661B900509BF6 /* AlipayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlipayManager.h; sourceTree = "<group>"; };
+		6D3499011EF661B900509BF6 /* AlipayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipayManager.m; sourceTree = "<group>"; };
+		6D3499031EF661B900509BF6 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		6D3499041EF661B900509BF6 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		6D3499091EF662B200509BF6 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		6D34990B1EF662C800509BF6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6D34990D1EF662DA00509BF6 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		6D34990F1EF662E700509BF6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6D3499111EF662FA00509BF6 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		6D3499131EF6630B00509BF6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6D3499151EF6631600509BF6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6D3499171EF6632300509BF6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6D3499191EF6632F00509BF6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		6D34991B1EF6633800509BF6 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		6D34D08A1ED2D0730065202B /* WJTradingHallRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJTradingHallRechargeViewController.h; sourceTree = "<group>"; };
 		6D34D08B1ED2D0730065202B /* WJTradingHallRechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJTradingHallRechargeViewController.m; sourceTree = "<group>"; };
 		6D34D08D1ED2EFC00065202B /* WJTradingHallRechargeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJTradingHallRechargeTableViewCell.h; sourceTree = "<group>"; };
@@ -1053,11 +1080,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D34991C1EF6633800509BF6 /* CoreMotion.framework in Frameworks */,
+				6D34991A1EF6632F00509BF6 /* CFNetwork.framework in Frameworks */,
+				6D3499181EF6632300509BF6 /* Foundation.framework in Frameworks */,
+				6D3499161EF6631600509BF6 /* UIKit.framework in Frameworks */,
+				6D3499141EF6630B00509BF6 /* CoreGraphics.framework in Frameworks */,
+				6D3499121EF662FA00509BF6 /* CoreText.framework in Frameworks */,
+				6D3499101EF662E700509BF6 /* QuartzCore.framework in Frameworks */,
+				6D34990E1EF662DA00509BF6 /* CoreTelephony.framework in Frameworks */,
+				6D34990C1EF662C800509BF6 /* SystemConfiguration.framework in Frameworks */,
+				6D34990A1EF662B200509BF6 /* libc++.tbd in Frameworks */,
 				6D962F831EE9359D002E8326 /* MessageUI.framework in Frameworks */,
 				6D962FB91EE9361F002E8326 /* TencentOpenAPI.framework in Frameworks */,
 				6D962F811EE9357D002E8326 /* libsqlite3.tbd in Frameworks */,
 				6D962F7F1EE93574002E8326 /* ImageIO.framework in Frameworks */,
 				6D962F7D1EE9356A002E8326 /* JavaScriptCore.framework in Frameworks */,
+				6D3499081EF661B900509BF6 /* AlipaySDK.framework in Frameworks */,
 				6D962FBD1EE9361F002E8326 /* libWeChatSDK.a in Frameworks */,
 				6D962FBB1EE9361F002E8326 /* libWeiboSDK.a in Frameworks */,
 				6D962F7B1EE93560002E8326 /* libstdc++.tbd in Frameworks */,
@@ -1720,6 +1758,7 @@
 		6D0EABD81EB326070026B20B /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				6D3498FE1EF661B900509BF6 /* WJAlipaySDK */,
 				6D3498FA1EF65A5000509BF6 /* WeixinPayManager */,
 				6D962F841EE9361E002E8326 /* WJShareSDK */,
 				B40EF40E1ECAFD1A00DDE49F /* BMChineseStringSort */,
@@ -1855,6 +1894,41 @@
 				6D3498FC1EF65A5000509BF6 /* WeixinPayManager.m */,
 			);
 			path = WeixinPayManager;
+			sourceTree = "<group>";
+		};
+		6D3498FE1EF661B900509BF6 /* WJAlipaySDK */ = {
+			isa = PBXGroup;
+			children = (
+				6D3498FF1EF661B900509BF6 /* Manager */,
+				6D3499021EF661B900509BF6 /* SDK */,
+			);
+			path = WJAlipaySDK;
+			sourceTree = "<group>";
+		};
+		6D3498FF1EF661B900509BF6 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				6D3499001EF661B900509BF6 /* AlipayManager.h */,
+				6D3499011EF661B900509BF6 /* AlipayManager.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		6D3499021EF661B900509BF6 /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				6D3499031EF661B900509BF6 /* AlipaySDK.bundle */,
+				6D3499041EF661B900509BF6 /* AlipaySDK.framework */,
+				6D3499051EF661B900509BF6 /* openssl */,
+			);
+			path = SDK;
+			sourceTree = "<group>";
+		};
+		6D3499051EF661B900509BF6 /* openssl */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = openssl;
 			sourceTree = "<group>";
 		};
 		6D962F841EE9361E002E8326 /* WJShareSDK */ = {
@@ -2805,6 +2879,16 @@
 		B514D8A472B536766ABCB718 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D34991B1EF6633800509BF6 /* CoreMotion.framework */,
+				6D3499191EF6632F00509BF6 /* CFNetwork.framework */,
+				6D3499171EF6632300509BF6 /* Foundation.framework */,
+				6D3499151EF6631600509BF6 /* UIKit.framework */,
+				6D3499131EF6630B00509BF6 /* CoreGraphics.framework */,
+				6D3499111EF662FA00509BF6 /* CoreText.framework */,
+				6D34990F1EF662E700509BF6 /* QuartzCore.framework */,
+				6D34990D1EF662DA00509BF6 /* CoreTelephony.framework */,
+				6D34990B1EF662C800509BF6 /* SystemConfiguration.framework */,
+				6D3499091EF662B200509BF6 /* libc++.tbd */,
 				6D962F821EE9359D002E8326 /* MessageUI.framework */,
 				6D962F801EE9357D002E8326 /* libsqlite3.tbd */,
 				6D962F7E1EE93574002E8326 /* ImageIO.framework */,
@@ -2942,6 +3026,7 @@
 				6D0EABF01EB326070026B20B /* index.html in Resources */,
 				6D0EAB241EB3176F0026B20B /* LaunchScreen.storyboard in Resources */,
 				6D0EABEF1EB326070026B20B /* dome.html in Resources */,
+				6D3499071EF661B900509BF6 /* AlipaySDK.bundle in Resources */,
 				6D680C7D1EDEC35F00FFFC2F /* Localizable.strings in Resources */,
 				6D962FBA1EE9361F002E8326 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				6D962FBC1EE9361F002E8326 /* WeiboSDK.bundle in Resources */,
@@ -3314,6 +3399,7 @@
 				6D0EABFD1EB326070026B20B /* WebViewJsBridge.m in Sources */,
 				B45218A71EB9F471009E9E40 /* WJAttributeDetailModel.m in Sources */,
 				B40EF4331ECC25B300DDE49F /* WJConsumerServiceTopView.m in Sources */,
+				6D3499061EF661B900509BF6 /* AlipayManager.m in Sources */,
 				6D27CBED1ECC508F00BC6C97 /* WJWinnerListViewController.m in Sources */,
 				B47825E31ED3D5A5002267A6 /* WJPassView.m in Sources */,
 				B47826161ED59FF1002267A6 /* WJIndividualCenterModel.m in Sources */,

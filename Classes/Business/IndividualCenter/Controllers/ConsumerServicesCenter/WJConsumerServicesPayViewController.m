@@ -9,18 +9,22 @@
 #import "WJConsumerServicesPayViewController.h"
 #import "WJRechargeCenterCell.h"
 
-
-
 #import "WJConsumerServicesIntegralViewController.h"
+#import "APIServiceCenterConditionManager.h"
+#import "WJServiceCenterConditionModel.h"
+#import "APIOpenServiceCenterManager.h"
 
-@interface WJConsumerServicesPayViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface WJConsumerServicesPayViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
 {
     UIButton *payRightNowButton;
 }
-@property(nonatomic,strong)UITableView              *tableView;
-@property(nonatomic,strong)NSMutableArray           *payArray;
-@property(nonatomic,strong)NSArray                  *listArray;
-@property(nonatomic,assign)NSInteger                selectPayAwayIndex;
+@property(nonatomic,strong)APIServiceCenterConditionManager *conditionManager;
+@property(nonatomic,strong)APIOpenServiceCenterManager      *openServiceCenterManager;
+@property(nonatomic,strong)WJServiceCenterConditionModel    *conditionModel;
+@property(nonatomic,strong)UITableView                      *tableView;
+@property(nonatomic,strong)NSMutableArray                   *payArray;
+@property(nonatomic,strong)NSArray                          *listArray;
+@property(nonatomic,assign)NSInteger                        selectPayAwayIndex;
 @end
 
 @implementation WJConsumerServicesPayViewController
@@ -33,6 +37,7 @@
     [self.view addSubview:self.tableView];
     
     [self UISetup];
+    [self.conditionManager loadData];
 }
 
 -(void)UISetup
@@ -73,6 +78,40 @@
 //{
 //    [[TKAlertCenter defaultCenter]  postAlertWithMessage:manager.errorMessage];
 //}
+
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    if([manager isKindOfClass:[APIServiceCenterConditionManager class]])
+    {
+        NSDictionary *dic = [manager fetchDataWithReformer:nil];
+        self.conditionModel = [[WJServiceCenterConditionModel alloc] initWithDic:dic];
+        [self.tableView reloadData];
+        
+
+    } else if ([manager isKindOfClass:[APIOpenServiceCenterManager class]]) {
+        
+        NSDictionary *dic = [manager fetchDataWithReformer:nil];
+
+//        if ([self.openServiceCenterManager.payType isEqualToString:@"1"]) {
+//            
+//            [AlipayManager alipayManager].selectPaymentVC = self;
+//            [AlipayManager alipayManager].totleCash = dic[@"order_total"];
+//            [[AlipayManager alipayManager]callAlipayWithOrderString:dic[@"trade_no"]];
+//            
+//        }else if ([self.openServiceCenterManager.payType isEqualToString:@"2"]){
+//            [WeixinPayManager WXPayManager].selectPaymentVC = self;
+//            [WeixinPayManager WXPayManager].totleCash = dic[@"order_total"];
+//            [[WeixinPayManager WXPayManager]callWexinPayWithPrePayid:dic[@"trade_no"]];
+//        }
+    }
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    [[TKAlertCenter defaultCenter]  postAlertWithMessage:manager.errorMessage];
+}
+
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -118,6 +157,9 @@
         [subView removeFromSuperview];
     }
     
+    NSDictionary *infoDic = [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation];
+
+    
     switch (indexPath.section) {
         case 0:
         {
@@ -149,22 +191,24 @@
                 
             } else if (indexPath.row == 1) {
                 
-                contentL.text = @"A888888";
+                contentL.text  =  infoDic[@"userCode"];
+
                 
             } else if (indexPath.row == 2) {
-                contentL.text = @"李明";
+                
+                contentL.text  =  infoDic[@"name"];
                 
             }  else if (indexPath.row == 3) {
-                contentL.text = @"13354283549";
+                contentL.text = infoDic[@"contact"];;
                 
             }  else if (indexPath.row == 4) {
-                contentL.text = @"20000元";
+                contentL.text = [NSString stringWithFormat:@"%@元",self.conditionModel.amount];
                 
             }  else if (indexPath.row == 5) {
-                contentL.text = @"120000/90000积分";
+                contentL.text = [NSString stringWithFormat:@"%@/%@积分",self.conditionModel.freezeIntegral,self.conditionModel.integralStandard];
                 
             } else {
-                contentL.text = @"12/9人 >= 3000待用积分 ";
+                contentL.text = [NSString stringWithFormat:@"%@/%@人 >= %@待用积分",self.conditionModel.member,self.conditionModel.memberStandard,self.conditionModel.memberIntegralStandard];
             }
             
             
@@ -237,14 +281,16 @@
         case 0:
         {
             //支付宝
-            //            self.payMentManager.payType = @"1";
+            self.openServiceCenterManager.payType = @"1";
+            
         }
             break;
             
         case 1:
         {
             //微信
-            //            self.payMentManager.payType = @"2";
+            self.openServiceCenterManager.payType = @"2";
+
         }
             break;
             
@@ -252,10 +298,11 @@
             break;
     }
     
-    //    [self.payMentManager loadData];
+    self.openServiceCenterManager.payAmount = self.conditionModel.amount;
+    [self.openServiceCenterManager loadData];
     
-    WJConsumerServicesIntegralViewController *consumerServicesIntegralVC = [[WJConsumerServicesIntegralViewController alloc] init];
-    [self.navigationController pushViewController:consumerServicesIntegralVC animated:YES];
+//    WJConsumerServicesIntegralViewController *consumerServicesIntegralVC = [[WJConsumerServicesIntegralViewController alloc] init];
+//    [self.navigationController pushViewController:consumerServicesIntegralVC animated:YES];
     
 }
 - (void)didReceiveMemoryWarning {
@@ -301,5 +348,22 @@
     return _payArray;
 }
 
+-(APIServiceCenterConditionManager *)conditionManager
+{
+    if (!_conditionManager) {
+        _conditionManager = [[APIServiceCenterConditionManager alloc] init];
+        _conditionManager.delegate = self;
+    }
+    return _conditionManager;
+}
+
+-(APIOpenServiceCenterManager *)openServiceCenterManager
+{
+    if (!_openServiceCenterManager) {
+        _openServiceCenterManager = [[APIOpenServiceCenterManager alloc] init];
+        _openServiceCenterManager.delegate = self;
+    }
+    return _openServiceCenterManager;
+}
 
 @end

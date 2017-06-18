@@ -23,7 +23,7 @@
 
 
         self.storeId = dic[@"store_id"];
-        self.userType = dic[@"user_type"];
+        self.userType = [dic[@"user_type"] integerValue];
         self.messageCount = [dic[@"news_num"] integerValue];
     }
     

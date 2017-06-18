@@ -20,10 +20,10 @@
 @property(nonatomic,assign)NSInteger refundOrderCount;
 
 @property(nonatomic,strong)NSString  *storeId;
-@property(nonatomic,strong)NSString  *userType; //用户类型 1.未激活用户 2.激活用户 3.报单中心（用户服务中心） 4.分公司
+@property(nonatomic,assign)NSInteger userType; //用户类型 1.未激活用户 2.激活用户 3.报单中心（用户服务中心） 4.分公司
 
 
-@property(nonatomic,assign)NSInteger messageCount;        //消息
+@property(nonatomic,assign)NSInteger messageCount;  //消息
 
 - (id)initWithDic:(NSDictionary *)dic;
 

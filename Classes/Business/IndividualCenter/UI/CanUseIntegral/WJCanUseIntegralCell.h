@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "WJIntegralModel.h"
 @interface WJCanUseIntegralCell : UITableViewCell
 
+-(void)configDataWithModel:(WJIntegralModel *)model;
 @end

@@ -12,6 +12,7 @@
 #import "APIPayNowManager.h"
 #import "WJAtrrValueModel.h"
 
+#import "WJOrderConfirmController.h"
 #import "WeixinPayManager.h"
 #import "AlipayManager.h"
 
@@ -72,9 +73,9 @@
     
     self.payNowManager.attrRelationids = [NSString stringWithFormat:@"%@,%@",colorModel.valueId,sizeModel.valueId];
     self.payNowManager.storeId = self.storeId;
-//    self.payNowManager.goodsNum = NumberToString(currentCount);
-//    self.payNowManager.goodsID = self.goodsID;
-//    [self.payNowManager loadData];
+    self.payNowManager.goodsNum = NumberToString(currentCount);
+    self.payNowManager.goodsID = self.goodsID;
+    [self.payNowManager loadData];
     
 //    [AlipayManager alipayManager].selectPaymentVC = self;
 //    [AlipayManager alipayManager].totleCash = @"100";
@@ -96,7 +97,7 @@
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
     NSDictionary * dic = [manager fetchDataWithReformer:nil];
-
+    
 }
 
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager

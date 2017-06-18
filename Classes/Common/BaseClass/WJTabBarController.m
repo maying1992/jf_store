@@ -12,6 +12,7 @@
 #import "WJIndividualCenterViewController.h"
 #import "WJPrefectureViewController.h"
 #import "WJTradingHallViewController.h"
+#import "WJLoginController.h"
 
 #define IMAGE_W 22
 #define IMAGE_H 22
@@ -136,11 +137,18 @@
 //需要通知的控制器
 - (void)postControllerWithIndex:(NSInteger)index
 {
+//    WJNavigationController *nav = (WJNavigationController *)self.selectedViewController;
+//    [nav dismissViewControllerAnimated:NO completion:nil];
+    
     if (index == 1) {
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kTabCategoryRefresh object:nil];
         
-    } else if (index == 4) {
+    }else if (index == 2){
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kTraingHallVCResponse object:nil];
+
+    }else if (index == 4) {
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kTabIndividualCenterRefresh object:nil];
     }

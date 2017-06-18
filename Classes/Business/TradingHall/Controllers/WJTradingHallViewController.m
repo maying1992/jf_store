@@ -9,17 +9,22 @@
 #import "WJTradingHallViewController.h"
 #import "WJKLineView.h"
 #import "WJTradingHallTableViewCell.h"
+#import "WJTabBarController.h"
+#import "APITradeHallFeeManager.h"
 
+#import "WJLoginController.h"
 #import "WJTradingHallRechargeViewController.h"
 #import "WJTradingHallOutputViewController.h"
 #import "WJTradingHallInputViewController.h"
 
 #define klineViewW      280
-@interface WJTradingHallViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface WJTradingHallViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
 
-@property(nonatomic ,strong) WJKLineView        *kLineView;
-@property(nonatomic ,strong) UITableView        *mainTableView;
-@property(nonatomic ,assign) BOOL               isRecharge;
+@property(nonatomic ,strong) WJKLineView                *kLineView;
+@property(nonatomic ,strong) UITableView                *mainTableView;
+@property(nonatomic ,assign) BOOL                        isRecharge;
+@property(nonatomic ,strong) APITradeHallFeeManager     * tradeHallFeeManager;
+
 
 @end
 
@@ -33,6 +38,10 @@
     [self.view addSubview:self.mainTableView];
     [self navigationSetup];
     [self hiddenBackBarButtonItem];
+    [kDefaultCenter addObserver:self selector:@selector(tradingHallCResponse) name:KCheckingPayVCResponse object:nil];
+    [kDefaultCenter addObserver:self selector:@selector(checkingIsPay) name:kTraingHallVCResponse object:nil];
+    [kDefaultCenter addObserver:self selector:@selector(goOutVC) name:kTraingHallVCGoOutVC object:nil];
+
 }
 
 - (void)navigationSetup
@@ -43,6 +52,45 @@
     [rightButton setTitle:@"续费" forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(rightButtonAction) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+}
+
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    NSDictionary * dic = [manager fetchDataWithReformer:nil];
+    
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    NSLog(@"%@",manager.errorMessage);
+}
+
+#pragma mark - BUtton Action
+
+- (void)tradingHallCResponse
+{
+    if (!USER_ID) {
+        WJLoginController *loginVC = [[WJLoginController alloc]init];
+        loginVC.loginFrom = LoginFromTradingHallView;
+        WJNavigationController *Navigation = [[WJNavigationController alloc] initWithRootViewController:loginVC];
+        [self presentViewController:Navigation animated:YES completion:nil];
+    }else{
+        [self.tradeHallFeeManager loadData];
+    }
+}
+
+- (void)checkingIsPay
+{
+    [self.tradeHallFeeManager loadData];
+}
+
+- (void)goOutVC
+{
+    WJTabBarController * tab = (WJTabBarController *)self.tabBarController;
+    if([WJGlobalVariable sharedInstance].tabBarIndex != 2){
+        [tab changeTabIndex:[WJGlobalVariable sharedInstance].tabBarIndex];
+    }
 }
 
 - (void)rightButtonAction
@@ -112,6 +160,15 @@
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _mainTableView;
+}
+
+- (APITradeHallFeeManager *)tradeHallFeeManager
+{
+    if (_tradeHallFeeManager == nil) {
+        _tradeHallFeeManager = [[APITradeHallFeeManager alloc]init];
+        _tradeHallFeeManager.delegate = self;
+    }
+    return _tradeHallFeeManager;
 }
 
 @end

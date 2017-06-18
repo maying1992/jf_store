@@ -49,6 +49,7 @@
         NSLog(@"%@",userInformation);
         [self dismissViewControllerAnimated:YES completion:nil];
         
+        [self successGoOut];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"loginRefresh" object:nil];
     }
 
@@ -60,7 +61,17 @@
     ALERT(manager.errorMessage);
 }
 
-
+- (void)successGoOut
+{
+    switch (self.loginFrom) {
+        case LoginFromTradingHallView:
+            [[NSNotificationCenter defaultCenter] postNotificationName:kTraingHallVCResponse object:nil];
+            break;
+            
+        default:
+            break;
+    }
+}
 
 #pragma mark - Cusitom Function
 
@@ -93,6 +104,9 @@
     [_loginView.phoneTextField resignFirstResponder];
     [_loginView.passwordTextField resignFirstResponder];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    if (self.loginFrom == LoginFromTradingHallView) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kTraingHallVCGoOutVC object:nil];
+    }
 
 }
 -(void)registerAction

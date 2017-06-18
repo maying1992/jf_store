@@ -14,7 +14,7 @@
 #import "WeixinPayManager.h"
 #import "AlipayManager.h"
 
-@interface WJTradingHallRechargeViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerParamSourceDelegate>
+@interface WJTradingHallRechargeViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
 {
     NSInteger selectCell;
 }

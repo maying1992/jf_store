@@ -9,14 +9,18 @@
 #import "WJTradingHallRechargeViewController.h"
 #import "WJTradingHallRechargeTableViewCell.h"
 #import "WJAdmissionModel.h"
+#import "APITradeHallPaymentManager.h"
 
-@interface WJTradingHallRechargeViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "WeixinPayManager.h"
+#import "AlipayManager.h"
+
+@interface WJTradingHallRechargeViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerParamSourceDelegate>
 {
     NSInteger selectCell;
-
 }
-@property(nonatomic ,strong) UITableView             * mainTableView;
-@property(nonatomic ,strong) WJAdmissionModel        * admissionModel;
+@property(nonatomic ,strong) UITableView                        * mainTableView;
+@property(nonatomic ,strong) WJAdmissionModel                   * admissionModel;
+@property(nonatomic ,strong) APITradeHallPaymentManager         * tradeHallPaymentManager;
 
 @end
 
@@ -56,7 +60,35 @@
 
 - (void)paymentButtonAction
 {
+    if ([self.admissionModel.admissionType isEqualToString:@"个人"]) {
+        self.tradeHallPaymentManager.feeType = @"1";
+    }else{
+        self.tradeHallPaymentManager.feeType = @"2";
+    }
+    self.tradeHallPaymentManager.payType = NumberToString(selectCell - 2);
+    [self.tradeHallPaymentManager loadData];
     
+}
+
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    NSDictionary * dic = [manager fetchDataWithReformer:nil];
+    if (selectCell - 2 == 1) {
+        [AlipayManager alipayManager].selectPaymentVC = self;
+        [AlipayManager alipayManager].totleCash = dic[@"order_total"];
+        [[AlipayManager alipayManager]callAlipayWithOrderString:dic[@"prepayid"]];
+    }else{
+        [WeixinPayManager WXPayManager].selectPaymentVC = self;
+        [WeixinPayManager WXPayManager].totleCash = dic[@"order_total"];
+        [[WeixinPayManager WXPayManager]callWexinPayWithPrePayid:dic[@"prepayid"]];
+    }
+    
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    NSLog(@"%@",manager.errorMessage);
 }
 
 #pragma mark UITableViewDelegate && UITableViewDataSource
@@ -132,10 +164,10 @@
             cell = [[WJTradingHallRechargeTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WJTradingHallRechargeTableViewCell"];
         }
         if (indexPath.row == 3) {
-            cell.textLabel.text = @"微信支付";
+            cell.textLabel.text = @"支付宝支付";
             [self cellSelect:indexPath.row Cell:cell];
         }else{
-            cell.textLabel.text = @"支付宝支付";
+            cell.textLabel.text = @"微信支付";
             [self cellSelect:indexPath.row Cell:cell];
         }
         return cell;
@@ -225,9 +257,13 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    
+- (APITradeHallPaymentManager *)tradeHallPaymentManager
+{
+    if (_tradeHallPaymentManager == nil) {
+        _tradeHallPaymentManager = [[APITradeHallPaymentManager alloc]init];
+        _tradeHallPaymentManager.delegate = self;
+    }
+    return _tradeHallPaymentManager;
 }
 
 

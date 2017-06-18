@@ -16,9 +16,9 @@
 #define UMeng_AppKey                @"585a330e2ae85b2c73000b62"
 #define JPush_AppKey                @"138727d1a6bc28a53e7f6ad3"
 
-#define WX_AppID                    @"wx5d68986871a804eb"               //APPID
-#define WX_MchID                    @"1448234102"                       //商户号，填写商户对应参数
-#define WX_PartnerID                @"Vplus201703151535ihujiaplatformV" //商户API密钥，填写相应参数
+#define WX_AppID                    @"wx14758e350711494b"               //APPID
+#define WX_MchID                    @"1481723972"                       //商户号，填写商户对应参数
+#define WX_PartnerID                @"90725fcfa4838a38fa4d4bf220176433" //商户API密钥，填写相应参数
 
 #else
 

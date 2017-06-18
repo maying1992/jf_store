@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/Business/Home/Controllers/Area/WJChooseGoodsPropertyController.m"
-            timestampString = "519471868.091526"
+            timestampString = "519480615.94702"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "-managerCallAPIDidSuccess:"
             landmarkType = "7">
          </BreakpointContent>

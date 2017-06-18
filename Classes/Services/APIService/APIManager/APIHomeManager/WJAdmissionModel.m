@@ -15,7 +15,12 @@
 {
     if (self = [super init]) {
         self.admissionMoney = ToString(dic[@"admission_money"]);
-        self.admissionType = ToString(dic[@"admission_type"]);
+        if ([ToString(dic[@"admission_type"]) isEqualToString:@"1"]) {
+            self.admissionType = @"个人";
+        }else if ([ToString(dic[@"admission_type"]) isEqualToString:@"2"]){
+            self.admissionType = @"企业";
+        }
+//        self.admissionType = ToString(dic[@"admission_type"]);
     }
     return self;
 }

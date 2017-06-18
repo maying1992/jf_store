@@ -48,7 +48,7 @@
         //数量值
         curCountL = [[UILabel alloc] initWithFrame:CGRectMake(reduceButton.right  +ALD(10), 0, reduceImage.size.width + ALD(20), reduceImage.size.height + ALD(20))];
         curCountL.font = WJFont14;
-        curCountL.textColor = WJColorNavigationBar;
+        curCountL.textColor = WJColorMainColor;
         curCountL.textAlignment = NSTextAlignmentCenter;
         curCountL.text = [NSString stringWithFormat:@"%ld",curCount];
         curCountL.backgroundColor = [UIColor clearColor];

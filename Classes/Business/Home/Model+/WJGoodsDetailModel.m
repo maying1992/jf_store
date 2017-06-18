@@ -31,13 +31,6 @@
                 [self.picList addObject:url];
             }
         }
-        
-        self.attributeList = [NSMutableArray array];
-        if (![dic[@"attribute_list"]isEqualToArray:@[]]) {
-            for (NSString * url in dic[@"attribute_list"]) {
-                [self.attributeList addObject:url];
-            }
-        }
     }
     return self;
 }

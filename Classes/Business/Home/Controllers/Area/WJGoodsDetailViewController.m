@@ -27,6 +27,9 @@
 @property(nonatomic, strong) SDCycleScrollView               * cycleScrollView;
 @property(nonatomic, strong) APIGoodsDetailsManager          * goodsDetailsManager;
 @property(nonatomic ,strong) WJGoodsDetailModel              * goodsDetailModel;
+@property(nonatomic ,strong) NSMutableArray                  * sizeArray;
+@property(nonatomic ,strong) NSMutableArray                  * colorArray;
+
 
 @end
 
@@ -56,9 +59,11 @@
 #pragma mark - APIManagerCallBackDelegate
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
-    self.goodsDetailModel = [manager fetchDataWithReformer:[WJGoodsDetailReformer new]];
-    _cycleScrollView.imageURLStringsGroup = _goodsDetailModel.picList;;
-
+    NSDictionary * dic = [manager fetchDataWithReformer:[WJGoodsDetailReformer new]];
+    self.goodsDetailModel = dic[@"categoryModel"];
+    self.sizeArray = dic[@"size_list"];
+    self.colorArray = dic[@"color_list"];
+    _cycleScrollView.imageURLStringsGroup = _goodsDetailModel.picList;
     [self.mainTableView reloadData];
 }
 
@@ -85,6 +90,8 @@
 {
     WJChooseGoodsPropertyController * chooseGoodsVC = [[WJChooseGoodsPropertyController alloc]init];
 //    chooseGoodsVC.productDetailModel = self.productDetailModel;
+    chooseGoodsVC.sizeArray = self.sizeArray;
+    chooseGoodsVC.colorArray = self.colorArray;
     chooseGoodsVC.toNextController = ToAddShoppingCart;
     chooseGoodsVC.isFromProductDetail = YES;
     chooseGoodsVC.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
@@ -95,6 +102,8 @@
 - (void)buyNowButtonAction
 {
     WJChooseGoodsPropertyController * chooseGoodsVC = [[WJChooseGoodsPropertyController alloc]init];
+    chooseGoodsVC.sizeArray = self.sizeArray;
+    chooseGoodsVC.colorArray = self.colorArray;
 //    chooseGoodsVC.productDetailModel = self.productDetailModel;
     chooseGoodsVC.toNextController = ToConfirmOrderController;
     chooseGoodsVC.isFromProductDetail = YES;

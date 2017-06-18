@@ -132,7 +132,7 @@
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
     if ([manager isKindOfClass:[APIQueryIntergralListManager class]]) {
-        self.listArray = [manager fetchDataWithReformer:[[WJIntegralListReformer alloc] init]];
+        self.listModel = [manager fetchDataWithReformer:[[WJIntegralListReformer alloc] init]];
         
         if (self.listArray.count == 0) {
             
@@ -187,7 +187,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 3;
+    if (self.listArray == nil || self.listArray.count == 0) {
+        return 0;
+    } else {
+        return self.listArray.count;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

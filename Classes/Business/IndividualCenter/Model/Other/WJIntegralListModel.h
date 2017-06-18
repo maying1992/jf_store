@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface WJIntegralListModel : NSObject
+@property(nonatomic,assign)NSInteger      integral;
 @property(nonatomic,assign)NSInteger      totalPage;
 @property(nonatomic,strong)NSMutableArray *integralList;
 - (id)initWithDic:(NSDictionary *)dic;

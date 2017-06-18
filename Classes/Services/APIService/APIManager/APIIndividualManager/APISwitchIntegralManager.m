@@ -1,14 +1,14 @@
 //
-//  APIOpenServiceCenterManager.m
+//  APISwitchIntegralManager.m
 //  jf_store
 //
 //  Created by maying on 2017/6/18.
 //  Copyright © 2017年 JF. All rights reserved.
 //
 
-#import "APIOpenServiceCenterManager.h"
+#import "APISwitchIntegralManager.h"
 
-@implementation APIOpenServiceCenterManager
+@implementation APISwitchIntegralManager
 - (instancetype)init
 {
     self = [super init];
@@ -45,15 +45,16 @@
 //让manager能够获取调用API所需要的数据
 - (NSDictionary *)paramsForApi:(APIBaseManager *)manager
 {
-    return @{@"order_total":self.payAmount ? : @"",
-             @"pay_type":self.payType,
+    return @{
+             @"integral":self.integral ? : @"",
+             @"in_user_id":self.inUserId ? : @"",
              };
 }
 
 #pragma mark - APIManager Methods
 - (NSString *)methodName
 {
-    return @"openServiceCenter";
+    return @"giveIntegral";
 }
 
 - (NSString *)serviceType

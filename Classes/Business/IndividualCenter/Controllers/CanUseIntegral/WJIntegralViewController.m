@@ -27,28 +27,28 @@
     self.title = @"积分";
     self.isHiddenTabBar = YES;
     [self.view addSubview:self.tableView];
-//    [self setUI];
+    [self setUI];
 }
 
-//-(void)setUI
-//{
-//    UIButton *givingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    givingButton.frame = CGRectMake(0, kScreenHeight - kNavBarAndStatBarHeight - ALD(44), kScreenWidth/2, ALD(44));
-//    [givingButton setTitle:@"赠送" forState:UIControlStateNormal];
-//    [givingButton setTitleColor:WJColorDardGray3 forState:UIControlStateNormal];
-//    givingButton.backgroundColor = WJColorWhite;
-//    [givingButton addTarget:self action:@selector(givingButtonAction) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:givingButton];
-//    
-//    
-//    UIButton *activateButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    activateButton.frame = CGRectMake(givingButton.right, kScreenHeight - kNavBarAndStatBarHeight - ALD(44), kScreenWidth/2, ALD(44));
-//    [activateButton setTitle:@"激活/复投" forState:UIControlStateNormal];
-//    [activateButton setTitleColor:WJColorWhite forState:UIControlStateNormal];
-//    activateButton.backgroundColor = WJColorMainColor;
-//    [activateButton addTarget:self action:@selector(activateButtonAction) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:activateButton];
-//}
+-(void)setUI
+{
+    UIButton *givingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    givingButton.frame = CGRectMake(0, kScreenHeight - kNavBarAndStatBarHeight - ALD(44), kScreenWidth/2, ALD(44));
+    [givingButton setTitle:@"赠送" forState:UIControlStateNormal];
+    [givingButton setTitleColor:WJColorDardGray3 forState:UIControlStateNormal];
+    givingButton.backgroundColor = WJColorWhite;
+    [givingButton addTarget:self action:@selector(givingButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:givingButton];
+    
+    
+    UIButton *activateButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    activateButton.frame = CGRectMake(givingButton.right, kScreenHeight - kNavBarAndStatBarHeight - ALD(44), kScreenWidth/2, ALD(44));
+    [activateButton setTitle:@"激活/复投" forState:UIControlStateNormal];
+    [activateButton setTitleColor:WJColorWhite forState:UIControlStateNormal];
+    activateButton.backgroundColor = WJColorMainColor;
+    [activateButton addTarget:self action:@selector(activateButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:activateButton];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -191,20 +191,19 @@
     
 }
 
-//#pragma mark - Action
-//-(void)givingButtonAction
-//{
-//    WJGivingListViewController *givingListVC = [[WJGivingListViewController alloc] init];
-//    [self.navigationController pushViewController:givingListVC animated:YES];
-//}
-//
-//
-//-(void)activateButtonAction
-//{
-//    WJIntegralActivateViewController *integralActivateVC = [[WJIntegralActivateViewController alloc] init];
-//    [self.navigationController pushViewController:integralActivateVC animated:YES];
-//}
+#pragma mark - Action
+-(void)givingButtonAction
+{
+    WJGivingListViewController *givingListVC = [[WJGivingListViewController alloc] init];
+    [self.navigationController pushViewController:givingListVC animated:YES];
+}
 
+
+-(void)activateButtonAction
+{
+    WJIntegralActivateViewController *integralActivateVC = [[WJIntegralActivateViewController alloc] init];
+    [self.navigationController pushViewController:integralActivateVC animated:YES];
+}
 
 #pragma mark - 属性方法
 - (UITableView *)tableView{

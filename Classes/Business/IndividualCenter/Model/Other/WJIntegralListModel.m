@@ -12,10 +12,11 @@
 - (id)initWithDic:(NSDictionary *)dic{
     if (self = [super init]) {
         
+        self.integral = [dic[@"integral"] integerValue];
         self.totalPage = [dic[@"total_page"] integerValue];
         
         NSMutableArray *arr = [NSMutableArray array];
-        for (NSDictionary *orderDic in dic[@"order_list"]) {
+        for (NSDictionary *orderDic in dic[@"integral_list"]) {
             WJIntegralModel *integralModel = [[WJIntegralModel alloc] initWithDic:orderDic];
             [arr addObject:integralModel];
         }

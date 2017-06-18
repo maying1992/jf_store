@@ -66,6 +66,7 @@
 		6D27CC281ECC545500BC6C97 /* WJWinnerListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D27CC271ECC545500BC6C97 /* WJWinnerListTableViewCell.m */; };
 		6D27CC2E1ECC674A00BC6C97 /* WJFloatWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D27CC2D1ECC674A00BC6C97 /* WJFloatWindowView.m */; };
 		6D3498E71EF62C7300509BF6 /* WJAtrrValueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3498E61EF62C7300509BF6 /* WJAtrrValueModel.m */; };
+		6D3498EA1EF6382F00509BF6 /* APIPayNowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3498E91EF6382F00509BF6 /* APIPayNowManager.m */; };
 		6D34D08C1ED2D0730065202B /* WJTradingHallRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34D08B1ED2D0730065202B /* WJTradingHallRechargeViewController.m */; };
 		6D34D08F1ED2EFC00065202B /* WJTradingHallRechargeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34D08E1ED2EFC00065202B /* WJTradingHallRechargeTableViewCell.m */; };
 		6D34D0921ED2F59D0065202B /* WJTradingHallOutputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D34D0911ED2F59D0065202B /* WJTradingHallOutputViewController.m */; };
@@ -475,6 +476,8 @@
 		6D27CC2D1ECC674A00BC6C97 /* WJFloatWindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJFloatWindowView.m; sourceTree = "<group>"; };
 		6D3498E51EF62C7300509BF6 /* WJAtrrValueModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJAtrrValueModel.h; sourceTree = "<group>"; };
 		6D3498E61EF62C7300509BF6 /* WJAtrrValueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJAtrrValueModel.m; sourceTree = "<group>"; };
+		6D3498E81EF6382F00509BF6 /* APIPayNowManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIPayNowManager.h; sourceTree = "<group>"; };
+		6D3498E91EF6382F00509BF6 /* APIPayNowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIPayNowManager.m; sourceTree = "<group>"; };
 		6D34D08A1ED2D0730065202B /* WJTradingHallRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJTradingHallRechargeViewController.h; sourceTree = "<group>"; };
 		6D34D08B1ED2D0730065202B /* WJTradingHallRechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJTradingHallRechargeViewController.m; sourceTree = "<group>"; };
 		6D34D08D1ED2EFC00065202B /* WJTradingHallRechargeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJTradingHallRechargeTableViewCell.h; sourceTree = "<group>"; };
@@ -2011,6 +2014,8 @@
 				6D52C8C81EF3DD400062D38B /* APIPrizeResultListManager.m */,
 				6D52D6AD1EF4D7D700396BBF /* APIPrizeNowManager.h */,
 				6D52D6AE1EF4D7D700396BBF /* APIPrizeNowManager.m */,
+				6D3498E81EF6382F00509BF6 /* APIPayNowManager.h */,
+				6D3498E91EF6382F00509BF6 /* APIPayNowManager.m */,
 			);
 			path = APIHomeManager;
 			sourceTree = "<group>";
@@ -3064,6 +3069,7 @@
 				6D962FB61EE9361F002E8326 /* WBApiManager.m in Sources */,
 				B4E5B6B11EC075A800F9A7CA /* WJCategoryReformer.m in Sources */,
 				6D0EABDE1EB326070026B20B /* WJNavigationController.m in Sources */,
+				6D3498EA1EF6382F00509BF6 /* APIPayNowManager.m in Sources */,
 				B45218EC1EBB3195009E9E40 /* BaseDBManager.m in Sources */,
 				B4429BD31ECDA61100A87C38 /* WJBondRecycleViewController.m in Sources */,
 				B4E5B7151EC5689200F9A7CA /* WJSetPersonalStoreView.m in Sources */,

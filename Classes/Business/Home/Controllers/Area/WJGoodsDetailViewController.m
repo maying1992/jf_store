@@ -104,6 +104,8 @@
     WJChooseGoodsPropertyController * chooseGoodsVC = [[WJChooseGoodsPropertyController alloc]init];
     chooseGoodsVC.sizeArray = self.sizeArray;
     chooseGoodsVC.colorArray = self.colorArray;
+    chooseGoodsVC.storeId = self.goodsDetailModel.storeId;
+    chooseGoodsVC.goodsID = self.goodsDetailModel.goodsId;
 //    chooseGoodsVC.productDetailModel = self.productDetailModel;
     chooseGoodsVC.toNextController = ToConfirmOrderController;
     chooseGoodsVC.isFromProductDetail = YES;

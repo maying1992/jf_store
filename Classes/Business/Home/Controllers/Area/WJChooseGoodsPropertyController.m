@@ -9,6 +9,8 @@
 #import "WJChooseGoodsPropertyController.h"
 #import "WJChooseGoodsSizeCell.h"
 #import "WJDigitalSelectorView.h"
+#import "APIPayNowManager.h"
+#import "WJAtrrValueModel.h"
 
 @interface WJChooseGoodsPropertyController ()<UITableViewDataSource, UITableViewDelegate,APIManagerCallBackDelegate>
 {
@@ -26,6 +28,7 @@
 @property(nonatomic,strong)UIButton                    *backButton;
 @property(nonatomic,strong)WJChooseGoodsSizeCell       *sizeCell;
 @property(nonatomic,strong)WJChooseGoodsSizeCell       *colorCell;
+@property(nonatomic,strong)APIPayNowManager            *payNowManager;
 
 @end
 
@@ -60,7 +63,15 @@
         ALERT(@"请选择数量");
         return;
     }
+    WJAtrrValueModel *sizeModel = self.sizeArray[sizeTag - 1001];
+    WJAtrrValueModel *colorModel = self.colorArray[colorTag - 1001];
+
     
+    self.payNowManager.attrRelationids = [NSString stringWithFormat:@"%@,%@",colorModel.valueId,sizeModel.valueId];
+    self.payNowManager.storeId = self.storeId;
+    self.payNowManager.goodsNum = NumberToString(currentCount);
+    self.payNowManager.goodsID = self.goodsID;
+    [self.payNowManager loadData];
 }
 
 -(void)backButtonAction
@@ -70,6 +81,17 @@
 }
 
 
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    NSDictionary * dic = [manager fetchDataWithReformer:nil];
+
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    NSLog(@"%@",manager.errorMessage);
+}
 
 #pragma mark - UITableViewDelegate
 
@@ -271,6 +293,14 @@
         button.backgroundColor = WJColorWhite;
         colorTag = 0;
     }
+}
+
+- (APIPayNowManager *)payNowManager{
+    if (_payNowManager == nil) {
+        _payNowManager = [[APIPayNowManager alloc]init];
+        _payNowManager.delegate = self;
+    }
+    return _payNowManager;
 }
 
 

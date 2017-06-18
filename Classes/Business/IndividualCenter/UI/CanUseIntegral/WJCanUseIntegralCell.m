@@ -56,6 +56,23 @@
     return self;
 }
 
+-(void)configDataWithModel:(WJIntegralModel *)model
+{
+    orderNoL.text = [NSString stringWithFormat:@"订单编号：%@",model.integralNo];
+    if ([model.consumptionType isEqualToString:@"1"]) {
+        
+        integralL.text = [NSString stringWithFormat:@"+%@积分",model.total];
+
+    } else {
+        
+        integralL.text = [NSString stringWithFormat:@"-%@积分",model.total];
+
+    }
+    nameL.text = model.tradeType;
+    timeL.text = model.tradeTime;
+}
+
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

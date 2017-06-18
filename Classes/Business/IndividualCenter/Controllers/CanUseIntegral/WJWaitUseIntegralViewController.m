@@ -10,6 +10,8 @@
 #import "WJWaitUseIntegralCell.h"
 #import "WJRefreshTableView.h"
 #import "APIQueryIntergralListManager.h"
+#import "WJIntegralListModel.h"
+#import "WJIntegralListReformer.h"
 @interface WJWaitUseIntegralViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     BOOL      isHeaderRefresh;
@@ -18,6 +20,7 @@
 @property(nonatomic,strong)APIQueryIntergralListManager *queryIntergralListManager;
 @property(nonatomic,strong)WJRefreshTableView       *tableView;
 @property(nonatomic,strong)NSMutableArray           *listArray;
+@property(nonatomic,strong)WJIntegralListModel      *listModel;
 
 @end
 
@@ -121,54 +124,51 @@
     
 }
 
-#pragma mark - APIManagerCallBackDelegate
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
     if ([manager isKindOfClass:[APIQueryIntergralListManager class]]) {
+        self.listArray = [manager fetchDataWithReformer:[[WJIntegralListReformer alloc] init]];
         
-        //        self.orderListModel = [manager fetchDataWithReformer:[[WJOrderListReformer alloc] init]];
-        //
-        //        if (self.orderArray.count == 0) {
-        //
-        //            self.orderArray =  self.orderListModel.orderList;
-        //
-        //        } else {
-        //
-        //            if (self.orderManager.firstPageNo < self.orderListModel.totalPage) {
-        //
-        //                [self.orderArray addObjectsFromArray: self.orderListModel.orderList];
-        //            }
-        //        }
+        if (self.listArray.count == 0) {
+            
+            self.listArray =  self.listModel.integralList;
+            
+        } else {
+            
+            if (self.queryIntergralListManager.firstPageNo < self.listModel.totalPage) {
+                
+                [self.listArray addObjectsFromArray: self.listModel.integralList];
+            }
+        }
         
         [self endGetData:YES];
         [self refreshFooterStatus:manager.hadGotAllData];
     }
 }
 
-
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager
 {
     if ([manager isKindOfClass:[APIQueryIntergralListManager class]]) {
         
-        //        if (manager.errorType == APIManagerErrorTypeNoData) {
-        //            [self refreshFooterStatus:YES];
-        //
-        //            if (isHeaderRefresh) {
-        //                if (self.orderArray.count > 0) {
-        //                    [self.orderArray removeAllObjects];
-        //
-        //                }
-        //                [self endGetData:YES];
-        //                return;
-        //            }
-        //            [self endGetData:NO];
-        //
-        //        } else {
-        //            
-        //            [self refreshFooterStatus:self.orderManager.hadGotAllData];
-        //            [self endGetData:NO];
-        //            
-        //        }
+        if (manager.errorType == APIManagerErrorTypeNoData) {
+            [self refreshFooterStatus:YES];
+            
+            if (isHeaderRefresh) {
+                if (self.listArray.count > 0) {
+                    [self.listArray removeAllObjects];
+                    
+                }
+                [self endGetData:YES];
+                return;
+            }
+            [self endGetData:NO];
+            
+        } else {
+            
+            [self refreshFooterStatus:self.queryIntergralListManager.hadGotAllData];
+            [self endGetData:NO];
+            
+        }
         
     }
 }
@@ -203,7 +203,7 @@
         cell.backgroundColor = WJColorWhite;
         cell.separatorInset = UIEdgeInsetsMake(0, ALD(12), 0, ALD(12));
     }
-    
+    [cell configDataWithModel:self.listArray[indexPath.row]];
     return cell;
 }
 

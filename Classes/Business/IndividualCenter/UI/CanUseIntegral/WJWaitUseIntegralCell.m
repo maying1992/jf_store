@@ -93,6 +93,16 @@
     }
     return self;
 }
+
+-(void)configDataWithModel:(WJIntegralModel *)model
+{
+    orderNoL.text = [NSString stringWithFormat:@"订单编号：%@",model.integralNo];
+    integralTypeL.text = [NSString stringWithFormat:@"%@: %@积分",model.tradeType,model.total];
+    startTimeL.text = model.tradeTime;
+    endTimeL.text = model.returnTime;
+}
+
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

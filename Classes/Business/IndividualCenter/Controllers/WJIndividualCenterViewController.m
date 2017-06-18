@@ -575,7 +575,7 @@
                         if (USER_ID) {
                             
                             
-                            if ([self.individualCenterModel.userType isEqualToString:@"3"]) {
+                            if (self.individualCenterModel.userType == 3) {
                                 
                                 WJConsumerServicesIntegralViewController *consumerServicesIntegralVC = [[WJConsumerServicesIntegralViewController alloc] init];
                                 [self.navigationController pushViewController:consumerServicesIntegralVC animated:YES];

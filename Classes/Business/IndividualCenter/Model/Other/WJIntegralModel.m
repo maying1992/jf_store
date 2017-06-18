@@ -17,9 +17,9 @@
 
         self.tradeType = dic[@"trade_type"];
         self.consumptionType = dic[@"consumption_type"];
-        self.time = dic[@"return_date"];
+        self.returnTime = dic[@"return_date"];
         self.tradeTime = dic[@"trade_date"];
-        self.tradeTime = dic[@"total"];
+        self.total = dic[@"total"];
 
     }
     return self;

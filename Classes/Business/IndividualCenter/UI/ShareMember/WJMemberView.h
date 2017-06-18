@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "WJMemberModel.h"
 @interface WJMemberView : UIView
+-(void)conFigDataWithModel:(WJMemberModel*)model;
 
 @end

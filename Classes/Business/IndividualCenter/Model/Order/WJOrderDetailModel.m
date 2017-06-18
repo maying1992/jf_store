@@ -18,7 +18,12 @@
         self.phone = ToString(dic[@"contacts"]);
 
         self.submitTime = ToString(dic[@"create_date"]);
-        self.payTime = ToString(dic[@"pay_time"]);        
+        self.payTime = ToString(dic[@"pay_time"]);
+        
+        self.orderPrice = ToString(dic[@"order_price"]);
+        self.orderIntegral = ToString(dic[@"order_integral"]);
+        
+        self.orderStatus = (OrderStatus)[dic[@"status"] intValue];
 
         NSMutableArray * resultsArray  = [NSMutableArray array];
         if ([dic isKindOfClass:[NSDictionary class]]) {

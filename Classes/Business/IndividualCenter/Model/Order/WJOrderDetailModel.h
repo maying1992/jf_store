@@ -17,6 +17,10 @@
 @property(nonatomic,strong) NSString        *submitTime;
 @property(nonatomic,strong) NSString        *payTime;
 
+@property(nonatomic,strong) NSString        *orderPrice;
+@property(nonatomic,strong) NSString        *orderIntegral;
+
+@property (nonatomic ,assign) OrderStatus    orderStatus;
 @property(nonatomic,strong)NSMutableArray   *shopList;
 
 

@@ -56,13 +56,13 @@
     return self;
 }
 
-
--(void)configData:(NSString *)time detail:(NSString *)str integral:(NSString *)integral
+-(void)configDataWithModel:(WJConsumeModel *)model
 {
-    timeL.text = time;
-    detailL.text = str;
-    integralL.text = integral;
+    timeL.text = model.date;
+    detailL.text = model.desc;
+    integralL.text = model.integral;
 }
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];

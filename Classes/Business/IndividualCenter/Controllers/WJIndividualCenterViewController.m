@@ -573,16 +573,19 @@
                         if (USER_ID) {
                             
                             
-                            if (self.individualCenterModel.userType == 3) {
-                                
-                                WJConsumerServicesIntegralViewController *consumerServicesIntegralVC = [[WJConsumerServicesIntegralViewController alloc] init];
-                                [self.navigationController pushViewController:consumerServicesIntegralVC animated:YES];
-                                
-                            } else {
-                                
-                                WJConsumerServicesProtocolViewController *consumerServicesProtocolVC = [[WJConsumerServicesProtocolViewController alloc] init];
-                                [self.navigationController pushViewController:consumerServicesProtocolVC animated:YES];
-                            }
+                            WJConsumerServicesIntegralViewController *consumerServicesIntegralVC = [[WJConsumerServicesIntegralViewController alloc] init];
+                            [self.navigationController pushViewController:consumerServicesIntegralVC animated:YES];
+                            
+//                            if (self.individualCenterModel.userType == 3) {
+//                                
+//                                WJConsumerServicesIntegralViewController *consumerServicesIntegralVC = [[WJConsumerServicesIntegralViewController alloc] init];
+//                                [self.navigationController pushViewController:consumerServicesIntegralVC animated:YES];
+//                                
+//                            } else {
+//                                
+//                                WJConsumerServicesProtocolViewController *consumerServicesProtocolVC = [[WJConsumerServicesProtocolViewController alloc] init];
+//                                [self.navigationController pushViewController:consumerServicesProtocolVC animated:YES];
+//                            }
                             
                         } else {
                             

@@ -16,7 +16,7 @@
 
 + (instancetype)alipayManager;
 
-- (void)callAlipayWithOrderString:(NSString *)orderString;
+- (void)callAlipayWithOrderString:(NSString *)orderString NowController:(WJViewController *)controller TotleCash:(NSString *)totleCash;
 
 - (void)handleOpenURL:(NSURL *)url;
 

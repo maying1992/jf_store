@@ -25,7 +25,6 @@
 @property(nonatomic,strong)APIOpenServiceCenterManager      *openServiceCenterManager;
 @property(nonatomic,strong)WJServiceCenterConditionModel    *conditionModel;
 @property(nonatomic,strong)UITableView                      *tableView;
-@property(nonatomic,strong)NSMutableArray                   *payArray;
 @property(nonatomic,strong)NSArray                          *listArray;
 @property(nonatomic,assign)NSInteger                        selectPayAwayIndex;
 @end
@@ -125,7 +124,6 @@
         return 7;
         
     }  else {
-        //        return self.payArray.count;
         return 2;
     }
 }
@@ -158,7 +156,6 @@
     }
     
     NSDictionary *infoDic = [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation];
-
     
     switch (indexPath.section) {
         case 0:
@@ -247,7 +244,6 @@
         }
             
             break;
-
             
         default:
             break;
@@ -279,7 +275,6 @@
 #pragma mark - Action
 -(void)payRightNowButtonAction
 {
-    //调支付宝、微信支付
     switch (self.selectPayAwayIndex) {
         case 0:
         {
@@ -342,14 +337,6 @@
              ];
 }
 
-- (NSMutableArray *)payArray
-{
-    if (!_payArray) {
-        _payArray = [NSMutableArray array];
-    }
-    
-    return _payArray;
-}
 
 -(APIServiceCenterConditionManager *)conditionManager
 {

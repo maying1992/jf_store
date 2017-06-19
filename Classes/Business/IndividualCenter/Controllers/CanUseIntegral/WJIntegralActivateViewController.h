@@ -9,5 +9,5 @@
 #import "WJViewController.h"
 
 @interface WJIntegralActivateViewController : WJViewController
-
+@property(nonatomic,strong)NSString *doubleTotalIntegral;
 @end

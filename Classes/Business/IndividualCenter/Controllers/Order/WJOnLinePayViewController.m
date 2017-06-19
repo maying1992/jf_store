@@ -35,7 +35,7 @@
 
 -(void)setUI
 {
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kNavigationBarHeight - ALD(64), kScreenWidth, ALD(64))];
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kNavBarAndStatBarHeight - kTabbarHeight, kScreenWidth, kTabbarHeight)];
     bottomView.backgroundColor = WJColorWhite;
     bottomView.layer.borderWidth = 0.5f;
     bottomView.layer.borderColor =  WJColorSeparatorLine.CGColor;
@@ -50,7 +50,7 @@
     [bottomView addSubview:totalAmountL];
     
     UIButton *payButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    payButton.frame = CGRectMake(bottomView.width - ALD(100),0, ALD(100), ALD(64));
+    payButton.frame = CGRectMake(bottomView.width - ALD(100),0, ALD(100), kTabbarHeight);
     [payButton setTitle:@"支付" forState:UIControlStateNormal];
     [payButton setTitleColor:WJColorWhite forState:UIControlStateNormal];
     payButton.titleLabel.font = WJFont14;
@@ -65,9 +65,9 @@
 {
     NSDictionary *dic = [manager fetchDataWithReformer:nil];
     if (self.selectPayAwayIndex  == 0) {
-        [[AlipayManager alipayManager] callAlipayWithOrderString:dic[@"order_total"] NowController:self TotleCash:dic[@"order_total"]];
+        [[WeixinPayManager WXPayManager] callWexinPayWithPrePayid:dic[@"prepayid"] NowController:self TotleCash:dic[@"order_total"]];
     }else{
-        [[WeixinPayManager WXPayManager] callWexinPayWithPrePayid:dic[@"order_total"] NowController:self TotleCash:dic[@"order_total"]];
+        [[AlipayManager alipayManager] callAlipayWithOrderString:dic[@"prepayid"] NowController:self TotleCash:dic[@"order_total"]];
     }
 }
 

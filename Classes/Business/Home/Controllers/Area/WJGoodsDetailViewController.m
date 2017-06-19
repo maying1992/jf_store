@@ -70,6 +70,7 @@
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager
 {
     NSLog(@"%@",manager.errorMessage);
+    ALERT(manager.errorMessage);
 }
 
 - (void)backBarButton:(UIButton *)btn{

@@ -11,8 +11,8 @@
 #import "QQApiManager.h"
 #import "WXApiManager.h"
 #import "WBApiManager.h"
-//#import "WeixinPayManager.h"
-//#import "AlipayManager.h"
+#import "WeixinPayManager.h"
+#import "AlipayManager.h"
 
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
@@ -50,7 +50,7 @@
     }else if ([sourceApplication isEqualToString:@"com.tencent.mqq"]) {
         [QQApiInterface handleOpenURL:url delegate:[QQApiManager sharedManager]];
     }else if ([url.host isEqualToString:@"safepay"]){
-//            [[AlipayManager alipayManager]handleOpenURL:url];
+            [[AlipayManager alipayManager]handleOpenURL:url];
     }else{
         [WeiboSDK handleOpenURL:url delegate:[WBApiManager sharedManager]];
     }
@@ -69,7 +69,7 @@
     }else if ([sourceApplication isEqualToString:@"com.tencent.mqq"]) {
         [QQApiInterface handleOpenURL:url delegate:[QQApiManager sharedManager]];
     }else if ([url.host isEqualToString:@"safepay"]){
-//        [[AlipayManager alipayManager]handleOpenURL:url];
+        [[AlipayManager alipayManager]handleOpenURL:url];
     }else{
         [WeiboSDK handleOpenURL:url delegate:[WBApiManager sharedManager]];
     }

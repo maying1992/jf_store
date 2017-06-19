@@ -21,14 +21,17 @@
     return instance;
 }
 
-- (void)callAlipayWithOrderString:(NSString *)orderString
+- (void)callAlipayWithOrderString:(NSString *)orderString NowController:(WJViewController *)controller TotleCash:(NSString *)totleCash
 {
-        NSString *appScheme = @"styw";
-        //调用支付结果开始支付
-        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-            NSLog(@"reslut = %@",resultDic);
-            
-        }];
+    self.selectPaymentVC = controller;
+    self.totleCash  = totleCash;
+
+    NSString *appScheme = @"styw";
+    //调用支付结果开始支付
+    [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+        NSLog(@"reslut = %@",resultDic);
+        
+    }];
 }
 
 - (void)handleOpenURL:(NSURL *)url

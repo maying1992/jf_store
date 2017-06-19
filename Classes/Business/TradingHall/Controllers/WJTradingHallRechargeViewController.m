@@ -75,13 +75,9 @@
 {
     NSDictionary * dic = [manager fetchDataWithReformer:nil];
     if (selectCell - 2 == 1) {
-        [AlipayManager alipayManager].selectPaymentVC = self;
-        [AlipayManager alipayManager].totleCash = dic[@"order_total"];
-        [[AlipayManager alipayManager]callAlipayWithOrderString:dic[@"prepayid"]];
+        [[AlipayManager alipayManager]callAlipayWithOrderString:dic[@"prepayid"] NowController:self TotleCash:dic[@"order_total"]];
     }else{
-        [WeixinPayManager WXPayManager].selectPaymentVC = self;
-        [WeixinPayManager WXPayManager].totleCash = dic[@"order_total"];
-        [[WeixinPayManager WXPayManager]callWexinPayWithPrePayid:dic[@"prepayid"]];
+        [[WeixinPayManager WXPayManager]callWexinPayWithPrePayid:dic[@"prepayid"]NowController:self TotleCash:dic[@"order_total"]];
     }
     
 }

@@ -27,8 +27,11 @@
 
 #pragma mark - Request WeiXin 
 //拿到prePayId创建请求参数
-- (void)callWexinPayWithPrePayid:(NSString *)prePayid
+- (void)callWexinPayWithPrePayid:(NSString *)prePayid NowController:(WJViewController *)controller TotleCash:(NSString *)totleCash;
 {
+    self.selectPaymentVC = controller;
+    self.totleCash = totleCash;
+    
     NSString    *package, *time_stamp, *nonce_str;
     //设置支付参数
     time_t now;
@@ -124,9 +127,13 @@
     if([resp isKindOfClass:[PayResp class]]){
         //支付返回结果，实际支付结果需要去微信服务器端查询
         if (resp.errCode == WXSuccess) {
-            WJPayResultViewController *successViewController = [[WJPayResultViewController alloc] init];
-            successViewController.totleCash = self.totleCash;
-            [self.selectPaymentVC.navigationController pushViewController:successViewController animated:YES whetherJump:YES];
+            if (self.paymentFrom == PaymentFromTradingHallView) {
+                [self.selectPaymentVC dismissViewControllerAnimated:YES completion:nil];
+            }else{
+                WJPayResultViewController *successViewController = [[WJPayResultViewController alloc] init];
+                successViewController.totleCash = self.totleCash;
+                [self.selectPaymentVC.navigationController pushViewController:successViewController animated:YES whetherJump:YES];
+            }
         }else{
             ALERT(@"支付失败！");
             NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);

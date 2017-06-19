@@ -57,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Classes/Business/IndividualCenter/Controllers/Order/WJOrderConfirmController.m"
-            timestampString = "519554701.823592"
+            filePath = "Classes/Business/IndividualCenter/Controllers/Information/WJEditAddressViewController.m"
+            timestampString = "519557291.938558"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
-            landmarkName = "-tableView:viewForFooterInSection:"
+            startingLineNumber = "344"
+            endingLineNumber = "344"
+            landmarkName = "-saveButtonAction"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

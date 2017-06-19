@@ -451,6 +451,7 @@
     _addAddressManager.cityId = self.selectCity.areaNo;
     _addAddressManager.districtId = self.selectDistrict.areaNo;
     _addAddressManager.isDefault = isDefault;
+    _addAddressManager.address = detailAddressTF.text;
     _addAddressManager.status = 1;
     return _addAddressManager;
 }

@@ -78,8 +78,9 @@
         position = _pageNo + 1;
     }
     
-    return @{@"pageSize":NumberToString(self.pageCount),
-             @"pageNum":NumberToString(position),
+    return @{
+//             @"pageSize":NumberToString(self.pageCount),
+//             @"pageNum":NumberToString(position),
              };
 }
 

@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *provinceId;
 @property (nonatomic, strong) NSString *cityId;
 @property (nonatomic, strong) NSString *districtId;
+@property (nonatomic, strong) NSString *address;
 
 @property (nonatomic, assign) NSInteger isDefault;
 @property (nonatomic, assign) NSInteger status; //操作类型 1.新增/修改 2.删除

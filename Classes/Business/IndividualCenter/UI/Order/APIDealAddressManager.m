@@ -45,7 +45,7 @@
 //让manager能够获取调用API所需要的数据
 - (NSDictionary *)paramsForApi:(APIBaseManager *)manager
 {
-    return @{
+    return @{@"address" :self.address?:@"",
              @"receivingId" :self.receiveId?:@"",
              @"consignee" :self.receiveName,
              @"contacts" :self.phone,
@@ -53,7 +53,7 @@
              @"city" :self.cityId,
              @"district" :self.districtId,
              @"isDefault" :NumberToString(self.isDefault),
-             @"stauts" :NumberToString(self.status)
+             @"operation_type" :NumberToString(self.status)
              };
 }
 

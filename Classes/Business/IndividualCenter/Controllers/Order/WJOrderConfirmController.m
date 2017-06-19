@@ -337,22 +337,20 @@
             
         } else {
             
-            nameL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(10), ALD(15), kScreenWidth - ALD(20), ALD(20))];
-            nameL.textColor = WJColorMainColor;
+            nameL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(10), ALD(15), kScreenWidth - ALD(20), ALD(22))];
+            nameL.textColor = WJColorMainTitle;
             nameL.text = [NSString stringWithFormat:@"收件人:%@",self.orderConfirmModel.receiverName];
             nameL.font = WJFont14;
             [cell.contentView addSubview:nameL];
             
-            
-            phoneL = [[UILabel alloc] initWithFrame:CGRectMake(nameL.frame.origin.x, nameL.bottom, kScreenWidth - ALD(20), ALD(20))];
-            phoneL.textColor = WJColorMainColor;
+            phoneL = [[UILabel alloc] initWithFrame:CGRectMake(nameL.frame.origin.x, nameL.bottom, kScreenWidth - ALD(20), ALD(22))];
+            phoneL.textColor = WJColorMainTitle;
             phoneL.text = [NSString stringWithFormat:@"手机号: %@",self.orderConfirmModel.phoneNumber];
             phoneL.font = WJFont14;
             [cell.contentView addSubview:phoneL];
             
-            
-            addressL = [[UILabel alloc] initWithFrame:CGRectMake(phoneL.frame.origin.x,phoneL.bottom, kScreenWidth - ALD(25), ALD(35))];
-            addressL.textColor = WJColorMainColor;
+            addressL = [[UILabel alloc] initWithFrame:CGRectMake(phoneL.frame.origin.x,phoneL.bottom, kScreenWidth - ALD(20), ALD(26))];
+            addressL.textColor = WJColorMainTitle;
             addressL.numberOfLines = 0;
             addressL.text = [NSString stringWithFormat:@"收货地址:%@",self.orderConfirmModel.address];
             addressL.font = WJFont14;

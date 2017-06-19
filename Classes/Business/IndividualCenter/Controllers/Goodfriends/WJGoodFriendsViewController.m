@@ -15,6 +15,8 @@
 #import "APIQueryFriendsListManager.h"
 #import "WJFriendsListReformer.h"
 #import "WJFriendListModel.h"
+#import "WJShare.h"
+
 @interface WJGoodFriendsViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
 {
 //    NSMutableArray *dataArray;
@@ -325,6 +327,13 @@
 
             
         } else {
+            
+//            [WJShare sendShareController:self
+//                                 LinkURL:dic[@"turn_url"]
+//                                 TagName:@"TAG_ProductDetail"
+//                                   Title:dic[@"title"]
+//                             Description:dic[@"describe"]
+//                              ThumbImage:dic[@"logo_pic_url"]];
             
         }
     } else {

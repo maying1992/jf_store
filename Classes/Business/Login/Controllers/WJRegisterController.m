@@ -61,6 +61,18 @@
         
     } else if ([manager isKindOfClass:[APIRegisterManager class]]) {
         
+        NSDictionary *userDic = [manager fetchDataWithReformer:nil];
+        
+        if (userDic) {
+            [[NSUserDefaults standardUserDefaults] setObject:userDic forKey:KUserInformation];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            NSDictionary  *userInformation = [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation];
+            NSLog(@"%@",userInformation);
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"loginRefresh" object:nil];
+        }
+        
         WJBindInformationViewController *bindInformationVC = [[WJBindInformationViewController alloc] init];
         [self.navigationController pushViewController:bindInformationVC animated:NO whetherJump:YES];
     }
@@ -178,8 +190,6 @@
         _recommenderInfoManager.delegate = self;
     }
     _recommenderInfoManager.recommenderCode = self.registerView.recommendedTextField.text;
-//    _recommenderInfoManager.loginName = self.registerView.phoneTextField.text;
-//    _recommenderInfoManager.verifiationCode = self.registerView.verifyTextField.text;
 
     return _recommenderInfoManager;
 }

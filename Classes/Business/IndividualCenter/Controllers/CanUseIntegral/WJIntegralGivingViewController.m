@@ -8,10 +8,15 @@
 
 #import "WJIntegralGivingViewController.h"
 #import "WJSystemAlertView.h"
+#import "APIIntegralDoubleManager.h"
 
-@interface WJIntegralGivingViewController ()<UITableViewDelegate,UITableViewDataSource,WJSystemAlertViewDelegate,UITextFieldDelegate>
-@property (nonatomic, strong)UITableView     *tableView;
-@property(nonatomic,strong)NSArray           *listArray;
+@interface WJIntegralGivingViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,APIManagerCallBackDelegate>
+{
+    UITextField *givingIntegralTF;
+}
+@property(nonatomic,strong)APIIntegralDoubleManager *integralDoubleManager;
+@property(nonatomic,strong)UITableView              *tableView;
+@property(nonatomic,strong)NSArray                  *listArray;
 @end
 
 @implementation WJIntegralGivingViewController
@@ -22,6 +27,9 @@
     self.isHiddenTabBar = YES;
     [self.view addSubview:self.tableView];
     [self initBottomView];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handletapPressGesture)];
+    [self.view  addGestureRecognizer:tapGesture];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,6 +47,20 @@
     givingBtn.backgroundColor = WJColorMainColor;
     [givingBtn addTarget:self action:@selector(givingBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:givingBtn];
+}
+
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    if ([manager isKindOfClass:[APIIntegralDoubleManager class]]) {
+        
+        ALERT(@"赠送成功");
+    }
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    [[TKAlertCenter defaultCenter]  postAlertWithMessage:manager.errorMessage];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -81,51 +103,51 @@
     UILabel *nameL = (UILabel *)[cell.contentView viewWithTag:3001];
     UITextField *contentTF = (UITextField *)[cell.contentView viewWithTag:3002];
     
+    NSDictionary *infoDic = [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation];
+
+    
     NSDictionary *dic = self.listArray[indexPath.row];
     nameL.text = dic[@"text"];
     
     if (indexPath.row == 0) {
         
         contentTF.userInteractionEnabled = NO;
-        contentTF.text = @"A8888";
+        contentTF.text = infoDic[@"userCode"];
         
         
     } else if (indexPath.row == 1) {
         
-        contentTF.text = @"李成";
+        contentTF.text = infoDic[@"name"];
         contentTF.userInteractionEnabled = NO;
         
         
     } else if (indexPath.row == 2) {
         
         contentTF.userInteractionEnabled = NO;
-        contentTF.text = @"18838218310";
+        contentTF.text = infoDic[@"contact"];
         
     } else {
         
         contentTF.userInteractionEnabled = YES;
         contentTF.placeholder = @"请输入积分";
+        givingIntegralTF = contentTF;
     }
     
     return cell;
 }
 
-#pragma mark - WJSystemAlertViewDelegate
--(void)wjAlertView:(WJSystemAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0) {
-        
-        
-    }
-}
-
 #pragma mark - Action
 -(void)givingBtnAction
 {
-    NSString *message = [NSString stringWithFormat:@"当前激活需红积分%@，可用积分%@是否确认激活?",@"4000",@"6000"];
-    WJSystemAlertView *alertView = [[WJSystemAlertView alloc] initWithTitle:@"激活信息" message:message delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"取消" textAlignment:NSTextAlignmentCenter];
-    [alertView showIn];
+    [self.integralDoubleManager loadData];
 }
+
+#pragma mark - Event
+-(void)handletapPressGesture
+{
+    [givingIntegralTF resignFirstResponder];
+}
+
 - (UITableView *)tableView
 {
     if (nil == _tableView) {
@@ -148,6 +170,18 @@
              @{@"text":@"联系方式"},
              @{@"text":@"赠送积分"}
              ];
+}
+
+-(APIIntegralDoubleManager *)integralDoubleManager
+{
+    if (!_integralDoubleManager) {
+        _integralDoubleManager = [[APIIntegralDoubleManager alloc] init];
+        _integralDoubleManager.delegate = self;
+    }
+    _integralDoubleManager.integral = givingIntegralTF.text;
+    _integralDoubleManager.integralId = self.integralModel.integralId;
+
+    return _integralDoubleManager;
 }
 
 @end

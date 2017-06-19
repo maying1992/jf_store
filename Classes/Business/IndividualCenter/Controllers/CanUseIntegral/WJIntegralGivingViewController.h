@@ -7,7 +7,8 @@
 //
 
 #import "WJViewController.h"
-
+#import "WJGivingIntegralModel.h"
 @interface WJIntegralGivingViewController : WJViewController
 
+@property(nonatomic,strong)WJGivingIntegralModel *integralModel;
 @end

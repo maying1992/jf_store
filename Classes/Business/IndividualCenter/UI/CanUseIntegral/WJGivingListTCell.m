@@ -24,35 +24,32 @@
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        timeL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(12), ALD(5), ALD(200), ALD(22))];
-        timeL.textColor = WJColorDardGray3;
-        timeL.text = @"2017-03-25";
-        timeL.font = WJFont12;
-    
-        
-
-        integralL = [[UILabel alloc] initWithFrame:CGRectMake(timeL.frame.origin.x, timeL.bottom + ALD(6), ALD(150), ALD(22))];
+        integralL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(12), ALD(5), ALD(150), ALD(22))];
         integralL.textColor = WJColorDardGray3;
         integralL.font = WJFont15;
-        integralL.text = @"3545积分";
+        
+        
+        timeL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(12), integralL.bottom + ALD(6), kScreenWidth - ALD(24) - ALD(90) - ALD(10), ALD(22))];
+        timeL.textColor = WJColorDardGray3;
+        timeL.font = WJFont12;
         
         givingButton = [UIButton buttonWithType:UIButtonTypeCustom];
         givingButton.frame = CGRectMake(kScreenWidth - ALD(12) - ALD(90), (ALD(60) - ALD(30))/2, ALD(80), ALD(30));
         [givingButton setTitle:@"赠送" forState:UIControlStateNormal];
-        [givingButton setTitleColor:WJColorMainColor forState:UIControlStateNormal];
+        [givingButton setTitleColor:WJColorDardGray6 forState:UIControlStateNormal];
         givingButton.layer.cornerRadius = 16;
         givingButton.layer.borderWidth = 0.5;
-        givingButton.layer.borderColor = WJColorMainColor.CGColor;
+        givingButton.layer.borderColor = WJColorDardGray6.CGColor;
+        givingButton.userInteractionEnabled = NO;
         [givingButton addTarget:self action:@selector(givingButtonAction) forControlEvents:UIControlEventTouchUpInside];
         
         
         UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth - ALD(12) - ALD(90) - ALD(15), (ALD(60) - ALD(44))/2,1, ALD(44))];
         lineView.backgroundColor = WJColorSeparatorLine;
         
-        typeL = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth - ALD(12) - ALD(90) - ALD(15) - ALD(40) - ALD(40), (ALD(60) - ALD(30))/2, ALD(40), ALD(30))];
+        typeL = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth - ALD(12) - ALD(90) - ALD(15) - ALD(40) - ALD(40), ALD(5), ALD(40), ALD(30))];
         typeL.textColor = WJColorDardGray3;
         typeL.font = WJFont15;
-        typeL.text = @"激活";
         typeL.textAlignment = NSTextAlignmentRight;
         
         [self.contentView addSubview:timeL];
@@ -63,6 +60,38 @@
     }
     return self;
 }
+
+-(void)configDataWithModel:(WJGivingIntegralModel *)model
+{
+    timeL.text = [NSString stringWithFormat:@"开始：%@ 结束:%@",model.startTime,model.endTime];
+    integralL.text = [NSString stringWithFormat:@"%@积分",model.integral];
+    typeL.text = model.remark;
+    
+    if (model.isDoubly == 1) {
+        
+        givingButton.userInteractionEnabled = YES;
+        
+        givingButton.layer.cornerRadius = 16;
+        givingButton.layer.borderWidth = 0.5;
+        givingButton.layer.borderColor = WJColorMainColor.CGColor;
+        [givingButton setTitleColor:WJColorMainColor forState:UIControlStateNormal];
+
+        
+    } else {
+        
+        givingButton.userInteractionEnabled = NO;
+        
+        givingButton.layer.cornerRadius = 16;
+        givingButton.layer.borderWidth = 0.5;
+        givingButton.layer.borderColor = WJColorDardGray6.CGColor;
+        [givingButton setTitleColor:WJColorDardGray6 forState:UIControlStateNormal];
+
+
+    }
+
+
+}
+
 
 #pragma mark - Action
 -(void)givingButtonAction

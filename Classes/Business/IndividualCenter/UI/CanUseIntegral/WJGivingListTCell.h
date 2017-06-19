@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "WJGivingIntegralModel.h"
 @interface WJGivingListTCell : UITableViewCell
 @property(nonatomic,strong)WJActionBlock tapGivingBlock;
+-(void)configDataWithModel:(WJGivingIntegralModel *)model;
 @end

@@ -9,13 +9,16 @@
 #import "WJIntegralActivateViewController.h"
 #import "WJSystemAlertView.h"
 #import "APIActivationIntegralManager.h"
+#import "APIUserBindingInfoManager.h"
 @interface WJIntegralActivateViewController ()<UITableViewDelegate,UITableViewDataSource,WJSystemAlertViewDelegate,UITextFieldDelegate,APIManagerCallBackDelegate>
 {
     UITextField *integralTextField;
 }
 @property(nonatomic,strong)APIActivationIntegralManager *activationIntegralManager;
-@property (nonatomic,strong)UITableView                 *tableView;
+@property(nonatomic,strong)APIUserBindingInfoManager    *userBindingInfoManager;
+@property(nonatomic,strong)UITableView                  *tableView;
 @property(nonatomic,strong)NSArray                      *listArray;
+@property(nonatomic,strong)NSString                     *serviceCode;
 @end
 
 @implementation WJIntegralActivateViewController
@@ -29,6 +32,8 @@
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handletapPressGesture)];
     [self.view  addGestureRecognizer:tapGesture];
+    
+    [self.userBindingInfoManager loadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,15 +56,23 @@
 #pragma mark - APIManagerCallBackDelegate
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
-    if([manager isKindOfClass:[APIActivationIntegralManager class]])
-    {
+    if ([manager isKindOfClass:[APIUserBindingInfoManager class]]) {
         
+        NSDictionary *dic = [manager fetchDataWithReformer:nil];
+        
+        self.serviceCode = dic[@"service_code"];
+        
+        [self.tableView reloadData];
+        
+    } else if ([manager isKindOfClass:[APIActivationIntegralManager class]]) {
+        
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager
 {
-    
+    [[TKAlertCenter defaultCenter]  postAlertWithMessage:manager.errorMessage];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -111,7 +124,7 @@
     if (indexPath.row == 0) {
         
         contentTF.userInteractionEnabled = NO;
-        contentTF.text = infoDic[@"userCode"];
+        contentTF.text = self.serviceCode ;
         
         
     } else if (indexPath.row == 1) {
@@ -150,6 +163,12 @@
     if (!(integralTextField.text.length > 0)) {
         ALERT(@"请输入激活积分");
         return;
+    }
+    
+    if ([integralTextField.text integerValue] > [self.doubleTotalIntegral integerValue]) {
+        ALERT(@"输入超出可激活积分");
+        return;
+        
     }
     [self.activationIntegralManager loadData];
     
@@ -197,5 +216,15 @@
     _activationIntegralManager.integral = integralTextField.text;
     return _activationIntegralManager;
 }
+
+-(APIUserBindingInfoManager *)userBindingInfoManager
+{
+    if (!_userBindingInfoManager) {
+        _userBindingInfoManager = [[APIUserBindingInfoManager alloc] init];
+        _userBindingInfoManager.delegate = self;
+    }
+    return _userBindingInfoManager;
+}
+
 
 @end

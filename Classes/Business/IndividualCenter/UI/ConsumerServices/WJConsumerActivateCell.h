@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WJMemberModel.h"
+#import "WJServiceCenterActivateModel.h"
 @interface WJConsumerActivateCell : UITableViewCell
 
-- (void)conFigDataWithMemberModel:(WJMemberModel *)model;
+- (void)conFigDataWithModel:(WJServiceCenterActivateModel *)model;
 
 @end

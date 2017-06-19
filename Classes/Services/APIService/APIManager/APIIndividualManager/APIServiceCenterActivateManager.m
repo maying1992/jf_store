@@ -1,31 +1,20 @@
 //
-//  APIQueryIntergralListManager.m
+//  APIServiceCenterActivateManager.m
 //  jf_store
 //
-//  Created by maying on 2017/6/17.
+//  Created by maying on 2017/6/19.
 //  Copyright © 2017年 JF. All rights reserved.
 //
 
-#import "APIQueryIntergralListManager.h"
+#import "APIServiceCenterActivateManager.h"
 
-@interface APIQueryIntergralListManager ()
-{
-    NSInteger _pageNo;  //  分页:第几页 从1开始 默认1
-}
-
-@property (nonatomic, assign, readwrite) NSInteger callBackCount;    //  请求返回的个数
-@end
-
-@implementation APIQueryIntergralListManager
-
+@implementation APIServiceCenterActivateManager
 - (instancetype)init
 {
     self = [super init];
     if (self) {
         self.paramSource = self;
         self.validator = self;
-        self.pageCount = 10;        // 默认10
-        self.firstPageNo = 1;       //默认第一页
     }
     return self;
 }
@@ -38,19 +27,7 @@
  */
 - (BOOL)manager:(APIBaseManager *)manager isCorrectWithCallBackData:(NSDictionary *)data
 {
-    if ([data isKindOfClass:[NSDictionary class]]) {
-        self.callBackCount = [data[@"total_page"] integerValue];
-        
-    }
-    BOOL isCorrect = [data[@"rspCode"] integerValue] == 0 && self.callBackCount > 0;
-    if (isCorrect) {
-        if (self.shouldCleanData) {
-            _pageNo = _firstPageNo;
-        }else {
-            _pageNo++;
-        }
-    }
-    return isCorrect;
+    return [data[@"rspCode"] integerValue] == 0;
 }
 
 /*
@@ -68,23 +45,17 @@
 //让manager能够获取调用API所需要的数据
 - (NSDictionary *)paramsForApi:(APIBaseManager *)manager
 {
-    NSInteger position = _pageNo;
-    if (self.shouldCleanData) {
-        position = _firstPageNo;
-    }else {
-        position = _pageNo + 1;
-    }
-    return @{@"integral_type" :NumberToString(self.integralType),
-//             @"user_id" :self.userID ? : @"",
-             @"page_size":NumberToString(self.pageCount),
-             @"current_page":NumberToString(position)
+    return @{
+             @"integral_id":self.integralIds ? : @"",
+             @"integral_red":self.redIntegral ? : @"",
+             @"integral_use":self.useIntegral ? : @""
              };
 }
 
 #pragma mark - APIManager Methods
 - (NSString *)methodName
 {
-    return @"queryIntegralList";
+    return @"activation";
 }
 
 - (NSString *)serviceType

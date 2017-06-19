@@ -99,6 +99,7 @@
 		6D41DF7D1EF7D7EE008597E1 /* APICreateOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41DF7C1EF7D7EE008597E1 /* APICreateOrderManager.m */; };
 		6D41DF801EF7F6A8008597E1 /* WJOnlinePayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41DF7F1EF7F6A8008597E1 /* WJOnlinePayModel.m */; };
 		6D41DF831EF7FB78008597E1 /* WJOrderConfirmReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41DF821EF7FB78008597E1 /* WJOrderConfirmReformer.m */; };
+		6D41DF861EF802BA008597E1 /* APIPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41DF851EF802BA008597E1 /* APIPaymentManager.m */; };
 		6D4FC7031EBC2C32007BC78A /* APILoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4FC7021EBC2C32007BC78A /* APILoginManager.m */; };
 		6D52C8BD1EF3C47C0062D38B /* APIPrizeGoodsListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8BC1EF3C47C0062D38B /* APIPrizeGoodsListManager.m */; };
 		6D52C8C01EF3C5C80062D38B /* WJLotteryGrawReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8BF1EF3C5C80062D38B /* WJLotteryGrawReformer.m */; };
@@ -587,6 +588,8 @@
 		6D41DF7F1EF7F6A8008597E1 /* WJOnlinePayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJOnlinePayModel.m; sourceTree = "<group>"; };
 		6D41DF811EF7FB78008597E1 /* WJOrderConfirmReformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJOrderConfirmReformer.h; sourceTree = "<group>"; };
 		6D41DF821EF7FB78008597E1 /* WJOrderConfirmReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJOrderConfirmReformer.m; sourceTree = "<group>"; };
+		6D41DF841EF802BA008597E1 /* APIPaymentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIPaymentManager.h; sourceTree = "<group>"; };
+		6D41DF851EF802BA008597E1 /* APIPaymentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIPaymentManager.m; sourceTree = "<group>"; };
 		6D45D0001EB97B2800CB3CF3 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6D4FC7011EBC2C32007BC78A /* APILoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APILoginManager.h; sourceTree = "<group>"; };
 		6D4FC7021EBC2C32007BC78A /* APILoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APILoginManager.m; sourceTree = "<group>"; };
@@ -2252,6 +2255,8 @@
 				6D3498E91EF6382F00509BF6 /* APIPayNowManager.m */,
 				6D41DF7B1EF7D7EE008597E1 /* APICreateOrderManager.h */,
 				6D41DF7C1EF7D7EE008597E1 /* APICreateOrderManager.m */,
+				6D41DF841EF802BA008597E1 /* APIPaymentManager.h */,
+				6D41DF851EF802BA008597E1 /* APIPaymentManager.m */,
 			);
 			path = APIHomeManager;
 			sourceTree = "<group>";
@@ -3614,6 +3619,7 @@
 				B4E5B6AB1EC065D400F9A7CA /* WJCategoryCell.m in Sources */,
 				6D99C4741ED53BC3008A6DA7 /* WJCanelOutputViewController.m in Sources */,
 				6D96DC3A1EB97F25004EDE7F /* UIView+LayoutMethods.m in Sources */,
+				6D41DF861EF802BA008597E1 /* APIPaymentManager.m in Sources */,
 				B45218ED1EBB3195009E9E40 /* WJDBAreaManager.m in Sources */,
 				B40EF3F41ECAB02800DDE49F /* WJSystemMessageCell.m in Sources */,
 				6D52C8D21EF3E4D20062D38B /* WJLotteryDrawDetailReformer.m in Sources */,

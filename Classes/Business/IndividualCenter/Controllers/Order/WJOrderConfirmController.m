@@ -66,21 +66,21 @@
 //    [self requestData];
 }
 
--(void)requestData
-{
-    if (self.orderConfirmFromController == FromPayRightNow) {
-        
-        //立即购买
-        [self showLoadingView];
-//        [self.payRightNowManager loadData];
-        
-    } else {
-        
-        //购物车
-        [self showLoadingView];
-//        [self.shopCartSettleManager loadData];
-    }
-}
+//-(void)requestData
+//{
+//    if (self.orderConfirmFromController == FromPayRightNow) {
+//        
+//        //立即购买
+//        [self showLoadingView];
+////        [self.payRightNowManager loadData];
+//        
+//    } else {
+//        
+//        //购物车
+//        [self showLoadingView];
+////        [self.shopCartSettleManager loadData];
+//    }
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

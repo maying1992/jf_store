@@ -11,10 +11,11 @@
 #import "WJDigitalSelectorView.h"
 #import "APIPayNowManager.h"
 #import "WJAtrrValueModel.h"
+#import "WJConfirmOrderReformer.h"
+#import "WJOrderConfirmModel.h"
+
 
 #import "WJOrderConfirmController.h"
-#import "WeixinPayManager.h"
-#import "AlipayManager.h"
 
 @interface WJChooseGoodsPropertyController ()<UITableViewDataSource, UITableViewDelegate,APIManagerCallBackDelegate>
 {
@@ -89,8 +90,11 @@
 #pragma mark - APIManagerCallBackDelegate
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
-    NSDictionary * dic = [manager fetchDataWithReformer:nil];
-    
+    WJOrderConfirmModel * orderConfirmModel = [manager fetchDataWithReformer:[WJConfirmOrderReformer new]];
+    WJOrderConfirmController * orderVC = [[WJOrderConfirmController alloc]init];
+    orderVC.orderConfirmFromController = FromPayRightNow;
+    orderVC.orderConfirmModel = orderConfirmModel;
+    [self.navigationController pushViewController:orderVC animated:YES];
 }
 
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager

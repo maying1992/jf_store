@@ -94,6 +94,8 @@
 		6D3A370A1EEFE10300F5767A /* WJChannelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3A37091EEFE10300F5767A /* WJChannelModel.m */; };
 		6D417D2F1ECE9C9800CB6E35 /* WJTradingHallTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D417D2E1ECE9C9800CB6E35 /* WJTradingHallTableViewCell.m */; };
 		6D417D391ECEF0C700CB6E35 /* WJKLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D417D381ECEF0C700CB6E35 /* WJKLineView.m */; };
+		6D41DF771EF7803E008597E1 /* WJConfirmOrderReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41DF761EF7803E008597E1 /* WJConfirmOrderReformer.m */; };
+		6D41DF7A1EF7ACC8008597E1 /* WJOrderIntegralListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41DF791EF7ACC8008597E1 /* WJOrderIntegralListModel.m */; };
 		6D4FC7031EBC2C32007BC78A /* APILoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4FC7021EBC2C32007BC78A /* APILoginManager.m */; };
 		6D52C8BD1EF3C47C0062D38B /* APIPrizeGoodsListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8BC1EF3C47C0062D38B /* APIPrizeGoodsListManager.m */; };
 		6D52C8C01EF3C5C80062D38B /* WJLotteryGrawReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8BF1EF3C5C80062D38B /* WJLotteryGrawReformer.m */; };
@@ -553,6 +555,10 @@
 		6D417D2E1ECE9C9800CB6E35 /* WJTradingHallTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJTradingHallTableViewCell.m; sourceTree = "<group>"; };
 		6D417D371ECEF0C700CB6E35 /* WJKLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJKLineView.h; sourceTree = "<group>"; };
 		6D417D381ECEF0C700CB6E35 /* WJKLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJKLineView.m; sourceTree = "<group>"; };
+		6D41DF751EF7803E008597E1 /* WJConfirmOrderReformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJConfirmOrderReformer.h; sourceTree = "<group>"; };
+		6D41DF761EF7803E008597E1 /* WJConfirmOrderReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJConfirmOrderReformer.m; sourceTree = "<group>"; };
+		6D41DF781EF7ACC8008597E1 /* WJOrderIntegralListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJOrderIntegralListModel.h; sourceTree = "<group>"; };
+		6D41DF791EF7ACC8008597E1 /* WJOrderIntegralListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJOrderIntegralListModel.m; sourceTree = "<group>"; };
 		6D45D0001EB97B2800CB3CF3 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6D4FC7011EBC2C32007BC78A /* APILoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APILoginManager.h; sourceTree = "<group>"; };
 		6D4FC7021EBC2C32007BC78A /* APILoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APILoginManager.m; sourceTree = "<group>"; };
@@ -1374,6 +1380,8 @@
 				6D52C8D11EF3E4D20062D38B /* WJLotteryDrawDetailReformer.m */,
 				6D52D6B61EF50B7700396BBF /* WJGoodsDetailReformer.h */,
 				6D52D6B71EF50B7700396BBF /* WJGoodsDetailReformer.m */,
+				6D41DF751EF7803E008597E1 /* WJConfirmOrderReformer.h */,
+				6D41DF761EF7803E008597E1 /* WJConfirmOrderReformer.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -2370,6 +2378,8 @@
 				B45218A21EB9F471009E9E40 /* WJAttributeDetailModel.m */,
 				B45218A31EB9F471009E9E40 /* WJOrderModel.h */,
 				B45218A41EB9F471009E9E40 /* WJOrderModel.m */,
+				6D41DF781EF7ACC8008597E1 /* WJOrderIntegralListModel.h */,
+				6D41DF791EF7ACC8008597E1 /* WJOrderIntegralListModel.m */,
 				B45218A51EB9F471009E9E40 /* WJProductModel.h */,
 				B45218A61EB9F471009E9E40 /* WJProductModel.m */,
 				B47DA0941ECED68D0038D7E2 /* WJIndividualOrderListModel.h */,
@@ -3312,6 +3322,7 @@
 				B4683FEB1EF684DF00339415 /* APIBondRecyleManager.m in Sources */,
 				B4429BC91ECD81F900A87C38 /* WJIndividualOrderDetailViewController.m in Sources */,
 				6D417D391ECEF0C700CB6E35 /* WJKLineView.m in Sources */,
+				6D41DF7A1EF7ACC8008597E1 /* WJOrderIntegralListModel.m in Sources */,
 				B45218CF1EBB2AB0009E9E40 /* WJLoginController.m in Sources */,
 				B4E5B6F91EC4632400F9A7CA /* WJRechargeOrderDetailViewController.m in Sources */,
 				6D27CC121ECC53C800BC6C97 /* WJAddressTableViewCell.m in Sources */,
@@ -3406,6 +3417,7 @@
 				6D962FB81EE9361F002E8326 /* WXApiManager.m in Sources */,
 				B4E5B6D81EC2F86700F9A7CA /* WJCreditsSwitchCell.m in Sources */,
 				6D0EABEE1EB326070026B20B /* WJUtilityMethod.m in Sources */,
+				6D41DF771EF7803E008597E1 /* WJConfirmOrderReformer.m in Sources */,
 				6D0EABED1EB326070026B20B /* WJGlobalVariable.m in Sources */,
 				B45218D01EBB2AB0009E9E40 /* WJRegisterController.m in Sources */,
 				6D0EABE01EB326070026B20B /* WJViewController.m in Sources */,

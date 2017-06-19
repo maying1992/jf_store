@@ -7,7 +7,6 @@
 //
 
 #import "WJOrderConfirmController.h"
-#import "WJOrderConfirmModel.h"
 #import "WJRechargeCenterCell.h"
 #import "WJOrderModel.h"
 #import "WJPurchaseOrderCell.h"
@@ -15,6 +14,10 @@
 #import "WJPassView.h"
 #import "WJSystemAlertView.h"
 #import "WJIntegralTradePasswordViewController.h"
+#import "WJOrderIntegralListModel.h"
+#import "WJProductModel.h"
+
+
 @interface WJOrderConfirmController ()<UITableViewDelegate, UITableViewDataSource,APIManagerCallBackDelegate,WJSystemAlertViewDelegate,WJPassViewDelegate>
 {
     UILabel    *nameL;
@@ -22,11 +25,13 @@
     UILabel    *addressL;
     
     UILabel    *totalAmountL;
-    CGFloat    totalOrderAmount;
-    CGFloat    totalIntegralAmount;
+
+    NSInteger  orderIntegralTotal;
+    NSInteger  orderCashTotal;
+    NSInteger  logisticsIntegralTotal;
+    NSInteger  logisticsCostTotal;
 
 }
-@property(nonatomic,strong)WJOrderConfirmModel      *orderConfirmModel;
 
 @property(nonatomic,strong)UITableView              *tableView;
 @property(nonatomic,strong)NSArray                  *listArray;
@@ -40,7 +45,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"确认订单";
-    totalOrderAmount = 0;
+    orderIntegralTotal = 0;
+    orderCashTotal = 0;
+    logisticsIntegralTotal = 0;
+    logisticsCostTotal = 0;
+
     self.isHiddenTabBar = YES;
     
     [self.view addSubview:self.tableView];
@@ -94,9 +103,8 @@
     
     
     totalAmountL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(12), (ALD(49) - ALD(25))/2, kScreenWidth - submitButton.width - ALD(15) - ALD(12), ALD(25))];
-    totalAmountL.text = [NSString stringWithFormat:@"合计: %@积分%@元 运费: %@",self.orderConfirmModel.orderTotal,self.orderConfirmModel.integralTotal,self.orderConfirmModel.freightTotal];
     totalAmountL.textColor = WJColorDarkGray;
-    totalAmountL.font = WJFont15;
+    totalAmountL.font = WJFont14;
     totalAmountL.textAlignment = NSTextAlignmentLeft;
     [bgView addSubview:totalAmountL];
     
@@ -227,26 +235,55 @@
 
         UILabel *totalMoneyL = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth - ALD(12) - ALD(150), 0, ALD(150), ALD(30))];
         totalMoneyL.textAlignment = NSTextAlignmentRight;
+        totalMoneyL.font = WJFont13;
+        totalMoneyL.textColor = WJColorDarkGray;
         [footerView addSubview:totalMoneyL];
-        
-        
-        WJOrderModel *order = self.orderConfirmModel.listArray[section - 2];
 
-        NSString *totalMoneyStr = [NSString stringWithFormat:@"商品小计: %@",order.PayAmount];
-        totalMoneyL.attributedText= [self attributedText:totalMoneyStr firstLength:5];
-        
-        
         UILabel *freightL = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth - ALD(12) - ALD(150), totalMoneyL.bottom, ALD(150), ALD(30))];
         freightL.textAlignment = NSTextAlignmentRight;
         [footerView addSubview:freightL];
-    
-        NSString *freightStr = [NSString stringWithFormat:@"运费: %@",order.freight];
-        freightL.attributedText= [self attributedText:freightStr firstLength:3];
+        freightL.font = WJFont13;
+        freightL.textColor = WJColorDarkGray;
         
         UIView *spaceView = [[UIView alloc] initWithFrame:CGRectMake(0, ALD(75) - ALD(15), kScreenWidth, ALD(15))];
         spaceView.backgroundColor = WJColorViewBg;
-        
         [footerView addSubview:spaceView];
+        
+        WJOrderModel *order = self.orderConfirmModel.listArray[section - 2];
+        NSInteger  orderIntegral = 0 ;
+        NSInteger  orderCash = 0 ;
+        NSInteger  logisticsIntegral = 0;
+        NSInteger  logisticsCost = 0;
+        for (WJProductModel * model in order.productList) {
+            orderIntegral = + [model.orderIntegral integerValue];
+            orderCash = + [model.orderTotal integerValue];
+            logisticsIntegral = + [model.logisticsIntegral integerValue];
+            logisticsCost = + [model.logisticsCost integerValue];
+        }
+        orderIntegralTotal = + orderIntegral;
+        orderCashTotal = + orderCash;
+        logisticsIntegralTotal = + logisticsIntegral;
+        logisticsCostTotal = + logisticsCost;
+
+        
+        NSString *totalMoneyStr = [self cashAddIntegralString:NumberToString(orderIntegral) CashString:NumberToString(orderCash)];
+        totalMoneyL.text = [NSString stringWithFormat:@"商品小计: %@",totalMoneyStr];
+
+        NSString *freightStr = [self cashAddIntegralString:NumberToString(logisticsIntegral) CashString:NumberToString(logisticsCost)];
+        if ([freightStr isEqualToString:@""]) {
+            freightStr = @"0元";
+        }
+        freightL.text = [NSString stringWithFormat:@"运费: %@",freightStr];
+        
+        
+        NSString *totalStr = [self cashAddIntegralString:NumberToString(orderIntegralTotal) CashString:NumberToString(orderCashTotal)];
+        totalStr = [NSString stringWithFormat:@"合计: %@",totalStr];
+        NSString *frStr = [self cashAddIntegralString:NumberToString(logisticsIntegralTotal) CashString:NumberToString(logisticsCostTotal)];
+        if ([frStr isEqualToString:@""]) {
+            frStr = @"0元";
+        }
+        frStr = [NSString stringWithFormat:@"运费: %@",frStr];
+        totalAmountL.text = [NSString stringWithFormat:@"%@  %@",totalStr,frStr];
         
         return footerView;
 
@@ -254,6 +291,22 @@
     }
     
     return footerView;
+}
+
+- (NSString *)cashAddIntegralString:(NSString *)integralString CashString:(NSString *)cashString
+{
+    NSString * string = @"";
+    if (![cashString isEqualToString:@"0"]) {
+        string = [string stringByAppendingFormat:@"%@元",cashString];
+    }
+    if (![integralString isEqualToString:@"0"]) {
+        if ([string isEqualToString:@""]) {
+            string = [string stringByAppendingFormat:@"%@积分",integralString];
+        }else{
+            string = [string stringByAppendingFormat:@"+%@积分",integralString];
+        }
+    }
+    return string;
 }
 
 
@@ -313,42 +366,17 @@
         
     } else if (indexPath.section == 1) {
         
-        
+        //积分选择
         WJRechargeCenterCell *rechargeCenterCell = [[WJRechargeCenterCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PurchaseOrderDetailCellIdentifier"];
         rechargeCenterCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell  = rechargeCenterCell;
-        
-        if (indexPath.row == 0) {
-            
-            rechargeCenterCell.textLabel.text = @"可用积分3倍支付";
-            
-            if (indexPath.row == self.selectPayAwayIndex) {
-                [rechargeCenterCell conFigData:YES];
-            }else{
-                [rechargeCenterCell conFigData:NO];
-            }
-            
-            
-        }  else if (indexPath.row == 1) {
-            
-            rechargeCenterCell.textLabel.text = @"购物积分5倍支付";
-            
-            if (indexPath.row == self.selectPayAwayIndex) {
-                [rechargeCenterCell conFigData:YES];
-            }else{
-                [rechargeCenterCell conFigData:NO];
-            }
-            
-        } else {
-            
-            rechargeCenterCell.textLabel.text = @"多功能积分1倍支付";
-            
-            if (indexPath.row == self.selectPayAwayIndex) {
-                [rechargeCenterCell conFigData:YES];
-            }else{
-                [rechargeCenterCell conFigData:NO];
-            }
+        if (indexPath.row == self.selectPayAwayIndex) {
+            [rechargeCenterCell conFigData:YES];
+        }else{
+            [rechargeCenterCell conFigData:NO];
         }
+        WJOrderIntegralListModel * model = self.orderConfirmModel.integralListArray[indexPath.row];
+        rechargeCenterCell.textLabel.text = model.integralMultiple;
+        cell  = rechargeCenterCell;
         
     } else {
         
@@ -418,27 +446,27 @@
     
 }
 
-- (NSAttributedString *)attributedText:(NSString *)text firstLength:(NSInteger)len{
-    
-    NSMutableAttributedString *result = [[NSMutableAttributedString alloc]
-                                         initWithString:text];
-    NSDictionary *attributesForFirstWord = @{
-                                             NSFontAttributeName : WJFont12,
-                                             NSForegroundColorAttributeName : WJColorDarkGray,
-                                             };
-    
-    NSDictionary *attributesForSecondWord = @{
-                                              NSFontAttributeName : WJFont12,
-                                              NSForegroundColorAttributeName : WJColorSubColor,
-                                              };
-    [result setAttributes:attributesForFirstWord
-                    range:NSMakeRange(0, len)];
-    [result setAttributes:attributesForSecondWord
-                    range:NSMakeRange(len, text.length - len)];
-    
-    
-    return [[NSAttributedString alloc] initWithAttributedString:result];
-}
+//- (NSAttributedString *)attributedText:(NSString *)text firstLength:(NSInteger)len{
+//    
+//    NSMutableAttributedString *result = [[NSMutableAttributedString alloc]
+//                                         initWithString:text];
+//    NSDictionary *attributesForFirstWord = @{
+//                                             NSFontAttributeName : WJFont12,
+//                                             NSForegroundColorAttributeName : WJColorDarkGray,
+//                                             };
+//    
+//    NSDictionary *attributesForSecondWord = @{
+//                                              NSFontAttributeName : WJFont12,
+//                                              NSForegroundColorAttributeName : WJColorSubColor,
+//                                              };
+//    [result setAttributes:attributesForFirstWord
+//                    range:NSMakeRange(0, len)];
+//    [result setAttributes:attributesForSecondWord
+//                    range:NSMakeRange(len, text.length - len)];
+//    
+//    
+//    return [[NSAttributedString alloc] initWithAttributedString:result];
+//}
 
 #pragma mark - Action
 -(void)submitButtonAction
@@ -536,54 +564,54 @@
     return _tableView;
 }
 
--(WJOrderConfirmModel *)orderConfirmModel
-{
-    if (!_orderConfirmModel) {
-        _orderConfirmModel = [[WJOrderConfirmModel alloc] init];
-    }
-    _orderConfirmModel.receiverName = @"小名";
-    _orderConfirmModel.address = @"京宝大厦";
-    _orderConfirmModel.phoneNumber = @"13312330493";
-    _orderConfirmModel.orderTotal = @"42324";
-    _orderConfirmModel.integralTotal = @"100";
-    _orderConfirmModel.freightTotal = @"20";
-    
-    
-    WJProductModel *product1 = [[WJProductModel alloc] init];
-    product1.name = @"茶水壶";
-    product1.standardDes = @"43mmx56mm";
-    product1.count = 1;
-    
-    WJProductModel *product2 = [[WJProductModel alloc] init];
-    product2.name = @"电暖壶";
-    product2.standardDes = @"30mmx40mm";
-    product2.count = 1;
-    
-    WJOrderModel *order1 = [[WJOrderModel alloc] init];
-    order1.shopName = @"北京阿迪王店铺";
-    order1.orderStatus = OrderStatusUnfinished;
-    order1.freight = @"34积分";
-    order1.PayAmount = @"4323积分";
-    
-    
-    WJOrderModel *order2 = [[WJOrderModel alloc] init];
-    order2.shopName = @"耐克店铺";
-    order2.orderStatus = OrderStatusUnfinished;
-    order2.freight = @"94积分";
-    order2.PayAmount = @"223积分";
-    
-    WJProductModel *product3 = [[WJProductModel alloc] init];
-    product3.name = @"保温杯";
-    product3.standardDes = @"30mmx40mm";
-    product3.count = 1;
-    
-    order1.productList = [NSMutableArray arrayWithObjects:product1,product2 ,nil];
-    order2.productList = [NSMutableArray arrayWithObjects:product3 ,product1,nil];
-    
-    _orderConfirmModel.listArray = [NSMutableArray arrayWithObjects:order1, order2,nil];
-    
-    return _orderConfirmModel;
-}
+//-(WJOrderConfirmModel *)orderConfirmModel
+//{
+//    if (!_orderConfirmModel) {
+//        _orderConfirmModel = [[WJOrderConfirmModel alloc] init];
+//    }
+//    _orderConfirmModel.receiverName = @"小名";
+//    _orderConfirmModel.address = @"京宝大厦";
+//    _orderConfirmModel.phoneNumber = @"13312330493";
+//    _orderConfirmModel.orderTotal = @"42324";
+//    _orderConfirmModel.integralTotal = @"100";
+//    _orderConfirmModel.freightTotal = @"20";
+//    
+//    
+//    WJProductModel *product1 = [[WJProductModel alloc] init];
+//    product1.name = @"茶水壶";
+//    product1.standardDes = @"43mmx56mm";
+//    product1.count = 1;
+//    
+//    WJProductModel *product2 = [[WJProductModel alloc] init];
+//    product2.name = @"电暖壶";
+//    product2.standardDes = @"30mmx40mm";
+//    product2.count = 1;
+//    
+//    WJOrderModel *order1 = [[WJOrderModel alloc] init];
+//    order1.shopName = @"北京阿迪王店铺";
+//    order1.orderStatus = OrderStatusUnfinished;
+//    order1.freight = @"34积分";
+//    order1.PayAmount = @"4323积分";
+//    
+//    
+//    WJOrderModel *order2 = [[WJOrderModel alloc] init];
+//    order2.shopName = @"耐克店铺";
+//    order2.orderStatus = OrderStatusUnfinished;
+//    order2.freight = @"94积分";
+//    order2.PayAmount = @"223积分";
+//    
+//    WJProductModel *product3 = [[WJProductModel alloc] init];
+//    product3.name = @"保温杯";
+//    product3.standardDes = @"30mmx40mm";
+//    product3.count = 1;
+//    
+//    order1.productList = [NSMutableArray arrayWithObjects:product1,product2 ,nil];
+//    order2.productList = [NSMutableArray arrayWithObjects:product3 ,product1,nil];
+//    
+//    _orderConfirmModel.listArray = [NSMutableArray arrayWithObjects:order1, order2,nil];
+//    
+//    return _orderConfirmModel;
+//}
 
 
 

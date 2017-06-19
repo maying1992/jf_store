@@ -14,9 +14,18 @@
 #import "WJMultifunctionIntegralViewController.h"
 #import "WJIntegralActivateViewController.h"
 #import "WJGivingListViewController.h"
-@interface WJIntegralViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)UITableView  *tableView;
-@property(nonatomic,strong)NSArray      *listArray;
+#import "APIQueryAllIntegralInfoManager.h"
+#import "WJAllTypeIntegralModel.h"
+#import "WJSystemAlertView.h"
+#import "WJBindindConsumerServicesCenterViewController.h"
+@interface WJIntegralViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate,WJSystemAlertViewDelegate>
+{
+    UIButton *activateButton;
+}
+@property(nonatomic,strong)APIQueryAllIntegralInfoManager *queryAllIntegralInfoManager;
+@property(nonatomic,strong)UITableView                    *tableView;
+@property(nonatomic,strong)NSArray                        *listArray;
+@property(nonatomic,strong)WJAllTypeIntegralModel         *allTypeIntegralModel;
 
 @end
 
@@ -28,6 +37,8 @@
     self.isHiddenTabBar = YES;
     [self.view addSubview:self.tableView];
     [self setUI];
+    
+    [self.queryAllIntegralInfoManager loadData];
 }
 
 -(void)setUI
@@ -41,7 +52,7 @@
     [self.view addSubview:givingButton];
     
     
-    UIButton *activateButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    activateButton = [UIButton buttonWithType:UIButtonTypeCustom];
     activateButton.frame = CGRectMake(givingButton.right, kScreenHeight - kNavBarAndStatBarHeight - ALD(44), kScreenWidth/2, ALD(44));
     [activateButton setTitle:@"激活/复投" forState:UIControlStateNormal];
     [activateButton setTitleColor:WJColorWhite forState:UIControlStateNormal];
@@ -54,6 +65,41 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    if ([manager isKindOfClass:[APIQueryAllIntegralInfoManager class]]) {
+        
+        NSDictionary *dic = [manager fetchDataWithReformer:nil];
+
+        self.allTypeIntegralModel = [[WJAllTypeIntegralModel alloc] initWithDic:dic];
+        
+        
+        if (self.allTypeIntegralModel.operationStatus == 1) {
+            
+            [activateButton setTitle:@"激活" forState:UIControlStateNormal];
+
+            
+        } else if (self.allTypeIntegralModel.operationStatus == 2) {
+            
+            [activateButton setTitle:@"激活" forState:UIControlStateNormal];
+
+        } else {
+            
+            [activateButton setTitle:@"复投" forState:UIControlStateNormal];
+
+        }
+        
+        [self.tableView reloadData];
+
+    }
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+
+}
+
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -107,33 +153,33 @@
     switch (indexPath.row) {
         case 0:
         {
-            integralL.text = [NSString stringWithFormat:@"%@积分",@"200"];
+            integralL.text = [NSString stringWithFormat:@"%@积分",self.allTypeIntegralModel.canUseIntegral];
         }
             break;
         case 1:
         {
-            integralL.text = [NSString stringWithFormat:@"%@积分",@"1000"];
+            integralL.text = [NSString stringWithFormat:@"%@积分",self.allTypeIntegralModel.shopIntegral];
 
         }
             break;
             
         case 2:
         {
-            integralL.text = [NSString stringWithFormat:@"%@积分",@"500"];
+            integralL.text = [NSString stringWithFormat:@"%@积分",self.allTypeIntegralModel.waitUseIntegral];
 
         }
             break;
             
         case 3:
         {
-            integralL.text = [NSString stringWithFormat:@"%@积分",@"230"];
+            integralL.text = [NSString stringWithFormat:@"%@积分",self.allTypeIntegralModel.multifunctionalIntegral];
 
         }
             break;
             
         case 4:
         {
-            integralL.text = [NSString stringWithFormat:@"%@积分",@"10"];
+            integralL.text = [NSString stringWithFormat:@"%@积分",self.allTypeIntegralModel.shareIntegral];
         }
             break;
             
@@ -191,6 +237,17 @@
     
 }
 
+#pragma mark - WJSystemAlertViewDelegate
+-(void)wjAlertView:(WJSystemAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        
+        WJBindindConsumerServicesCenterViewController *bindindConsumerServicesCenterVC = [[WJBindindConsumerServicesCenterViewController alloc] init];
+        [self.navigationController pushViewController:bindindConsumerServicesCenterVC animated:YES];
+    }
+}
+
+
 #pragma mark - Action
 -(void)givingButtonAction
 {
@@ -201,8 +258,32 @@
 
 -(void)activateButtonAction
 {
-    WJIntegralActivateViewController *integralActivateVC = [[WJIntegralActivateViewController alloc] init];
-    [self.navigationController pushViewController:integralActivateVC animated:YES];
+    
+    NSString *title = nil;
+    if (self.allTypeIntegralModel.operationStatus == 1) {
+        
+        WJSystemAlertView *alertView = [[WJSystemAlertView alloc] initWithTitle:@"绑定消费服务" message:@"您还未绑定消费服务中心，去绑定？" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"取消" textAlignment:NSTextAlignmentCenter];
+        [alertView showIn];
+        
+    } else if (self.allTypeIntegralModel.operationStatus == 2) {
+        
+        title = @"激活";
+
+        WJIntegralActivateViewController *integralActivateVC = [[WJIntegralActivateViewController alloc] init];
+        integralActivateVC.title = title;
+        integralActivateVC.doubleTotalIntegral = self.allTypeIntegralModel.doubleTotalIntegral;
+        [self.navigationController pushViewController:integralActivateVC animated:YES];
+        
+    } else {
+        
+        title = @"复投";
+        
+        WJIntegralActivateViewController *integralActivateVC = [[WJIntegralActivateViewController alloc] init];
+        integralActivateVC.title = title;
+        integralActivateVC.doubleTotalIntegral = self.allTypeIntegralModel.doubleTotalIntegral;
+        [self.navigationController pushViewController:integralActivateVC animated:YES];
+    }
+
 }
 
 #pragma mark - 属性方法
@@ -228,6 +309,15 @@
              @{@"text":@"多功能积分"},
              @{@"text":@"分享积分"}
              ];
+}
+
+-(APIQueryAllIntegralInfoManager *)queryAllIntegralInfoManager
+{
+    if (!_queryAllIntegralInfoManager) {
+        _queryAllIntegralInfoManager = [[APIQueryAllIntegralInfoManager alloc] init];
+        _queryAllIntegralInfoManager.delegate = self;
+    }
+    return _queryAllIntegralInfoManager;
 }
 
 @end

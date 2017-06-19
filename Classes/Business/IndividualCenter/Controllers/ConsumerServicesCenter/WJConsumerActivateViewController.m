@@ -10,9 +10,9 @@
 #import "WJConsumerActivateCell.h"
 #import "WJMemberModel.h"
 #import "WJSystemAlertView.h"
-@interface WJConsumerActivateViewController ()<UITableViewDelegate,UITableViewDataSource,WJSystemAlertViewDelegate>
-@property(nonatomic,strong)UITableView              *tableView;
-@property(nonatomic,strong)NSMutableArray           *listArray;
+@interface WJConsumerActivateViewController ()<UITableViewDelegate,UITableViewDataSource,WJSystemAlertViewDelegate,APIManagerCallBackDelegate>
+@property(nonatomic,strong)UITableView                  *tableView;
+@property(nonatomic,strong)NSMutableArray               *listArray;
 @end
 
 @implementation WJConsumerActivateViewController
@@ -139,6 +139,7 @@
     }
     return _listArray;
 }
+
 
 
 @end

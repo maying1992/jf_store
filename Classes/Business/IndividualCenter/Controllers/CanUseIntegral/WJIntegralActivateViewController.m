@@ -8,10 +8,14 @@
 
 #import "WJIntegralActivateViewController.h"
 #import "WJSystemAlertView.h"
-
-@interface WJIntegralActivateViewController ()<UITableViewDelegate,UITableViewDataSource,WJSystemAlertViewDelegate,UITextFieldDelegate>
-@property (nonatomic, strong)UITableView     *tableView;
-@property(nonatomic,strong)NSArray           *listArray;
+#import "APIActivationIntegralManager.h"
+@interface WJIntegralActivateViewController ()<UITableViewDelegate,UITableViewDataSource,WJSystemAlertViewDelegate,UITextFieldDelegate,APIManagerCallBackDelegate>
+{
+    UITextField *integralTextField;
+}
+@property(nonatomic,strong)APIActivationIntegralManager *activationIntegralManager;
+@property (nonatomic,strong)UITableView                 *tableView;
+@property(nonatomic,strong)NSArray                      *listArray;
 @end
 
 @implementation WJIntegralActivateViewController
@@ -22,6 +26,9 @@
     self.isHiddenTabBar = YES;
     [self.view addSubview:self.tableView];
     [self initBottomView];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handletapPressGesture)];
+    [self.view  addGestureRecognizer:tapGesture];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,6 +46,20 @@
     confirmBtn.backgroundColor = WJColorMainColor;
     [confirmBtn addTarget:self action:@selector(confirmBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:confirmBtn];
+}
+
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    if([manager isKindOfClass:[APIActivationIntegralManager class]])
+    {
+        
+    }
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -63,7 +84,7 @@
         cell.separatorInset = UIEdgeInsetsMake(0, ALD(12), 0, ALD(12));
         
         
-        UILabel *nameL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(12), 0, ALD(110), ALD(44))];
+        UILabel *nameL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(12), 0, ALD(120), ALD(44))];
         nameL.textColor = WJColorDarkGray;
         nameL.font = WJFont14;
         nameL.tag = 3001;
@@ -81,30 +102,34 @@
     UILabel *nameL = (UILabel *)[cell.contentView viewWithTag:3001];
     UITextField *contentTF = (UITextField *)[cell.contentView viewWithTag:3002];
     
+    NSDictionary *infoDic = [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation];
+
+    
     NSDictionary *dic = self.listArray[indexPath.row];
     nameL.text = dic[@"text"];
     
     if (indexPath.row == 0) {
         
         contentTF.userInteractionEnabled = NO;
-        contentTF.text = @"A8888";
+        contentTF.text = infoDic[@"userCode"];
         
         
     } else if (indexPath.row == 1) {
         
-        contentTF.text = @"李成";
+        contentTF.text = infoDic[@"name"];
         contentTF.userInteractionEnabled = NO;
 
         
     } else if (indexPath.row == 2) {
         
         contentTF.userInteractionEnabled = NO;
-        contentTF.text = @"18838218310";
+        contentTF.text = infoDic[@"contact"];
         
     } else {
         
         contentTF.userInteractionEnabled = YES;
         contentTF.placeholder = @"请输入积分";
+        integralTextField = contentTF;
     }
     
     return cell;
@@ -122,10 +147,23 @@
 #pragma mark - Action
 -(void)confirmBtnAction
 {
-    NSString *message = [NSString stringWithFormat:@"当前激活需红积分%@，可用积分%@是否确认激活?",@"4000",@"6000"];
-    WJSystemAlertView *alertView = [[WJSystemAlertView alloc] initWithTitle:@"激活信息" message:message delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"取消" textAlignment:NSTextAlignmentCenter];
-    [alertView showIn];
+    if (!(integralTextField.text.length > 0)) {
+        ALERT(@"请输入激活积分");
+        return;
+    }
+    [self.activationIntegralManager loadData];
+    
+//    NSString *message = [NSString stringWithFormat:@"当前激活需红积分%@，可用积分%@是否确认激活?",@"4000",@"6000"];
+//    WJSystemAlertView *alertView = [[WJSystemAlertView alloc] initWithTitle:@"激活信息" message:message delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"取消" textAlignment:NSTextAlignmentCenter];
+//    [alertView showIn];
 }
+
+#pragma mark - Action
+-(void)handletapPressGesture
+{
+    [integralTextField resignFirstResponder];
+}
+
 - (UITableView *)tableView
 {
     if (nil == _tableView) {
@@ -148,6 +186,16 @@
              @{@"text":@"联系方式"},
              @{@"text":@"激活积分"}
              ];
+}
+
+-(APIActivationIntegralManager *)activationIntegralManager
+{
+    if (!_activationIntegralManager) {
+        _activationIntegralManager = [[APIActivationIntegralManager alloc] init];
+        _activationIntegralManager.delegate = self;
+    }
+    _activationIntegralManager.integral = integralTextField.text;
+    return _activationIntegralManager;
 }
 
 @end

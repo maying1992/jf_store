@@ -309,6 +309,9 @@
 		B46840001EF774D900339415 /* WJConsumeServiceQueryReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = B4683FFF1EF774D900339415 /* WJConsumeServiceQueryReformer.m */; };
 		B46840031EF7814200339415 /* APICancelOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B46840021EF7814200339415 /* APICancelOrderManager.m */; };
 		B46840061EF7ACEE00339415 /* APIIntegralRechargeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B46840051EF7ACEE00339415 /* APIIntegralRechargeManager.m */; };
+		B46840091EF7B5B200339415 /* APIActivationIntegralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B46840081EF7B5B200339415 /* APIActivationIntegralManager.m */; };
+		B468400C1EF7BF0500339415 /* APIQueryAllIntegralInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B468400B1EF7BF0500339415 /* APIQueryAllIntegralInfoManager.m */; };
+		B46840121EF7C2AD00339415 /* WJAllTypeIntegralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B46840111EF7C2AD00339415 /* WJAllTypeIntegralModel.m */; };
 		B47825E31ED3D5A5002267A6 /* WJPassView.m in Sources */ = {isa = PBXBuildFile; fileRef = B47825E21ED3D5A5002267A6 /* WJPassView.m */; };
 		B47825E91ED4292F002267A6 /* WJSysContactsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B47825E81ED4292F002267A6 /* WJSysContactsManager.m */; };
 		B47825EC1ED44735002267A6 /* WJProductEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47825EB1ED44735002267A6 /* WJProductEditViewController.m */; };
@@ -1012,6 +1015,12 @@
 		B46840021EF7814200339415 /* APICancelOrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APICancelOrderManager.m; sourceTree = "<group>"; };
 		B46840041EF7ACEE00339415 /* APIIntegralRechargeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIIntegralRechargeManager.h; sourceTree = "<group>"; };
 		B46840051EF7ACEE00339415 /* APIIntegralRechargeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIIntegralRechargeManager.m; sourceTree = "<group>"; };
+		B46840071EF7B5B200339415 /* APIActivationIntegralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIActivationIntegralManager.h; sourceTree = "<group>"; };
+		B46840081EF7B5B200339415 /* APIActivationIntegralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIActivationIntegralManager.m; sourceTree = "<group>"; };
+		B468400A1EF7BF0500339415 /* APIQueryAllIntegralInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIQueryAllIntegralInfoManager.h; sourceTree = "<group>"; };
+		B468400B1EF7BF0500339415 /* APIQueryAllIntegralInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIQueryAllIntegralInfoManager.m; sourceTree = "<group>"; };
+		B46840101EF7C2AD00339415 /* WJAllTypeIntegralModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJAllTypeIntegralModel.h; sourceTree = "<group>"; };
+		B46840111EF7C2AD00339415 /* WJAllTypeIntegralModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJAllTypeIntegralModel.m; sourceTree = "<group>"; };
 		B47825E11ED3D5A5002267A6 /* WJPassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJPassView.h; sourceTree = "<group>"; };
 		B47825E21ED3D5A5002267A6 /* WJPassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJPassView.m; sourceTree = "<group>"; };
 		B47825E71ED4292F002267A6 /* WJSysContactsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WJSysContactsManager.h; path = ../../Business/IndividualCenter/Controllers/Goodfriends/WJSysContactsManager.h; sourceTree = "<group>"; };
@@ -2877,6 +2886,10 @@
 				B46840021EF7814200339415 /* APICancelOrderManager.m */,
 				B46840041EF7ACEE00339415 /* APIIntegralRechargeManager.h */,
 				B46840051EF7ACEE00339415 /* APIIntegralRechargeManager.m */,
+				B46840071EF7B5B200339415 /* APIActivationIntegralManager.h */,
+				B46840081EF7B5B200339415 /* APIActivationIntegralManager.m */,
+				B468400A1EF7BF0500339415 /* APIQueryAllIntegralInfoManager.h */,
+				B468400B1EF7BF0500339415 /* APIQueryAllIntegralInfoManager.m */,
 			);
 			path = APIIndividualManager;
 			sourceTree = "<group>";
@@ -2921,6 +2934,8 @@
 				B4683FF91EF772CD00339415 /* WJServiceCenterQueryModel.m */,
 				B4683FFB1EF7739C00339415 /* WJConsumeModel.h */,
 				B4683FFC1EF7739C00339415 /* WJConsumeModel.m */,
+				B46840101EF7C2AD00339415 /* WJAllTypeIntegralModel.h */,
+				B46840111EF7C2AD00339415 /* WJAllTypeIntegralModel.m */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -3252,6 +3267,7 @@
 				B459DA041EBD7BDB00F3748B /* WJEditAddressViewController.m in Sources */,
 				6D27CC2E1ECC674A00BC6C97 /* WJFloatWindowView.m in Sources */,
 				6D417D2F1ECE9C9800CB6E35 /* WJTradingHallTableViewCell.m in Sources */,
+				B46840091EF7B5B200339415 /* APIActivationIntegralManager.m in Sources */,
 				B40EF3E31EC98A5400DDE49F /* WJRechargeCenterCell.m in Sources */,
 				6D27CC251ECC543100BC6C97 /* WJSearchViewController.m in Sources */,
 				6D27CC231ECC543100BC6C97 /* WJHomeViewController.m in Sources */,
@@ -3322,6 +3338,7 @@
 				6D52D6B21EF5000600396BBF /* APIVerifyPayPasswordManager.m in Sources */,
 				B47826141ED59FF1002267A6 /* WJDeliveryAddressListModel.m in Sources */,
 				B4683FCD1EF6255000339415 /* APIServiceCenterConditionManager.m in Sources */,
+				B46840121EF7C2AD00339415 /* WJAllTypeIntegralModel.m in Sources */,
 				B40EF3BC1EC8387D00DDE49F /* WJAlreadyDeliverViewController.m in Sources */,
 				B45218851EB9F3D0009E9E40 /* WJIndivdualMoreCollectionViewCell.m in Sources */,
 				B45218C01EBB29DE009E9E40 /* WJRegisterView.m in Sources */,
@@ -3418,6 +3435,7 @@
 				6D96DC391EB97F25004EDE7F /* UIView+HandyAutoLayout.m in Sources */,
 				B47DA0B51ECEEF840038D7E2 /* WJWaitUseIntegralCell.m in Sources */,
 				B47DA0A61ECEE63E0038D7E2 /* WJCanUseIntegralCell.m in Sources */,
+				B468400C1EF7BF0500339415 /* APIQueryAllIntegralInfoManager.m in Sources */,
 				6D52D6BB1EF50BD200396BBF /* WJGoodsDetailModel.m in Sources */,
 				B4429BC31ECD7B5500A87C38 /* WJIndividualFinishOrderViewController.m in Sources */,
 				B45218D71EBB2C2B009E9E40 /* WJIndividualInformationController.m in Sources */,

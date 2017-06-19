@@ -196,7 +196,7 @@
                 contentL.text  =  infoDic[@"name"];
                 
             }  else if (indexPath.row == 3) {
-                contentL.text = infoDic[@"contact"];;
+                contentL.text = infoDic[@"contact"];
                 
             }  else if (indexPath.row == 4) {
                 contentL.text = [NSString stringWithFormat:@"%@元",self.conditionModel.amount];
@@ -205,6 +205,7 @@
                 contentL.text = [NSString stringWithFormat:@"%@/%@积分",self.conditionModel.freezeIntegral,self.conditionModel.integralStandard];
                 
             } else {
+                
                 contentL.text = [NSString stringWithFormat:@"%@/%@人 >= %@待用积分",self.conditionModel.member,self.conditionModel.memberStandard,self.conditionModel.memberIntegralStandard];
             }
             

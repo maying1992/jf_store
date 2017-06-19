@@ -1,14 +1,14 @@
 //
-//  APIQueryIntergralListManager.m
+//  APIIntegralGivingManager.m
 //  jf_store
 //
-//  Created by maying on 2017/6/17.
+//  Created by maying on 2017/6/19.
 //  Copyright © 2017年 JF. All rights reserved.
 //
 
-#import "APIQueryIntergralListManager.h"
+#import "APIIntegralGivingManager.h"
 
-@interface APIQueryIntergralListManager ()
+@interface APIIntegralGivingManager ()
 {
     NSInteger _pageNo;  //  分页:第几页 从1开始 默认1
 }
@@ -16,8 +16,7 @@
 @property (nonatomic, assign, readwrite) NSInteger callBackCount;    //  请求返回的个数
 @end
 
-@implementation APIQueryIntergralListManager
-
+@implementation APIIntegralGivingManager
 - (instancetype)init
 {
     self = [super init];
@@ -50,8 +49,7 @@
             _pageNo++;
         }
     }
-    return isCorrect;
-}
+    return isCorrect;}
 
 /*
  当调用API的参数是来自用户输入的时候，验证是很必要的。
@@ -74,8 +72,7 @@
     }else {
         position = _pageNo + 1;
     }
-    return @{@"integral_type" :NumberToString(self.integralType),
-//             @"user_id" :self.userID ? : @"",
+    return @{
              @"page_size":NumberToString(self.pageCount),
              @"current_page":NumberToString(position)
              };
@@ -84,7 +81,7 @@
 #pragma mark - APIManager Methods
 - (NSString *)methodName
 {
-    return @"queryIntegralList";
+    return @"doublyIntegralList";
 }
 
 - (NSString *)serviceType

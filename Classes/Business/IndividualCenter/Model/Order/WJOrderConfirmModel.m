@@ -18,7 +18,7 @@
         self.receiverName = ToString(dic[@"consignee"]);
         self.phoneNumber = ToString(dic[@"contacts"]);
         self.address = ToString(dic[@"address"]);
-//        self.receivingId = ToString(dic[@"receiving_id"]);
+        self.receivingId = ToString(dic[@"receiving_id"]);
 //        self.orderTotal = ToString(dic[@"orderTotal"]);
 //        self.integralTotal = ToString(dic[@"integralTotal"]);
 

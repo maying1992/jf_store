@@ -14,7 +14,6 @@
 #import "WJConfirmOrderReformer.h"
 #import "WJOrderConfirmModel.h"
 
-
 #import "WJOrderConfirmController.h"
 
 @interface WJChooseGoodsPropertyController ()<UITableViewDataSource, UITableViewDelegate,APIManagerCallBackDelegate>

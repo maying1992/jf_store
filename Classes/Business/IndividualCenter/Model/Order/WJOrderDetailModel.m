@@ -9,6 +9,7 @@
 #import "WJOrderDetailModel.h"
 #import "WJShopModel.h"
 @implementation WJOrderDetailModel
+
 - (id)initWithDic:(NSDictionary *)dic{
     if (self = [super init]) {
         

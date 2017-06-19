@@ -7,9 +7,10 @@
 //
 
 #import "WJViewController.h"
-#import "WJOrderModel.h"
+#import "WJOnlinePayModel.h"
+
 @interface WJOnLinePayViewController : WJViewController
 
-@property(nonatomic,strong)WJOrderModel *orderModel;
+@property(nonatomic,strong)WJOnlinePayModel  * onlinePayModel;
 
 @end

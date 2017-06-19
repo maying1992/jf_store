@@ -39,14 +39,13 @@
     totalAmountL.font = WJFont13;
     totalAmountL.textAlignment = NSTextAlignmentLeft;
     
-    NSString *totalAmountStr = [NSString stringWithFormat:@"运费: %@",self.orderModel.freight];
+    NSString *totalAmountStr = [NSString stringWithFormat:@"总计: %@",self.onlinePayModel.orderTotal];
     totalAmountL.attributedText= [self attributedText:totalAmountStr firstLength:3];
     [bottomView addSubview:totalAmountL];
     
     UIButton *payButton = [UIButton buttonWithType:UIButtonTypeCustom];
     payButton.frame = CGRectMake(bottomView.width - ALD(100),0, ALD(100), ALD(64));
-    [payButton setTitle:@"付款"
-                       forState:UIControlStateNormal];
+    [payButton setTitle:@"支付" forState:UIControlStateNormal];
     [payButton setTitleColor:WJColorWhite forState:UIControlStateNormal];
     payButton.titleLabel.font = WJFont14;
     payButton.backgroundColor = WJColorMainColor;
@@ -80,26 +79,20 @@
 #pragma mark - Action
 -(void)payButtonAction
 {
-    if (self.orderModel.payType == 1) {
-        
+//    if (self.orderModel.payType == 1) {
+    
         //微信
 //        self.payMentManager.payType = @"1";
 
         
-    } else {
+//    } else {
         //支付宝
 //        self.payMentManager.payType = @"2";
-    }
+//    }
     
     //    [self.payMentManager loadData];
 }
 
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

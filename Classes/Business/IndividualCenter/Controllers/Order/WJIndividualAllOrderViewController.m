@@ -408,7 +408,7 @@
         {
             //积分+微信
             WJOnLinePayViewController *onLinePayVC = [[WJOnLinePayViewController alloc] init];
-            onLinePayVC.orderModel = self.orderModel;
+//            onLinePayVC.orderModel = self.orderModel;
             [self.navigationController pushViewController:onLinePayVC animated:YES];
             
         }
@@ -418,7 +418,7 @@
         {
             //积分+支付宝
             WJOnLinePayViewController *onLinePayVC = [[WJOnLinePayViewController alloc] init];
-            onLinePayVC.orderModel = self.orderModel;
+//            onLinePayVC.orderModel = self.orderModel;
             [self.navigationController pushViewController:onLinePayVC animated:YES];
         }
             break;
@@ -486,7 +486,7 @@
         {
             //微信支付
             WJOnLinePayViewController *onLinePayVC = [[WJOnLinePayViewController alloc] init];
-            onLinePayVC.orderModel = order;
+//            onLinePayVC.orderModel = order;
             [self.navigationController pushViewController:onLinePayVC animated:YES];
             
         }
@@ -496,7 +496,7 @@
         {
             //支付宝支付
             WJOnLinePayViewController *onLinePayVC = [[WJOnLinePayViewController alloc] init];
-            onLinePayVC.orderModel = order;
+//            onLinePayVC.orderModel = order;
             [self.navigationController pushViewController:onLinePayVC animated:YES];
             
         }

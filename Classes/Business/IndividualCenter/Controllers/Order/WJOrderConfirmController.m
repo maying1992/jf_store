@@ -16,7 +16,11 @@
 #import "WJIntegralTradePasswordViewController.h"
 #import "WJOrderIntegralListModel.h"
 #import "WJProductModel.h"
+#import "APICreateOrderManager.h"
+#import "WJOnlinePayModel.h"
+#import "WJOrderConfirmReformer.h"
 
+#import "WJOnLinePayViewController.h"
 
 @interface WJOrderConfirmController ()<UITableViewDelegate, UITableViewDataSource,APIManagerCallBackDelegate,WJSystemAlertViewDelegate,WJPassViewDelegate>
 {
@@ -35,8 +39,8 @@
 
 @property(nonatomic,strong)UITableView              *tableView;
 @property(nonatomic,strong)NSArray                  *listArray;
-
 @property(nonatomic,assign)NSInteger                selectPayAwayIndex;
+@property(nonatomic,strong)APICreateOrderManager              * createOrderManager;
 
 @end
 
@@ -49,7 +53,8 @@
     orderCashTotal = 0;
     logisticsIntegralTotal = 0;
     logisticsCostTotal = 0;
-
+    _selectPayAwayIndex = 0;
+    
     self.isHiddenTabBar = YES;
     
     [self.view addSubview:self.tableView];
@@ -113,7 +118,15 @@
 #pragma mark - APIManagerCallBackDelegate
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
+    WJOnlinePayModel * onlinePayModel = [manager fetchDataWithReformer:[WJOrderConfirmReformer new]];
     
+    if ([onlinePayModel.orderIntegral integerValue] == 0) {
+        WJOnLinePayViewController * onLinePayVC = [[WJOnLinePayViewController alloc]init];
+        onLinePayVC.onlinePayModel = onlinePayModel;
+        [self.navigationController pushViewController:onLinePayVC animated:YES];
+    }else{
+
+    }
 }
 
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager
@@ -408,35 +421,12 @@
             NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
             [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
             
-//            if (self.orderConfirmFromController == FromPayRightNow) {
-//                
-//                //立即购买
-//                WJOrderShopModel *orderShopModel = [self.orderConfirmModel.shopArray objectAtIndex:0];
-//                WJProductModel *productModel =[orderShopModel.productArray firstObject];
-//                
-//                _payRightNowManager.shopId = orderShopModel.shopId;
-//                _payRightNowManager.skuId = productModel.skuId;
-//                _payRightNowManager.goodsCount = productModel.count;
-//                _payRightNowManager.receiveId = addressModel.receivingId;
-//                
-//                [self showLoadingView];
-//                [_payRightNowManager loadData];
-//                
-//            } else {
-//                
-//                //购物车
-//                _shopCartSettleManager.receiveId = addressModel.receivingId;
-//                [self showLoadingView];
-//                [_shopCartSettleManager loadData];
-//                
-//            }
-            
         };
         [self.navigationController pushViewController:myDeliveryAddressVC animated:YES];
         
     } else if (indexPath.section == 1) {
         
-        self.selectPayAwayIndex = indexPath.row;
+        self.selectPayAwayIndex = indexPath.row + 1;
 
         [self.tableView reloadData];
     }
@@ -469,9 +459,32 @@
 #pragma mark - Action
 -(void)submitButtonAction
 {
-    WJPassView *passView  = [[WJPassView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - ALD(50)) title:@"请输入支付密码"];
-    passView.delegate = self;
-    [passView showIn];
+    if (self.orderConfirmFromController == FromPayRightNow) {
+
+        //立即购买
+        WJOrderModel *order = self.orderConfirmModel.listArray[0];
+
+        
+        WJProductModel *productModel =[order.productList firstObject];
+        self.createOrderManager.storeId = order.shopId;
+        self.createOrderManager.goodsNum = NumberToString(productModel.count);
+        self.createOrderManager.skuId = productModel.skuId;
+        self.createOrderManager.type = @"2";
+//        [self showLoadingView];
+        [_createOrderManager loadData];
+
+    } else {
+
+        //购物车
+//        _shopCartSettleManager.receiveId = addressModel.receivingId;
+//        [self showLoadingView];
+//        [_shopCartSettleManager loadData];
+        
+    }
+    
+//    WJPassView *passView  = [[WJPassView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - ALD(50)) title:@"请输入支付密码"];
+//    passView.delegate = self;
+//    [passView showIn];
     
     
 //    if (self.orderConfirmModel.receiverName.length == 0 || self.orderConfirmModel.phoneNumber.length == 0 || self.orderConfirmModel.address.length == 0) {
@@ -550,6 +563,17 @@
 }
 
 #pragma mark - 属性方法
+- (APICreateOrderManager *)createOrderManager
+{
+    if (_createOrderManager == nil) {
+        _createOrderManager = [[APICreateOrderManager alloc]init];
+        _createOrderManager.delegate = self;
+    }
+    _createOrderManager.receivingId = self.orderConfirmModel.receivingId;
+    _createOrderManager.integralType = NumberToString(self.selectPayAwayIndex + 1);
+    return _createOrderManager;
+}
+
 - (UITableView *)tableView{
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavBarAndStatBarHeight - ALD(49)) style:UITableViewStyleGrouped];

@@ -79,6 +79,9 @@
     [self.view addSubview:self.collectionView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshIndividualCenter) name:kTabIndividualCenterRefresh object:nil];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshIndividualCenter) name:kCancelOrderSuccess object:nil];
 
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshView) name:@"IndividualCenterRefresh" object:nil];

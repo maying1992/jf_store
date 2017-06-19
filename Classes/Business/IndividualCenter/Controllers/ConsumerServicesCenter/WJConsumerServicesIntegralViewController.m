@@ -15,6 +15,7 @@
 #import "WJRefreshTableView.h"
 #import "WJConsumeServiceQueryReformer.h"
 #import "WJServiceCenterQueryModel.h"
+#import "WJConsumerServicesPayViewController.h"
 @interface WJConsumerServicesIntegralViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
 {
     BOOL      isHeaderRefresh;
@@ -292,7 +293,8 @@
 
 -(void)renewButtonAction
 {
-    
+    WJConsumerServicesPayViewController *consumerServicesPayVC = [[WJConsumerServicesPayViewController alloc] init];
+    [self.navigationController pushViewController:consumerServicesPayVC animated:YES];
 }
 
 -(WJConsumerServiceTopView *)topView

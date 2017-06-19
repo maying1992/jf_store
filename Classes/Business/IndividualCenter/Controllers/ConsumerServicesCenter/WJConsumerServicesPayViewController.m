@@ -14,6 +14,8 @@
 #import "WJServiceCenterConditionModel.h"
 #import "APIOpenServiceCenterManager.h"
 #import "WJAddressViewController.h"
+#import "AlipayManager.h"
+#import "WeixinPayManager.h"
 
 @interface WJConsumerServicesPayViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
 {
@@ -93,18 +95,15 @@
     } else if ([manager isKindOfClass:[APIOpenServiceCenterManager class]]) {
         
         NSDictionary *dic = [manager fetchDataWithReformer:nil];
-
-//        if ([self.openServiceCenterManager.payType isEqualToString:@"1"]) {
-//            
-//            [AlipayManager alipayManager].selectPaymentVC = self;
-//            [AlipayManager alipayManager].totleCash = dic[@"order_total"];
-//            [[AlipayManager alipayManager]callAlipayWithOrderString:dic[@"trade_no"]];
-//            
-//        }else if ([self.openServiceCenterManager.payType isEqualToString:@"2"]){
-//            [WeixinPayManager WXPayManager].selectPaymentVC = self;
-//            [WeixinPayManager WXPayManager].totleCash = dic[@"order_total"];
-//            [[WeixinPayManager WXPayManager]callWexinPayWithPrePayid:dic[@"trade_no"]];
-//        }
+        
+        if ([self.openServiceCenterManager.payType isEqualToString:@"1"]) {
+            
+            [[AlipayManager alipayManager]callAlipayWithOrderString:dic[@"prepayid"] NowController:self TotleCash:dic[@"order_total"]];
+            
+        }else if ([self.openServiceCenterManager.payType isEqualToString:@"2"]){
+     
+            [[WeixinPayManager WXPayManager]callWexinPayWithPrePayid:dic[@"prepayid"]NowController:self TotleCash:dic[@"order_total"]];
+        }
     }
 }
 

@@ -91,7 +91,7 @@
 #define kTabCategoryRefresh         @"RefreshCategory"          //tab分类刷新
 #define kTabIndividualCenterRefresh @"RefreshIndividualCenter"  //tab个人中心刷新
 
-#define kDeleteOrderSuccess         @"deleteOrderSuccess"       //删除订单
+#define kCancelOrderSuccess         @"cancelOrderSuccess"       //取消订单
 #define kUserIdToWeb                @"UserIdToWeb"              //useid给H5
 
 

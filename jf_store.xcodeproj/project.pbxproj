@@ -96,6 +96,10 @@
 		6D417D391ECEF0C700CB6E35 /* WJKLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D417D381ECEF0C700CB6E35 /* WJKLineView.m */; };
 		6D41DF771EF7803E008597E1 /* WJConfirmOrderReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41DF761EF7803E008597E1 /* WJConfirmOrderReformer.m */; };
 		6D41DF7A1EF7ACC8008597E1 /* WJOrderIntegralListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41DF791EF7ACC8008597E1 /* WJOrderIntegralListModel.m */; };
+		6D41DF7D1EF7D7EE008597E1 /* APICreateOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41DF7C1EF7D7EE008597E1 /* APICreateOrderManager.m */; };
+		6D41DF801EF7F6A8008597E1 /* WJOnlinePayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41DF7F1EF7F6A8008597E1 /* WJOnlinePayModel.m */; };
+		6D41DF831EF7FB78008597E1 /* WJOrderConfirmReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41DF821EF7FB78008597E1 /* WJOrderConfirmReformer.m */; };
+		6D41DF861EF802BA008597E1 /* APIPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41DF851EF802BA008597E1 /* APIPaymentManager.m */; };
 		6D4FC7031EBC2C32007BC78A /* APILoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4FC7021EBC2C32007BC78A /* APILoginManager.m */; };
 		6D52C8BD1EF3C47C0062D38B /* APIPrizeGoodsListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8BC1EF3C47C0062D38B /* APIPrizeGoodsListManager.m */; };
 		6D52C8C01EF3C5C80062D38B /* WJLotteryGrawReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D52C8BF1EF3C5C80062D38B /* WJLotteryGrawReformer.m */; };
@@ -578,6 +582,14 @@
 		6D41DF761EF7803E008597E1 /* WJConfirmOrderReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJConfirmOrderReformer.m; sourceTree = "<group>"; };
 		6D41DF781EF7ACC8008597E1 /* WJOrderIntegralListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJOrderIntegralListModel.h; sourceTree = "<group>"; };
 		6D41DF791EF7ACC8008597E1 /* WJOrderIntegralListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJOrderIntegralListModel.m; sourceTree = "<group>"; };
+		6D41DF7B1EF7D7EE008597E1 /* APICreateOrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICreateOrderManager.h; sourceTree = "<group>"; };
+		6D41DF7C1EF7D7EE008597E1 /* APICreateOrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APICreateOrderManager.m; sourceTree = "<group>"; };
+		6D41DF7E1EF7F6A8008597E1 /* WJOnlinePayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJOnlinePayModel.h; sourceTree = "<group>"; };
+		6D41DF7F1EF7F6A8008597E1 /* WJOnlinePayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJOnlinePayModel.m; sourceTree = "<group>"; };
+		6D41DF811EF7FB78008597E1 /* WJOrderConfirmReformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJOrderConfirmReformer.h; sourceTree = "<group>"; };
+		6D41DF821EF7FB78008597E1 /* WJOrderConfirmReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJOrderConfirmReformer.m; sourceTree = "<group>"; };
+		6D41DF841EF802BA008597E1 /* APIPaymentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIPaymentManager.h; sourceTree = "<group>"; };
+		6D41DF851EF802BA008597E1 /* APIPaymentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIPaymentManager.m; sourceTree = "<group>"; };
 		6D45D0001EB97B2800CB3CF3 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6D4FC7011EBC2C32007BC78A /* APILoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APILoginManager.h; sourceTree = "<group>"; };
 		6D4FC7021EBC2C32007BC78A /* APILoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APILoginManager.m; sourceTree = "<group>"; };
@@ -1535,6 +1547,8 @@
 				B4683FF01EF68EE000339415 /* WJFriendsListReformer.m */,
 				B4683FFE1EF774D900339415 /* WJConsumeServiceQueryReformer.h */,
 				B4683FFF1EF774D900339415 /* WJConsumeServiceQueryReformer.m */,
+				6D41DF811EF7FB78008597E1 /* WJOrderConfirmReformer.h */,
+				6D41DF821EF7FB78008597E1 /* WJOrderConfirmReformer.m */,
 				B468401F1EF7D47000339415 /* WJServiceCenterActivateReformer.h */,
 				B46840201EF7D47000339415 /* WJServiceCenterActivateReformer.m */,
 				B468402E1EF7F64200339415 /* WJGivingIntegralListReformer.h */,
@@ -2239,6 +2253,10 @@
 				6D52D6AE1EF4D7D700396BBF /* APIPrizeNowManager.m */,
 				6D3498E81EF6382F00509BF6 /* APIPayNowManager.h */,
 				6D3498E91EF6382F00509BF6 /* APIPayNowManager.m */,
+				6D41DF7B1EF7D7EE008597E1 /* APICreateOrderManager.h */,
+				6D41DF7C1EF7D7EE008597E1 /* APICreateOrderManager.m */,
+				6D41DF841EF802BA008597E1 /* APIPaymentManager.h */,
+				6D41DF851EF802BA008597E1 /* APIPaymentManager.m */,
 			);
 			path = APIHomeManager;
 			sourceTree = "<group>";
@@ -2451,6 +2469,8 @@
 				B47DA0BA1ED2B4040038D7E2 /* WJOrderConfirmModel.m */,
 				B4683FD71EF6550A00339415 /* WJOrderDetailModel.h */,
 				B4683FD81EF6550A00339415 /* WJOrderDetailModel.m */,
+				6D41DF7E1EF7F6A8008597E1 /* WJOnlinePayModel.h */,
+				6D41DF7F1EF7F6A8008597E1 /* WJOnlinePayModel.m */,
 				B4683FDA1EF6576E00339415 /* WJShopModel.h */,
 				B4683FDB1EF6576E00339415 /* WJShopModel.m */,
 			);
@@ -3303,6 +3323,7 @@
 				6D0EABDF1EB326070026B20B /* WJTabBarController.m in Sources */,
 				B47826301ED9222A002267A6 /* WJIntegralGivingViewController.m in Sources */,
 				B4E5B6D21EC2F23600F9A7CA /* WJGivingOrderCell.m in Sources */,
+				6D41DF7D1EF7D7EE008597E1 /* APICreateOrderManager.m in Sources */,
 				B40EF4241ECBFE8200DDE49F /* WJMyMessageViewController.m in Sources */,
 				B47DA0931ECEC58F0038D7E2 /* WJIntegralViewController.m in Sources */,
 				B4E5B7121EC5684F00F9A7CA /* WJSetPersonalStoreViewController.m in Sources */,
@@ -3350,6 +3371,7 @@
 				B4E5B6C91EC2BCE700F9A7CA /* WJChargeOrderCell.m in Sources */,
 				B45218A81EB9F471009E9E40 /* WJOrderModel.m in Sources */,
 				6D96DC711EB97FEF004EDE7F /* APICommonParamsGenerator.m in Sources */,
+				6D41DF831EF7FB78008597E1 /* WJOrderConfirmReformer.m in Sources */,
 				B40EF3B31EC80A6500DDE49F /* WJStoreModel.m in Sources */,
 				6D52C8D81EF3EDA50062D38B /* APIIndexCategoryManager.m in Sources */,
 				6D0EABE21EB326070026B20B /* UILabel+CountHeightAndWidth.m in Sources */,
@@ -3507,6 +3529,7 @@
 				B468400C1EF7BF0500339415 /* APIQueryAllIntegralInfoManager.m in Sources */,
 				6D52D6BB1EF50BD200396BBF /* WJGoodsDetailModel.m in Sources */,
 				B4429BC31ECD7B5500A87C38 /* WJIndividualFinishOrderViewController.m in Sources */,
+				6D41DF801EF7F6A8008597E1 /* WJOnlinePayModel.m in Sources */,
 				B45218D71EBB2C2B009E9E40 /* WJIndividualInformationController.m in Sources */,
 				B4683FE51EF66F0000339415 /* APIQueryBondManager.m in Sources */,
 				6D96DC791EB97FEF004EDE7F /* APIServiceWanJiKa.m in Sources */,
@@ -3596,6 +3619,7 @@
 				B4E5B6AB1EC065D400F9A7CA /* WJCategoryCell.m in Sources */,
 				6D99C4741ED53BC3008A6DA7 /* WJCanelOutputViewController.m in Sources */,
 				6D96DC3A1EB97F25004EDE7F /* UIView+LayoutMethods.m in Sources */,
+				6D41DF861EF802BA008597E1 /* APIPaymentManager.m in Sources */,
 				B45218ED1EBB3195009E9E40 /* WJDBAreaManager.m in Sources */,
 				B40EF3F41ECAB02800DDE49F /* WJSystemMessageCell.m in Sources */,
 				6D52C8D21EF3E4D20062D38B /* WJLotteryDrawDetailReformer.m in Sources */,

@@ -8,12 +8,17 @@
 
 #import "WJOnLinePayViewController.h"
 #import "WJRechargeCenterCell.h"
+#import "APIPaymentManager.h"
+#import "AlipayManager.h"
+#import "WeixinPayManager.h"
+
 @interface WJOnLinePayViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
 {
     UILabel     *totalAmountL;
 }
 @property(nonatomic,strong)UITableView              *tableView;
 @property(nonatomic,assign)NSInteger                selectPayAwayIndex;
+@property(nonatomic,strong)APIPaymentManager        * paymentManager;
 
 @end
 
@@ -22,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"在线支付";
+    _selectPayAwayIndex = 0;
     self.isHiddenTabBar = YES;
     [self setUI];
     [self.view addSubview:self.tableView];
@@ -29,7 +35,7 @@
 
 -(void)setUI
 {
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kNavigationBarHeight - ALD(64), kScreenWidth, ALD(64))];
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kNavBarAndStatBarHeight - kTabbarHeight, kScreenWidth, kTabbarHeight)];
     bottomView.backgroundColor = WJColorWhite;
     bottomView.layer.borderWidth = 0.5f;
     bottomView.layer.borderColor =  WJColorSeparatorLine.CGColor;
@@ -39,14 +45,13 @@
     totalAmountL.font = WJFont13;
     totalAmountL.textAlignment = NSTextAlignmentLeft;
     
-    NSString *totalAmountStr = [NSString stringWithFormat:@"运费: %@",self.orderModel.freight];
+    NSString *totalAmountStr = [NSString stringWithFormat:@"总计: %@",self.onlinePayModel.orderTotal];
     totalAmountL.attributedText= [self attributedText:totalAmountStr firstLength:3];
     [bottomView addSubview:totalAmountL];
     
     UIButton *payButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    payButton.frame = CGRectMake(bottomView.width - ALD(100),0, ALD(100), ALD(64));
-    [payButton setTitle:@"付款"
-                       forState:UIControlStateNormal];
+    payButton.frame = CGRectMake(bottomView.width - ALD(100),0, ALD(100), kTabbarHeight);
+    [payButton setTitle:@"支付" forState:UIControlStateNormal];
     [payButton setTitleColor:WJColorWhite forState:UIControlStateNormal];
     payButton.titleLabel.font = WJFont14;
     payButton.backgroundColor = WJColorMainColor;
@@ -55,51 +60,36 @@
     
 }
 
-//#pragma mark - APIManagerCallBackDelegate
-//- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
-//{
-//    if ([manager isKindOfClass:[APIPayMentManager class]]) {
-//        NSDictionary *dic = [manager fetchDataWithReformer:nil];
-//        if ([self.payMentManager.payType isEqualToString:@"1"]) {
-//            [AlipayManager alipayManager].selectPaymentVC = self;
-//            [AlipayManager alipayManager].totleCash = dic[@"order_total"];
-//            [[AlipayManager alipayManager]callAlipayWithOrderString:dic[@"prepayid"]];
-//        }else if ([self.payMentManager.payType isEqualToString:@"2"]){
-//            [WeixinPayManager WXPayManager].selectPaymentVC = self;
-//            [WeixinPayManager WXPayManager].totleCash = dic[@"order_total"];
-//            [[WeixinPayManager WXPayManager]callWexinPayWithPrePayid:dic[@"prepayid"]];
-//        }
-//    }
-//}
-//
-//- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
-//{
-//    [[TKAlertCenter defaultCenter]  postAlertWithMessage:manager.errorMessage];
-//}
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    NSDictionary *dic = [manager fetchDataWithReformer:nil];
+    if (self.selectPayAwayIndex  == 0) {
+        [[WeixinPayManager WXPayManager] callWexinPayWithPrePayid:dic[@"prepayid"] NowController:self TotleCash:dic[@"order_total"]];
+    }else{
+        [[AlipayManager alipayManager] callAlipayWithOrderString:dic[@"prepayid"] NowController:self TotleCash:dic[@"order_total"]];
+    }
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    [[TKAlertCenter defaultCenter]  postAlertWithMessage:manager.errorMessage];
+}
 
 #pragma mark - Action
 -(void)payButtonAction
 {
-    if (self.orderModel.payType == 1) {
-        
+    if (self.selectPayAwayIndex  == 0) {
         //微信
-//        self.payMentManager.payType = @"1";
-
-        
+        self.paymentManager.payType = @"2";
     } else {
         //支付宝
-//        self.payMentManager.payType = @"2";
+        self.paymentManager.payType = @"1";
     }
     
-    //    [self.payMentManager loadData];
+    [self.paymentManager loadData];
 }
 
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -125,36 +115,17 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = WJColorWhite;
     }
-//    
-//    for (UIView *subView in cell.contentView.subviews)
-//    {
-//        [subView removeFromSuperview];
-//    }
-//    
-  
-    if (indexPath.row == 0) {
-        
-        cell.textLabel.text = @"微信支付";
-        
-        if (indexPath.row == self.selectPayAwayIndex) {
-            [cell conFigData:YES];
-        }else{
-            [cell conFigData:NO];
-        }
-        
-        
-    } else {
-        
-        cell.textLabel.text = @"支付宝支付";
-        
-        if (indexPath.row == self.selectPayAwayIndex) {
-            [cell conFigData:YES];
-        }else{
-            [cell conFigData:NO];
-        }
-        
+    if (indexPath.row == self.selectPayAwayIndex) {
+        [cell conFigData:YES];
+    }else{
+        [cell conFigData:NO];
     }
     
+    if (indexPath.row == 0) {
+        cell.textLabel.text = @"微信支付";
+    } else {
+        cell.textLabel.text = @"支付宝支付";
+    }
     
     return cell;
 }
@@ -202,6 +173,16 @@
         _tableView.tableFooterView = [UIView new];
     }
     return _tableView;
+}
+
+- (APIPaymentManager *)paymentManager
+{
+    if (_paymentManager == nil) {
+        _paymentManager = [[APIPaymentManager alloc]init];
+        _paymentManager.delegate = self;
+        _paymentManager.orderId = self.onlinePayModel.orderId;
+    }
+    return _paymentManager;
 }
 
 @end

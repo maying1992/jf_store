@@ -14,7 +14,6 @@
 #import "WJConfirmOrderReformer.h"
 #import "WJOrderConfirmModel.h"
 
-
 #import "WJOrderConfirmController.h"
 
 @interface WJChooseGoodsPropertyController ()<UITableViewDataSource, UITableViewDelegate,APIManagerCallBackDelegate>
@@ -100,6 +99,7 @@
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager
 {
     NSLog(@"%@",manager.errorMessage);
+    ALERT(manager.errorMessage);
 }
 
 #pragma mark - UITableViewDelegate

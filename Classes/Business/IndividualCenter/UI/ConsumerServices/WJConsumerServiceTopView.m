@@ -7,7 +7,7 @@
 //
 
 #import "WJConsumerServiceTopView.h"
-
+#import "WJServiceCenterQueryModel.h"
 @interface WJConsumerServiceTopView ()
 {
     UILabel     *redIntegralL;
@@ -29,12 +29,10 @@
         redIntegralL.textColor = WJColorWhite;
         redIntegralL.font = WJFont15;
         
-        
         integralL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(12), redIntegralL.bottom + ALD(23), kScreenWidth - ALD(32) - ALD(120) , ALD(50))];
         integralL.textColor = WJColorWhite;
         integralL.textAlignment = NSTextAlignmentLeft;
         integralL.font = WJFont45;
-        integralL.text = @"2350积分";
         
         
         rechargeRedIntegralBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -48,7 +46,6 @@
         [rechargeRedIntegralBtn addTarget:self action:@selector(rechargeRedIntegralAction) forControlEvents:UIControlEventTouchUpInside];
         
         timeL = [[UILabel alloc] initWithFrame:CGRectMake(ALD(12), integralL.bottom + ALD(30), kScreenWidth - ALD(24), ALD(20))];
-        timeL.text = @"开始时间：2017-03-24 结束时间：2019-02-05";
         timeL.textColor = [WJUtilityMethod colorWithHexColorString:@"#95dcd5"];
         timeL.font = WJFont12;
         
@@ -61,6 +58,14 @@
     return self;
 }
 
+-(void)configDataWithModel:(WJServiceCenterQueryModel *)model
+{
+    integralL.text = [NSString stringWithFormat:@"%@积分",model.redIntegral];
+    timeL.text = [NSString stringWithFormat:@"开始时间：%@ 结束时间：%@",model.startTime,model.endTime];
+}
+
+
+#pragma mark Action
 -(void)rechargeRedIntegralAction
 {
     self.rechargeRedIntegralBlock();

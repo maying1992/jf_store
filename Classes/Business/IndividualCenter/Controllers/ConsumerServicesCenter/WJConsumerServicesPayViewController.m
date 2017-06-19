@@ -14,6 +14,8 @@
 #import "WJServiceCenterConditionModel.h"
 #import "APIOpenServiceCenterManager.h"
 #import "WJAddressViewController.h"
+#import "AlipayManager.h"
+#import "WeixinPayManager.h"
 
 @interface WJConsumerServicesPayViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
 {
@@ -23,7 +25,6 @@
 @property(nonatomic,strong)APIOpenServiceCenterManager      *openServiceCenterManager;
 @property(nonatomic,strong)WJServiceCenterConditionModel    *conditionModel;
 @property(nonatomic,strong)UITableView                      *tableView;
-@property(nonatomic,strong)NSMutableArray                   *payArray;
 @property(nonatomic,strong)NSArray                          *listArray;
 @property(nonatomic,assign)NSInteger                        selectPayAwayIndex;
 @end
@@ -93,18 +94,15 @@
     } else if ([manager isKindOfClass:[APIOpenServiceCenterManager class]]) {
         
         NSDictionary *dic = [manager fetchDataWithReformer:nil];
-
-//        if ([self.openServiceCenterManager.payType isEqualToString:@"1"]) {
-//            
-//            [AlipayManager alipayManager].selectPaymentVC = self;
-//            [AlipayManager alipayManager].totleCash = dic[@"order_total"];
-//            [[AlipayManager alipayManager]callAlipayWithOrderString:dic[@"trade_no"]];
-//            
-//        }else if ([self.openServiceCenterManager.payType isEqualToString:@"2"]){
-//            [WeixinPayManager WXPayManager].selectPaymentVC = self;
-//            [WeixinPayManager WXPayManager].totleCash = dic[@"order_total"];
-//            [[WeixinPayManager WXPayManager]callWexinPayWithPrePayid:dic[@"trade_no"]];
-//        }
+        
+        if ([self.openServiceCenterManager.payType isEqualToString:@"1"]) {
+            
+            [[AlipayManager alipayManager]callAlipayWithOrderString:dic[@"prepayid"] NowController:self TotleCash:dic[@"order_total"]];
+            
+        }else if ([self.openServiceCenterManager.payType isEqualToString:@"2"]){
+     
+            [[WeixinPayManager WXPayManager]callWexinPayWithPrePayid:dic[@"prepayid"]NowController:self TotleCash:dic[@"order_total"]];
+        }
     }
 }
 
@@ -126,7 +124,6 @@
         return 7;
         
     }  else {
-        //        return self.payArray.count;
         return 2;
     }
 }
@@ -159,7 +156,6 @@
     }
     
     NSDictionary *infoDic = [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation];
-
     
     switch (indexPath.section) {
         case 0:
@@ -248,7 +244,6 @@
         }
             
             break;
-
             
         default:
             break;
@@ -280,7 +275,6 @@
 #pragma mark - Action
 -(void)payRightNowButtonAction
 {
-    //调支付宝、微信支付
     switch (self.selectPayAwayIndex) {
         case 0:
         {
@@ -343,14 +337,6 @@
              ];
 }
 
-- (NSMutableArray *)payArray
-{
-    if (!_payArray) {
-        _payArray = [NSMutableArray array];
-    }
-    
-    return _payArray;
-}
 
 -(APIServiceCenterConditionManager *)conditionManager
 {

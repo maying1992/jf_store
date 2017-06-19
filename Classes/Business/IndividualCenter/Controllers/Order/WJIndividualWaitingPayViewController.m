@@ -22,13 +22,19 @@
 #import "WJOnLinePayViewController.h"
 
 #import "WJOrderConfirmController.h"
+#import "APICancelOrderManager.h"
+#import "WJRefundPickerView.h"
 
-@interface WJIndividualWaitingPayViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate,WJPassViewDelegate,WJSystemAlertViewDelegate>
+@interface WJIndividualWaitingPayViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate,WJPassViewDelegate,WJSystemAlertViewDelegate,WJRefundPickerViewDelegate>
 {
     BOOL      isHeaderRefresh;
     BOOL      isFooterRefresh;
 }
 @property(nonatomic,strong)APIIndividualOrderManager    *orderManager;
+@property(nonatomic,strong)APICancelOrderManager        *cancelOrderManager;
+@property(nonatomic,strong)WJRefundPickerView           *refundPickerView;
+@property(nonatomic,strong)UIView                       *maskView;
+
 @property(nonatomic,strong)NSMutableArray               *orderArray;
 @property(nonatomic,strong)WJIndividualOrderListModel   *orderListModel;
 @property(nonatomic,assign)NSInteger                    payType;
@@ -45,6 +51,14 @@
     
     [self.view addSubview:self.tableView];
     [self requestData];
+    
+    //取消订单 刷新
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:kCancelOrderSuccess object:nil];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)requestData
@@ -136,6 +150,11 @@
         
         [self endGetData:YES];
         [self refreshFooterStatus:manager.hadGotAllData];
+        
+    } else if ([manager isKindOfClass:[APICancelOrderManager class]]) {
+        
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kCancelOrderSuccess object:nil];
     }
 }
 
@@ -354,6 +373,28 @@
 
 }
 
+#pragma mark - WJRefundPickerView
+-(void)refundPickerView:(WJRefundPickerView *)refundPickerView clickCancelButton:(UIButton *)cancelButton
+{
+    [_maskView removeFromSuperview];
+}
+
+-(void)refundPickerView:(WJRefundPickerView *)refundPickerView clickConfirmButtonWithLogisticsCompanyModel:(WJLogisticsCompanyModel *)logisticsCompanyModel
+{
+    [_maskView removeFromSuperview];
+    
+    self.cancelOrderManager.orderId     = self.orderModel.orderNo;
+    self.cancelOrderManager.cancelReason = logisticsCompanyModel.logisticsCompanyName;
+    [self.cancelOrderManager loadData];
+}
+
+#pragma mark- Event Response
+-(void)tapMaskViewgesture:(UITapGestureRecognizer*)tap
+{
+    [tap.view removeFromSuperview];
+}
+
+
 #pragma mark - WJPassViewDelegate
 - (void)successWithVerifyPsdAlert:(WJPassView *)alertView
 {
@@ -524,6 +565,10 @@
 -(void)cancelOrderWithOrder:(WJOrderModel *)order
 {
     NSLog(@"取消");
+    
+    self.orderModel  = order;
+    [self.view addSubview:self.maskView];
+    [self.maskView addSubview:self.refundPickerView];
 }
 
 
@@ -539,6 +584,43 @@
         _tableView.dataSource = self;
     }
     return _tableView;
+}
+
+-(UIView *)maskView
+{
+    if (nil == _maskView) {
+        _maskView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        _maskView.backgroundColor = WJColorBlack;
+        _maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
+        
+        UITapGestureRecognizer *tapGestureAddress = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMaskViewgesture:)];
+        [_maskView addGestureRecognizer:tapGestureAddress];
+        
+    }
+    return _maskView;
+}
+
+-(WJRefundPickerView *)refundPickerView
+{
+    if (nil == _refundPickerView) {
+        _refundPickerView = [[WJRefundPickerView alloc] initWithFrame:CGRectMake(0, kScreenHeight - ALD(300), kScreenWidth, ALD(300))];
+        _refundPickerView.delegate = self;
+        
+        WJLogisticsCompanyModel *model1 = [[WJLogisticsCompanyModel alloc] init];
+        model1.logisticsCompanyName = @"我不想买了";
+        
+        WJLogisticsCompanyModel *model2 = [[WJLogisticsCompanyModel alloc] init];
+        model2.logisticsCompanyName = @"信息填写错误，重新拍";
+        
+        WJLogisticsCompanyModel *model3 = [[WJLogisticsCompanyModel alloc] init];
+        model3.logisticsCompanyName = @"卖家缺货";
+        
+        WJLogisticsCompanyModel *model4 = [[WJLogisticsCompanyModel alloc] init];
+        model4.logisticsCompanyName = @"其他原因";
+        
+        _refundPickerView.expressListArray = [NSMutableArray arrayWithObjects:model1,model2,model3,model4,nil];
+    }
+    return _refundPickerView;
 }
 
 - (NSMutableArray *)orderArray{
@@ -557,5 +639,14 @@
     _orderManager.orderStatus = OrderStatusUnfinished;
 //    _orderManager.userID = USER_ID;
     return _orderManager;
+}
+
+-(APICancelOrderManager *)cancelOrderManager
+{
+    if (!_cancelOrderManager) {
+        _cancelOrderManager = [[APICancelOrderManager alloc] init];
+        _cancelOrderManager.delegate = self;
+    }
+    return _cancelOrderManager;
 }
 @end

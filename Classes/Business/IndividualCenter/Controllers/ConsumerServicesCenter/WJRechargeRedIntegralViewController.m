@@ -8,12 +8,15 @@
 
 #import "WJRechargeRedIntegralViewController.h"
 #import "WJRechargeCenterCell.h"
-@interface WJRechargeRedIntegralViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+#import "APIIntegralRechargeManager.h"
+#import "AlipayManager.h"
+#import "WeixinPayManager.h"
+@interface WJRechargeRedIntegralViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,APIManagerCallBackDelegate>
 {
     UITextField *amountTF;
 }
+@property(nonatomic,strong)APIIntegralRechargeManager *integralRechargeManager;
 @property(nonatomic,strong)UITableView              *tableView;
-@property(nonatomic,strong)NSMutableArray           *payArray;
 @property(nonatomic,strong)NSArray                  *listArray;
 @property(nonatomic,assign)NSInteger                selectPayAwayIndex;
 @end
@@ -27,8 +30,6 @@
     [self.view addSubview:self.tableView];
     [self UISetup];
     
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handletapPressGesture)];
-    [self.view  addGestureRecognizer:tapGesture];
 }
 
 -(void)UISetup
@@ -48,27 +49,29 @@
     [self.tableView addSubview:payRightNowButton];
 }
 
-//#pragma mark - APIManagerCallBackDelegate
-//- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
-//{
-//    if ([manager isKindOfClass:[APIPayMentManager class]]) {
-//        NSDictionary *dic = [manager fetchDataWithReformer:nil];
-//        if ([self.payMentManager.payType isEqualToString:@"1"]) {
-//            [AlipayManager alipayManager].selectPaymentVC = self;
-//            [AlipayManager alipayManager].totleCash = dic[@"order_total"];
-//            [[AlipayManager alipayManager]callAlipayWithOrderString:dic[@"prepayid"]];
-//        }else if ([self.payMentManager.payType isEqualToString:@"2"]){
-//            [WeixinPayManager WXPayManager].selectPaymentVC = self;
-//            [WeixinPayManager WXPayManager].totleCash = dic[@"order_total"];
-//            [[WeixinPayManager WXPayManager]callWexinPayWithPrePayid:dic[@"prepayid"]];
-//        }
-//    }
-//}
-//
-//- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
-//{
-//    [[TKAlertCenter defaultCenter]  postAlertWithMessage:manager.errorMessage];
-//}
+#pragma mark - APIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    if ([manager isKindOfClass:[APIIntegralRechargeManager class]]) {
+        
+        NSDictionary *dic = [manager fetchDataWithReformer:nil];
+        
+        if ([self.integralRechargeManager.payType isEqualToString:@"1"]) {
+            
+            [[AlipayManager alipayManager]callAlipayWithOrderString:dic[@"prepayid"] NowController:self TotleCash:dic[@"order_total"]];
+            
+        } else if ([self.integralRechargeManager.payType isEqualToString:@"2"]){
+            
+            [[WeixinPayManager WXPayManager]callWexinPayWithPrePayid:dic[@"prepayid"]NowController:self TotleCash:dic[@"order_total"]];
+        }
+    }
+
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    [[TKAlertCenter defaultCenter]  postAlertWithMessage:manager.errorMessage];
+}
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -82,7 +85,6 @@
         return 2;
         
     }  else {
-        //        return self.payArray.count;
         return 2;
     }
 }
@@ -134,15 +136,16 @@
             [cell.contentView addSubview:nameL];
             [cell.contentView addSubview:contentTF];
             
+            NSDictionary *infoDic = [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation];
+
             
             NSDictionary *dic = self.listArray[indexPath.row];
             nameL.text = dic[@"text"];
             
             if (indexPath.row == 0) {
                 
-                //此处带过来的
                 contentTF.userInteractionEnabled = NO;
-                contentTF.text = @"A888888";
+                contentTF.text = infoDic[@"userCode"];
                 
             } else {
                 
@@ -162,7 +165,7 @@
             
             if (indexPath.row == 0) {
                 
-                rechargeCenterCell.textLabel.text = @"微信支付";
+                rechargeCenterCell.textLabel.text = @"支付宝支付";
                 
                 if (indexPath.row == self.selectPayAwayIndex) {
                     [rechargeCenterCell conFigData:YES];
@@ -173,7 +176,7 @@
                 
             } else {
                 
-                rechargeCenterCell.textLabel.text = @"支付宝支付";
+                rechargeCenterCell.textLabel.text = @"微信支付";
                 
                 if (indexPath.row == self.selectPayAwayIndex) {
                     [rechargeCenterCell conFigData:YES];
@@ -185,7 +188,6 @@
         }
             
             break;
-            
             
         default:
             break;
@@ -204,6 +206,13 @@
     }
 }
 
+#pragma mark - UITextFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [amountTF resignFirstResponder];
+    return YES;
+}
+
 #pragma mark - Action
 -(void)payRightNowButtonAction
 {
@@ -216,28 +225,23 @@
         case 0:
         {
             //支付宝
-            //            self.payMentManager.payType = @"1";
+            self.integralRechargeManager.payType = @"1";
+
         }
             break;
             
         case 1:
         {
             //微信
-            //            self.payMentManager.payType = @"2";
+            self.integralRechargeManager.payType = @"2";
         }
             break;
             
         default:
             break;
     }
-    
-    //    [self.payMentManager loadData];
-}
-
-#pragma mark -event
--(void)handletapPressGesture
-{
-    [amountTF resignFirstResponder];
+    self.integralRechargeManager.rechargeAmount = amountTF.text;
+    [self.integralRechargeManager loadData];
 }
 
 
@@ -270,14 +274,15 @@
              ];
 }
 
-- (NSMutableArray *)payArray
+-(APIIntegralRechargeManager *)integralRechargeManager
 {
-    if (!_payArray) {
-        _payArray = [NSMutableArray array];
+    if (!_integralRechargeManager) {
+        _integralRechargeManager = [[APIIntegralRechargeManager alloc] init];
+        _integralRechargeManager.delegate = self;
     }
-    
-    return _payArray;
-}
+    _integralRechargeManager.integralType = @"2";
 
+    return _integralRechargeManager;
+}
 
 @end

@@ -9,24 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Classes/Business/IndividualCenter/Controllers/ConsumerServicesCenter/WJConsumerServicesPayViewController.m"
-            timestampString = "519479130.358588"
+            filePath = "Classes/Services/APIService/APIManager/APIIndividualManager/APIOpenServiceCenterManager.m"
+            timestampString = "519536404.898302"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "-managerCallAPIDidFailed:"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "-manager:isCorrectWithCallBackData:"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            scope = "0"
-            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -35,8 +25,24 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Classes/Services/APIService/APIManager/APIIndividualManager/APIIndividualOrderManager.m"
-            timestampString = "519479140.332961"
+            filePath = "Classes/Business/IndividualCenter/Controllers/ConsumerServicesCenter/WJConsumerServicesPayViewController.m"
+            timestampString = "519549034.873904"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "-managerCallAPIDidSuccess:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Classes/Services/APIService/APIManager/APIIndividualManager/APIQueryServiceCenterManager.m"
+            timestampString = "519543483.788652"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "44"
@@ -48,15 +54,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Classes/Services/APIService/APIManager/APIIndividualManager/APIOpenServiceCenterManager.m"
-            timestampString = "519479747.140219"
+            filePath = "Classes/Services/APIService/APIManager/APIIndividualManager/APIIndividualOrderManager.m"
+            timestampString = "519544007.616144"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "-manager:isCorrectWithCallBackData:"
             landmarkType = "7">
          </BreakpointContent>
@@ -67,40 +73,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Classes/Services/APIService/APIManager/APIIndividualManager/APIQueryIntergralListManager.m"
-            timestampString = "519479887.257521"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "-manager:isCorrectWithCallBackData:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Classes/Services/APIService/APIManager/APILoginManager/APIRecommenderInfoManager.m"
-            timestampString = "519480803.527632"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "-manager:isCorrectWithCallBackData:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Classes/Services/APIService/APIManager/APIIndividualManager/APIUserBindingInfoManager.m"
-            timestampString = "519481667.487984"
+            filePath = "Classes/Services/APIService/APIManager/APIIndividualManager/APIOrderDetailManager.m"
+            timestampString = "519547281.227406"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"

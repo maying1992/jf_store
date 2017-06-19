@@ -221,7 +221,7 @@
 }
 
 #pragma mark - 属性方法
-- (UITableView *)tableView{
+- (WJRefreshTableView *)tableView{
     if (_tableView == nil) {
         
         _tableView = [[WJRefreshTableView alloc] initWithFrame:CGRectMake(0, ALD(170), kScreenWidth, kScreenHeight - kNavBarAndStatBarHeight - ALD(170)) style:UITableViewStylePlain refreshNow:NO refreshViewType:WJRefreshViewTypeBoth];

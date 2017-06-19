@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "WJConsumeModel.h"
 @interface WJConsumerServiceIntegralCell : UITableViewCell
 
--(void)configData:(NSString *)time detail:(NSString *)str integral:(NSString *)integral;
-
+-(void)configDataWithModel:(WJConsumeModel *)model;
 @end

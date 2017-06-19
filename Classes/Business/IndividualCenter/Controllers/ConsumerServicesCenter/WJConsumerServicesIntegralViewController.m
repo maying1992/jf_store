@@ -11,10 +11,22 @@
 #import "WJConsumerServiceIntegralCell.h"
 #import "WJConsumerActivateViewController.h"
 #import "WJRechargeRedIntegralViewController.h"
-@interface WJConsumerServicesIntegralViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)WJConsumerServiceTopView *topView;
-@property(nonatomic,strong)UITableView              *tableView;
-@property(nonatomic,strong)NSMutableArray           *listArray;
+#import "APIQueryServiceCenterManager.h"
+#import "WJRefreshTableView.h"
+#import "WJConsumeServiceQueryReformer.h"
+#import "WJServiceCenterQueryModel.h"
+#import "WJConsumerServicesPayViewController.h"
+@interface WJConsumerServicesIntegralViewController ()<UITableViewDelegate,UITableViewDataSource,APIManagerCallBackDelegate>
+{
+    BOOL      isHeaderRefresh;
+    BOOL      isFooterRefresh;
+}
+
+@property(nonatomic,strong)WJServiceCenterQueryModel    *serviceCenterQueryModel;
+@property(nonatomic,strong)WJConsumerServiceTopView     *topView;
+@property(nonatomic,strong)WJRefreshTableView           *tableView;
+@property(nonatomic,strong)NSMutableArray               *listArray;
+@property(nonatomic,strong)APIQueryServiceCenterManager *queryServiceCenterManager;
 
 @end
 
@@ -29,6 +41,8 @@
     
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.topView;
+    
+    [self requestData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,6 +77,127 @@
     [self.view addSubview:renewButton];
 }
 
+#pragma mark - Request
+
+- (void)requestData{
+    
+    if (self.listArray.count > 0) {
+        [self.listArray removeAllObjects];
+    }
+    self.queryServiceCenterManager.shouldCleanData = YES;
+    self.queryServiceCenterManager.firstPageNo = 1;
+    [self.queryServiceCenterManager loadData];
+}
+
+#pragma mark - WJRefreshTableView Delegate
+
+- (void)startHeadRefreshToDo:(WJRefreshTableView *)tableView
+{
+    if (!isHeaderRefresh && !isFooterRefresh) {
+        isHeaderRefresh = YES;
+        self.queryServiceCenterManager.shouldCleanData = YES;
+        [self requestData];
+    }
+    
+}
+
+- (void)startFootRefreshToDo:(WJRefreshTableView *)tableView
+{
+    if (!isFooterRefresh && !isHeaderRefresh) {
+        isFooterRefresh = YES;
+        self.queryServiceCenterManager.shouldCleanData = NO;
+        [self.queryServiceCenterManager loadData];
+    }
+}
+
+- (void)endGetData:(BOOL)needReloadData{
+    
+    if (isHeaderRefresh) {
+        isHeaderRefresh = NO;
+        [self.tableView endHeadRefresh];
+    }
+    
+    if (isFooterRefresh){
+        isFooterRefresh = NO;
+        [self.tableView endFootFefresh];
+    }
+    
+    if (needReloadData) {
+        [self.tableView reloadData];
+    }
+}
+
+- (void)refreshFooterStatus:(BOOL)status{
+    
+    if (status) {
+        [self.tableView hiddenFooter];
+    } else {
+        [self.tableView showFooter];
+    }
+    
+    if (self.listArray.count > 0) {
+        self.tableView.tableFooterView = [UIView new];
+        
+    } else {
+        
+        //        self.tableView.tableFooterView = nil;
+    }
+    
+}
+
+- (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
+{
+    if ([manager isKindOfClass:[APIQueryServiceCenterManager class]]) {
+        
+        self.serviceCenterQueryModel = [manager fetchDataWithReformer:[[WJConsumeServiceQueryReformer alloc] init]];
+        
+        if (self.listArray.count == 0) {
+            
+            self.listArray =  self.serviceCenterQueryModel.integralList;
+            
+        } else {
+            
+            if (self.queryServiceCenterManager.firstPageNo < self.serviceCenterQueryModel.totalPage) {
+                
+                [self.listArray addObjectsFromArray: self.serviceCenterQueryModel.integralList];
+            }
+        }
+        
+        [self.topView configDataWithModel:self.serviceCenterQueryModel];
+
+        [self endGetData:YES];
+        [self refreshFooterStatus:manager.hadGotAllData];
+    }
+}
+
+- (void)managerCallAPIDidFailed:(APIBaseManager *)manager
+{
+    if ([manager isKindOfClass:[APIQueryServiceCenterManager class]]) {
+        
+        if (manager.errorType == APIManagerErrorTypeNoData) {
+            [self refreshFooterStatus:YES];
+            
+            if (isHeaderRefresh) {
+                if (self.listArray.count > 0) {
+                    [self.listArray removeAllObjects];
+                    
+                }
+                [self endGetData:YES];
+                return;
+            }
+            [self endGetData:NO];
+            
+        } else {
+            
+            [self refreshFooterStatus:self.queryServiceCenterManager.hadGotAllData];
+            [self endGetData:NO];
+            
+        }
+        
+    }
+}
+
+
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -72,7 +207,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 3;
+    if (self.listArray == nil || self.listArray.count == 0) {
+        return 0;
+    } else {
+        return self.listArray.count;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -134,6 +273,8 @@
         cell.backgroundColor = WJColorWhite;
     }
     
+    [cell configDataWithModel:self.listArray[indexPath.row]];
+    
     return cell;
 }
 
@@ -152,7 +293,8 @@
 
 -(void)renewButtonAction
 {
-    
+    WJConsumerServicesPayViewController *consumerServicesPayVC = [[WJConsumerServicesPayViewController alloc] init];
+    [self.navigationController pushViewController:consumerServicesPayVC animated:YES];
 }
 
 -(WJConsumerServiceTopView *)topView
@@ -176,9 +318,9 @@
 }
 
 #pragma mark - 属性方法
-- (UITableView *)tableView{
+- (WJRefreshTableView *)tableView{
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavBarAndStatBarHeight - ALD(44)) style:UITableViewStylePlain];
+        _tableView = [[WJRefreshTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavBarAndStatBarHeight - ALD(44)) style:UITableViewStylePlain refreshNow:NO refreshViewType:WJRefreshViewTypeBoth];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorInset = UIEdgeInsetsZero;
@@ -188,5 +330,14 @@
         _tableView.tableFooterView = [UIView new];
     }
     return _tableView;
+}
+
+-(APIQueryServiceCenterManager *)queryServiceCenterManager
+{
+    if (!_queryServiceCenterManager) {
+        _queryServiceCenterManager = [[APIQueryServiceCenterManager alloc] init];
+        _queryServiceCenterManager.delegate = self;
+    }
+    return _queryServiceCenterManager;
 }
 @end

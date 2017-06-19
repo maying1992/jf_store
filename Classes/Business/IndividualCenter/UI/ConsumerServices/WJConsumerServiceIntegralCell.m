@@ -27,7 +27,6 @@
         timeL = [[UILabel alloc] initWithFrame:CGRectMake(0,0, kScreenWidth/3,  ALD(60))];
         timeL.textAlignment = NSTextAlignmentCenter;
         timeL.font = WJFont12;
-        timeL.text = @"2017-05-23 15:30";
         timeL.numberOfLines = 0;
         timeL.textColor = WJColorDardGray3;
         
@@ -36,14 +35,12 @@
         detailL.textAlignment = NSTextAlignmentCenter;
         detailL.font = WJFont12;
         detailL.numberOfLines = 0;
-        detailL.text = @"A888888激活会员777777";
         detailL.textColor = WJColorDardGray3;
         
 
         integralL = [[UILabel alloc] initWithFrame:CGRectMake(detailL.right,0, kScreenWidth/3,  ALD(60))];
         integralL.textAlignment = NSTextAlignmentCenter;
         integralL.font = WJFont12;
-        integralL.text = @"-2000积分";
         integralL.numberOfLines = 0;
         integralL.textColor = WJColorDardGray3;
         
@@ -56,13 +53,18 @@
     return self;
 }
 
-
--(void)configData:(NSString *)time detail:(NSString *)str integral:(NSString *)integral
+-(void)configDataWithModel:(WJConsumeModel *)model
 {
-    timeL.text = time;
-    detailL.text = str;
-    integralL.text = integral;
+    timeL.text = model.date;
+    detailL.text = model.desc;
+    if ([model.integral integerValue] > 0) {
+        
+        integralL.text = [NSString stringWithFormat:@"%@积分",model.integral];
+    } else {
+        integralL.text = @"0积分";
+    }
 }
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];

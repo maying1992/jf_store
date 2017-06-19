@@ -1,30 +1,20 @@
 //
-//  APIIndividualOrderManager.m
+//  APIIntegralRechargeManager.m
 //  jf_store
 //
-//  Created by reborn on 2017/5/19.
+//  Created by maying on 2017/6/19.
 //  Copyright © 2017年 JF. All rights reserved.
 //
 
-#import "APIIndividualOrderManager.h"
+#import "APIIntegralRechargeManager.h"
 
-@interface APIIndividualOrderManager ()
-{
-    NSInteger _pageNo;  //  分页:第几页 从1开始 默认1
-}
-
-@property (nonatomic, assign, readwrite) NSInteger callBackCount;    //  请求返回的个数
-@end
-
-@implementation APIIndividualOrderManager
+@implementation APIIntegralRechargeManager
 - (instancetype)init
 {
     self = [super init];
     if (self) {
         self.paramSource = self;
         self.validator = self;
-        self.pageCount = 10;        // 默认10
-        self.firstPageNo = 1;       //默认第一页
     }
     return self;
 }
@@ -36,24 +26,8 @@
  而且本来判断返回数据是否正确的逻辑就应该交给manager去做，不要放到回调到controller的delegate方法里面去做。
  */
 - (BOOL)manager:(APIBaseManager *)manager isCorrectWithCallBackData:(NSDictionary *)data
-{  
-    if(data == nil) {
-        return NO;
-    }
-    
-    if ([data isKindOfClass:[NSDictionary class]]) {
-        self.callBackCount = [data[@"total_page"] integerValue];
-        
-    }
-    BOOL isCorrect = [data[@"rspCode"] integerValue] == 0 && self.callBackCount > 0;
-    if (isCorrect) {
-        if (self.shouldCleanData) {
-            _pageNo = _firstPageNo;
-        }else {
-            _pageNo++;
-        }
-    }
-    return isCorrect;
+{
+    return [data[@"rspCode"] integerValue] == 0;
 }
 
 /*
@@ -71,24 +45,17 @@
 //让manager能够获取调用API所需要的数据
 - (NSDictionary *)paramsForApi:(APIBaseManager *)manager
 {
-    NSInteger position = _pageNo;
-    if (self.shouldCleanData) {
-        position = _firstPageNo;
-    }else {
-        position = _pageNo + 1;
-    }
-    
-    return @{@"pageSize":NumberToString(self.pageCount),
-             @"pageNum":NumberToString(position),
-             @"order_status":NumberToString(self.orderStatus),
-//             @"user_id" :self.userID ? :@""
+    return @{
+             @"type":self.integralType ? : @"",
+             @"pay_type":self.payType ? : @"",
+             @"amount":self.rechargeAmount ? : @""
              };
 }
 
 #pragma mark - APIManager Methods
 - (NSString *)methodName
 {
-    return @"orderList";
+    return @"integralRecharge";
 }
 
 - (NSString *)serviceType
@@ -99,13 +66,5 @@
 - (APIManagerRequestType)requestType
 {
     return APIManagerRequestTypePost;
-}
-
-
-#pragma mark - setter
-- (void)setFirstPageNo:(NSInteger)firstPageNo
-{
-    _firstPageNo = firstPageNo;
-    _pageNo = _firstPageNo;
 }
 @end

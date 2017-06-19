@@ -14,6 +14,9 @@
 @property(nonatomic,strong)NSString        *imageUrl;
 @property(nonatomic,assign)NSInteger       count;
 @property(nonatomic,strong)NSString        *standardDes;  //规格
+@property(nonatomic,strong)NSString        *logisticsIntegral;
+@property(nonatomic,strong)NSString        *orderIntegral;
+@property(nonatomic,strong)NSString        *orderTotal;
 
 
 @property(nonatomic,assign)NSInteger       stock;
@@ -26,7 +29,7 @@
 @property(nonatomic,strong)NSString        *cartId;
 @property(nonatomic,strong)NSString        *brandId;
 @property(nonatomic,strong)NSString        *brandName;
-//@property(nonatomic,strong)NSMutableArray  *attributeArray;
+@property(nonatomic,strong)NSMutableArray  *attributeArray;
 @property(nonatomic,assign)BOOL            isSelect;
 
 

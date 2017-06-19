@@ -10,6 +10,9 @@
 #import "WJProductModel.h"
 #import "WJOrderModel.h"
 #import <UIImageView+WebCache.h>
+#import "WJAttributeDetailModel.h"
+
+
 @interface WJPurchaseOrderCell ()
 {    
     UIImageView *iconIV;
@@ -26,17 +29,16 @@
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        iconIV = [[UIImageView alloc] initWithFrame:CGRectMake(ALD(5), ALD(10), ALD(92), ALD(108))];
+        iconIV = [[UIImageView alloc] initWithFrame:CGRectMake(ALD(5), ALD(10), ALD(100), ALD(100))];
         iconIV.layer.borderColor = WJColorSeparatorLine.CGColor;
         iconIV.layer.borderWidth = 0.5f;
-        iconIV.backgroundColor = WJRandomColor;
         iconIV.hidden = NO;
         
 
-        nameL = [[UILabel alloc] initWithFrame:CGRectMake(iconIV.right+ ALD(15), iconIV.frame.origin.y + ALD(20), kScreenWidth - ALD(139), ALD(22))];
+        nameL = [[UILabel alloc] initWithFrame:CGRectMake(iconIV.right+ ALD(15), iconIV.frame.origin.y + ALD(10), kScreenWidth - ALD(139), ALD(35))];
         nameL.textColor = WJColorDarkGray;
         nameL.font = WJFont15;
-        
+        nameL.numberOfLines = 2;
         
         standardL = [[UILabel alloc] initWithFrame:CGRectMake(nameL.frame.origin.x, nameL.bottom + ALD(20), ALD(150), ALD(22))];
         standardL.textColor = WJColorDardGray9;
@@ -59,26 +61,16 @@
 
 - (void)configDataWithProduct:(WJProductModel *)product
 {
-    standardL.text = [NSString stringWithFormat:@"规格:%@",product.standardDes];
+    NSString * standardStr = @"";
+    for (WJAttributeDetailModel *model in product.attributeArray) {
+        standardStr = [standardStr stringByAppendingFormat:@"%@:%@  ",model.attributeName,model.valueName];
+    }
+    standardL.text = standardStr;
     
     countL.text = [NSString stringWithFormat:@"x %ld",(long)product.count];
     
     [iconIV sd_setImageWithURL:[NSURL URLWithString:product.imageUrl] placeholderImage:BitmapCommodityImage];
     nameL.text = product.name;
-}
-
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

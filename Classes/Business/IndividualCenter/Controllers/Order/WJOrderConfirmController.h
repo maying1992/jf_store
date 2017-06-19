@@ -7,6 +7,7 @@
 //
 
 #import "WJViewController.h"
+#import "WJOrderConfirmModel.h"
 
 typedef NS_ENUM(NSInteger,OrderConfirmFromController){
     
@@ -16,6 +17,8 @@ typedef NS_ENUM(NSInteger,OrderConfirmFromController){
 
 
 @interface WJOrderConfirmController : WJViewController
+
 @property(nonatomic,assign)OrderConfirmFromController    orderConfirmFromController;
+@property(nonatomic,strong)WJOrderConfirmModel      *orderConfirmModel;
 
 @end

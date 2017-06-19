@@ -9,11 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @interface WJOrderConfirmModel : NSObject
+
 @property(nonatomic,strong)NSString     *receiverName;
 @property(nonatomic,strong)NSString     *phoneNumber;
 @property(nonatomic,strong)NSString     *address;
 @property(nonatomic,strong)NSString     *receivingId;
 @property(nonatomic,strong)NSArray      *listArray;
+@property(nonatomic,strong)NSArray      *integralListArray;
+
+
 
 @property(nonatomic,strong)NSString     *orderTotal;
 @property(nonatomic,strong)NSString     *integralTotal;

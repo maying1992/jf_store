@@ -81,8 +81,8 @@
              @"brand_id":self.brandID?:@"",
              @"brand_name":self.brandName?:@"",
              @"condition":self.condition?:@"",
-             @"min_price":self.minPrice?:@"",
-             @"max_price":self.maxPrice?:@"",
+             @"orderField":self.orderField?:@"",
+             @"orderType":self.orderType?:@"",
              @"page_size":NumberToString(self.pageCount),
              @"current_page":NumberToString(position)};
 }

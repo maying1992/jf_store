@@ -15,17 +15,28 @@
 
 #define kGoodsIdentifier                @"kGoodsIdentifier"
 
+typedef enum
+{
+    ButtonStatusNormal,   //无状态
+    ButtonStatusAscend,
+    ButtonStatusDescend
+} ButtonStatus;
+
+
 @interface WJGoodsListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,APIManagerCallBackDelegate>
 {
     WJTitleButton * salesButton;
     WJTitleButton * priceButton;
     WJTitleButton * timeButton;
+//    NSInteger       numStatus;
 }
 
 @property(nonatomic,strong)UICollectionView             * mainCollectionView;
 @property(nonatomic,strong)UIView                       * guidanceView;
 @property(nonatomic,strong)APIGoodsListManager          * goodsListManager;
 @property(nonatomic,strong)NSMutableArray               * dataArray;
+@property(nonatomic,assign)ButtonStatus                  numButtonStatus;
+@property(nonatomic,assign)ButtonStatus                  priceButtonStatus;
 
 @end
 
@@ -36,6 +47,9 @@
     self.title = @"商品列表";
     self.isHiddenTabBar = YES;
     
+    _numButtonStatus = ButtonStatusNormal;
+    _priceButtonStatus = ButtonStatusNormal;
+
     [self.view addSubview:self.mainCollectionView];
     [self.view addSubview:self.guidanceView];
 
@@ -133,13 +147,6 @@
         [priceButton addTarget:self action:@selector(brandClick:) forControlEvents:UIControlEventTouchUpInside];
         [_guidanceView addSubview:priceButton];
         
-//        timeButton = [[WJTitleButton alloc] init];
-//        timeButton.tag = 12002;
-//        [timeButton setTitle:@"时间" forState:UIControlStateNormal];
-//        [self button:timeButton buttonIsSelect:NO];
-//        [timeButton addTarget:self action:@selector(brandClick:) forControlEvents:UIControlEventTouchUpInside];
-//        [_guidanceView addSubview:timeButton];
-        
         UIView * bottomLine = [[UIView alloc]initWithFrame:CGRectMake(0, 39.5, kScreenWidth, 0.5)];
         bottomLine.backgroundColor = WJColorSeparatorLine;
         [_guidanceView addSubview:bottomLine];
@@ -149,9 +156,9 @@
 
 - (void)brandClick:(UIButton *)button
 {
-    button.selected = !button.selected;
     [self button:button buttonIsSelect:YES];
 }
+
 
 - (void)button:(UIButton *)button buttonIsSelect:(BOOL)isSelect
 {
@@ -159,28 +166,63 @@
     CGPoint center;
     if (buttonTag == 0) {
         if (isSelect) {
-            priceButton.selected = NO;
-//            timeButton.selected = NO;
+            if (_numButtonStatus == ButtonStatusNormal) {
+                button.selected = !button.selected;
+                _numButtonStatus = ButtonStatusDescend;
+                self.goodsListManager.orderType = @"desc";
+                [salesButton setTitleColor:WJColorMainColor forState:UIControlStateNormal];
+                [salesButton setImage:[UIImage imageNamed:@"classified-screening_icon_n"] forState:UIControlStateNormal];
+            }else if (_numButtonStatus == ButtonStatusDescend){
+                _numButtonStatus = ButtonStatusAscend;
+                self.goodsListManager.orderType = @"asc";
+                [salesButton setTitleColor:WJColorMainColor forState:UIControlStateNormal];
+                [salesButton setImage:[UIImage imageNamed:@"classified-screening_icon_s"] forState:UIControlStateNormal];
+            }else{
+                _numButtonStatus = ButtonStatusDescend;
+                self.goodsListManager.orderType = @"desc";
+                [salesButton setTitleColor:WJColorMainColor forState:UIControlStateNormal];
+                [salesButton setImage:[UIImage imageNamed:@"classified-screening_icon_n"] forState:UIControlStateNormal];
+            }
+            _priceButtonStatus = ButtonStatusNormal;
+            [priceButton setTitleColor:WJColorMainTitle forState:UIControlStateNormal];
+            [priceButton setImage:[UIImage imageNamed:@"classified-screening_icon"] forState:UIControlStateNormal];
+            self.goodsListManager.orderField = @"ale_num";
+            self.goodsListManager.shouldCleanData = YES;
+            [self.goodsListManager loadData];
         }
         center.y = _guidanceView.center.y;
         center.x = _guidanceView.center.x/2;
         button.center = center;
     }else if (buttonTag == 1){
         if (isSelect) {
-            salesButton.selected = NO;
-//            timeButton.selected = NO;
+            if (_priceButtonStatus == ButtonStatusNormal) {
+                button.selected = !button.selected;
+                _priceButtonStatus = ButtonStatusDescend;
+                self.goodsListManager.orderType = @"desc";
+                [priceButton setTitleColor:WJColorMainColor forState:UIControlStateNormal];
+                [priceButton setImage:[UIImage imageNamed:@"classified-screening_icon_n"] forState:UIControlStateNormal];
+            }else if (_priceButtonStatus == ButtonStatusDescend){
+                _priceButtonStatus = ButtonStatusAscend;
+                self.goodsListManager.orderType = @"asc";
+                [priceButton setTitleColor:WJColorMainColor forState:UIControlStateNormal];
+                [priceButton setImage:[UIImage imageNamed:@"classified-screening_icon_s"] forState:UIControlStateNormal];
+            }else{
+                _priceButtonStatus = ButtonStatusDescend;
+                self.goodsListManager.orderType = @"desc";
+                [priceButton setTitleColor:WJColorMainColor forState:UIControlStateNormal];
+                [priceButton setImage:[UIImage imageNamed:@"classified-screening_icon_n"] forState:UIControlStateNormal];
+            }
+            _numButtonStatus = ButtonStatusNormal;
+            [salesButton setTitleColor:WJColorMainTitle forState:UIControlStateNormal];
+            [salesButton setImage:[UIImage imageNamed:@"classified-screening_icon"] forState:UIControlStateNormal];
+            
+            self.goodsListManager.orderField = @"selling_price";
+            self.goodsListManager.shouldCleanData = YES;
+            [self.goodsListManager loadData];
         }
         center.y = _guidanceView.center.y;
         center.x = _guidanceView.center.x + _guidanceView.center.x/2;
         button.center = center;
-    }else{
-//        if (isSelect) {
-//            salesButton.selected = NO;
-//            priceButton.selected = NO;
-//        }
-//        center.y = _guidanceView.center.y;
-//        center.x = (_guidanceView.center.x/3)*2 + _guidanceView.center.x;
-//        button.center = center;
     }
 }
 

@@ -21,10 +21,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setTitleColor:WJColorMainTitle forState:UIControlStateNormal];
-        [self setTitleColor:WJColorMainColor forState:UIControlStateSelected];
+//        [self setTitleColor:WJColorMainColor forState:UIControlStateSelected];
         self.titleLabel.font = WJFont14;
-        [self setImage:[UIImage imageNamed:@"classified-screening_icon_n"] forState:UIControlStateNormal];
-        [self setImage:[UIImage imageNamed:@"classified-screening_icon_s"] forState:UIControlStateSelected];
+        [self setImage:[UIImage imageNamed:@"classified-screening_icon"] forState:UIControlStateNormal];
+//        [self setImage:[UIImage imageNamed:@"classified-screening_icon_n"] forState:UIControlStateSelected];
     }
     return self;
 }

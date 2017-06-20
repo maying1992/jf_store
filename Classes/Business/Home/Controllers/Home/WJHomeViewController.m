@@ -37,7 +37,12 @@
 #define kGoodsIdentifier                @"kGoodsIdentifier"
 
 @interface WJHomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,SDCycleScrollViewDelegate,UISearchBarDelegate,APIManagerCallBackDelegate>
+{
+    BOOL            isHeaderRefresh;
+    BOOL            isFooterRefresh;
+}
 
+@property(nonatomic, strong) WJAddressButton           * addressButton;
 @property(nonatomic, strong) WJRefreshCollectionView   * collectionView;
 @property(nonatomic, strong) SDCycleScrollView         * cycleScrollView;
 @property(nonatomic, strong) UISearchBar               * searchBar;
@@ -52,12 +57,17 @@
 
 @implementation WJHomeViewController
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [_addressButton setTitle:SITE_NAME forState:UIControlStateNormal];
+    [self.homeManager loadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"首页";
     [self navigationSetup];
     [self.view addSubview:self.collectionView];
-    [self.homeManager loadData];
 //    [self addAdvertisementView];
 }
 
@@ -97,10 +107,10 @@
     }else{
         string = SITE_NAME;
     }
-    WJAddressButton * addressButton = [[WJAddressButton alloc]init];
-    [addressButton setTitle:string forState:UIControlStateNormal];
-    [addressButton addTarget:self action:@selector(addressButton) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addressButton];
+    self.addressButton = [[WJAddressButton alloc]init];
+    [_addressButton setTitle:string forState:UIControlStateNormal];
+    [_addressButton addTarget:self action:@selector(addressButton) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_addressButton];
     
     UIButton * scanButton = [UIButton buttonWithType:UIButtonTypeCustom];
     scanButton.frame = CGRectMake(0, 0, 21, 21);
@@ -110,7 +120,53 @@
     
     self.navigationItem.titleView = self.searchBar;
 }
-  
+
+#pragma mark - WJRefreshCollectionView Delegate
+
+-(void)cleanTopViewData
+{
+    if (self.goodsListArray.count > 0) {
+        [self.goodsListArray removeAllObjects];
+        
+    }
+    if (self.channelListArray.count > 0) {
+        [self.channelListArray removeAllObjects];
+    }
+    
+    if (self.picListArray.count > 0) {
+        [self.picListArray removeAllObjects];
+    }
+}
+
+- (void)startHeadRefreshToDo:(WJRefreshCollectionView *)collectionView
+{
+    if (!isHeaderRefresh && !isFooterRefresh) {
+        isHeaderRefresh = YES;
+        self.homeManager.shouldCleanData = YES;
+        [self cleanTopViewData];
+        [self.homeManager loadData];
+    }
+    
+}
+- (void)endGetData:(BOOL)needReloadData{
+    
+    if (isHeaderRefresh) {
+        isHeaderRefresh = NO;
+        [self.collectionView endHeadRefresh];
+    }
+    
+    if (needReloadData) {
+        [self dataRefresh];
+    }
+}
+
+- (void)dataRefresh
+{
+    [_addressButton setTitle:SITE_NAME forState:UIControlStateNormal];
+    [self.collectionView reloadData];
+
+}
+
 #pragma mark - APIManagerCallBackDelegate
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
@@ -118,8 +174,9 @@
     self.goodsListArray = dic[@"goods_list"];
     self.channelListArray = dic[@"channel_list"];
     self.picListArray = dic[@"pic_list"];
-    [self.collectionView reloadData];
-    
+    [self dataRefresh];
+    [self endGetData:YES];
+
     NSMutableArray * picUrlArray = [NSMutableArray array];
     for (int i = 0; i< self.picListArray.count; i++) {
         WJBannerModel * model = self.picListArray[i];
@@ -135,6 +192,7 @@
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager
 {
     NSLog(@"%@",manager.errorMessage);
+    ALERT(manager.errorMessage);
 }
 
 
@@ -300,7 +358,7 @@
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         
-//        [_collectionView refreshNow:NO refreshViewType:WJRefreshViewTypeHeader];
+        [_collectionView refreshNow:NO refreshViewType:WJRefreshViewTypeHeader];
         
         //轮播
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kDefaultIdentifier];

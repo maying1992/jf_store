@@ -75,6 +75,7 @@
         ALERT(@"抽奖成功");
     }
     self.dataModel = [manager fetchDataWithReformer:[WJLotteryDrawDetailReformer new]];
+    _cycleScrollView.imageURLStringsGroup = self.dataModel.picInfoList;
     [self.mainTableView reloadData];
 }
 
@@ -87,7 +88,6 @@
 - (void)backBarButton:(UIButton *)btn{
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 #pragma mark - WJPassViewDelegate
 - (void)successWithVerifyPsdAlert:(WJPassView *)alertView
@@ -223,12 +223,12 @@
 - (SDCycleScrollView *)cycleScrollView
 {
     if (_cycleScrollView == nil) {
-        NSArray *imageNames = @[[UIImage imageNamed:@"new_x1_19201200_01"],[UIImage imageNamed:@"new_x1_19201200_02"],[UIImage imageNamed:@"new_x1_19201200_03"],[UIImage imageNamed:@"new_x1_19201200_04"]];
-        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth * 0.6) shouldInfiniteLoop:YES imageNamesGroup:imageNames];
+//        NSArray *imageNames = @[[UIImage imageNamed:@"new_x1_19201200_01"],[UIImage imageNamed:@"new_x1_19201200_02"],[UIImage imageNamed:@"new_x1_19201200_03"],[UIImage imageNamed:@"new_x1_19201200_04"]];
+        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth * 0.6) delegate:self placeholderImage:nil];
         _cycleScrollView.delegate = self;
         _cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
         _cycleScrollView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        //        _cycleScrollView.autoScrollTimeInterval = 2;
+//        _cycleScrollView.autoScrollTimeInterval = 2;
     }
     return _cycleScrollView;
 }

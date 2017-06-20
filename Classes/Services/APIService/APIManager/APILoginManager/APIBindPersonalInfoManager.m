@@ -49,7 +49,8 @@
     return @{@"name" :self.name,
              @"certCode" :self.certCode,
              @"front" :self.front,
-             @"rear" :self.rear};
+             @"rear" :self.rear
+             };
 }
 
 #pragma mark - APIManager Methods

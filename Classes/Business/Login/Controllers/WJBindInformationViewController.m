@@ -20,7 +20,6 @@
 @interface WJBindInformationViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,APIManagerCallBackDelegate>
 {
     NSInteger   currentTapButtonIndex;
-
 }
 
 @property(nonatomic,strong)WJBindInformationView                    *bindInformationView;
@@ -75,8 +74,7 @@
 - (void)managerCallAPIDidFailed:(APIBaseManager *)manager
 {
     [self hiddenLoadingView];
-    NSLog(@"%@",manager.errorMessage);
-    ALERT(@"上传失败");
+    [[TKAlertCenter defaultCenter]  postAlertWithMessage:manager.errorMessage];
 }
 
 #pragma mark - Action
@@ -133,83 +131,83 @@
     
 }
 
--(void)uploadToServer:(NSData *)frontImageData backImageData:(NSData *)backImageData
-{
-    NSString *token = [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation][@"token"];
+//-(void)uploadToServer:(NSData *)frontImageData backImageData:(NSData *)backImageData
+//{
+//    NSString *token = [[NSUserDefaults standardUserDefaults] dictionaryForKey:KUserInformation][@"token"];
+//
+//    NSDictionary *params= @{
+//                            @"appVersion":kSystemVersion,
+//                            @"token":token,
+//                            @"name":self.bindInformationView.nameTextField.text,
+//                            @"loginName":self.bindInformationView.phoneTextField.text,
+//                            @"certCode":self.bindInformationView.identityCardTextField.text
+//                            };
+//    
+//    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+//    
+//    APIBaseService *service = [[APIServiceFactory sharedInstance] serviceWithIdentifier:kAPIServiceWanJiKa];
+//    NSString *url = [NSString stringWithFormat:@"%@/user/binding",service.apiBaseUrl];
+//
+//    [mgr POST:url
+//               parameters:params
+//constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+//      [formData appendPartWithFileData:frontImageData name:@"front" fileName:@"front.jpg" mimeType:@"image/jpeg"];
+//      [formData appendPartWithFileData:backImageData name:@"rear" fileName:@"back.jpg" mimeType:@"image/jpeg"];
+//      [self showLoadingView];
+//  }
+//                 progress:nil
+//                  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//
+//                        NSInteger result=[responseObject[@"rspCode"]integerValue];
+//                        
+//                        if (result ==000 )
+//                        {
+//                            [self hiddenLoadingView];
+//                            [[TKAlertCenter defaultCenter] postAlertWithMessage:@"上传成功"];
+//                            
+//                            WJPasswordSettingViewController *passwordSettingVC = [[WJPasswordSettingViewController alloc] init];
+//                            passwordSettingVC.passwordType = PasswordTypeNew;
+//                            passwordSettingVC.passwordSettingFrom = PasswordSettingFromBinding;
+//                            [self.navigationController pushViewController:passwordSettingVC animated:NO];
+//                        }
+//                        
+//                    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//                        
+//                        NSLog(@"fail");
+//                        [[TKAlertCenter defaultCenter] postAlertWithMessage:@"上传失败"];
+//                        
+//                    }];
+//    
+//}
 
-    NSDictionary *params= @{
-                            @"appVersion":kSystemVersion,
-                            @"token":token,
-                            @"name":self.bindInformationView.nameTextField.text,
-                            @"loginName":self.bindInformationView.phoneTextField.text,
-                            @"certCode":self.bindInformationView.identityCardTextField.text
-                            };
-    
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    
-    APIBaseService *service = [[APIServiceFactory sharedInstance] serviceWithIdentifier:kAPIServiceWanJiKa];
-    NSString *url = [NSString stringWithFormat:@"%@/user/binding",service.apiBaseUrl];
 
-    [mgr POST:url
-               parameters:params
-constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-      [formData appendPartWithFileData:frontImageData name:@"front" fileName:@"front.jpg" mimeType:@"image/jpeg"];
-      [formData appendPartWithFileData:backImageData name:@"rear" fileName:@"back.jpg" mimeType:@"image/jpeg"];
-      [self showLoadingView];
-  }
-                 progress:nil
-                  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-
-                        NSInteger result=[responseObject[@"rspCode"]integerValue];
-                        
-                        if (result ==000 )
-                        {
-                            [self hiddenLoadingView];
-                            [[TKAlertCenter defaultCenter] postAlertWithMessage:@"上传成功"];
-                            
-                            WJPasswordSettingViewController *passwordSettingVC = [[WJPasswordSettingViewController alloc] init];
-                            passwordSettingVC.passwordType = PasswordTypeNew;
-                            passwordSettingVC.passwordSettingFrom = PasswordSettingFromBinding;
-                            [self.navigationController pushViewController:passwordSettingVC animated:NO];
-                        }
-                        
-                    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                        
-                        NSLog(@"fail");
-                        [[TKAlertCenter defaultCenter] postAlertWithMessage:@"上传失败"];
-                        
-                    }];
-    
-}
-
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0) {
-        
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        //资源类型为Camera
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        picker.delegate = self;
-        
-        //设置选择后的图片可被编辑
-        //picker.allowsEditing = YES;
-        [self presentViewController:picker animated:NO completion:nil];
-        
-        
-    } else if (buttonIndex == 1) {
-        
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        //资源类型为图片库
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        picker.delegate = self;
-        
-        //设置选择后的图片可被编辑
-        //picker.allowsEditing = YES;
-        [self presentViewController:picker animated:NO completion:nil];
-        
-    }
-}
+//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    if (buttonIndex == 0) {
+//        
+//        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+//        //资源类型为Camera
+//        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        picker.delegate = self;
+//        
+//        //设置选择后的图片可被编辑
+//        //picker.allowsEditing = YES;
+//        [self presentViewController:picker animated:NO completion:nil];
+//        
+//        
+//    } else if (buttonIndex == 1) {
+//        
+//        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+//        //资源类型为图片库
+//        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//        picker.delegate = self;
+//        
+//        //设置选择后的图片可被编辑
+//        //picker.allowsEditing = YES;
+//        [self presentViewController:picker animated:NO completion:nil];
+//        
+//    }
+//}
 
 #pragma mark - event
 -(void)handletapPressGesture

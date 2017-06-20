@@ -28,10 +28,12 @@ typedef enum
     WJTitleButton * salesButton;
     WJTitleButton * priceButton;
     WJTitleButton * timeButton;
+    BOOL            isHeaderRefresh;
+    BOOL            isFooterRefresh;
 //    NSInteger       numStatus;
 }
 
-@property(nonatomic,strong)UICollectionView             * mainCollectionView;
+@property(nonatomic,strong)WJRefreshCollectionView             * mainCollectionView;
 @property(nonatomic,strong)UIView                       * guidanceView;
 @property(nonatomic,strong)APIGoodsListManager          * goodsListManager;
 @property(nonatomic,strong)NSMutableArray               * dataArray;
@@ -56,10 +58,64 @@ typedef enum
     [self.goodsListManager loadData];
 }
 
+#pragma mark - WJRefreshTableView Delegate
+
+- (void)startHeadRefreshToDo:(WJRefreshCollectionView *)collectionView
+{
+    if (!isHeaderRefresh && !isFooterRefresh) {
+        isHeaderRefresh = YES;
+        self.goodsListManager.shouldCleanData = YES;
+        if (self.dataArray.count > 0) {
+            [self.dataArray removeAllObjects];
+        }
+        [self.goodsListManager loadData];
+    }
+    
+}
+
+- (void)startFootRefreshToDo:(WJRefreshCollectionView *)collectionView
+{
+    if (!isFooterRefresh && !isHeaderRefresh) {
+        isFooterRefresh = YES;
+        self.goodsListManager.shouldCleanData = NO;
+        [self.goodsListManager loadData];
+    }
+}
+
+- (void)endGetData:(BOOL)needReloadData{
+    
+    if (isHeaderRefresh) {
+        isHeaderRefresh = NO;
+        [self.mainCollectionView endHeadRefresh];
+    }
+    
+    if (isFooterRefresh){
+        isFooterRefresh = NO;
+        [self.mainCollectionView endFootFefresh];
+    }
+    
+    if (needReloadData) {
+        [self.mainCollectionView reloadData];
+    }
+}
+
+- (void)refreshFooterStatus:(BOOL)status{
+    
+    if (status) {
+        [self.mainCollectionView hiddenFooter];
+    }else {
+        [self.mainCollectionView showFooter];
+    }
+    
+}
+
 #pragma mark - APIManagerCallBackDelegate
 - (void)managerCallAPIDidSuccess:(APIBaseManager *)manager
 {
-    self.dataArray = [manager fetchDataWithReformer:[WJGoodsListReformer new]];
+    NSArray * array = [manager fetchDataWithReformer:[WJGoodsListReformer new]];
+    [self.dataArray addObjectsFromArray:array];
+    [self endGetData:YES];
+    [self refreshFooterStatus:manager.hadGotAllData];
     [self.mainCollectionView reloadData];
 
 }
@@ -119,8 +175,9 @@ typedef enum
         _mainCollectionView.showsVerticalScrollIndicator = NO;
         _mainCollectionView.delegate = self;
         _mainCollectionView.dataSource = self;
+        [_mainCollectionView refreshNow:NO refreshViewType:WJRefreshViewTypeBoth];
         
-//        [_collectionView refreshNow:NO refreshViewType:WJRefreshViewTypeHeader];
+        
         //商品
         [_mainCollectionView registerClass:[WJGoodsCollectionViewCell class] forCellWithReuseIdentifier:kGoodsIdentifier];
     }
@@ -236,5 +293,13 @@ typedef enum
     return _goodsListManager;
 }
 
+
+- (NSMutableArray *)dataArray
+{
+    if (_dataArray == nil) {
+        _dataArray = [NSMutableArray array];
+    }
+    return _dataArray;
+}
 
 @end

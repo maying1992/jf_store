@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/Business/Home/Controllers/Area/WJGoodsListViewController.m"
-            timestampString = "519634163.799822"
+            timestampString = "519637538.438819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "-button:buttonIsSelect:"
             landmarkType = "7">
          </BreakpointContent>
